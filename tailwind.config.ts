@@ -8,6 +8,10 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontFamily: {
+      inter: 'var(--inter-font)',
+      rock: 'var(--rock-font)',
+    },
     extend: {
       colors: {
         blue: {
@@ -15,6 +19,7 @@ const config: Config = {
           500: '#0070F3',
           600: '#2F6FEB',
         },
+        kakao: '#FEE500',
       },
     },
   },

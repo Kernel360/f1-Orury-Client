@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { pretendard } from './fonts';
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Orury',
@@ -12,7 +10,7 @@ export const metadata: Metadata = {
 function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={pretendard.className}>
         <div className="max-w-[768px] mx-auto">{children}</div>
       </body>
     </html>
