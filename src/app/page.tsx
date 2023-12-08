@@ -13,8 +13,8 @@ function Home() {
             <NavigateBlock key={index} props={value} />
           ))}
         </div>
+        <Navbar />
       </div>
-      <Navbar />
     </main>
   );
 }
