@@ -9,8 +9,8 @@ function Home() {
       <div>
         <Title />
         <div className="flex flex-wrap mx-4 gap-4 justify-between">
-          {Object.values(NAVIGATE_BLOCKS).map((value, index) => (
-            <NavigateBlock key={index} props={value} />
+          {Object.values(NAVIGATE_BLOCKS).map(value => (
+            <NavigateBlock key={value.title} blockProps={value} />
           ))}
         </div>
         <Navbar />
