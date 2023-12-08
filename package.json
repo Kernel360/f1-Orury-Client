@@ -14,6 +14,7 @@
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
+    "tailwindcss-safe-area": "^0.4.1",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
