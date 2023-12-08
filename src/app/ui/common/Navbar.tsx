@@ -22,7 +22,7 @@ function Navbar() {
     });
 
   return (
-    <nav className="w-full h-12 flex justify-evenly pb-safe fixed bottom-0">
+    <nav className="w-full h-12 flex justify-evenly pb-safe fixed bottom-0 max-w-[768px]">
       {Object.values(NAVBAR).map(value => (
         <Link href={value.href}>
           <div className="flex flex-col justify-evenly min-w-[32px] h-full items-center">
