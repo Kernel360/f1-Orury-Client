@@ -1,13 +1,12 @@
 import TEAM from '@/constants/team';
-import Kakao from '../ui/buttons/Kakao';
+import Kakao from '@/app/ui/buttons/Kakao';
+import Title from '@/app/ui/common/Title';
 
-function page() {
+function Page() {
   return (
     <div className="flex pt-[4rem] flex-col justify-between h-screen">
-      <div className="flex flex-col gap-8 max-w-[480px] mx-auto">
-        <span className="font-rock text-[3rem] mx-auto drop-shadow-xl ">
-          {TEAM.title}
-        </span>
+      <div className="flex flex-col max-w-[480px] mx-auto">
+        <Title />
         <span className="font-pretendard text-xl mx-auto drop-shadow-xl font-semibold">
           {TEAM.content}
         </span>
@@ -19,4 +18,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

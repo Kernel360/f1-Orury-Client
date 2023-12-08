@@ -1,8 +1,7 @@
 import React from 'react';
-import { rock_salt } from '../fonts';
 
-function layout({ children }: { children: React.ReactNode }) {
-  return <div className={rock_salt.variable}>{children}</div>;
+function Layout({ children }: { children: React.ReactNode }) {
+  return <div className="h-screen bg-white px-4">{children}</div>;
 }
 
-export default layout;
+export default Layout;
