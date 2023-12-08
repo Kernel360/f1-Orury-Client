@@ -1,4 +1,4 @@
-import { board, map, crew } from '/public/index';
+import { board, map, crew } from 'public/index';
 
 const NAVIGATE_BLOCKS = {
   MAP: {
