@@ -1,4 +1,5 @@
-import { board, map, crew } from '/public/index';
+// eslint-disable-next-line import/no-unresolved
+import { map, board, crew } from 'public/index';
 
 const NAVIGATE_BLOCKS = {
   MAP: {

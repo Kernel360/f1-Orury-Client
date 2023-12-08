@@ -1,4 +1,4 @@
-import kakao from '/public/kakao.svg';
+import kakao from 'public/kakao.svg';
 import BUTTON from '@/constants/ui/button';
 import ICON from '@/constants/ui/icon';
 import Image from 'next/image';
