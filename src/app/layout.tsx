@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { pretendard } from './fonts';
-import './globals.css';
+import { pretendard } from '@/app/ui/fonts';
+import '@/app/styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Orury',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={pretendard.className}>
+      <body className={`${pretendard.className} antialiased bg-slate-100`}>
         <div className="max-w-[768px] mx-auto">{children}</div>
       </body>
     </html>
