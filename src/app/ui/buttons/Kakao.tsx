@@ -1,11 +1,14 @@
-import kakao from '$/kakao.svg';
+import kakao from '/public/kakao.svg';
 import BUTTON from '@/constants/ui/button';
 import ICON from '@/constants/ui/icon';
 import Image from 'next/image';
 
 function Kakao() {
   return (
-    <button className="relative w-full h-[3rem] bg-kakao rounded-xl active:brightness-90 max-w-[480px]">
+    <button
+      type="button"
+      className="relative w-full h-[3rem] bg-kakao rounded-xl active:brightness-90 max-w-[480px]"
+    >
       <Image
         src={kakao}
         alt={BUTTON.kakao}

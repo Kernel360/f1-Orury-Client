@@ -1,6 +1,6 @@
 import { board, map, crew } from '/public/index';
 
-export const NAVIGATE_BLOCKS = {
+const NAVIGATE_BLOCKS = {
   MAP: {
     index: 0,
     href: '/map',
@@ -23,3 +23,5 @@ export const NAVIGATE_BLOCKS = {
     title: '크루',
   },
 };
+
+export default NAVIGATE_BLOCKS;

@@ -1,6 +1,6 @@
 import Title from '@/app/ui/common/Title';
 import NavigateBlock from '@/app/ui/NavigateBlock';
-import { NAVIGATE_BLOCKS } from '@/constants/ui/navigateBlock';
+import NAVIGATE_BLOCKS from '@/constants/ui/navigateBlock';
 import Navbar from '@/app/ui/common/Navbar';
 
 function Home() {

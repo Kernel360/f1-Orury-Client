@@ -23,8 +23,8 @@ function NavigateBlock({ props }: { props: NavigateBlockProps }) {
       >
         <Image src={src} alt={title} className="absolute right-0 bottom-4" />
         <div className={`${giants.className} flex flex-col justify-start`}>
-          <span className={`text-xl sm:text-2xl text-grey-200`}>{sub}</span>
-          <span className={`text-2xl sm:text-3xl text-white`}>{title}</span>
+          <span className="text-xl sm:text-2xl text-grey-200">{sub}</span>
+          <span className="text-2xl sm:text-3xl text-white">{title}</span>
         </div>
       </div>
     </Link>
