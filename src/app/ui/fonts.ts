@@ -2,7 +2,7 @@ import { Inter, Rock_Salt } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const pretendard = localFont({
-  src: '../../assets/fonts/PretendardVariable.woff2',
+  src: '../../../assets/fonts/PretendardVariable.woff2',
   display: 'swap',
   variable: '--pretendard',
 });
@@ -13,9 +13,15 @@ export const inter = Inter({
   variable: '--inter-font',
 });
 
-export const rock_salt = Rock_Salt({
+export const rock = Rock_Salt({
   subsets: ['latin'],
   weight: '400',
   display: 'swap',
   variable: '--rock-font',
+});
+
+export const giants = localFont({
+  src: '../../../assets/fonts/Giants-Regular.ttf',
+  display: 'swap',
+  variable: '--giants-font',
 });
