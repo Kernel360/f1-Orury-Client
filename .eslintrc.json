@@ -28,7 +28,8 @@
     "import/prefer-default-export": ["off", { "target": "single" }],
     "object-curly-newline": "off",
     "arrow-parens": "off",
-    "implicit-arrow-linebreak": "off"
+    "arrow-body-style": "off",
+    "@typescript-eslint/no-shadow": "off"
   },
   "globals": {
     "React": "writable"
