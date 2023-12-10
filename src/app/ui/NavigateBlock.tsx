@@ -11,8 +11,8 @@ function NavigateBlock({ blockProps }: { blockProps: NavigateBlockProps }) {
     <Link href={href} className={clsx(index ? 'w-[calc(50%-8px)]' : 'w-full')}>
       <div
         className={clsx(
-          `flex relative shadow-2xl rounded-2xl p-4 ${
-            index ? 'h-[20rem]' : 'h-[12rem]'
+          `flex relative shadow-main rounded-2xl p-4 ${
+            index ? 'h-[18rem] sm:h-[24rem]' : 'h-[13rem] sm:h-[18rem]'
           }`,
           {
             'bg-primary': index === 0,
