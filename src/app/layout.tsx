@@ -11,7 +11,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={`${pretendard.className} antialiased bg-slate-100`}>
-        <div className="max-w-[768px] mx-auto">{children}</div>
+        <div className="max-w-[768px] mx-auto h-screen">{children}</div>
       </body>
     </html>
   );
