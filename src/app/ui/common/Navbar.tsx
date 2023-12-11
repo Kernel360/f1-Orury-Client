@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import NAVBAR from '@/constants/ui/common/navbar';
-import NavbarProps from '@/types/ui/navbar';
+import NavbarProps from '@/types/ui/common/navbar';
 
 function Navbar() {
   const pathname = usePathname();
@@ -15,11 +15,12 @@ function Navbar() {
     return value.inActiveSrc;
   };
 
-  const textClassName = (href: string) =>
-    clsx('text-center text-[10px]', {
+  const textClassName = (href: string) => {
+    return clsx('text-center text-[10px]', {
       'text-primary': pathname === href,
       'text-grey-400': pathname !== href,
     });
+  };
 
   return (
     <nav className="w-full h-12 flex justify-evenly pb-safe fixed bottom-0 max-w-[768px] bg-white">
