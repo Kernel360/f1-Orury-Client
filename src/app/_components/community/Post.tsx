@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import ArticleProps from '@/types/community/article';
+import PostsProps from '@/types/community/posts';
 import getTimeDiff from '@/utils/getTimeDiff';
 
-function Post({ ...props }: ArticleProps) {
+function Post({ ...props }: PostsProps) {
   return (
     <li className="flex justify-between gap-3 py-3">
       <div className="flex flex-col gap-3 max-w-[calc(100%-112px)]">
