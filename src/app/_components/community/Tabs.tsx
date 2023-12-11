@@ -15,7 +15,7 @@ function Tabs() {
   };
 
   return (
-    <ul className="grid grid-cols-3 h-14">
+    <ul className="grid h-10 grid-cols-3">
       {Object.values(TABS).map(tab => (
         <li key={tab.title} className={liClassName(tab.path)}>
           {tab.title}

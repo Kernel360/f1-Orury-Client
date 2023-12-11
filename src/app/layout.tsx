@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { pretendard } from '@/app/ui/fonts';
+import { pretendard } from '@/app/_components/ui/fonts';
 import '@/app/styles/globals.css';
 
 export const metadata: Metadata = {

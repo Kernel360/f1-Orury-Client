@@ -1,5 +1,5 @@
 import Tabs from '@/app/_components/community/Tabs';
-import Header from '@/app/ui/common/Header';
+import Header from '@/app/_components/ui/common/Header';
 
 function layout({ children }: { children: React.ReactNode }) {
   return (

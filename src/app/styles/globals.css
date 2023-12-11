@@ -15,3 +15,9 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+
+@layer components {
+  .ellipsis {
+    @apply text-ellipsis whitespace-nowrap overflow-hidden;
+  }
+}
