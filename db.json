@@ -1,0 +1,86 @@
+{
+  "posts": [
+    {
+      "id": 7,
+      "nickname": "닉네임7",
+      "title": "모킹 테스트 타이틀7",
+      "body": "모킹 테스트 바디",
+      "profileImage": "http://via.placeholder.com/360x360",
+      "createdAt": "2023-12-11T19:00:00",
+      "updatedAt": "2023-12-11T19:00:00"
+    },
+    {
+      "id": 6,
+      "nickname": "닉네임6",
+      "title": "모킹 테스트 타이틀6",
+      "body": "모킹 테스트 바디",
+      "profileImage": "http://via.placeholder.com/360x360",
+      "createdAt": "2023-12-11T18:00:00",
+      "updatedAt": "2023-12-11T19:00:00"
+    },
+    {
+      "id": 5,
+      "nickname": "닉네임5",
+      "title": "모킹 테스트 타이틀5",
+      "body": "모킹 테스트 바디",
+      "profileImage": "http://via.placeholder.com/360x360",
+      "createdAt": "2023-12-11T17:30:00",
+      "updatedAt": "2023-12-11T19:00:00"
+    },
+    {
+      "id": 4,
+      "nickname": "닉네임4",
+      "title": "모킹 테스트 타이틀4",
+      "body": "모킹 테스트 바디",
+      "profileImage": "http://via.placeholder.com/360x360",
+      "createdAt": "2023-12-11T17:20:00",
+      "updatedAt": "2023-12-11T19:00:00"
+    },
+    {
+      "id": 3,
+      "nickname": "닉네임3",
+      "title": "모킹 테스트 타이틀3",
+      "body": "모킹 테스트 바디",
+      "profileImage": "http://via.placeholder.com/360x360",
+      "createdAt": "2023-12-11T13:00:00",
+      "updatedAt": "2023-12-11T19:00:00"
+    },
+    {
+      "id": 2,
+      "nickname": "닉네임2",
+      "title": "모킹 테스트 타이틀2",
+      "body": "모킹 테스트 바디",
+      "profileImage": "http://via.placeholder.com/360x360",
+      "createdAt": "2023-12-10T19:00:00",
+      "updatedAt": "2023-12-11T19:00:00"
+    },
+    {
+      "id": 1,
+      "nickname": "닉네임1",
+      "title": "모킹 테스트 타이틀1인데 타이틀이 과도하게 길어지면 어떻게 되는 지",
+      "body": "모킹 테스트 바디인데 바디의 내용이 과도하게 길어지면 어떻게 되는 지 궁금해서 늘려보고 있습니다.",
+      "profileImage": "http://via.placeholder.com/360x360",
+      "createdAt": "2023-11-11T19:00:00",
+      "updatedAt": "2023-12-11T19:00:00"
+    },
+    {
+      "id": 0,
+      "nickname": "닉네임0",
+      "title": "모킹 테스트 타이틀0",
+      "body": "모킹 테스트 바디",
+      "profileImage": "http://via.placeholder.com/360x360",
+      "createdAt": "2022-12-11T19:00:00",
+      "updatedAt": "2023-12-11T19:00:00"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
