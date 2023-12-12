@@ -2,7 +2,7 @@ import CustomError from '@/error/CustomError';
 
 const getPosts = async () => {
   try {
-    const response = await fetch(`${process.env.API_URL as string}/api/posts`);
+    const response = await fetch(`${process.env.API_URL!}/api/posts`);
 
     if (!response.ok) {
       throw new Error('no response');
