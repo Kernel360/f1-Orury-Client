@@ -1,12 +1,16 @@
+'use client';
+
 import kakao from 'public/kakao.svg';
 import BUTTON from '@/constants/ui/button';
 import ICON from '@/constants/ui/icon';
 import Image from 'next/image';
+import { signIn } from 'next-auth/react';
 
 function Kakao() {
   return (
     <button
       type="button"
+      onClick={() => signIn('kakao', { callbackUrl: '/' })}
       className="relative w-full h-[3rem] bg-kakao rounded-xl active:brightness-90 max-w-[480px]"
     >
       <Image
