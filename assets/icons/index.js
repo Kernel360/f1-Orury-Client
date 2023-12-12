@@ -1,4 +1,4 @@
-import announce from '$/announce.svg';
+import notice from '$/notice.svg';
 import bar from '$/bar.svg';
 import community from '$/navbar/community.svg';
 import crew from '$/navbar/crew.svg';
@@ -12,7 +12,7 @@ import map_active from '$/navbar/active/map-active.svg';
 import my_active from '$/navbar/active/my-active.svg';
 
 export {
-  announce,
+  notice,
   bar,
   community,
   crew,

@@ -2,15 +2,15 @@ import Title from '@/app/_components/ui/common/Title';
 import NavigateBlock from '@/app/_components/ui/NavigateBlock';
 import NAVIGATE_BLOCKS from '@/constants/ui/navigateBlock';
 import Navbar from '@/app/_components/ui/common/Navbar';
-import Announcement from '@/app/_components/home/Announcement';
+import Notice from '@/app/_components/home/Notice';
 
 function Home() {
   return (
-    <main className="flex flex-col bg-white justify-between pb-16">
+    <main className="flex flex-col justify-between pb-16 bg-white">
       <div>
         <Title />
-        <Announcement />
-        <div className="flex flex-wrap mx-4 gap-4 justify-between">
+        <Notice />
+        <div className="flex flex-wrap justify-between gap-4 mx-4">
           {Object.values(NAVIGATE_BLOCKS).map(value => (
             <NavigateBlock key={value.title} blockProps={value} />
           ))}
