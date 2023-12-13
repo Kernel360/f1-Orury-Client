@@ -1,15 +1,14 @@
 import CustomError from '@/error/CustomError';
-import PostsProps from '@/types/community/posts';
 
-const getPosts = async () => {
+const getDetail = async (id: string) => {
   try {
-    const response = await fetch(`${process.env.API_URL!}/api/posts`);
+    const response = await fetch(`${process.env.API_URL!}/api/posts/${id}`);
 
     if (!response.ok) {
       throw new Error('no response');
     }
 
-    return (await response.json()) as PostsProps[];
+    return (await response.json()) as PostDetailProps;
   } catch (error: unknown) {
     if (error instanceof CustomError) {
       throw new Error(error.message);
@@ -19,4 +18,4 @@ const getPosts = async () => {
   }
 };
 
-export default getPosts;
+export default getDetail;

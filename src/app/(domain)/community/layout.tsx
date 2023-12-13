@@ -1,13 +1,10 @@
-import SearchBar from '@/app/_components/community/SearchBar';
-import Tabs from '@/app/_components/community/Tabs';
 import Header from '@/app/_components/ui/common/Header';
+import HEADER from '@/constants/ui/common/header';
 
 function layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="bg-white">
-      <Header title="게시판" isBack />
-      <Tabs />
-      <SearchBar />
+      <Header title={HEADER.community} isBack />
       {children}
     </div>
   );

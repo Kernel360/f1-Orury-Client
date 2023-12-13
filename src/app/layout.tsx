@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { pretendard } from '@/app/_components/ui/fonts';
 import '@/app/styles/globals.css';
+import { SessionContext } from './api/auth/SessionContext';
 
 export const metadata: Metadata = {
   title: 'Orury',
@@ -11,7 +12,9 @@ function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={`${pretendard.className} antialiased bg-slate-100`}>
-        <div className="max-w-[768px] mx-auto h-screen">{children}</div>
+        <SessionContext>
+          <div className="max-w-[768px] mx-auto h-screen">{children}</div>
+        </SessionContext>
       </body>
     </html>
   );
