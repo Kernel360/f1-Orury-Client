@@ -1,40 +1,32 @@
 import Image from 'next/image';
 import PostsProps from '@/types/community/posts';
-import getTimeDiff from '@/utils/getTimeDiff';
+import Link from 'next/link';
+import User from '@/app/_components/community/User';
 
 function Post({ ...props }: PostsProps) {
   return (
-    <li className="flex justify-between gap-3 py-3">
-      <div className="flex flex-col gap-3 max-w-[calc(100%-112px)]">
-        <div className="flex gap-2">
-          <Image
-            src={props.profileImage}
-            alt="image"
-            width={36}
-            height={36}
-            className="rounded-full"
-          />
+    <li>
+      <Link
+        href={`/community/${props.id}`}
+        className="flex justify-between gap-3 py-3"
+      >
+        <div className="flex flex-col gap-3 max-w-[calc(100%-112px)]">
+          <User {...props} />
           <div className="flex flex-col">
-            <span className="text-sm font-bold">{props.nickname}</span>
-            <span className="text-xs text-grey-500">
-              {getTimeDiff(props?.createdAt)}
+            <span className="font-bold ellipsis">{props.title}</span>
+            <span className="text-sm whitespace-normal ellipsis line-clamp-2">
+              {props.content}
             </span>
           </div>
         </div>
-        <div className="flex flex-col">
-          <span className="font-bold ellipsis">{props.title}</span>
-          <span className="text-sm whitespace-normal ellipsis line-clamp-2">
-            {props.body}
-          </span>
-        </div>
-      </div>
-      <Image
-        src={props.profileImage}
-        alt="image"
-        width={96}
-        height={96}
-        className="rounded-lg"
-      />
+        <Image
+          src={props.thumbnail_image}
+          alt="image"
+          width={96}
+          height={96}
+          className="rounded-lg"
+        />
+      </Link>
     </li>
   );
 }

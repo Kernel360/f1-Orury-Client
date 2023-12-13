@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
     fontFamily: {
       inter: ['var(--inter-font)'],
+      pretendard: ['var(--pretendard-font)'],
       rock: ['var(--rock-font)'],
       giants: ['var(--giants-font)'],
     },
@@ -38,6 +39,7 @@ const config: Config = {
         green: '#8FCAAA',
         red: '#FF006B',
         kakao: '#FEE500',
+        disabled: '#96A2AC',
       },
       boxShadow: {
         main: '0px 6px 6px 0px rgba(0, 0, 0, 0.25)',

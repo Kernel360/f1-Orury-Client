@@ -1,7 +1,7 @@
 const TABS = Object.freeze({
   announcement: {
-    title: '공지',
-    path: '/community/notice',
+    title: '인기',
+    path: '/community/hot',
   },
   main: {
     title: '자유게시판',

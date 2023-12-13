@@ -4,10 +4,15 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { back, ellipsis, x_mark } from '$/header';
 import HeaderProps from '@/types/ui/common/header';
+import { useRouter } from 'next/navigation';
 
 function Header({ title, isBack, isExit, isEllipsis }: HeaderProps) {
+  const router = useRouter();
+
   // TODO: 추후 클릭 핸들러 연결
-  const onClick = () => {};
+  const onClick = () => {
+    router.back();
+  };
 
   const buttonClassName = (isBack?: boolean) => {
     return clsx('absolute', {
@@ -25,7 +30,7 @@ function Header({ title, isBack, isExit, isEllipsis }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 flex items-center justify-center h-10 bg-white">
+    <header className="sticky top-0 flex items-center justify-center h-12 bg-white">
       <button
         type="button"
         onClick={onClick}

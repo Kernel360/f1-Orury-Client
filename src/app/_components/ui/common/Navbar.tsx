@@ -11,14 +11,20 @@ function Navbar() {
   const pathname = usePathname();
 
   const srcFinder = ({ value }: { value: NavbarProps }) => {
-    if (pathname === value.href) return value.activeSrc;
+    if (pathname === '/' && value.href === '/') return value.activeSrc;
+    if (value.href !== '/') {
+      if (pathname.startsWith(value.href)) return value.activeSrc;
+    }
+
     return value.inActiveSrc;
   };
 
   const textClassName = (href: string) => {
     return clsx('text-center text-[10px]', {
-      'text-primary': pathname === href,
-      'text-grey-400': pathname !== href,
+      'text-primary':
+        (pathname === '/' && href === '/') ||
+        (href !== '/' && pathname.startsWith(href)),
+      'text-disabled': pathname !== href,
     });
   };
 
