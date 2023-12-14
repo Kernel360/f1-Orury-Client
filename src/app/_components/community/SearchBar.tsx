@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { magnifying_glass } from '$/searchBar';
+import { magnifying_glass } from '$/community/searchBar';
 import { x_mark } from '$/header';
 import { useState } from 'react';
 
