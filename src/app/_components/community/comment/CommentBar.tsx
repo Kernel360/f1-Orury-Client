@@ -16,7 +16,7 @@ function CommentBar() {
   };
 
   return (
-    <section className="sticky bottom-12 left-0 px-1">
+    <section className="sticky bottom-0 left-0 px-1 pb-10">
       <textarea
         className="w-full py-2 pl-4 pr-10 rounded-md outline-none bg-grey-100 placeholder:text-grey-500 caret-primary"
         placeholder="댓글을 입력하세요."
