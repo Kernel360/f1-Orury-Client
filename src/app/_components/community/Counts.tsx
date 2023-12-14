@@ -1,6 +1,7 @@
 import { CountsProps } from '@/types/community/counts';
 import CountItem from '@/app/_components/community/CountItem';
 import COUNT_ITEM from '@/constants/community/counts';
+import { randomUUID } from 'crypto';
 
 function Counts({ size, likes, comments, views }: CountsProps) {
   const getCount = (index: number) => {
@@ -14,7 +15,7 @@ function Counts({ size, likes, comments, views }: CountsProps) {
     <div className="flex gap-2 w-full">
       {COUNT_ITEM.map(({ icon, activeIcon, color }, index) => (
         <CountItem
-          key={icon}
+          key={randomUUID()}
           icon={icon}
           count={getCount(index)}
           color={color}
