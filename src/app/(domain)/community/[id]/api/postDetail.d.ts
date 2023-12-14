@@ -12,6 +12,7 @@ interface PostDetailProps {
   created_at: string;
   updated_at: string;
   images: string[];
+  isLike: boolean;
   comments: CommentProps[];
 }
 
