@@ -27,7 +27,3 @@ interface CommentProps {
   updated_at: string;
   children?: CommentProps[];
 }
-
-// export interface PostDetail {
-//   data: PostType;
-// }
