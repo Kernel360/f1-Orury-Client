@@ -30,7 +30,8 @@
     "arrow-parens": "off",
     "arrow-body-style": "off",
     "@typescript-eslint/no-shadow": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "react/require-default-props": "off"
   },
   "globals": {
     "React": "writable"
