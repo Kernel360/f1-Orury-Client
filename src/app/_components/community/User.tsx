@@ -29,6 +29,8 @@ function User({
             src={isLiked ? thumbsUp_active : thumbsUp}
             alt="좋아요"
             width={12}
+            height={12}
+            quality={100}
           />
           <span className="text-red text-xs">{likes}</span>
         </>
@@ -42,7 +44,13 @@ function User({
     if (commentCount) {
       return (
         <>
-          <Image src={comment} alt="댓글" width={12} />
+          <Image
+            src={comment}
+            alt="댓글"
+            quality={100}
+            width={12}
+            height={12}
+          />
           <span className="text-primary text-xs">{commentCount}</span>
         </>
       );
@@ -67,7 +75,7 @@ function User({
             <span className="text-xs text-grey-500">
               {getTimeDiff(created_at)}
             </span>
-            <div className="flex gap-1">
+            <div className="flex gap-[2px]">
               {renderLikeCount(likes)}
               {renderCommentCount(comment_count)}
             </div>
