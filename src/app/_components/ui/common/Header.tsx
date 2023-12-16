@@ -30,7 +30,7 @@ function Header({ title, isBack, isExit, isEllipsis }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 flex items-center justify-center h-12 bg-white z-50">
+    <header className="sticky top-0 flex items-center justify-center h-12 bg-white z-10 ">
       <button
         type="button"
         onClick={onClick}
