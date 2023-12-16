@@ -40,6 +40,7 @@ const config: Config = {
         red: '#FF006B',
         kakao: '#FEE500',
         disabled: '#96A2AC',
+        warning: '#DA0000',
       },
       boxShadow: {
         main: '0px 6px 6px 0px rgba(0, 0, 0, 0.25)',
