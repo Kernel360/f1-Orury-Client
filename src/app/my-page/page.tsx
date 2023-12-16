@@ -22,7 +22,7 @@ function page() {
         gender={data.gender}
       />
       <Activity />
-      <section className="bg-white mt-4 p-4">
+      <section className="bg-white mt-4 p-4 shadow-xl">
         <Signout />
         <Withdrawal />
       </section>

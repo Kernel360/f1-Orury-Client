@@ -16,6 +16,12 @@
   }
 }
 
+@layer utilities {
+  .safe-padding-comment {
+    padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  }
+}
+
 @layer components {
   .ellipsis {
     @apply text-ellipsis whitespace-nowrap overflow-hidden;
