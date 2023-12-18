@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript"],
   "parser": "@typescript-eslint/parser",
@@ -31,7 +32,13 @@
     "arrow-body-style": "off",
     "@typescript-eslint/no-shadow": "off",
     "operator-linebreak": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "some": ["nesting", "id"]
+      }
+    ]
   },
   "globals": {
     "React": "writable"

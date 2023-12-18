@@ -31,7 +31,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "/public/*.js",
-    "src"
+    "src",
+    "jest.config.ts"
   ],
   "exclude": ["node_modules"]
 }
