@@ -2,7 +2,7 @@ import React from 'react';
 import mypage from '@/lib/myPage.json';
 import Header from '@/app/_components/ui/common/Header';
 import HEADER from '@/constants/ui/common/header';
-import Signout from '@/app/_components/ui/buttons/signout';
+import Signout from '@/app/_components/ui/buttons/Signout';
 import {
   Profile,
   Privacy,
