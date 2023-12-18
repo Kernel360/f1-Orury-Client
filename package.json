@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "eslint ./**/*.{js,jsx,ts,tsx} --cache --fix"
+    "lint:fix": "eslint ./**/*.{js,jsx,ts,tsx} --cache --fix",
+    "test": "jest --watch"
   },
   "dependencies": {
     "clsx": "^2.0.0",
@@ -19,6 +20,9 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@types/jest": "^29.5.11",
     "@types/node": "^20.10.4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -37,10 +41,13 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.2.0",
     "postcss": "^8",
     "prettier": "^3.1.0",
     "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.2"
   },
   "lint-staged": {
