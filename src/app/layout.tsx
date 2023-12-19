@@ -11,9 +11,15 @@ export const metadata: Metadata = {
 function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <meta
+        name="viewport"
+        content="viewport-fit=cover, width=device-width, initial-scale=1.0"
+      />
       <body className={`${pretendard.className} antialiased bg-slate-100`}>
         <SessionContext>
-          <div className="max-w-[768px] mx-auto h-screen">{children}</div>
+          <div className="max-w-[768px] mx-auto h-screen pb-safe bg-white">
+            {children}
+          </div>
         </SessionContext>
       </body>
     </html>
