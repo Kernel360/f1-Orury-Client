@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { camera, pencil } from '$/my-page';
 import { x_mark } from '$/header';
 import Button from '@/app/_components/ui/buttons/Button';
+import Input from '@/app/_components//ui/common/Input';
 
 function Profile({ ...props }: GetMyPageProps) {
   const [isToggled, setIsToggled] = useState<boolean>(false);
@@ -64,12 +65,12 @@ function Profile({ ...props }: GetMyPageProps) {
 
       <div className={`${isToggled ? 'block' : 'hidden'} w-full relative`}>
         <span className="w-28 font-thin inline-block">닉네임</span>
-        <input
-          className="outline-none focus:border-b-primary border-b p-2 w-[calc(100%-7rem)]"
+        <Input
           placeholder={nickname}
-          type="text"
           onChange={inputHandler}
           value={nickname}
+          width="[calc(100%-7rem)]"
+          isFocus
         />
         <button
           type="button"
