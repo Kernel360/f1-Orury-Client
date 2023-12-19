@@ -20,6 +20,10 @@
   .safe-padding-comment {
     padding-bottom: calc(40px + env(safe-area-inset-bottom));
   }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
 
 @layer components {
@@ -32,6 +36,7 @@
   -ms-overflow-style: none; /* IE, Edge */
   scrollbar-width: none; /* Firefox */
 }
+
 ::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
 }
