@@ -3,7 +3,7 @@ import User from '@/app/_components/community/User';
 import Counts from '@/app/_components/community/Counts';
 import Comment from '@/app/_components/community/comment/Comment';
 import CommentBar from '@/app/_components/community/comment/CommentBar';
-import comment from '@/lib/comment.json';
+import { commentsMock } from '@/__mock__/data/comment.mock';
 
 async function Page({ params }: { params: { id: string } }) {
   const details = await getDetail(params.id);
@@ -31,7 +31,7 @@ async function Page({ params }: { params: { id: string } }) {
             />
           </div>
         </div>
-        {comment.data.map(value => (
+        {commentsMock.map(value => (
           <Comment key={value.id} {...value} />
         ))}
       </div>

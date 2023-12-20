@@ -1,17 +1,17 @@
 import React from 'react';
-import mypage from '@/lib/myPage.json';
 import Header from '@/app/_components/ui/common/Header';
 import HEADER from '@/constants/ui/common/header';
-import Signout from '@/app/_components/ui/buttons/Signout';
+import SignOut from '@/app/_components/ui/buttons/SignOut';
 import {
   Profile,
   Privacy,
   Activity,
   Withdrawal,
 } from '@/app/_components/my-page';
+import { profileMock } from '@/__mock__/data/profile.mock';
 
 function page() {
-  const { data } = mypage;
+  const data = profileMock;
   return (
     <div>
       <Header title={HEADER.myPage} isBack />
@@ -23,7 +23,7 @@ function page() {
       />
       <Activity />
       <section className="bg-white mt-4 p-4 shadow-xl">
-        <Signout />
+        <SignOut />
         <Withdrawal />
       </section>
     </div>
