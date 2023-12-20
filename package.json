@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "formatter": "run formmater",
+    "formatter": "prettier --write --cache \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint ./**/*.{js,jsx,ts,tsx} --cache --fix",
     "test": "jest --watch"
   },
