@@ -1,20 +1,16 @@
 import CustomError from '@/error/CustomError';
 import PostsProps from '@/types/community/posts';
+import { axiosInstance } from '@/lib/axios/axios-instance';
+import { END_POINT } from '@/constants/api/end-point';
 
 const getPosts = async () => {
   try {
-    const response = await fetch(`${process.env.API_URL!}/api/posts`);
-
-    if (!response.ok) {
-      throw new Error('no response');
-    }
-
-    return (await response.json()) as PostsProps[];
+    const { data: posts } = await axiosInstance.get<PostsProps[]>(END_POINT.post);
+    return posts;
   } catch (error: unknown) {
     if (error instanceof CustomError) {
       throw new Error(error.message);
     }
-
     throw new Error('something went to wrong');
   }
 };
