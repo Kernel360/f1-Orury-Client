@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { pretendard } from '@/app/_components/ui/fonts';
 import '@/app/styles/globals.css';
+import { nodeServer } from '@/__mock__/browser';
+import { DEV } from '@/constants/api';
 import { SessionContext } from './api/auth/SessionContext';
 
 export const metadata: Metadata = {
@@ -9,6 +11,10 @@ export const metadata: Metadata = {
 };
 
 function RootLayout({ children }: { children: React.ReactNode }) {
+  if (DEV) {
+    nodeServer.listen();
+  }
+
   return (
     <html lang="en">
       <meta

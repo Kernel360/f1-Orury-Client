@@ -1,14 +1,13 @@
 import CustomError from '@/error/CustomError';
+import { axiosInstance } from '@/lib/axios/axios-instance';
+import { END_POINT } from '@/constants/api/end-point';
 
 const getDetail = async (id: string) => {
   try {
-    const response = await fetch(`${process.env.API_URL!}/api/posts/${id}`);
-
-    if (!response.ok) {
-      throw new Error('no response');
-    }
-
-    return (await response.json()) as PostDetailProps;
+    const { data: postDetail } = await axiosInstance<PostDetailProps>(
+      END_POINT.detailPost(id),
+    );
+    return postDetail;
   } catch (error: unknown) {
     if (error instanceof CustomError) {
       throw new Error(error.message);
