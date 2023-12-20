@@ -2,7 +2,7 @@
 
 import { signOut } from 'next-auth/react';
 
-function Signout() {
+function SignOut() {
   return (
     <button type="button" onClick={() => signOut()}>
       <span className="text-red font-semibold">로그아웃</span>
@@ -10,4 +10,4 @@ function Signout() {
   );
 }
 
-export default Signout;
+export default SignOut;
