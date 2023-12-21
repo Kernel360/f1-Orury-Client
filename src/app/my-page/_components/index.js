@@ -1,4 +1,4 @@
-import Privacy from '@/app/_components/my-page/privacy/Privacy';
+import Privacy from '@/app/my-page/_components/privacy/Privacy';
 import Activity from './Activity';
 import Profile from './Profile';
 import Withdrawal from './Withdrawal';

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { randomUUID } from 'crypto';
 import { reply } from '$/community';
-import User from '@/app/_components/community/User';
 import { ChildrenCommentProps, CommentProps } from '@/types/community/comment';
+import User from '@/app/(domain)/community/_components/User';
 
 function Comment({ ...props }: CommentProps) {
   const renderChildren = (childrenComment?: ChildrenCommentProps[]) => {

@@ -6,7 +6,7 @@ import POST from '@/constants/community/post';
 import { UserProps } from '@/types/community/user';
 import { thumbsUp, comment } from '$/community';
 import { useState } from 'react';
-import CommentButtons from '@/app/_components/community/comment/CommentButtons';
+import CommentButtons from '@/app/(domain)/community/_components/comment/CommentButtons';
 import { thumbsUp_active } from '$/community/active';
 
 function User({

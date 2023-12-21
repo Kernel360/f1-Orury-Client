@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { WITHDRAWAL_MODAL } from '@/constants/my-page/withdrawal';
-import Modal from '@/app/_components/ui/common/Modal';
+import Modal from '@/app/ui/common/Modal';
 import { signOut } from 'next-auth/react';
 
 function Withdrawal() {

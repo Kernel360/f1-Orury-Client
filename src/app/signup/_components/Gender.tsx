@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { GENDER } from '@/constants/signup';
-import Check from '@/app/_components/signup/Check';
-import Button from '@/app/_components/ui/buttons/Button';
+import Button from '@/app/ui/buttons/Button';
 import useSignupState from '@/store/signup/signupStore';
+import Check from '@/app/signup/_components/Check';
 
 function Gender() {
   const [isChecked, setIsChecked] = useState(false);

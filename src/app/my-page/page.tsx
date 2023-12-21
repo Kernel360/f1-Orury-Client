@@ -1,14 +1,14 @@
 import React from 'react';
-import Header from '@/app/_components/ui/common/Header';
+import Header from '@/app/ui/common/Header';
 import HEADER from '@/constants/ui/common/header';
-import SignOut from '@/app/_components/ui/buttons/SignOut';
 import {
   Profile,
   Privacy,
   Activity,
   Withdrawal,
-} from '@/app/_components/my-page';
+} from '@/app/my-page/_components';
 import { profileMock } from '@/__mock__/data/profile.mock';
+import SignOut from '@/app/ui/buttons/Signout';
 
 function page() {
   const data = profileMock;

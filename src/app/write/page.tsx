@@ -1,11 +1,11 @@
 'use client';
 
-import Header from '@/app/_components/ui/common/Header';
-import Input from '@/app/_components/ui/common/Input';
-import Textarea from '@/app/_components/ui/common/Textarea';
-import Button from '@/app/_components/ui/buttons/Button';
-import PhotoBooth from '@/app/_components/write/PhotoBooth';
+import Header from '@/app/ui/common/Header';
+import Input from '@/app/ui/common/Input';
+import Textarea from '@/app/ui/common/Textarea';
+import Button from '@/app/ui/buttons/Button';
 import { useState } from 'react';
+import PhotoBooth from '@/app/write/_components/PhotoBooth';
 
 function Page() {
   const [title, setTitle] = useState('');
