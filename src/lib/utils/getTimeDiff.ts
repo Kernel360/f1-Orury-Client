@@ -23,9 +23,9 @@ function getTimeDiff(time: string) {
     case diffInHours < TIME_THRESHOLD.day:
       return `${diffInHours}${TIME_DIFF.hour}`;
     case diffInDays < TIME_THRESHOLD.month:
-      return `${diffInDays}${TIME_DIFF.month}`;
+      return `${diffInDays}${TIME_DIFF.day}`;
     case diffInDays < TIME_THRESHOLD.year:
-      return `${Math.floor(diffInDays / DAYS.byMonth)}${TIME_DIFF.day}`;
+      return `${Math.floor(diffInDays / DAYS.byMonth)}${TIME_DIFF.month}`;
     default:
       return `${Math.floor(diffInDays / DAYS.byYear)}${TIME_DIFF.year}`;
   }
