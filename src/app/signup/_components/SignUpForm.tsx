@@ -1,34 +1,12 @@
 'use client';
 
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '@/app/ui/buttons/Button';
-import {
-  BIRTHDAY_INPUT,
-  GENDER,
-  INVALID_MESSAGE,
-  rBirthform,
-} from '@/constants/signup';
+import { BIRTHDAY_INPUT, GENDER, rBirthform } from '@/constants/signup';
+import { FormSchemaType, formSchema } from '@/app/signup/schema';
 
 function SignUpForm() {
-  // Zod 스키마 정의
-  const formSchema = z.object({
-    birthday: z.string().refine(
-      value => {
-        const dateValue = new Date(value);
-        const minDate = new Date('1900-01-01');
-        const maxDate = new Date();
-
-        return dateValue >= minDate && dateValue <= maxDate;
-      },
-      { message: INVALID_MESSAGE.birth },
-    ),
-    gender: z.number({ required_error: INVALID_MESSAGE.gender }),
-  });
-
-  type FormSchemaType = z.infer<typeof formSchema>;
-
   const {
     handleSubmit,
     register,
