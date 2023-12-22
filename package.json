@@ -13,13 +13,16 @@
   },
   "dependencies": {
     "axios": "^1.6.2",
+    "@hookform/resolvers": "^3.3.2",
     "clsx": "^2.0.0",
     "next": "14.0.3",
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.49.2",
     "tailwindcss-safe-area": "^0.4.1",
     "typescript": "^5.2.2",
+    "zod": "^3.22.4",
     "zustand": "^4.4.7"
   },
   "devDependencies": {

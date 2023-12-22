@@ -1,8 +1,8 @@
 import getDetail from '@/app/(domain)/community/[id]/api/getDetail';
-import User from '@/app/_components/community/User';
-import Counts from '@/app/_components/community/Counts';
-import Comment from '@/app/_components/community/comment/Comment';
-import CommentBar from '@/app/_components/community/comment/CommentBar';
+import User from '@/app/(domain)/community/_components/User';
+import Counts from '@/app/(domain)/community/_components/Counts';
+import Comment from '@/app/(domain)/community/_components/comment/Comment';
+import CommentBar from '@/app/(domain)/community/_components/comment/CommentBar';
 import { commentsMock } from '@/__mock__/data/comment.mock';
 
 async function Page({ params }: { params: { id: string } }) {

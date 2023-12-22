@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import { pretendard } from '@/app/_components/ui/fonts';
+import { pretendard } from '@/app/ui/fonts';
 import '@/app/styles/globals.css';
 import { nodeServer } from '@/__mock__/browser';
 import { DEV } from '@/constants/api';
+import Navbar from '@/app/ui/common/Navbar';
 import { SessionContext } from './api/auth/SessionContext';
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
         <SessionContext>
           <div className="max-w-[768px] mx-auto h-screen pb-safe bg-white">
             {children}
+            <Navbar />
           </div>
         </SessionContext>
       </body>
