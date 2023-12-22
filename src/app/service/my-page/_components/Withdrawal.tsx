@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { WITHDRAWAL_MODAL } from '@/constants/my-page/withdrawal';
 import Modal from '@/app/ui/common/Modal';
 import { signOut } from 'next-auth/react';
+import { MODAL } from '@/constants/ui/common/modal';
 
 function Withdrawal() {
   const [isClicked, setIsClicked] = useState(false);
@@ -19,8 +19,9 @@ function Withdrawal() {
       </button>
       {isClicked && (
         <Modal
-          title={WITHDRAWAL_MODAL.title}
-          content={WITHDRAWAL_MODAL.content}
+          title={MODAL.withdrawal.title}
+          content={MODAL.withdrawal.content}
+          okContent={MODAL.withdrawal.okContent}
           cancelHandler={clickHandler}
           okHandler={() => signOut({ callbackUrl: '/' })}
         />

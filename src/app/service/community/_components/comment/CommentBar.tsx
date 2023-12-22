@@ -7,7 +7,7 @@ import { useState } from 'react';
 function CommentBar() {
   const [text, setText] = useState<string>('');
 
-  const textHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const textHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
 
@@ -17,12 +17,11 @@ function CommentBar() {
 
   return (
     <section className="sticky bottom-0 left-0 px-1 safe-padding-comment">
-      <textarea
+      <input
         className="w-full py-2 pl-4 pr-10 rounded-md outline-none bg-grey-100 placeholder:text-grey-500 caret-primary"
         placeholder="댓글을 입력하세요."
         onChange={textHandler}
         value={text}
-        rows={1}
       />
       <button
         type="button"

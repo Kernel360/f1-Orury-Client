@@ -6,12 +6,13 @@ import {
   Privacy,
   Activity,
   Withdrawal,
-} from '@/app/my-page/_components';
+} from '@/app/service/my-page/_components';
 import { profileMock } from '@/__mock__/data/profile.mock';
-import SignOut from '@/app/ui/buttons/Signout';
+import SignOut from '@/app/ui/buttons/SignOut';
 
 function page() {
   const data = profileMock;
+
   return (
     <div>
       <Header title={HEADER.myPage} isBack />

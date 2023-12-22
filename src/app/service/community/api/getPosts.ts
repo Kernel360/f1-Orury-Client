@@ -6,7 +6,7 @@ import { END_POINT } from '@/constants/api/end-point';
 const getPosts = async () => {
   try {
     const { data: posts } = await axiosInstance.get<PostsProps[]>(
-      END_POINT.post,
+      END_POINT.posts,
     );
     return posts;
   } catch (error: unknown) {

@@ -64,12 +64,12 @@ function Profile({ ...props }: GetMyPageProps) {
       </button>
 
       <div className={`${isToggled ? 'block' : 'hidden'} w-full relative`}>
-        <span className="w-28 font-thin inline-block">닉네임</span>
+        <span className="w-16 font-thin inline-block">닉네임</span>
         <Input
           placeholder={nickname}
           onChange={inputHandler}
           value={nickname}
-          width="[calc(100%-7rem)]"
+          width="w-[calc(100%-4rem)]"
           isFocus
         />
         <button

@@ -1,5 +1,5 @@
 import { CountsProps } from '@/types/community/counts';
-import CountItem from '@/app/(domain)/community/_components/CountItem';
+import CountItem from '@/app/service/community/_components/CountItem';
 import COUNT_ITEM from '@/constants/community/counts';
 import { randomUUID } from 'crypto';
 

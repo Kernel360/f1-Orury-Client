@@ -1,12 +1,12 @@
-import getDetail from '@/app/(domain)/community/[id]/api/getDetail';
-import User from '@/app/(domain)/community/_components/User';
-import Counts from '@/app/(domain)/community/_components/Counts';
-import Comment from '@/app/(domain)/community/_components/comment/Comment';
-import CommentBar from '@/app/(domain)/community/_components/comment/CommentBar';
+import getPostDetail from '@/app/service/community/[id]/api/getPostDetail';
+import User from '@/app/service/community/_components/User';
+import Counts from '@/app/service/community/_components/Counts';
+import Comment from '@/app/service/community/_components/comment/Comment';
+import CommentBar from '@/app/service/community/_components/comment/CommentBar';
 import { commentsMock } from '@/__mock__/data/comment.mock';
 
 async function Page({ params }: { params: { id: string } }) {
-  const details = await getDetail(params.id);
+  const details = await getPostDetail(params.id);
 
   return (
     <div className="flex flex-col justify-between relative h-screen">
@@ -16,7 +16,7 @@ async function Page({ params }: { params: { id: string } }) {
             user_profile_image={details.user_profile_image}
             user_nickname={details.user_nickname}
             created_at={details.created_at}
-            isLike={details.isLike}
+            is_like={details.is_like}
           />
           <div className="flex flex-col gap-4">
             <span className="font-bold text-xl">{details.title}</span>

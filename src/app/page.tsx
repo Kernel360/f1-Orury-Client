@@ -1,24 +1,21 @@
+import TEAM from '@/constants/team';
+import Kakao from '@/app/ui/buttons/Kakao';
 import Title from '@/app/ui/common/Title';
-import NavigateBlock from '@/app/ui/NavigateBlock';
-import NAVIGATE_BLOCKS from '@/constants/ui/navigateBlock';
-import Navbar from '@/app/ui/common/Navbar';
-import Notice from '@/app/_components/Notice';
 
-function Home() {
+async function Page() {
   return (
-    <main className="flex flex-col justify-between pb-16 bg-white">
-      <div>
+    <div className="flex pt-[4rem] flex-col justify-between h-screen">
+      <div className="flex flex-col max-w-[480px] mx-auto">
         <Title />
-        <Notice />
-        <div className="flex flex-wrap justify-between gap-4 mx-4">
-          {Object.values(NAVIGATE_BLOCKS).map(value => (
-            <NavigateBlock key={value.title} blockProps={value} />
-          ))}
-        </div>
+        <span className="mx-auto text-xl font-semibold font-pretendard drop-shadow-xl">
+          {TEAM.content}
+        </span>
       </div>
-      <Navbar />
-    </main>
+      <div className="flex justify-center pb-[2rem] mx-4">
+        <Kakao />
+      </div>
+    </div>
   );
 }
 
-export default Home;
+export default Page;

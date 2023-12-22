@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
-import Heading from '@/app/my-page/_components/Heading';
-import Content from '@/app/my-page/_components/privacy/Content';
+import Heading from '@/app/service/my-page/_components/Heading';
+import Content from '@/app/service/my-page/_components/privacy/Content';
 import { PrivacyProps } from '@/types/my-page/privacy';
 import { GENDER, HEADLING_TITLE } from '@/constants/my-page/privacy';
 

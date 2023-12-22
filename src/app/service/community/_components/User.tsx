@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import getTimeDiff from '@/utils/getTimeDiff';
+import getTimeDiff from '@/lib/utils/getTimeDiff';
 import POST from '@/constants/community/post';
 import { UserProps } from '@/types/community/user';
-import { thumbsUp, comment } from '$/community';
+import { like_outline, comment } from '$/community';
 import { useState } from 'react';
-import CommentButtons from '@/app/(domain)/community/_components/comment/CommentButtons';
-import { thumbsUp_active } from '$/community/active';
+import CommentButtons from '@/app/service/community/_components/comment/CommentButtons';
+import { like_active_red } from '$/community/active';
 
 function User({
   user_profile_image,
@@ -15,18 +15,21 @@ function User({
   created_at,
   like_count,
   comment_count,
-  isLike,
+  is_like,
   hasButton,
 }: UserProps) {
+  // 댓글의 좋아요 수 (number)
   const [likes, setLikes] = useState(like_count);
-  const [isLiked, setisLiked] = useState(isLike);
+
+  // 유저가 댓글의 좋아요를 눌렀는 지 여부 (boolean)
+  const [isLike, setisLike] = useState(is_like);
 
   const renderLikeCount = (likes?: number) => {
     if (likes) {
       return (
         <>
           <Image
-            src={isLiked ? thumbsUp_active : thumbsUp}
+            src={isLike ? like_active_red : like_outline}
             alt="좋아요"
             width={12}
             height={12}
@@ -87,7 +90,7 @@ function User({
         <CommentButtons
           isLike={isLike}
           setLikes={setLikes}
-          setIsLiked={setisLiked}
+          setIsLike={setisLike}
         />
       )}
     </div>
