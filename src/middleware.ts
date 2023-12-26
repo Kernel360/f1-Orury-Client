@@ -1,5 +1,6 @@
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
+import CALLBACK_URL from '@/constants/url';
 
 export async function middleware(req: NextRequest) {
   const token = await getToken({
@@ -13,8 +14,8 @@ export async function middleware(req: NextRequest) {
   //   return NextResponse.redirect(new URL('/signin', req.url));
   // }
 
-  if (!token && pathname === '/') {
-    return NextResponse.redirect(new URL('/signin', req.url));
+  if (!token && pathname === CALLBACK_URL.service) {
+    return NextResponse.redirect(new URL(CALLBACK_URL.home, req.url));
   }
 
   return null;
