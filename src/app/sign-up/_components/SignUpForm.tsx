@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '@/app/ui/buttons/Button';
 import { BIRTHDAY_INPUT, GENDER, rBirthform } from '@/constants/signup';
-import { FormSchemaType, formSchema } from '@/app/signup/schema';
+import { FormSchemaType, formSchema } from '@/app/sign-up/schema';
 
 function SignUpForm() {
   const {
@@ -30,9 +30,7 @@ function SignUpForm() {
     trigger('gender');
   };
 
-  const onSubmit: SubmitHandler<FormSchemaType> = data => {
-    console.log(data);
-  };
+  const onSubmit: SubmitHandler<FormSchemaType> = () => {};
 
   return (
     <form
