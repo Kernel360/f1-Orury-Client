@@ -13,8 +13,8 @@ export async function middleware(req: NextRequest) {
   //   return NextResponse.redirect(new URL('/signin', req.url));
   // }
 
-  if (!token && pathname === '/') {
-    return NextResponse.redirect(new URL('/signin', req.url));
+  if (!token && pathname === '/service') {
+    return NextResponse.redirect(new URL('/', req.url));
   }
 
   return null;

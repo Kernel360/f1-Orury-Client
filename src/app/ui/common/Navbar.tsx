@@ -9,10 +9,14 @@ import NavbarProps from '@/types/ui/common/navbar';
 
 function Navbar() {
   const pathname = usePathname();
+  const HOME = '/service';
 
   const srcFinder = ({ value }: { value: NavbarProps }) => {
-    if (pathname === '/' && value.href === '/') return value.activeSrc;
-    if (value.href !== '/') {
+    if (pathname === HOME && value.href === HOME) {
+      return value.activeSrc;
+    }
+
+    if (value.href !== HOME) {
       if (pathname.startsWith(value.href)) return value.activeSrc;
     }
 
@@ -22,8 +26,9 @@ function Navbar() {
   const textClassName = (href: string) => {
     return clsx('text-center text-[10px]', {
       'text-primary':
-        (pathname === '/' && href === '/') ||
-        (href !== '/' && pathname.startsWith(href)),
+        (pathname === HOME && href === HOME) ||
+        (href !== HOME && pathname.startsWith(href)),
+
       'text-disabled': pathname !== href,
     });
   };
