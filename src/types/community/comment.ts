@@ -1,4 +1,4 @@
-export interface ChildrenCommentProps {
+export interface ChildCommentProps {
   id: number;
   content: string;
   parent_id: number;
@@ -7,8 +7,9 @@ export interface ChildrenCommentProps {
   user_profile_image: string;
   created_at: string;
   updated_at?: string;
-  is_like: boolean;
   like_count: number;
+  is_like: boolean;
+  deleted: number;
 }
 
 export interface CommentProps {
@@ -20,7 +21,8 @@ export interface CommentProps {
   user_profile_image: string;
   created_at: string;
   updated_at?: string;
-  is_like: boolean;
   like_count: number;
-  children?: ChildrenCommentProps[];
+  is_like: boolean;
+  deleted: number;
+  childComments?: ChildCommentProps[];
 }
