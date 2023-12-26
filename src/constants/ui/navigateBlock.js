@@ -4,21 +4,21 @@ import { map, board, crew } from 'public/index';
 const NAVIGATE_BLOCKS = {
   MAP: {
     index: 0,
-    href: '/map',
+    href: '/service/map',
     src: map,
     sub: '지도',
     title: '암장 정보',
   },
   COMMUNITY: {
     index: 1,
-    href: '/community',
+    href: '/service/community',
     src: board,
     sub: '커뮤니티',
     title: '게시판',
   },
   CREW: {
     index: 2,
-    href: '/crew',
+    href: '/service/crew',
     src: crew,
     sub: '',
     title: '크루',

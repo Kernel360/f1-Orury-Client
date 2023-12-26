@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 function Input({ placeholder, onChange, isFocus, value, width }: InputProps) {
   const inputClassName = clsx(
-    ` outline-none break-word border-b-2 py-2 pr-4 w-${width}`,
+    ` outline-none break-word border-b-2 py-2 pr-4 ${width}`,
     {
       'focus:border-b-primary': isFocus,
     },

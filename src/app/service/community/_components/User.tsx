@@ -6,8 +6,8 @@ import POST from '@/constants/community/post';
 import { UserProps } from '@/types/community/user';
 import { like_outline, comment } from '$/community';
 import { useState } from 'react';
-import CommentButtons from '@/app/service/community/_components/comment/CommentButtons';
 import { like_active_red } from '$/community/active';
+import CommentButtons from '@/app/service/community/_components/comment/CommentButtons';
 
 function User({
   user_profile_image,

@@ -26,6 +26,7 @@
     "@typescript-eslint/no-shadow": "off",
     "operator-linebreak": "off",
     "react/require-default-props": "off",
+    "implicit-arrow-linebreak": "off",
     "jsx-a11y/label-has-associated-control": [
       2,
       {

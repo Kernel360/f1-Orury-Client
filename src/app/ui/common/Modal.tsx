@@ -1,11 +1,18 @@
 interface ModalProps {
   title: string;
   content: string;
+  okContent: string;
   cancelHandler: () => void;
   okHandler: () => void;
 }
 
-function Modal({ title, content, cancelHandler, okHandler }: ModalProps) {
+function Modal({
+  title,
+  content,
+  cancelHandler,
+  okHandler,
+  okContent,
+}: ModalProps) {
   return (
     <div
       className="relative z-20"
@@ -56,7 +63,7 @@ function Modal({ title, content, cancelHandler, okHandler }: ModalProps) {
                 onClick={okHandler}
                 className="inline-flex w-auto justify-center rounded-md bg-warning px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500"
               >
-                탈퇴
+                {okContent}
               </button>
               <button
                 type="button"

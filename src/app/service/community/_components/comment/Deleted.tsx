@@ -7,7 +7,7 @@ function Deleted({ isChild }: { isChild?: boolean }) {
     'h-[5rem] flex justify-start items-center border-b py-4',
     {
       'px-4': !isChild,
-      'bg-grey-50': isChild,
+      'bg-grey-100': isChild,
     },
   );
 

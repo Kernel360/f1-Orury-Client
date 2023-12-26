@@ -10,8 +10,9 @@ function Comment({ ...props }: CommentProps) {
     if (childrenComment) {
       return Object.values(childrenComment).map(value => {
         if (value.deleted) return <Deleted key={randomUUID()} isChild />;
+
         return (
-          <div key={randomUUID()} className="flex bg-grey-50">
+          <div key={randomUUID()} className="flex bg-grey-100">
             <Image
               src={reply}
               alt="답글"

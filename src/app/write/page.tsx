@@ -24,7 +24,7 @@ function Page() {
         <div className="flex flex-col gap-4 w-full">
           <Input
             placeholder="제목"
-            width="full"
+            width="w-full"
             onChange={inputHandler}
             value={title}
             isFocus

@@ -11,7 +11,7 @@ import {
   MenubarContent,
   MenubarMenu,
   MenubarTrigger,
-} from '@/app/_components/ui/menubar';
+} from '@/app/_components/ui/MenuBar';
 import Modal from '@/app/ui/common/Modal';
 import { MODAL } from '@/constants/ui/common/modal';
 
