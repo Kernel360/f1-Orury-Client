@@ -1,4 +1,4 @@
-import Banner from '@/app/signup/_components/Banner';
+import Banner from '@/app/sign-up/_components/Banner';
 import SignUpForm from './_components/SignUpForm';
 
 function Page() {

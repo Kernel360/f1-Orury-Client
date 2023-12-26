@@ -7,7 +7,7 @@ function Post({ ...props }: PostsProps) {
   return (
     <li>
       <Link
-        href={`/community/${props.id}`}
+        href={`/service/community/${props.id}`}
         className="flex justify-between gap-3 py-3"
       >
         <div className="flex flex-col gap-3 max-w-[calc(100%-112px)]">
