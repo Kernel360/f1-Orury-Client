@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import getTimeDiff from '@/lib/utils/getTimeDiff';
+import getTimeDiff from '@/util/getTimeDiff';
 import POST from '@/constants/community/post';
 import { UserProps } from '@/types/community/user';
 import { like_outline, comment } from '$/community';

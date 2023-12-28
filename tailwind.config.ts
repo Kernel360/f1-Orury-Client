@@ -23,6 +23,9 @@ const config: Config = {
       giants: ['var(--giants-font)'],
     },
     extend: {
+      height: {
+        'full-size-omit-nav': 'calc(100vh - 3rem)',
+      },
       colors: {
         primary: '#855AFF',
         purple: {
