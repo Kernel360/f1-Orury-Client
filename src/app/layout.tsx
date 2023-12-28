@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { pretendard } from '@/app/ui/fonts';
-import '@/app/styles/globals.css';
+import '@/styles/globals.css';
 import { nodeServer } from '@/__mock__/browser';
 import { DEV } from '@/constants/api';
 import { SessionContext } from './api/auth/SessionContext';

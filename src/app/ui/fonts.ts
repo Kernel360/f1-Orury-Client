@@ -1,4 +1,4 @@
-import { Inter, Rock_Salt } from 'next/font/google';
+import { ABeeZee, Inter, Rock_Salt } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const pretendard = localFont({
@@ -24,4 +24,9 @@ export const giants = localFont({
   src: '../../../assets/fonts/Giants-Regular.ttf',
   display: 'swap',
   variable: '--giants-font',
+});
+
+export const aBeeZee = ABeeZee({
+  subsets: ['latin'],
+  weight: '400',
 });
