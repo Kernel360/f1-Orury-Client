@@ -1,16 +1,18 @@
 'use client';
 
 import clsx from 'clsx';
-import Image from 'next/image';
-import { mapSvg } from '$/map';
 import OneSearchResult from '@/app/service/map/_components/map/OneSearchResult';
 import type { SearchResultProps } from '@/types/map/BottomSheetProps';
+import { Map } from 'lucide-react';
+import { COLOR } from '@/styles/color';
 
 /**
  * @description 해당 Modal은 검색의 결과를 나타내기 위한 Modal입니다.
  * @param isSearching 현재 검색중인지 확인합니다. UI를 나타내기 위해서 필요합니다.
- * @param setIsSearching 검색 종료를 하기 위해서 필요합니다.
- * @param markerList 현재 보여주고 있는 검색 결과를 나타냅니다.
+ * @param onSearchingBlur 검색창에서 벗어났을 때 실행될 함수입니다.
+ * @param handleMovePosition 눌러진 포지션 값에 따라 해당 좌표로 지도의 중심을 이동시킵니다.
+ * @param handleCarouselOpen 전달받은 아이디 값의 이미지 모달을 엽니다.
+ * @param searchResult 검색된 값의 결과를 받아와서 나타냅니다.
  */
 function SearchResultModal({
   isSearching,
@@ -46,7 +48,7 @@ function SearchResultModal({
           className="flex items-center text-sm gap-2"
         >
           <span className="text-sm text-gray-400">지도 보기</span>
-          <Image src={mapSvg} alt="창 닫기" width="20" height="20" />
+          <Map size={20} stroke={COLOR.default} />
         </button>
       </div>
       {isEmptyResult ? (

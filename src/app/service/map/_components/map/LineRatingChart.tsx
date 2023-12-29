@@ -8,6 +8,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import { COLOR } from '@/styles/color';
 
 function CustomXTick({ index, x, y, data }: Partial<AxisChartAvgType>) {
   const month = data![index!]?.month;
@@ -17,7 +18,7 @@ function CustomXTick({ index, x, y, data }: Partial<AxisChartAvgType>) {
       x={x! + 10}
       y={y!}
       fontSize="12"
-      fill="#000000"
+      fill={COLOR.black}
       fontWeight="bold"
       textAnchor="end"
     >

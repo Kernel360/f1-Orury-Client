@@ -20,8 +20,7 @@ interface OneSearchKeywordType {
   title: string;
   place_title: string;
   is_like: boolean;
-  rating_score: number;
-  rating_count: number;
+  review_score: number;
   review_count: number;
   position: PositionType;
 }

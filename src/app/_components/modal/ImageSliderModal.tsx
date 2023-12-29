@@ -1,5 +1,6 @@
-import ImageCarousel from '@/app/ui/common/ImageCarousel';
+import ImageCarousel from '@/app/_components/common/ImageCarousel';
 import { ImageSliderModalProps } from '@/types/ui/modal/ImageSliderModal';
+import { X } from 'lucide-react';
 
 function ImageSliderModal({ images, onCloseModal }: ImageSliderModalProps) {
   return (
@@ -9,6 +10,11 @@ function ImageSliderModal({ images, onCloseModal }: ImageSliderModalProps) {
         type="button"
         className="absolute w-full h-full bg-[rgba(0,0,0,80%)]"
         onClick={onCloseModal}
+      />
+      <X
+        onClick={onCloseModal}
+        size="52"
+        className="cursor-pointer absolute z-[102] top-3 left-3"
       />
       <ImageCarousel images={images} />
     </div>

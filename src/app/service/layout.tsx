@@ -1,4 +1,4 @@
-import Navbar from '@/app/ui/common/Navbar';
+import Navbar from '@/app/_components/common/Navbar';
 import React from 'react';
 
 function layout({ children }: { children: React.ReactNode }) {

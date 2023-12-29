@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import Image from 'next/image';
 import { NavigateBlockProps } from '@/types/ui/navigateBlock';
-import { giants } from '@/app/ui/fonts';
+import { giants } from '@/styles/font';
 
 function NavigateBlock({ blockProps }: { blockProps: NavigateBlockProps }) {
   const { href, src, sub, title, index } = blockProps;

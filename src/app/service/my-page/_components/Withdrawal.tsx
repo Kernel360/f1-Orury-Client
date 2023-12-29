@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Modal from '@/app/ui/common/Modal';
+import Modal from '@/app/_components/common/Modal';
 import { signOut } from 'next-auth/react';
 import { MODAL } from '@/constants/ui/common/modal';
 

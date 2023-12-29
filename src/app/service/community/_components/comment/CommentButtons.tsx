@@ -12,7 +12,7 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from '@/app/_components/ui/MenuBar';
-import Modal from '@/app/ui/common/Modal';
+import Modal from '@/app/_components/common/Modal';
 import { MODAL } from '@/constants/ui/common/modal';
 
 function CommentButtons({ isLike, setLikes, setIsLike }: CommentBtnProps) {

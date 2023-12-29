@@ -1,8 +1,8 @@
-import Title from '@/app/ui/common/Title';
-import NavigateBlock from '@/app/ui/NavigateBlock';
+import Title from '@/app/_components/common/Title';
+import NavigateBlock from '@/app/service/_components/NavigateBlock';
 import NAVIGATE_BLOCKS from '@/constants/ui/navigateBlock';
-import Navbar from '@/app/ui/common/Navbar';
-import Notice from '@/app/_components/Notice';
+import Navbar from '@/app/_components/common/Navbar';
+import Notice from '@/app/service/_components/Notice';
 
 function Page() {
   return (

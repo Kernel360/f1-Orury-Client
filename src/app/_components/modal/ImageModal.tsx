@@ -1,5 +1,6 @@
 import type { ImageModalProps } from '@/types/ui/modal/ImageModal';
 import Image from 'next/image';
+import { X } from 'lucide-react';
 
 function ImageModal({ image, onCloseModal }: ImageModalProps) {
   const width = window.outerWidth;
@@ -10,6 +11,11 @@ function ImageModal({ image, onCloseModal }: ImageModalProps) {
         type="button"
         className="absolute w-full h-full bg-[rgba(0,0,0,80%)]"
         onClick={onCloseModal}
+      />
+      <X
+        onClick={onCloseModal}
+        size="52"
+        className="cursor-pointer absolute z-[102] top-3 left-3"
       />
       <Image
         className="z-[101]"

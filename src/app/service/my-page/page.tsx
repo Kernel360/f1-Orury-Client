@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '@/app/ui/common/Header';
+import Header from '@/app/_components/common/Header';
 import HEADER from '@/constants/ui/common/header';
 import {
   Profile,
@@ -8,7 +8,7 @@ import {
   Withdrawal,
 } from '@/app/service/my-page/_components';
 import { profileMock } from '@/__mock__/data/profile.mock';
-import SignOut from '@/app/ui/buttons/SignOut';
+import SignOut from '@/app/_components/buttons/SignOut';
 
 function page() {
   const data = profileMock;

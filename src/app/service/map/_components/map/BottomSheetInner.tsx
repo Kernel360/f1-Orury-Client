@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import clsx from 'clsx';
-import { aBeeZee } from '@/app/ui/fonts';
-import { phoneSvg } from '$/map';
+import { aBeeZee } from '@/styles/font';
 import OneSiteUrl from '@/app/service/map/_components/map/OneSiteUrl';
 import BarRatingChart from '@/app/service/map/_components/map/BarRatingChart';
 import getAvgPoint from '@/util/getAvgPoint';
@@ -15,10 +14,12 @@ import {
 import { useState } from 'react';
 import { BottomSheetInnerProps } from '@/types/map/BottomSheetProps';
 import ReviewModal from '@/app/service/map/_components/Review/ReviewModal';
+import { Smartphone } from 'lucide-react';
+import { COLOR } from '@/styles/color';
 
 /**
  * @description 바텀시트의 내부 콘테이너로서 내용물을 보여주는데 초점을 두고 있습니다.
- * @param props 상세정보들을 가져와서 보여주기 위해 상세값들을 가져옵니다.
+ * @param data 상세정보들을 가져와서 보여주기 위해 상세 값들을 가져옵니다.
  * @param handleImageOpen 단일 image Modal을 열기 위해서 사용되는 값입니다.
  */
 function BottomSheetInner({ data, handleImageOpen }: BottomSheetInnerProps) {
@@ -87,8 +88,10 @@ function BottomSheetInner({ data, handleImageOpen }: BottomSheetInnerProps) {
           <OneSiteUrl key={v.url} item={v} />
         ))}
         <div className="flex gap-2">
-          <Image src={phoneSvg} alt="phone-image" width={20} height={20} />
-          {phone}
+          <Smartphone stroke={COLOR.default} size={20} strokeWidth={1.25} />
+          <a className="cursor-pointer" href={`tel:${phone}`}>
+            {phone}
+          </a>
         </div>
       </div>
       <div className="shadow-custom-line h-[1px] py-1" />

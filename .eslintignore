@@ -6,3 +6,4 @@ tailwind.config.js
 tsconfig.json
 prettier.config.js
 public/index.js
+src/app/_components/ui

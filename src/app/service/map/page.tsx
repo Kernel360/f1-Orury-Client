@@ -4,8 +4,8 @@ import SearchBar from '@/app/service/map/_components/map/SearchBar';
 import BottomSheetContainer from '@/app/service/map/_components/map/BottomSheetContainer';
 import SearchResultModal from '@/app/service/map/_components/map/SearchResultModal';
 import KakaoBackGroundMap from '@/app/service/map/_components/map/KakaoBackGroundMap';
-import ImageSliderModal from '@/app/ui/modal/ImageSliderModal';
-import ImageModal from '@/app/ui/modal/ImageModal';
+import ImageSliderModal from '@/app/_components/modal/ImageSliderModal';
+import ImageModal from '@/app/_components/modal/ImageModal';
 import useMap from '@/hooks/map/useMap';
 
 function Page() {

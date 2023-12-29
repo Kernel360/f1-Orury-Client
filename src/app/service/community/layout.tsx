@@ -1,4 +1,4 @@
-import Header from '@/app/ui/common/Header';
+import Header from '@/app/_components/common/Header';
 import HEADER from '@/constants/ui/common/header';
 
 function layout({ children }: { children: React.ReactNode }) {

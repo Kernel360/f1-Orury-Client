@@ -1,6 +1,6 @@
 import TEAM from '@/constants/team';
-import Kakao from '@/app/ui/buttons/Kakao';
-import Title from '@/app/ui/common/Title';
+import Kakao from '@/app/_components/buttons/Kakao';
+import Title from '@/app/_components/common/Title';
 
 async function Page() {
   return (

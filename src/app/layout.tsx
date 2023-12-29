@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { pretendard } from '@/app/ui/fonts';
+import { pretendard } from '@/styles/font';
 import '@/styles/globals.css';
 import { nodeServer } from '@/__mock__/browser';
 import { DEV } from '@/constants/api';
