@@ -30,9 +30,9 @@ function BottomSheetContainer({
       blocking={false}
       draggable={!isSheetOpen}
       initialFocusRef={focusRef}
-      defaultSnap={({ maxHeight }) => maxHeight / 4}
-      snapPoints={({ maxHeight: max }) => {
-        return [200, max];
+      defaultSnap={200}
+      snapPoints={({ maxHeight }) => {
+        return [200, maxHeight];
       }}
       header={(
         <h1 className="flex items-center text-xl justify-center font-bold text-gray-800">
