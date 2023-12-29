@@ -33,6 +33,7 @@ function SearchBar({ isSearching, onSearchingFocus }: SearchKeyWordProps) {
   return (
     <div className={containerClassName}>
       <form onSubmit={handleSearchSubmit} className={formClassName}>
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="searchKeyword">
           <input
             id="searchKeyword"
@@ -42,6 +43,7 @@ function SearchBar({ isSearching, onSearchingFocus }: SearchKeyWordProps) {
             className="w-full outline-0"
           />
         </label>
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <button
           type="submit"
           className="absolute right-2 top-1/2 translate-y-[-50%]"
