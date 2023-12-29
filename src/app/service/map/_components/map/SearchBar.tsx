@@ -2,7 +2,7 @@ import type { SearchKeyWordProps } from '@/types/map/BottomSheetProps';
 import { FormEvent, useRef } from 'react';
 import { Search } from 'lucide-react';
 import clsx from 'clsx';
-import { defaultColor } from '@/constants/design';
+import { COLOR } from '@/styles/color';
 
 /**
  * @description 검색을 하기 위한 컴포넌트
@@ -48,7 +48,7 @@ function SearchBar({ isSearching, onSearchingFocus }: SearchKeyWordProps) {
           type="submit"
           className="absolute right-2 top-1/2 translate-y-[-50%]"
         >
-          <Search stroke={defaultColor} />
+          <Search stroke={COLOR.default} />
         </button>
       </form>
     </div>

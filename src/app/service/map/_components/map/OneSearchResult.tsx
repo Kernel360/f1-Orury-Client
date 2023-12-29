@@ -3,6 +3,7 @@ import type { OneSearchResultProps } from '@/types/map/BottomSheetProps';
 import { Star } from 'lucide-react';
 import { useState } from 'react';
 import Ratingbar from '@/app/_components/common/Ratingbar';
+import { COLOR } from '@/styles/color';
 
 /**
  * @description 검색 결과의 항목을 하나씩 보여주기 위한 소단위의 컴포넌트입니다.
@@ -50,7 +51,7 @@ function OneSearchResult({
               className="mr-2"
               onClick={handleLikeEvent}
               strokeWidth={1}
-              fill={isLike ? '#F1C644' : 'none'}
+              fill={isLike ? COLOR.star : 'none'}
             />
           </div>
           <button

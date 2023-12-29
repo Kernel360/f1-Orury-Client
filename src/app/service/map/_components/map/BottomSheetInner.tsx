@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { BottomSheetInnerProps } from '@/types/map/BottomSheetProps';
 import ReviewModal from '@/app/service/map/_components/Review/ReviewModal';
 import { Smartphone } from 'lucide-react';
-import { defaultColor } from '@/constants/design';
+import { COLOR } from '@/styles/color';
 
 /**
  * @description 바텀시트의 내부 콘테이너로서 내용물을 보여주는데 초점을 두고 있습니다.
@@ -88,7 +88,7 @@ function BottomSheetInner({ data, handleImageOpen }: BottomSheetInnerProps) {
           <OneSiteUrl key={v.url} item={v} />
         ))}
         <div className="flex gap-2">
-          <Smartphone stroke={defaultColor} size={20} strokeWidth={1.25} />
+          <Smartphone stroke={COLOR.default} size={20} strokeWidth={1.25} />
           <a className="cursor-pointer" href={`tel:${phone}`}>
             {phone}
           </a>
