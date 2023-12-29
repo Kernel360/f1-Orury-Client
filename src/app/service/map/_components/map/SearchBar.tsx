@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import { searchGlassSvg } from '$/map';
 import type { SearchKeyWordProps } from '@/types/map/BottomSheetProps';
 import { FormEvent, useRef } from 'react';
+import { Search } from 'lucide-react';
 import clsx from 'clsx';
+import { defaultColor } from '@/constants/design';
 
 /**
  * @description 검색을 하기 위한 컴포넌트
@@ -33,20 +33,21 @@ function SearchBar({ isSearching, onSearchingFocus }: SearchKeyWordProps) {
   return (
     <div className={containerClassName}>
       <form onSubmit={handleSearchSubmit} className={formClassName}>
-        <label>
+        <label htmlFor="searchKeyword">
           <input
+            id="searchKeyword"
             ref={searchRef}
             placeholder="오늘은 어디를 가볼까?"
             onFocus={handleSearchFocus}
             className="w-full outline-0"
           />
-          <button
-            type="submit"
-            className="absolute right-2 top-1/2 translate-y-[-50%]"
-          >
-            <Image src={searchGlassSvg} alt="검색" />
-          </button>
         </label>
+        <button
+          type="submit"
+          className="absolute right-2 top-1/2 translate-y-[-50%]"
+        >
+          <Search stroke={defaultColor} />
+        </button>
       </form>
     </div>
   );

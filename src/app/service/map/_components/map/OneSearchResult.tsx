@@ -2,7 +2,7 @@ import Image from 'next/image';
 import type { OneSearchResultProps } from '@/types/map/BottomSheetProps';
 import { Star } from 'lucide-react';
 import { useState } from 'react';
-import Ratingbar from '@/app/ui/common/Ratingbar';
+import Ratingbar from '@/app/_components/common/Ratingbar';
 
 /**
  * @description 검색 결과의 항목을 하나씩 보여주기 위한 소단위의 컴포넌트입니다.
@@ -14,15 +14,7 @@ function OneSearchResult({
   onMovePosition,
   handleCarouselOpen,
 }: OneSearchResultProps) {
-  const {
-    review_count,
-    rating_count,
-    rating_score,
-    place_title,
-    img,
-    title,
-    is_like,
-  } = item;
+  const { review_count, review_score, place_title, img, title, is_like } = item;
 
   const [isLike, setIsLike] = useState<boolean>(is_like);
 
@@ -54,23 +46,31 @@ function OneSearchResult({
             >
               {title}
             </button>
-            <Star className="mr-2" onClick={handleLikeEvent} strokeWidth={1} fill={isLike ? '#F1C644' : 'none'} />
+            <Star
+              className="mr-2"
+              onClick={handleLikeEvent}
+              strokeWidth={1}
+              fill={isLike ? '#F1C644' : 'none'}
+            />
           </div>
           <button
             className="cursor-pointer flex"
             type="button"
             onClick={onSearchClick}
           >
-            <Ratingbar size={20} point={rating_score} />
-            {`${rating_score} (${rating_count}) | 리뷰 ${review_count}건`}
+            <Ratingbar size={20} point={review_score} />
+            {`${review_score} / 리뷰 ${review_count}건`}
           </button>
           <div>{place_title}</div>
         </div>
-        <div className="cursor-pointer rounded-md relative overflow-hidden">
+        <button
+          type="button"
+          onClick={onCarouselOpen}
+          className="cursor-pointer rounded-md relative overflow-hidden"
+        >
           <Image
             className="cursor-pointer"
             src={img[0]}
-            onClick={onCarouselOpen}
             alt={`${title} 메인 이미지`}
             width={88}
             height={88}
@@ -80,7 +80,7 @@ function OneSearchResult({
               {img.length}
             </div>
           ) : null}
-        </div>
+        </button>
       </div>
     </div>
   );

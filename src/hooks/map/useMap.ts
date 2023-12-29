@@ -13,8 +13,7 @@ function useMap() {
   // 검색중인지 판단하는 state
   const [isSearching, setIsSearching] = useState<boolean>(false);
   // 검색 결과 state
-  const [searchResult] =
-    useState<SearchKeywordListType>(searchMock);
+  const [searchResult] = useState<SearchKeywordListType>(searchMock);
   // 보여질 이미지 모달
   const [imageModalUrl, setImageModalUrl] = useState<string>('');
   // 이미지 모달이 열려있는지 확인합니다.

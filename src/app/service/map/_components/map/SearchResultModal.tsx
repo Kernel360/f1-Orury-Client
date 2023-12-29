@@ -1,10 +1,10 @@
 'use client';
 
 import clsx from 'clsx';
-import Image from 'next/image';
-import { mapSvg } from '$/map';
 import OneSearchResult from '@/app/service/map/_components/map/OneSearchResult';
 import type { SearchResultProps } from '@/types/map/BottomSheetProps';
+import { Map } from 'lucide-react';
+import { defaultColor } from '@/constants/design';
 
 /**
  * @description 해당 Modal은 검색의 결과를 나타내기 위한 Modal입니다.
@@ -46,7 +46,7 @@ function SearchResultModal({
           className="flex items-center text-sm gap-2"
         >
           <span className="text-sm text-gray-400">지도 보기</span>
-          <Image src={mapSvg} alt="창 닫기" width="20" height="20" />
+          <Map size={20} stroke={defaultColor} />
         </button>
       </div>
       {isEmptyResult ? (

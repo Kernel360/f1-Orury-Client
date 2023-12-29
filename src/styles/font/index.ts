@@ -2,7 +2,7 @@ import { ABeeZee, Inter, Rock_Salt } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const pretendard = localFont({
-  src: '../../../assets/fonts/PretendardVariable.woff2',
+  src: './PretendardVariable.woff2',
   display: 'swap',
   variable: '--pretendard-font',
 });
@@ -21,7 +21,7 @@ export const rock = Rock_Salt({
 });
 
 export const giants = localFont({
-  src: '../../../assets/fonts/Giants-Regular.ttf',
+  src: './Giants-Regular.ttf',
   display: 'swap',
   variable: '--giants-font',
 });

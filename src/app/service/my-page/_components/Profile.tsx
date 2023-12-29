@@ -4,8 +4,8 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { camera, pencil } from '$/my-page';
 import { x_mark } from '$/header';
-import Button from '@/app/ui/buttons/Button';
-import Input from '@/app/ui/common/Input';
+import Button from '@/app/_components/buttons/Button';
+import Input from '@/app/_components/common/Input';
 
 function Profile({ ...props }: GetMyPageProps) {
   const [isToggled, setIsToggled] = useState<boolean>(false);

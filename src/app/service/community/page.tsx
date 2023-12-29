@@ -1,7 +1,7 @@
 import React from 'react';
 import getPosts from '@/app/service/community/api/getPosts';
 import { randomUUID } from 'crypto';
-import Floating from '@/app/ui/buttons/Floating';
+import Floating from '@/app/_components/buttons/Floating';
 import Post from '@/app/service/community/_components/Post';
 import SearchBar from '@/app/service/community/_components/SearchBar';
 import Tabs from '@/app/service/community/_components/Tabs';

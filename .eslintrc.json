@@ -27,6 +27,7 @@
     "operator-linebreak": "off",
     "react/require-default-props": "off",
     "implicit-arrow-linebreak": "off",
+    "@typescript-eslint/naming-convention": "off",
     "jsx-a11y/label-has-associated-control": [
       2,
       {

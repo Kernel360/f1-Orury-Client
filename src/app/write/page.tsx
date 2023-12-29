@@ -1,9 +1,9 @@
 'use client';
 
-import Header from '@/app/ui/common/Header';
-import Input from '@/app/ui/common/Input';
-import Textarea from '@/app/ui/common/Textarea';
-import Button from '@/app/ui/buttons/Button';
+import Header from '@/app/_components/common/Header';
+import Input from '@/app/_components/common/Input';
+import Textarea from '@/app/_components/common/Textarea';
+import Button from '@/app/_components/buttons/Button';
 import { useState } from 'react';
 import PhotoBooth from '@/app/write/_components/PhotoBooth';
 

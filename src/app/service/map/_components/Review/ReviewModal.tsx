@@ -6,7 +6,11 @@ import type { ReviewProps } from '@/types/map/ReviewProps';
  * @param isOpen 해당 Modal의 열림 여부를 나타냅니다.
  */
 function ReviewModal({ onCloseModal, isOpen }: ReviewProps) {
-  return <button type="button" onClick={onCloseModal}>{isOpen}</button>;
+  return (
+    <button type="button" onClick={onCloseModal}>
+      {isOpen}
+    </button>
+  );
 }
 
 export default ReviewModal;

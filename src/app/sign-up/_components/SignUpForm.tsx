@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Button from '@/app/ui/buttons/Button';
+import Button from '@/app/_components/buttons/Button';
 import { BIRTHDAY_INPUT, GENDER, rBirthform } from '@/constants/signup';
 import { FormSchemaType, formSchema } from '@/app/sign-up/schema';
 
