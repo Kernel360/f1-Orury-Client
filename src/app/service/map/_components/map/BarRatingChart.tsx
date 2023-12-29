@@ -7,6 +7,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import { COLOR } from '@/styles/color';
 
 function CustomYAxisLeft(props: Partial<AxisChartPointType>) {
   const idx = props?.index!;
@@ -17,7 +18,7 @@ function CustomYAxisLeft(props: Partial<AxisChartPointType>) {
       x={props?.x}
       y={props?.y}
       fontSize="12"
-      fill="#000000"
+      fill={COLOR.black}
       fontWeight="bold"
       textAnchor="end"
     >
@@ -35,7 +36,7 @@ function CustomYAxisRight(props: Partial<AxisChartPointType>) {
       x={props?.x}
       y={props?.y}
       fontSize="12"
-      fill="#999999"
+      fill={COLOR.gray}
       fontWeight="bold"
     >
       {count}

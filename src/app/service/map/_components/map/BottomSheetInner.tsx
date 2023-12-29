@@ -19,7 +19,7 @@ import { COLOR } from '@/styles/color';
 
 /**
  * @description 바텀시트의 내부 콘테이너로서 내용물을 보여주는데 초점을 두고 있습니다.
- * @param props 상세정보들을 가져와서 보여주기 위해 상세값들을 가져옵니다.
+ * @param data 상세정보들을 가져와서 보여주기 위해 상세 값들을 가져옵니다.
  * @param handleImageOpen 단일 image Modal을 열기 위해서 사용되는 값입니다.
  */
 function BottomSheetInner({ data, handleImageOpen }: BottomSheetInnerProps) {
