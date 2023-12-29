@@ -7,8 +7,7 @@ export const searchMock: SearchKeywordListType = {
       title: '더클라임 강남점',
       place_title: '서울 강남구 테헤란로',
       is_like: true,
-      rating_score: 4.5,
-      rating_count: 16,
+      review_score: 4.5,
       review_count: 15,
       position: {
         lat: 37.5063849225134,
@@ -21,8 +20,7 @@ export const searchMock: SearchKeywordListType = {
       title: '더클라임 양재점',
       place_title: '서울 강남구 남부 순환로',
       is_like: false,
-      rating_score: 4.5,
-      rating_count: 13,
+      review_score: 4.5,
       review_count: 12,
       position: {
         lat: 37.48522589024053,
@@ -39,8 +37,7 @@ export const searchMock: SearchKeywordListType = {
       title: '더클라임 신사점',
       place_title: '서울 강남구 압구정로2길',
       is_like: false,
-      rating_score: 4.5,
-      rating_count: 2,
+      review_score: 4.5,
       review_count: 5,
       position: {
         lat: 37.52111687308989,
@@ -57,8 +54,7 @@ export const searchMock: SearchKeywordListType = {
       title: '더클라임 논현점',
       place_title: '서울 서초구 강남대로',
       is_like: true,
-      rating_score: 5,
-      rating_count: 1,
+      review_score: 5,
       review_count: 25,
       position: {
         lat: 37.508263519405965,
@@ -75,8 +71,7 @@ export const searchMock: SearchKeywordListType = {
       title: '더클라임 사당점',
       place_title: '서울 관악구 과천대로',
       is_like: false,
-      rating_score: 0,
-      rating_count: 0,
+      review_score: 0,
       review_count: 0,
       position: {
         lat: 37.47444934741218,
@@ -93,8 +88,7 @@ export const searchMock: SearchKeywordListType = {
       title: '더클라임 서울대점',
       place_title: '서울 강남구 남부 순환로 2615 지하 1층',
       is_like: false,
-      rating_score: 4.4,
-      rating_count: 12,
+      review_score: 4.4,
       review_count: 3,
       position: {
         lat: 37.48521688274289,
