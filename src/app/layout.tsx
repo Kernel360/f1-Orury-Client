@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import { pretendard } from '@/styles/font';
 import '@/styles/globals.css';
-import { nodeServer } from '@/__mock__/browser';
-import { DEV } from '@/constants/api';
-import { SessionContext } from './api/auth/SessionContext';
+import Providers from '@/app/providers';
 
 export const metadata: Metadata = {
   title: 'Orury',
@@ -11,10 +9,6 @@ export const metadata: Metadata = {
 };
 
 function RootLayout({ children }: { children: React.ReactNode }) {
-  if (DEV) {
-    nodeServer.listen();
-  }
-
   return (
     <html lang="en">
       <meta
@@ -22,11 +16,11 @@ function RootLayout({ children }: { children: React.ReactNode }) {
         content="viewport-fit=cover, width=device-width, initial-scale=1.0"
       />
       <body className={`${pretendard.className} antialiased bg-slate-100`}>
-        <SessionContext>
+        <Providers>
           <div className="max-w-[768px] mx-auto h-screen pb-safe bg-white">
             {children}
           </div>
-        </SessionContext>
+        </Providers>
       </body>
     </html>
   );
