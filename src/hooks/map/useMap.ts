@@ -33,36 +33,59 @@ function useMap() {
   // 해당 지도의 아이디를 저장합니다. 해당 state를 통해 detail 정보를 불러옵니다.
   const [selectMarkerId, setSelectMarkerId] = useState<number | null>(null);
 
+  const [selectReviewId, setSelectReviewId] = useState<number | null>(null);
+
+  // 리뷰 모달의 열고 닫힘을 관리합니다. 모달이 열리기 위해서는 리뷰 아이디가 선택이 되어있어야 합니다.
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState<boolean>(false);
+
+  // 리뷰 모달을 열기 위한 함수입니다.
+  const handleReviewModalOpen = (selectReviewId: number) => {
+    setSelectReviewId(selectReviewId);
+    setIsReviewModalOpen(true);
+  };
+
+  // 리뷰 모달을 닫기 위한 함수입니다.
+  const onReviewModalClose = () => {
+    setSelectReviewId(null);
+    setIsReviewModalOpen(false);
+  };
+
   const onSearchingFocus = () => {
     setIsSearching(true);
   };
 
+  // 검색상태에서 벗어났을 때, 검색창을 닫기 위해 사용됩니다.
   const onSearchingBlur = () => {
     setIsSearching(false);
   };
 
+  // BottomSheet 가 닫히거나 닫을 때 실행되는 함수입니다.
   const onDisMiss = () => {
     setIsSheetOpen(false);
   };
 
+  // 단일 이미지 모달을 닫기 위한 함수입니다.
   const handleImageClosed = () => {
     setImageModalUrl('');
     setIsImageModalOpen(false);
   };
 
+  // 단일 이미지 모달을 열기 위한 함수입니다.
   const handleImageOpen = (imgUrl: string) => {
     setImageModalUrl(imgUrl);
     setIsImageModalOpen(true);
   };
 
-  const handleCarouselClosed = () => {
-    setCarouselImages([]);
-    setCarouselModalIsOpen(false);
-  };
-
+  // 슬라이드 이미지 모달을 열기 위한 함수입니다.
   const handleCarouselOpen = (imgUrls: string[]) => {
     setCarouselImages(imgUrls);
     setCarouselModalIsOpen(true);
+  };
+
+  // 슬라이드 이미지 모달을 닫기 위한 함수입니다.
+  const handleCarouselClosed = () => {
+    setCarouselImages([]);
+    setCarouselModalIsOpen(false);
   };
 
   // 좌표를 이동 시키고 열어주는 함수
@@ -89,12 +112,16 @@ function useMap() {
     isBottomSheetOpen,
     isSearching,
     imageModalUrl,
+    isReviewModalOpen,
     mapInfo,
     selectMarkerId,
     searchResult,
+    selectReviewId,
+    onReviewModalClose,
     onDisMiss,
     onSearchingFocus,
     onSearchingBlur,
+    handleReviewModalOpen,
     handleCarouselClosed,
     handleMovePosition,
     handleImageClosed,

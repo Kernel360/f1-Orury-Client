@@ -7,11 +7,17 @@ import KakaoBackGroundMap from '@/app/service/map/_components/map/KakaoBackGroun
 import ImageSliderModal from '@/app/_components/modal/ImageSliderModal';
 import ImageModal from '@/app/_components/modal/ImageModal';
 import useMap from '@/hooks/map/useMap';
+import ReviewModal from '@/app/service/map/_components/Review/ReviewModal';
 
 function Page() {
   const M = useMap();
   return (
     <div className="h-full relative">
+      <ReviewModal
+        position="right"
+        isOpen={M.isReviewModalOpen}
+        onCloseModal={M.onReviewModalClose}
+      />
       {M.isImageModalOpen ? (
         <ImageModal
           image={M.imageModalUrl}
@@ -45,6 +51,7 @@ function Page() {
         selectMarkerId={M.selectMarkerId}
         onDisMiss={M.onDisMiss}
         handleImageOpen={M.handleImageOpen}
+        handleReviewOpen={M.handleReviewModalOpen}
       />
     </div>
   );

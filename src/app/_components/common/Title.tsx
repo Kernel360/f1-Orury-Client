@@ -1,5 +1,5 @@
 import TEAM from '@/constants/team';
-import { rock } from '@/styles/font';
+import { rock } from '@/styles/fonts';
 
 function Title() {
   return (
