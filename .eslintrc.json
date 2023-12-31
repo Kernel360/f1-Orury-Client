@@ -28,6 +28,12 @@
     "react/require-default-props": "off",
     "implicit-arrow-linebreak": "off",
     "@typescript-eslint/naming-convention": "off",
+    "react/prop-types": "off",
+    "consistent-return": "off",
+    "react/jsx-no-constructed-context-values": "off",
+    "react/jsx-wrap-multilines": "off",
+    "react/jsx-indent": "off",
+    "@typescript-eslint/indent": "off",
     "jsx-a11y/label-has-associated-control": [
       2,
       {
