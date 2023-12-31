@@ -16,11 +16,13 @@ interface BottomSheetProps {
   isSheetOpen: boolean;
   onDisMiss: () => void;
   handleImageOpen: (url: string) => void;
+  handleReviewOpen: (reviewId: number) => void;
 }
 
 interface BottomSheetInnerProps {
   data: DetailPlaceType;
   handleImageOpen: (url: string) => void;
+  handleReviewOpen: (reviewId: number) => void;
 }
 
 interface SearchKeyWordProps {

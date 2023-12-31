@@ -1,6 +1,18 @@
+import { ReviewDataType } from '@/types/map/review';
+
 interface ReviewProps {
+  position: 'center' | 'right';
   isOpen: boolean;
   onCloseModal: () => void;
 }
 
-export type { ReviewProps };
+interface FirstReviewModalProps {
+  title: string;
+  isFirst: boolean;
+}
+
+interface ReviewListProps {
+  list: ReviewDataType[];
+}
+
+export type { ReviewProps, FirstReviewModalProps, ReviewListProps };
