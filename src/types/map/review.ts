@@ -1,6 +1,13 @@
 interface ReviewDataType {
   id: number;
-  writer: string;
+  isMine?: {
+    status: boolean;
+    point: number;
+  };
+  writer: {
+    name: string;
+    img: string;
+  };
   content?: string;
   img_urls?: string[];
   like_point: number;
@@ -14,4 +21,9 @@ interface ReviewResponseType {
   review_list: ReviewDataType[];
 }
 
-export type { ReviewDataType, ReviewResponseType };
+interface OneReviewProps {
+  item: ReviewDataType;
+  handleImageOpen: (url: string) => void;
+}
+
+export type { ReviewDataType, ReviewResponseType, OneReviewProps };

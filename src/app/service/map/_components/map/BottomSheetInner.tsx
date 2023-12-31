@@ -4,16 +4,11 @@ import OneSiteUrl from '@/app/service/map/_components/map/OneSiteUrl';
 import BarRatingChart from '@/app/service/map/_components/map/BarRatingChart';
 import getAvgPoint from '@/util/getAvgPoint';
 import LineRatingChart from '@/app/service/map/_components/map/LineRatingChart';
-import { v4 as uuid } from 'uuid';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from '@/app/_components/ui/carousel';
 import { BottomSheetInnerProps } from '@/types/map/BottomSheetProps';
 import { Smartphone } from 'lucide-react';
 import { COLOR } from '@/styles/color';
 import { aBeeZee } from '@/styles/fonts';
+import MapCarousel from '@/app/service/map/_components/MapCarousel';
 
 /**
  * @description 바텀시트의 내부 콘테이너로서 내용물을 보여주는데 초점을 두고 있습니다.
@@ -91,29 +86,7 @@ function BottomSheetInner({
         <span>사진</span>
         <span>{`${img_urls.length}개`}</span>
       </div>
-      <Carousel
-        opts={{
-          align: 'start',
-        }}
-        className="w-[95%] mx-auto my-0"
-      >
-        <CarouselContent className="h-[6.5rem]">
-          {img_urls.map(url => (
-            <CarouselItem key={uuid()} className="relative basis-1/3">
-              <div className="p-[0.5rem] rounded-xl overflow-hidden h-full relative">
-                <Image
-                  onClick={() => handleImageOpen(url)}
-                  src={url}
-                  alt={url}
-                  fill
-                  objectPosition="center"
-                  objectFit="cover"
-                />
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+      <MapCarousel handleImageOpen={handleImageOpen} img_urls={img_urls} />
       <div className="shadow-custom-line h-[1px] py-3" />
       <div className="flex justify-end p-[0.75rem]">
         <button type="button" onClick={onModalOpen}>

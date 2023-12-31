@@ -10,7 +10,7 @@ function FirstReviewModal({ title, isFirst }: FirstReviewModalProps) {
   return (
     <div>
       {isOpen && (
-        <div className="z-20 absolute bg-white top-0 w-full h-screen">
+        <div className="z-[102] absolute bg-white top-0 w-full h-screen">
           <X
             onClick={() => setIsOpen(false)}
             className="absolute top-2 right-2"

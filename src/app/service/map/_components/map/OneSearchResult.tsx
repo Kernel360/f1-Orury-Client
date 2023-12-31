@@ -2,7 +2,7 @@ import Image from 'next/image';
 import type { OneSearchResultProps } from '@/types/map/BottomSheetProps';
 import { Star } from 'lucide-react';
 import { useState } from 'react';
-import { Rating } from '@mui/material';
+import { IconButton, Rating } from '@mui/material';
 import { COLOR } from '@/styles/color';
 
 /**
@@ -47,13 +47,18 @@ function OneSearchResult({
             >
               {title}
             </button>
-            <Star
-              className="mr-2"
+            <IconButton
               onClick={handleLikeEvent}
-              strokeWidth={1}
-              stroke={isLike ? COLOR.star : COLOR.gray}
-              fill={isLike ? COLOR.star : 'none'}
-            />
+              className="mr-2"
+              size="large"
+              aria-label="like"
+            >
+              <Star
+                strokeWidth={1}
+                stroke={isLike ? COLOR.star : COLOR.gray}
+                fill={isLike ? COLOR.star : 'none'}
+              />
+            </IconButton>
           </div>
           <button
             className="cursor-pointer flex"
