@@ -1,5 +1,6 @@
 next.config.js
 /next.config.js
+public
 node_modules/
 postcss.config.js
 tailwind.config.js
