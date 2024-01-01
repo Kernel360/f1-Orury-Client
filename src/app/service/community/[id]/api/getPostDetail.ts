@@ -5,7 +5,7 @@ import { END_POINT } from '@/constants/api/end-point';
 const getPostDetail = async (id: string) => {
   try {
     const { data: postDetail } = await axiosInstance<PostDetailProps>(
-      END_POINT.detailPost(id),
+      END_POINT.post(id),
     );
     return postDetail;
   } catch (error: unknown) {

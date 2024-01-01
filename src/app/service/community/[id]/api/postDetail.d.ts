@@ -12,6 +12,7 @@ interface PostDetailProps {
   user_profile_image: string;
   like_count: number;
   comment_count: number;
+  is_writer: boolean;
   is_like: boolean;
 }
 
