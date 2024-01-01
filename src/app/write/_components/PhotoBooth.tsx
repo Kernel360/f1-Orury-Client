@@ -1,23 +1,9 @@
+import PhotoBoothButton from '@/app/write/_components/PhotoBoothButton';
+
 function PhotoBooth() {
   return (
-    <div className="flex gap-3">
-      <div>
-        <input
-          type="file"
-          accept="image/*,video/*"
-          capture="environment"
-          onClick={() => {}}
-          className="w-24 h-24 bg-grey-100 border-dashed border-2 rounded-lg flex justify-center items-center bg-camera"
-        />
-      </div>
-      <div>
-        <input
-          type="file"
-          accept="image/*,video/*"
-          onClick={() => {}}
-          className="w-24 h-24 bg-grey-100 border-dashed border-2 rounded-lg flex justify-center items-center bg-add"
-        />
-      </div>
+    <div className="w-full flex gap-3">
+      <PhotoBoothButton id="library" onClick={() => {}} />
     </div>
   );
 }
