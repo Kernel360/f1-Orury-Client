@@ -2,9 +2,9 @@
 
 import { ChangeEvent } from 'react';
 import clsx from 'clsx';
-import { TextareaProps } from '@/types/ui/common/textarea';
+import { ContentAreaType } from '@/types/ui/common/contentArea';
 
-function Textarea({ placeholder }: TextareaProps) {
+function Content({ placeholder }: ContentAreaType) {
   const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = '2em';
     e.target.style.height = `${e.target.scrollHeight}px`;
@@ -25,4 +25,4 @@ function Textarea({ placeholder }: TextareaProps) {
   );
 }
 
-export default Textarea;
+export default Content;
