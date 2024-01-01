@@ -3,29 +3,13 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { camera, pencil } from '$/my-page';
-import { x_mark } from '$/header';
-import Button from '@/app/_components/buttons/Button';
-import Input from '@/app/_components/common/Input';
+import ModifyInput from '@/app/_components/common/ModifyInput';
 
 function Profile({ ...props }: GetMyPageProps) {
-  const [isToggled, setIsToggled] = useState<boolean>(false);
-  const [nickname, setNickname] = useState(props.nickname);
-  const beforeNickname = props.nickname;
+  const [isToggled, setIsToggled] = useState(false);
+  const [nickname, setNickName] = useState(props.nickname);
 
   const clickHandler = () => {
-    setIsToggled(isToggled => !isToggled);
-  };
-
-  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNickname(event.target.value);
-  };
-
-  const clearHandler = () => {
-    setNickname('');
-  };
-
-  const cancelHandler = () => {
-    setNickname(beforeNickname);
     setIsToggled(isToggled => !isToggled);
   };
 
@@ -62,36 +46,13 @@ function Profile({ ...props }: GetMyPageProps) {
           <span className="font-light text-grey-500">{props.email}</span>
         </div>
       </button>
-
-      <div className={`${isToggled ? 'block' : 'hidden'} w-full relative`}>
-        <span className="w-16 font-thin inline-block">닉네임</span>
-        <Input
-          placeholder={nickname}
-          onChange={inputHandler}
-          value={nickname}
-          width="w-[calc(100%-4rem)]"
-          isFocus
-        />
-        <button
-          type="button"
-          onClick={clearHandler}
-          className="absolute right-2 top-1.5 cursor-pointer"
-        >
-          <Image src={x_mark} alt="삭제" />
-        </button>
-
-        <div className="flex justify-end w-full">
-          <div className="flex gap-2 w-40 h-10 mt-8">
-            <Button
-              content="취소"
-              handler={cancelHandler}
-              color="black"
-              outline
-            />
-            <Button content="변경" handler={clickHandler} color="primary" />
-          </div>
-        </div>
-      </div>
+      <ModifyInput
+        inputTitle="닉네임"
+        value={nickname}
+        setValue={setNickName}
+        isToggled={isToggled}
+        setIsToggled={setIsToggled}
+      />
     </section>
   );
 }
