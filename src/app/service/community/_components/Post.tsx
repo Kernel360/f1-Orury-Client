@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import PostsProps from '@/types/community/posts';
+import { PostsProps } from '@/types/community/posts';
 import Link from 'next/link';
 import User from '@/app/service/community/_components/User';
 
