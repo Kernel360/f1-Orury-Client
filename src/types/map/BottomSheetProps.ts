@@ -16,11 +16,13 @@ interface BottomSheetProps {
   isSheetOpen: boolean;
   onDisMiss: () => void;
   handleImageOpen: (url: string) => void;
+  handleReviewOpen: (reviewId: number) => void;
 }
 
 interface BottomSheetInnerProps {
   data: DetailPlaceType;
   handleImageOpen: (url: string) => void;
+  handleReviewOpen: (reviewId: number) => void;
 }
 
 interface SearchKeyWordProps {
@@ -42,6 +44,12 @@ interface SearchResultProps {
   handleMovePosition: (item: OneSearchKeywordType) => void;
 }
 
+interface MapCarouselProps {
+  width?: string;
+  img_urls: string[];
+  handleImageOpen: (url: string) => void;
+}
+
 export type {
   BottomSheetProps,
   OneSearchResultProps,
@@ -49,4 +57,5 @@ export type {
   KakaoBackGroundMapProps,
   SearchKeyWordProps,
   SearchResultProps,
+  MapCarouselProps,
 };

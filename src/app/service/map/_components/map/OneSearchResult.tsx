@@ -2,7 +2,7 @@ import Image from 'next/image';
 import type { OneSearchResultProps } from '@/types/map/BottomSheetProps';
 import { Star } from 'lucide-react';
 import { useState } from 'react';
-import Ratingbar from '@/app/_components/common/Ratingbar';
+import { IconButton, Rating } from '@mui/material';
 import { COLOR } from '@/styles/color';
 
 /**
@@ -47,19 +47,25 @@ function OneSearchResult({
             >
               {title}
             </button>
-            <Star
-              className="mr-2"
+            <IconButton
               onClick={handleLikeEvent}
-              strokeWidth={1}
-              fill={isLike ? COLOR.star : 'none'}
-            />
+              className="mr-2"
+              size="large"
+              aria-label="like"
+            >
+              <Star
+                strokeWidth={1}
+                stroke={isLike ? COLOR.star : COLOR.gray}
+                fill={isLike ? COLOR.star : 'none'}
+              />
+            </IconButton>
           </div>
           <button
             className="cursor-pointer flex"
             type="button"
             onClick={onSearchClick}
           >
-            <Ratingbar size={20} point={review_score} />
+            <Rating value={review_score} readOnly />
             {`${review_score} / 리뷰 ${review_count}건`}
           </button>
           <div>{place_title}</div>
@@ -72,6 +78,7 @@ function OneSearchResult({
           <Image
             className="cursor-pointer"
             src={img[0]}
+            onClick={onCarouselOpen}
             alt={`${title} 메인 이미지`}
             width={88}
             height={88}

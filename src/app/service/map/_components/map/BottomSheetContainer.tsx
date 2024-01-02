@@ -15,6 +15,7 @@ function BottomSheetContainer({
   isSheetOpen,
   onDisMiss,
   handleImageOpen,
+  handleReviewOpen,
 }: BottomSheetProps) {
   useCss('https://unpkg.com/react-spring-bottom-sheet/dist/style.css');
 
@@ -42,7 +43,11 @@ function BottomSheetContainer({
       onDismiss={onDisMiss}
       expandOnContentDrag={isSheetOpen}
     >
-      <BottomSheetInner handleImageOpen={handleImageOpen} data={data} />
+      <BottomSheetInner
+        handleReviewOpen={handleReviewOpen}
+        handleImageOpen={handleImageOpen}
+        data={data}
+      />
     </BottomSheet>
   );
 }

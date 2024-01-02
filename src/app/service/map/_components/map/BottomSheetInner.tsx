@@ -1,29 +1,28 @@
 import Image from 'next/image';
 import clsx from 'clsx';
-import { aBeeZee } from '@/styles/font';
 import OneSiteUrl from '@/app/service/map/_components/map/OneSiteUrl';
 import BarRatingChart from '@/app/service/map/_components/map/BarRatingChart';
 import getAvgPoint from '@/util/getAvgPoint';
 import LineRatingChart from '@/app/service/map/_components/map/LineRatingChart';
-import { v4 as uuid } from 'uuid';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from '@/app/_components/ui/carousel';
-import { useState } from 'react';
 import { BottomSheetInnerProps } from '@/types/map/BottomSheetProps';
-import ReviewModal from '@/app/service/map/_components/Review/ReviewModal';
 import { Smartphone } from 'lucide-react';
 import { COLOR } from '@/styles/color';
+import { aBeeZee } from '@/styles/fonts';
+import MapCarousel from '@/app/service/map/_components/MapCarousel';
 
 /**
  * @description 바텀시트의 내부 콘테이너로서 내용물을 보여주는데 초점을 두고 있습니다.
- * @param data 상세정보들을 가져와서 보여주기 위해 상세 값들을 가져옵니다.
+ * @param props 상세정보들을 가져와서 보여주기 위해 상세값들을 가져옵니다.
  * @param handleImageOpen 단일 image Modal을 열기 위해서 사용되는 값입니다.
+ * @param handleReviewOpen 해당 리뷰의 정보를 불러오기 위한 모달을 열어주기 위해 사용되는 함수입니다.
  */
-function BottomSheetInner({ data, handleImageOpen }: BottomSheetInnerProps) {
+function BottomSheetInner({
+  data,
+  handleImageOpen,
+  handleReviewOpen,
+}: BottomSheetInnerProps) {
   const {
+    id,
     state,
     title,
     logo_img,
@@ -37,29 +36,17 @@ function BottomSheetInner({ data, handleImageOpen }: BottomSheetInnerProps) {
     phone,
   } = data;
 
-  const [isReviewModalOpen, setIsReviewModalOpen] = useState<boolean>(false);
-
   const stateClassName = clsx('text-[0.75rem] leading-[1.063rem]', {
     'text-green': state,
     'text-end-time': !state,
   });
 
-  const onReviewModalOpen = () => {
-    setIsReviewModalOpen(true);
-  };
-
-  const onReviewModalClose = () => {
-    setIsReviewModalOpen(false);
+  const onModalOpen = () => {
+    handleReviewOpen(id);
   };
 
   return (
     <>
-      {isReviewModalOpen ? (
-        <ReviewModal
-          isOpen={isReviewModalOpen}
-          onCloseModal={onReviewModalClose}
-        />
-      ) : null}
       <div className="p-[0.75rem]">
         <div className="flex gap-[0.75rem]">
           <div>
@@ -99,32 +86,10 @@ function BottomSheetInner({ data, handleImageOpen }: BottomSheetInnerProps) {
         <span>사진</span>
         <span>{`${img_urls.length}개`}</span>
       </div>
-      <Carousel
-        opts={{
-          align: 'start',
-        }}
-        className="w-[95%] mx-auto my-0"
-      >
-        <CarouselContent className="h-[6.5rem]">
-          {img_urls.map(url => (
-            <CarouselItem key={uuid()} className="relative basis-1/3">
-              <div className="p-[0.5rem] h-full relative">
-                <Image
-                  onClick={() => handleImageOpen(url)}
-                  src={url}
-                  alt={url}
-                  fill
-                  objectPosition="center"
-                  objectFit="cover"
-                />
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+      <MapCarousel handleImageOpen={handleImageOpen} img_urls={img_urls} />
       <div className="shadow-custom-line h-[1px] py-3" />
       <div className="flex justify-end p-[0.75rem]">
-        <button type="button" onClick={onReviewModalOpen}>
+        <button type="button" onClick={onModalOpen}>
           리뷰 더보기
         </button>
       </div>

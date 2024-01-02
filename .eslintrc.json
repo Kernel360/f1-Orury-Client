@@ -34,6 +34,7 @@
     "react/jsx-wrap-multilines": "off",
     "react/jsx-indent": "off",
     "@typescript-eslint/indent": "off",
+    "jsx-a11y/control-has-associated-label": "off",
     "jsx-a11y/label-has-associated-control": [
       2,
       {
