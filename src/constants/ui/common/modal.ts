@@ -8,7 +8,13 @@ export const MODAL = {
   },
   deleteComment: {
     title: '댓글 삭제',
-    content: `댓글을 삭제하시겠습니까?? ${EOL}삭제된 내용은 복구할 수 없습니다.`,
+    content: `댓글을 삭제하시겠습니까? ${EOL}삭제된 내용은 복구할 수 없습니다.`,
+    okContent: '삭제',
+  },
+
+  deletePost: {
+    title: '게시글 삭제',
+    content: `게시글을 삭제하시겠습니까? ${EOL}삭제된 내용은 복구할 수 없습니다.`,
     okContent: '삭제',
   },
 } as const;

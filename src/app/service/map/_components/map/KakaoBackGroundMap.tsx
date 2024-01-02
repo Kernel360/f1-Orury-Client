@@ -50,7 +50,7 @@ function KakaoBackGroundMap({
                 key={`${marker.position.lat}-${marker.position.lng}`}
                 position={marker.position}
               />
-            ))
+              ))
             : null}
         </MarkerClusterer>
       </Map>

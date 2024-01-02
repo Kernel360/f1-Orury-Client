@@ -18,11 +18,11 @@ function SearchBar() {
 
   return (
     <section className="relative mx-4 my-2">
-      <button type="button" className="absolute left-1.5 top-2.5">
+      <button type="button" className="absolute left-2.5 top-2.5">
         <Image src={magnifying_glass} alt="검색" />
       </button>
       <input
-        className="w-full h-10 pl-8 pr-2 rounded-md outline-none bg-grey-100 placeholder:text-grey-500"
+        className="w-full h-10 pl-10 pr-2 rounded-md outline-none bg-grey-100 placeholder:text-grey-500"
         placeholder="검색어를 입력해주세요"
         onChange={textHandler}
         value={text}
@@ -30,7 +30,7 @@ function SearchBar() {
       <button
         type="button"
         onClick={clearTextHandler}
-        className="absolute right-1.5 top-2 cursor-pointer"
+        className="absolute right-2.5 top-2 cursor-pointer"
       >
         <Image src={x_mark} alt="삭제" />
       </button>

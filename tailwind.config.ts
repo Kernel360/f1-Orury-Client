@@ -89,11 +89,6 @@ const config: Config = {
       boxShadow: {
         main: '0px 6px 6px 0px rgba(0, 0, 0, 0.25)',
       },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },

@@ -29,6 +29,8 @@
     "implicit-arrow-linebreak": "off",
     "@typescript-eslint/naming-convention": "off",
     "jsx-a11y/control-has-associated-label": "off",
+    "consistent-return": "off",
+    "@typescript-eslint/indent": "off",
     "jsx-a11y/label-has-associated-control": [
       2,
       {

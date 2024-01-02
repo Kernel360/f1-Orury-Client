@@ -1,4 +1,4 @@
-interface PostsProps {
+export interface PostsProps {
   id: number;
   title: string;
   content: string;
@@ -8,10 +8,14 @@ interface PostsProps {
   user_id: number;
   user_nickname: string;
   user_profile_image: string;
+  user_email: string;
   created_at: string;
   updated_at: string;
   like_count: number;
   comment_count: number;
 }
 
-export default PostsProps;
+export interface PostsStateProps {
+  categoryId: number;
+  setCategoryId: (value: number) => void;
+}

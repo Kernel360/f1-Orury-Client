@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 interface ButtonProps {
-  handler: () => void;
+  onClick: () => void;
   content: string;
   color: string;
   submit?: boolean;
@@ -10,14 +10,14 @@ interface ButtonProps {
 }
 
 function Button({
-  handler,
+  onClick,
   content,
   color,
   submit,
   outline,
   disabled,
 }: ButtonProps) {
-  const buttonClassName = clsx('w-full rounded-lg h-12', {
+  const buttonClassName = clsx('w-full rounded-xl h-12', {
     [`border-2 border-${color} text-${color}`]: outline,
     [`bg-${color} border-none text-white`]: !outline,
     'disabled:pointer-events-none bg-disabled': disabled,
@@ -28,7 +28,7 @@ function Button({
       className={buttonClassName}
       disabled={disabled}
       type={submit ? 'submit' : 'button'}
-      onClick={handler}
+      onClick={onClick}
     >
       {content}
     </button>

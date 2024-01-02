@@ -1,13 +1,21 @@
-import { OneReviewProps } from '@/types/map/review';
 import { Avatar, Rating } from '@mui/material';
 import getTimeDiff from '@/util/getTimeDiff';
 import MapCarousel from '@/app/service/map/_components/MapCarousel';
-import { MoreHorizontal, Smile } from 'lucide-react';
-import { COLOR } from '@/styles/color';
-import RadioGroupRating, {
-  customIcons,
-} from '@/app/service/map/_components/Review/SatisfiedRating';
+import { Smile } from 'lucide-react';
+import RadioGroupRating from '@/app/service/map/_components/Review/SatisfiedRating';
 import { useState } from 'react';
+import { OneReviewProps } from '@/types/map/ReviewProps';
+import { customIcons } from '@/app/service/map/_components/Review/IconContainer';
+import IconChipList from '@/app/service/map/_components/Review/IconChipList';
+import clsx from 'clsx';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/app/_components/ui/dropdown-menu';
 
 function OneReview({ item, handleImageOpen }: OneReviewProps) {
   const {
@@ -18,10 +26,17 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
     writer,
     update_at,
     content,
+    review_reaction,
   } = item;
 
   const [isRatingModalOpen, setIsRatingModalOpen] = useState<boolean>(false);
   const [point, setPoint] = useState<number>(isMine?.point ?? 0);
+
+  const TouchClassName = clsx(
+    'flex duration-500 items-center gap-1 rounded-3xl p-2',
+    { 'bg-white shadow': !isRatingModalOpen },
+    { 'bg-gray-100': isRatingModalOpen },
+  );
 
   return (
     <div className="p-[1rem] shadow">
@@ -29,7 +44,19 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
         <div className="flex gap-2">
           <Avatar className="w-8 h-8" src={writer.img} />
           <span className="text-m font-bold">{writer.name}</span>
-          {isMine && <MoreHorizontal strokeWidth="1" stroke={COLOR.gray} />}
+          {isMine && (
+            <DropdownMenu className="z-[105]">
+              <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>Billing</DropdownMenuItem>
+                <DropdownMenuItem>Team</DropdownMenuItem>
+                <DropdownMenuItem>Subscription</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
         <Rating size="small" value={like_point} readOnly />
       </div>
@@ -50,11 +77,12 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
           onClick={() => setIsRatingModalOpen(false)}
         />
       )}
+      <IconChipList item={review_reaction} />
       <div className="relative flex pt-2 justify-between">
         <button
           type="button"
           onClick={() => setIsRatingModalOpen(true)}
-          className="flex items-center gap-1"
+          className={TouchClassName}
         >
           {point === 0 ? (
             <Smile size={24} strokeWidth="2" />

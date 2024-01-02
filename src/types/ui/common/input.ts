@@ -1,7 +1,9 @@
+import { ChangeEventHandler } from 'react';
+
 export interface InputProps {
   placeholder: string;
   width: string;
   isFocus?: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: ChangeEventHandler<HTMLTextAreaElement>;
   value?: string;
 }

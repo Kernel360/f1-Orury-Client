@@ -1,16 +1,16 @@
-const TABS = Object.freeze({
+const TABS = {
   announcement: {
     title: '인기',
-    path: '/community/hot',
+    id: 2,
   },
   main: {
     title: '자유게시판',
-    path: '/community',
+    id: 1,
   },
   qna: {
     title: 'QnA',
-    path: '/community/qna',
+    id: 3,
   },
-});
+} as const;
 
 export default TABS;

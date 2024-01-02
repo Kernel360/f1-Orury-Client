@@ -5,6 +5,7 @@ import { reviewMock } from '@/__mock__/data/review.mock';
 import FirstReviewModal from '@/app/service/map/_components/Review/FirstReviewModal';
 import ReviewList from '@/app/service/map/_components/Review/ReviewList';
 import { IconButton } from '@mui/material';
+import { COLOR } from '@/styles/color';
 
 /**
  * @description 지도 위에 띄위기 위해서 Modal로 구현을 합니다.
@@ -48,13 +49,15 @@ function ReviewModal({
         </button>
         {title}
       </div>
-      <ReviewList handleImageOpen={handleImageOpen} list={review_list} />
-      <IconButton
-        size="large"
-        className="fixed bottom-6 right-6 z-[50] rounded-3xl bg-white w-[3rem] h-[3rem] shadow-main"
-      >
-        <PenSquare strokeWidth={1.5} />
-      </IconButton>
+      <div className="relative mt-[3.5rem]">
+        <ReviewList handleImageOpen={handleImageOpen} list={review_list} />
+        <IconButton
+          size="large"
+          className="fixed bottom-6 right-6 z-[50] rounded-3xl bg-primary w-[3rem] h-[3rem] shadow-main"
+        >
+          <PenSquare fill="#ffffff" stroke={COLOR.default} strokeWidth={1.5} />
+        </IconButton>
+      </div>
     </div>
   );
 }

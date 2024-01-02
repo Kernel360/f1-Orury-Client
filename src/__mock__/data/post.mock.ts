@@ -15,5 +15,6 @@ export const postMock = {
   user_profile_image: 'http://via.placeholder.com/360x360',
   like_count: 201,
   comment_count: 5,
+  is_writer: true,
   is_like: true,
 };
