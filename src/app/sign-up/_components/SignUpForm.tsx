@@ -73,7 +73,7 @@ function SignUpForm() {
             <Button
               outline
               content={GENDER.man}
-              handler={() => handleButtonClick(GENDER.manIdx)}
+              onClick={() => handleButtonClick(GENDER.manIdx)}
               color={
                 getValues('gender') === GENDER.manIdx ? 'primary' : 'disabled'
               }
@@ -81,7 +81,7 @@ function SignUpForm() {
             <Button
               outline
               content={GENDER.woman}
-              handler={() => handleButtonClick(GENDER.womanIdx)}
+              onClick={() => handleButtonClick(GENDER.womanIdx)}
               color={
                 getValues('gender') === GENDER.womanIdx ? 'primary' : 'disabled'
               }
@@ -90,7 +90,7 @@ function SignUpForm() {
         </div>
       </div>
 
-      <Button handler={() => {}} content="회원 가입" color="primary" submit />
+      <Button onClick={() => {}} content="회원 가입" color="primary" submit />
     </form>
   );
 }

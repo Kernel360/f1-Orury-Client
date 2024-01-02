@@ -10,11 +10,7 @@ export async function middleware(req: NextRequest) {
   // 사용자가 요청하는 페이지 pathname
   const { pathname } = req.nextUrl;
 
-  // if (!token && pathname === '/my-page') {
-  //   return NextResponse.redirect(new URL('/signin', req.url));
-  // }
-
-  if (!token && pathname === CALLBACK_URL.service) {
+  if (!token && pathname === '') {
     return NextResponse.redirect(new URL(CALLBACK_URL.home, req.url));
   }
 

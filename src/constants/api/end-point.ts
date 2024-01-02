@@ -1,4 +1,4 @@
 export const END_POINT = {
-  detailPost: (id: number | string) => `/api/posts/${id}`,
-  posts: '/api/posts',
+  post: (id: number | string) => `/api/post/${id}`,
+  posts: (id: number | string) => `/api/posts/${id}`,
 };

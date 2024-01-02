@@ -14,6 +14,7 @@ function User({
   user_nickname,
   created_at,
   like_count,
+  id,
   comment_count,
   is_like,
   hasButton,
@@ -88,6 +89,7 @@ function User({
       </div>
       {hasButton && (
         <CommentButtons
+          id={id}
           isLike={isLike}
           setLikes={setLikes}
           setIsLike={setisLike}
