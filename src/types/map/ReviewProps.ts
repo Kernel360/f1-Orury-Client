@@ -1,9 +1,11 @@
 import { ReviewDataType } from '@/types/map/review';
+import { Dispatch, SetStateAction } from 'react';
 
 interface ReviewProps {
   position: 'center' | 'right';
   isOpen: boolean;
   onCloseModal: () => void;
+  handleImageOpen: (url: string) => void;
 }
 
 interface FirstReviewModalProps {
@@ -13,6 +15,17 @@ interface FirstReviewModalProps {
 
 interface ReviewListProps {
   list: ReviewDataType[];
+  handleImageOpen: (url: string) => void;
 }
 
-export type { ReviewProps, FirstReviewModalProps, ReviewListProps };
+interface RadioGroupRatingProps {
+  isOpen: boolean;
+  handlePoint: Dispatch<SetStateAction<number>>;
+}
+
+export type {
+  ReviewProps,
+  FirstReviewModalProps,
+  ReviewListProps,
+  RadioGroupRatingProps,
+};

@@ -44,6 +44,12 @@ interface SearchResultProps {
   handleMovePosition: (item: OneSearchKeywordType) => void;
 }
 
+interface MapCarouselProps {
+  width?: string;
+  img_urls: string[];
+  handleImageOpen: (url: string) => void;
+}
+
 export type {
   BottomSheetProps,
   OneSearchResultProps,
@@ -51,4 +57,5 @@ export type {
   KakaoBackGroundMapProps,
   SearchKeyWordProps,
   SearchResultProps,
+  MapCarouselProps,
 };

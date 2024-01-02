@@ -17,19 +17,20 @@ function Page() {
         position="right"
         isOpen={M.isReviewModalOpen}
         onCloseModal={M.onReviewModalClose}
+        handleImageOpen={M.handleImageOpen}
       />
-      {M.isImageModalOpen ? (
+      {M.isImageModalOpen && (
         <ImageModal
           image={M.imageModalUrl}
           onCloseModal={M.handleImageClosed}
         />
-      ) : null}
-      {M.carouselModalIsOpen ? (
+      )}
+      {M.carouselModalIsOpen && (
         <ImageSliderModal
           images={M.carouselImages}
           onCloseModal={M.handleCarouselClosed}
         />
-      ) : null}
+      )}
       <KakaoBackGroundMap
         mapInfo={M.mapInfo}
         positionList={M.searchResult.item}

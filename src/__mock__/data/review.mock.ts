@@ -6,7 +6,14 @@ export const reviewMock: ReviewResponseType = {
   review_list: [
     {
       id: 1,
-      writer: '닉네임1',
+      isMine: {
+        status: true,
+        point: 0,
+      },
+      writer: {
+        name: '닉네임1',
+        img: 'https://source.unsplash.com/random/300x300/?dog',
+      },
       content: '안녕하세요 저는 이제 막 클라이밍에 입문한 어쩌구 저쩌구',
       img_urls: [
         'https://source.unsplash.com/random/300x300/?cat',
@@ -22,7 +29,10 @@ export const reviewMock: ReviewResponseType = {
     },
     {
       id: 2,
-      writer: '닉네임2',
+      writer: {
+        name: '닉네임2',
+        img: 'https://source.unsplash.com/random/300x300/?dog',
+      },
       content: '안녕하세요 저는 이제 막ㅇㅇㅇ',
       img_urls: [
         'https://source.unsplash.com/random/300x300/?cat',
@@ -36,13 +46,12 @@ export const reviewMock: ReviewResponseType = {
     },
     {
       id: 3,
-      writer: '닉네임3',
+      writer: {
+        name: '닉네임3',
+        img: 'https://source.unsplash.com/random/300x300/?dog',
+      },
       content: '가지마셈\n가지말라했다 ㅇㅇ',
       img_urls: [
-        'https://source.unsplash.com/random/300x300/?cat',
-        'https://source.unsplash.com/random/300x300/?cat',
-        'https://source.unsplash.com/random/300x300/?cat',
-        'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
       ],
@@ -51,8 +60,30 @@ export const reviewMock: ReviewResponseType = {
       update_at: new Date().toString(),
     },
     {
-      id: 1,
-      writer: '닉네임1',
+      id: 4,
+      writer: {
+        name: '닉네임5',
+        img: 'https://source.unsplash.com/random/300x300/?dog',
+      },
+      content: '안녕하세요 저는 이제 막 클라이밍에 입문한 어쩌구 저쩌구',
+      img_urls: [
+        'https://source.unsplash.com/random/300x300/?cat',
+        'https://source.unsplash.com/random/300x300/?cat',
+        'https://source.unsplash.com/random/300x300/?cat',
+        'https://source.unsplash.com/random/300x300/?cat',
+        'https://source.unsplash.com/random/300x300/?cat',
+        'https://source.unsplash.com/random/300x300/?cat',
+      ],
+      like_point: 5,
+      create_at: new Date().toString(),
+      update_at: new Date().toString(),
+    },
+    {
+      id: 5,
+      writer: {
+        name: '닉네임4',
+        img: 'https://source.unsplash.com/random/300x300/?dog',
+      },
       content: '안녕하세요 저는 이제 막 클라이밍에 입문한 어쩌구 저쩌구',
       img_urls: [
         'https://source.unsplash.com/random/300x300/?cat',
