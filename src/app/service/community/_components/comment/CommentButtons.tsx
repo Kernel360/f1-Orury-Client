@@ -11,16 +11,18 @@ import {
   MenubarContent,
   MenubarMenu,
   MenubarTrigger,
-} from '@/app/_components/ui/MenuBar';
+} from '@/app/_components/ui/menuBar';
 import Modal from '@/app/_components/common/Modal';
 import { MODAL } from '@/constants/ui/common/modal';
+import useCommentStore from '@/store/community/commentStore';
 
-function CommentButtons({ isLike, setLikes, setIsLike }: CommentBtnProps) {
+function CommentButtons({ id, isLike, setLikes, setIsLike }: CommentBtnProps) {
   const [isClicked, setIsClicked] = useState(false);
-  const [isDelete, setIsDelete] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const { setCommentId, triggerModify, setTriggerModify } = useCommentStore();
 
   const cancelHandler = () => {
-    setIsDelete(isDelete => !isDelete);
+    setOpenDeleteModal(openDeleteModal => !openDeleteModal);
   };
 
   const thumbsUpHandler = () => {
@@ -34,6 +36,11 @@ function CommentButtons({ isLike, setLikes, setIsLike }: CommentBtnProps) {
     }
 
     return null;
+  };
+
+  const modifyHandler = () => {
+    if (id) setCommentId(id);
+    setTriggerModify(!triggerModify);
   };
 
   return (
@@ -62,16 +69,18 @@ function CommentButtons({ isLike, setLikes, setIsLike }: CommentBtnProps) {
           <Image src={ellipsis} width={16} alt="더보기" />
         </MenubarTrigger>
         <MenubarContent>
-          <MenubarCheckboxItem>수정</MenubarCheckboxItem>
+          <MenubarCheckboxItem onClick={modifyHandler} className="bg-white">
+            수정
+          </MenubarCheckboxItem>
           <MenubarCheckboxItem
-            className="text-warning"
-            onClick={() => setIsDelete(true)}
+            className="text-warning bg-white"
+            onClick={() => setOpenDeleteModal(true)}
           >
             삭제
           </MenubarCheckboxItem>
         </MenubarContent>
       </MenubarMenu>
-      {isDelete && (
+      {openDeleteModal && (
         <Modal
           title={MODAL.deleteComment.title}
           content={MODAL.deleteComment.content}

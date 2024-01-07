@@ -15,7 +15,7 @@ function Modal({
 }: ModalProps) {
   return (
     <div
-      className="relative z-20"
+      className="relative z-[5000]"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -23,10 +23,10 @@ function Modal({
       <div className="fixed inset-0 bg-grey-500 bg-opacity-80 transition-opacity" />
       <div className="fixed inset-0 z-20 w-screen overflow-y-auto">
         <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-          <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg min-w-[320px]">
+          <div className="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg min-w-[320px]">
             <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start">
-                <div className="mx-auto flex h-4 w-12 flex-shrink-0 justify-center rounded-full sm:mx-0 sm:h-10 sm:w-10">
+                <div className="mx-auto flex h-4 w-12 flex-shrink-0 justify-center rounded-xlll sm:mx-0 sm:h-10 sm:w-10">
                   <svg
                     className="h-6 w-6 text-warning"
                     fill="none"
@@ -61,14 +61,14 @@ function Modal({
               <button
                 type="button"
                 onClick={okHandler}
-                className="inline-flex w-auto justify-center rounded-md bg-warning px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500"
+                className="inline-flex w-auto justify-center rounded-xl bg-warning px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500"
               >
                 {okContent}
               </button>
               <button
                 type="button"
                 onClick={cancelHandler}
-                className="inline-flex w-auto justify-center rounded-md bg-white px-5 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 mr-3"
+                className="inline-flex w-auto justify-center rounded-xl bg-white px-5 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-900 hover:bg-gray-50 mr-3"
               >
                 취소
               </button>

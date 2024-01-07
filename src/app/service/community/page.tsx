@@ -1,23 +1,18 @@
 import React from 'react';
-import getPosts from '@/app/service/community/api/getPosts';
-import { randomUUID } from 'crypto';
-import Floating from '@/app/_components/buttons/Floating';
-import Post from '@/app/service/community/_components/Post';
+import Posts from '@/app/service/community/_components/Posts';
 import SearchBar from '@/app/service/community/_components/SearchBar';
 import Tabs from '@/app/service/community/_components/Tabs';
+import Floating from '@/app/_components/buttons/Floating';
+import Header from '@/app/_components/common/Header';
+import HEADER from '@/constants/ui/common/header';
 
 async function page() {
-  const posts = await getPosts();
-
   return (
     <div className="relative bg-white pb-16">
+      <Header title={HEADER.community} isBack />
       <SearchBar />
       <Tabs />
-      <ul className="mx-4">
-        {posts.map(post => (
-          <Post key={randomUUID()} {...post} />
-        ))}
-      </ul>
+      <Posts />
       <Floating />
     </div>
   );
