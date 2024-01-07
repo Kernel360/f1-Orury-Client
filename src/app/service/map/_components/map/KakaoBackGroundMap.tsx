@@ -45,11 +45,11 @@ function KakaoBackGroundMap({
         <MarkerClusterer averageCenter minLevel={10}>
           {positionList.length !== 0
             ? positionList.map(marker => (
-              <MapMarker
-                onClick={() => onMovePosition(marker)}
-                key={`${marker.position.lat}-${marker.position.lng}`}
-                position={marker.position}
-              />
+                <MapMarker
+                  onClick={() => onMovePosition(marker)}
+                  key={`${marker.position.lat}-${marker.position.lng}`}
+                  position={marker.position}
+                />
               ))
             : null}
         </MarkerClusterer>

@@ -32,6 +32,19 @@ interface IconChipListProps {
   item: ReactionType[];
 }
 
+interface ReviewStoreProps {
+  isOpen: boolean;
+  state: 'create' | 'fix';
+  reviewId: number | null;
+  setCreateMode: () => void;
+  setFixMode: (reviewId: number) => void;
+  reset: () => void;
+}
+
+interface ReviewRegisterModalProps {
+  isOpen: boolean;
+}
+
 export type {
   ReviewProps,
   FirstReviewModalProps,
@@ -40,4 +53,6 @@ export type {
   IconChipListProps,
   OneReviewProps,
   ReviewDataType,
+  ReviewStoreProps,
+  ReviewRegisterModalProps,
 };

@@ -1,12 +1,11 @@
 import * as React from 'react';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
-import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+import SentimentDissatisfiedOutlinedIcon from '@mui/icons-material/SentimentDissatisfiedOutlined';
 import { IconContainerProps } from '@mui/material';
-
-export const colorIcons = ['error', 'error', 'warning', 'success'];
+import SentimentSatisfiedOutlinedIcon from '@mui/icons-material/SentimentSatisfiedOutlined';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
+import { COLOR } from '@/styles/color';
 
 export const customIcons: {
   [index: string]: {
@@ -15,24 +14,24 @@ export const customIcons: {
   };
 } = {
   1: {
-    icon: <SentimentVeryDissatisfiedIcon color="error" />,
-    label: 'Very Dissatisfied',
+    icon: <SentimentSatisfiedOutlinedIcon sx={{ color: COLOR.default }} />,
+    label: '흥미진진',
   },
   2: {
-    icon: <SentimentDissatisfiedIcon color="error" />,
-    label: 'Dissatisfied',
+    icon: <ThumbUpOutlinedIcon color="primary" />,
+    label: '나이스',
   },
   3: {
-    icon: <SentimentSatisfiedIcon color="warning" />,
-    label: 'Neutral',
+    icon: <TipsAndUpdatesOutlinedIcon sx={{ color: COLOR.star }} />,
+    label: '도움이 돼요',
   },
   4: {
-    icon: <SentimentSatisfiedAltIcon color="success" />,
-    label: 'Satisfied',
+    icon: <FavoriteOutlinedIcon color="error" />,
+    label: '공감해요',
   },
   5: {
-    icon: <SentimentVerySatisfiedIcon color="success" />,
-    label: 'Very Satisfied',
+    icon: <SentimentDissatisfiedOutlinedIcon color="error" />,
+    label: '화나요',
   },
 };
 

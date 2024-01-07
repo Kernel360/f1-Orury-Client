@@ -1,10 +1,9 @@
 import { Avatar, Rating } from '@mui/material';
 import getTimeDiff from '@/util/getTimeDiff';
 import MapCarousel from '@/app/service/map/_components/MapCarousel';
-import { Smile } from 'lucide-react';
 import RadioGroupRating from '@/app/service/map/_components/Review/SatisfiedRating';
 import { useState } from 'react';
-import { OneReviewProps } from '@/types/map/ReviewProps';
+import type { OneReviewProps } from '@/types/map/ReviewProps';
 import { customIcons } from '@/app/service/map/_components/Review/IconContainer';
 import IconChipList from '@/app/service/map/_components/Review/IconChipList';
 import clsx from 'clsx';
@@ -12,13 +11,17 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/app/_components/ui/dropdown-menu';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
+import * as React from 'react';
+import { COLOR } from '@/styles/color';
+import { MoreHorizontal } from 'lucide-react';
+import useReviewStore from '@/store/review/reviewStore';
 
 function OneReview({ item, handleImageOpen }: OneReviewProps) {
   const {
+    id,
     isMine,
     create_at,
     img_urls,
@@ -38,22 +41,30 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
     { 'bg-gray-100': isRatingModalOpen },
   );
 
+  const setFixMode = useReviewStore(state => state.setFixMode);
+
+  const onFixHandling = () => {
+    setFixMode(id);
+  };
+
   return (
     <div className="p-[1rem] shadow">
       <div className="flex justify-between">
         <div className="flex gap-2">
           <Avatar className="w-8 h-8" src={writer.img} />
           <span className="text-m font-bold">{writer.name}</span>
-          {isMine && (
-            <DropdownMenu className="z-[105]">
-              <DropdownMenuTrigger>Open</DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
-                <DropdownMenuItem>Subscription</DropdownMenuItem>
+          {isMine?.status && (
+            <DropdownMenu>
+              <DropdownMenuTrigger className="relative z-10">
+                <MoreHorizontal size={20} />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="absolute min-w-[5rem] z-[103] flex cursor-default select-none flex-col items-center justify-center rounded-sm py-1.5 pl-2 pr-2 text-sm outline-none translate-y-[-50%] bg-white shadow">
+                <DropdownMenuItem onClick={onFixHandling}>
+                  수정
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-warning">
+                  삭제
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           )}
@@ -85,7 +96,7 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
           className={TouchClassName}
         >
           {point === 0 ? (
-            <Smile size={24} strokeWidth="2" />
+            <SentimentSatisfiedAltIcon sx={{ color: COLOR.default }} />
           ) : (
             customIcons[point]?.icon
           )}

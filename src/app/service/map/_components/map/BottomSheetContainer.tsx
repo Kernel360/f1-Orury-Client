@@ -35,11 +35,11 @@ function BottomSheetContainer({
       snapPoints={({ maxHeight }) => {
         return [200, maxHeight];
       }}
-      header={(
+      header={
         <h1 className="flex items-center text-xl justify-center font-bold text-gray-800">
           {data.title}
         </h1>
-      )}
+      }
       onDismiss={onDisMiss}
       expandOnContentDrag={isSheetOpen}
     >
