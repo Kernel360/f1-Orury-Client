@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode } from 'react';
 import mockEnable from '@/lib/msw/mock-enable';
 import { SessionContext } from '@/app/api/auth/SessionContext';

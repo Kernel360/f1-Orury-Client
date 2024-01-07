@@ -6,12 +6,12 @@ import { postMock } from '@/__mock__/data/post.mock';
 
 const communityHandler: HttpHandler[] = [
   //   getPosts
-  http.get(BACK_URL + END_POINT.posts, () => {
+  http.get(BACK_URL + END_POINT.posts(1), () => {
     return HttpResponse.json(postsMock);
   }),
 
   //   getPostDetail
-  http.get(BACK_URL + END_POINT.detailPost(43), () => {
+  http.get(BACK_URL + END_POINT.post(43), () => {
     return HttpResponse.json(postMock);
   }),
 ];

@@ -1,6 +1,5 @@
 async function mockEnable() {
-  const isServer = typeof window === 'undefined';
-  if (isServer) {
+  if (typeof window === 'undefined') {
     const { serverWorker } = await import('@/__mock__/handler/server');
     serverWorker.listen({ onUnhandledRequest: 'bypass' });
   } else {
