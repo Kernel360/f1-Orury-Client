@@ -3,7 +3,7 @@ import OneReview from '@/app/service/map/_components/Review/OneReview';
 
 function ReviewList({ list, handleImageOpen }: ReviewListProps) {
   return (
-    <div className="mt-[3.5rem]">
+    <>
       {list.map(item => (
         <OneReview
           key={item.id}
@@ -11,7 +11,7 @@ function ReviewList({ list, handleImageOpen }: ReviewListProps) {
           item={item}
         />
       ))}
-    </div>
+    </>
   );
 }
 export default ReviewList;

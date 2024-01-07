@@ -1,9 +1,14 @@
+interface ReactionType {
+  level: number;
+  count: number;
+}
 interface ReviewDataType {
   id: number;
   isMine?: {
     status: boolean;
     point: number;
   };
+  review_reaction: ReactionType[];
   writer: {
     name: string;
     img: string;
@@ -21,9 +26,4 @@ interface ReviewResponseType {
   review_list: ReviewDataType[];
 }
 
-interface OneReviewProps {
-  item: ReviewDataType;
-  handleImageOpen: (url: string) => void;
-}
-
-export type { ReviewDataType, ReviewResponseType, OneReviewProps };
+export type { ReactionType, ReviewDataType, ReviewResponseType };

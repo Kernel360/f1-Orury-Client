@@ -1,4 +1,4 @@
-import { DetailPlaceType, SearchKeywordListType } from '@/types/map/map';
+import type { DetailPlaceType, SearchKeywordListType } from '@/types/map/map';
 
 export const searchMock: SearchKeywordListType = {
   item: [
