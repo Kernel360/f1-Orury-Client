@@ -1,16 +1,27 @@
-import { OneReviewProps } from '@/types/map/review';
 import { Avatar, Rating } from '@mui/material';
 import getTimeDiff from '@/util/getTimeDiff';
 import MapCarousel from '@/app/service/map/_components/MapCarousel';
-import { MoreHorizontal, Smile } from 'lucide-react';
-import { COLOR } from '@/styles/color';
-import RadioGroupRating, {
-  customIcons,
-} from '@/app/service/map/_components/Review/SatisfiedRating';
+import RadioGroupRating from '@/app/service/map/_components/Review/SatisfiedRating';
 import { useState } from 'react';
+import type { OneReviewProps } from '@/types/map/ReviewProps';
+import { customIcons } from '@/app/service/map/_components/Review/IconContainer';
+import IconChipList from '@/app/service/map/_components/Review/IconChipList';
+import clsx from 'clsx';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/app/_components/ui/dropdown-menu';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
+import * as React from 'react';
+import { COLOR } from '@/styles/color';
+import { MoreHorizontal } from 'lucide-react';
+import useReviewStore from '@/store/review/reviewStore';
 
 function OneReview({ item, handleImageOpen }: OneReviewProps) {
   const {
+    id,
     isMine,
     create_at,
     img_urls,
@@ -18,10 +29,23 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
     writer,
     update_at,
     content,
+    review_reaction,
   } = item;
 
   const [isRatingModalOpen, setIsRatingModalOpen] = useState<boolean>(false);
   const [point, setPoint] = useState<number>(isMine?.point ?? 0);
+
+  const TouchClassName = clsx(
+    'flex duration-500 items-center gap-1 rounded-3xl p-2',
+    { 'bg-white shadow': !isRatingModalOpen },
+    { 'bg-gray-100': isRatingModalOpen },
+  );
+
+  const setFixMode = useReviewStore(state => state.setFixMode);
+
+  const onFixHandling = () => {
+    setFixMode(id);
+  };
 
   return (
     <div className="p-[1rem] shadow">
@@ -29,7 +53,21 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
         <div className="flex gap-2">
           <Avatar className="w-8 h-8" src={writer.img} />
           <span className="text-m font-bold">{writer.name}</span>
-          {isMine && <MoreHorizontal strokeWidth="1" stroke={COLOR.gray} />}
+          {isMine?.status && (
+            <DropdownMenu>
+              <DropdownMenuTrigger className="relative z-10">
+                <MoreHorizontal size={20} />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="absolute min-w-[5rem] z-[103] flex cursor-default select-none flex-col items-center justify-center rounded-sm py-1.5 pl-2 pr-2 text-sm outline-none translate-y-[-50%] bg-white shadow">
+                <DropdownMenuItem onClick={onFixHandling}>
+                  수정
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-warning">
+                  삭제
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
         <Rating size="small" value={like_point} readOnly />
       </div>
@@ -50,14 +88,15 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
           onClick={() => setIsRatingModalOpen(false)}
         />
       )}
+      <IconChipList item={review_reaction} />
       <div className="relative flex pt-2 justify-between">
         <button
           type="button"
           onClick={() => setIsRatingModalOpen(true)}
-          className="flex items-center gap-1"
+          className={TouchClassName}
         >
           {point === 0 ? (
-            <Smile size={24} strokeWidth="2" />
+            <SentimentSatisfiedAltIcon sx={{ color: COLOR.default }} />
           ) : (
             customIcons[point]?.icon
           )}

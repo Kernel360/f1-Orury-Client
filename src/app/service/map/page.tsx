@@ -8,11 +8,15 @@ import ImageSliderModal from '@/app/_components/modal/ImageSliderModal';
 import ImageModal from '@/app/_components/modal/ImageModal';
 import useMap from '@/hooks/map/useMap';
 import ReviewModal from '@/app/service/map/_components/Review/ReviewModal';
+import ReviewStoreProps from '@/store/review/reviewStore';
+import ReviewRegisterModal from '@/app/service/map/_components/Review/ReviewRegisterModal';
 
 function Page() {
+  const isOpen = ReviewStoreProps(state => state.isOpen);
   const M = useMap();
   return (
     <div className="h-full relative">
+      <ReviewRegisterModal isOpen={isOpen} />
       <ReviewModal
         position="right"
         isOpen={M.isReviewModalOpen}

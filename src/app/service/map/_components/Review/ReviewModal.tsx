@@ -1,10 +1,12 @@
 import type { ReviewProps } from '@/types/map/ReviewProps';
-import clsx from 'clsx';
 import { ChevronDown, ChevronLeft, PenSquare } from 'lucide-react';
 import { reviewMock } from '@/__mock__/data/review.mock';
 import FirstReviewModal from '@/app/service/map/_components/Review/FirstReviewModal';
 import ReviewList from '@/app/service/map/_components/Review/ReviewList';
 import { IconButton } from '@mui/material';
+import { COLOR } from '@/styles/color';
+import { cn } from '@/lib/utils';
+import useReviewStore from '@/store/review/reviewStore';
 
 /**
  * @description 지도 위에 띄위기 위해서 Modal로 구현을 합니다.
@@ -19,7 +21,9 @@ function ReviewModal({
   onCloseModal,
   handleImageOpen,
 }: ReviewProps) {
-  const ModalClassName = clsx(
+  const setCreateMode = useReviewStore(state => state.setCreateMode);
+
+  const ModalClassName = cn(
     'w-full max-w-[768px] overflow-y-scroll duration-1000 h-full top-0 right-0 absolute bg-white',
     { 'opacity-0 z-0': !isOpen },
     { 'opacity-1 z-[100]': isOpen },
@@ -27,7 +31,7 @@ function ReviewModal({
     { 'right-1/2': position === 'right' && !isOpen },
   );
 
-  const PositionClassName = clsx(
+  const PositionClassName = cn(
     'absolute',
     { ' right-3': position === 'center' },
     { ' left-3': position === 'right' },
@@ -48,13 +52,16 @@ function ReviewModal({
         </button>
         {title}
       </div>
-      <ReviewList handleImageOpen={handleImageOpen} list={review_list} />
-      <IconButton
-        size="large"
-        className="fixed bottom-6 right-6 z-[50] rounded-3xl bg-white w-[3rem] h-[3rem] shadow-main"
-      >
-        <PenSquare strokeWidth={1.5} />
-      </IconButton>
+      <div className="relative mt-[3.5rem]">
+        <ReviewList handleImageOpen={handleImageOpen} list={review_list} />
+        <IconButton
+          onClick={setCreateMode}
+          size="large"
+          className="fixed bottom-6 right-6 z-[50] rounded-3xl bg-primary w-[3rem] h-[3rem] shadow-main"
+        >
+          <PenSquare fill="#ffffff" stroke={COLOR.default} strokeWidth={1.5} />
+        </IconButton>
+      </div>
     </div>
   );
 }
