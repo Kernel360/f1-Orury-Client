@@ -16,7 +16,7 @@ interface SearchKeywordListType {
 
 interface OneSearchKeywordType {
   id: number;
-  img: string[];
+  images: string[];
   title: string;
   place_title: string;
   is_like: boolean;
@@ -56,7 +56,7 @@ interface DetailPlaceType {
   site_urls: URLType[];
   place_title: string;
   logo_img: string;
-  img_urls: string[];
+  images: string[];
   phone: string;
   week_day: string;
   week_end: string;

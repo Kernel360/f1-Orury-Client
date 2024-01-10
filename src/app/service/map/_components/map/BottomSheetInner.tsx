@@ -32,7 +32,7 @@ function BottomSheetInner({
     site_urls,
     bar_chart_data,
     line_chart_data,
-    img_urls,
+    images,
     phone,
   } = data;
 
@@ -84,9 +84,9 @@ function BottomSheetInner({
       <div className="shadow-custom-line h-[1px] py-1" />
       <div className="flex justify-between p-[0.75rem]">
         <span>사진</span>
-        <span>{`${img_urls.length}개`}</span>
+        <span>{`${images.length}개`}</span>
       </div>
-      <MapCarousel handleImageOpen={handleImageOpen} img_urls={img_urls} />
+      <MapCarousel handleImageOpen={handleImageOpen} images={images} />
       <div className="shadow-custom-line h-[1px] py-3" />
       <div className="flex justify-end p-[0.75rem]">
         <button type="button" onClick={onModalOpen}>

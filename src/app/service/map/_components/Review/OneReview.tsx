@@ -5,7 +5,9 @@ import RadioGroupRating from '@/app/service/map/_components/Review/SatisfiedRati
 import { useState } from 'react';
 import type { OneReviewProps } from '@/types/map/ReviewProps';
 import { customIcons } from '@/app/service/map/_components/Review/IconContainer';
-import IconChipList from '@/app/service/map/_components/Review/IconChipList';
+import IconChipList, {
+  IconChip,
+} from '@/app/service/map/_components/Review/IconChipList';
 import clsx from 'clsx';
 import {
   DropdownMenu,
@@ -24,16 +26,20 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
     id,
     isMine,
     create_at,
-    img_urls,
-    like_point,
+    images,
+    score,
     writer,
     update_at,
     content,
     review_reaction,
+    my_reaction,
   } = item;
 
   const [isRatingModalOpen, setIsRatingModalOpen] = useState<boolean>(false);
-  const [point, setPoint] = useState<number>(isMine?.point ?? 0);
+  const [reviewReaction, setReviewReaction] = useState({
+    review_reaction,
+    my_reaction,
+  });
 
   const TouchClassName = clsx(
     'flex duration-500 items-center gap-1 rounded-3xl p-2',
@@ -45,6 +51,27 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
 
   const onFixHandling = () => {
     setFixMode(id);
+  };
+
+  const handlePoint = (
+    type: 'help' | 'interest' | 'like' | 'thumb' | 'angry',
+  ) => {
+    if (type === undefined) return;
+    if (reviewReaction.my_reaction === type) {
+      setReviewReaction(prev => {
+        return {
+          ...prev,
+          my_reaction: null,
+        };
+      });
+    } else {
+      setReviewReaction(prev => {
+        return {
+          ...prev,
+          my_reaction: type,
+        };
+      });
+    }
   };
 
   return (
@@ -69,14 +96,14 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
             </DropdownMenu>
           )}
         </div>
-        <Rating size="small" value={like_point} readOnly />
+        <Rating size="small" value={score} readOnly />
       </div>
       {content && <div>{content}</div>}
-      {img_urls && img_urls?.length !== 0 && (
+      {images && images?.length !== 0 && (
         <div className="mt-4">
           <MapCarousel
             width="w-full"
-            img_urls={img_urls}
+            images={images}
             handleImageOpen={handleImageOpen}
           />
         </div>
@@ -88,22 +115,25 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
           onClick={() => setIsRatingModalOpen(false)}
         />
       )}
-      <IconChipList item={review_reaction} />
+      <IconChipList item={reviewReaction.review_reaction} />
       <div className="relative flex pt-2 justify-between">
         <button
           type="button"
           onClick={() => setIsRatingModalOpen(true)}
           className={TouchClassName}
         >
-          {point === 0 ? (
+          {reviewReaction.my_reaction === null ? (
             <SentimentSatisfiedAltIcon sx={{ color: COLOR.default }} />
           ) : (
-            customIcons[point]?.icon
+            customIcons[IconChip[reviewReaction.my_reaction]]?.icon
           )}
           <span>반응 남기기</span>
         </button>
         {isRatingModalOpen && (
-          <RadioGroupRating isOpen={isRatingModalOpen} handlePoint={setPoint} />
+          <RadioGroupRating
+            isOpen={isRatingModalOpen}
+            handlePoint={handlePoint}
+          />
         )}
         <div>
           {create_at === update_at

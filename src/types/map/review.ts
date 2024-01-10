@@ -1,21 +1,23 @@
 interface ReactionType {
-  level: number;
+  type: 'interest' | 'like' | 'help' | 'thumb' | 'angry';
   count: number;
 }
+
 interface ReviewDataType {
   id: number;
   isMine?: {
     status: boolean;
     point: number;
   };
+  my_reaction: 'interest' | 'like' | 'help' | 'thumb' | 'angry' | null;
   review_reaction: ReactionType[];
   writer: {
     name: string;
     img: string;
   };
   content?: string;
-  img_urls?: string[];
-  like_point: number;
+  images: string[];
+  score: number;
   create_at: string;
   update_at: string;
 }
