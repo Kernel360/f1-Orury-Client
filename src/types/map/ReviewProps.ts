@@ -29,6 +29,7 @@ interface OneReviewProps {
 
 interface IconChipListProps {
   item: ReactionType[];
+  myReaction: 'help' | 'interest' | 'like' | 'thumb' | 'angry' | null;
 }
 
 interface ReviewStoreProps {

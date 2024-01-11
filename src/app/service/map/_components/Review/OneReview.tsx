@@ -8,7 +8,6 @@ import { customIcons } from '@/app/service/map/_components/Review/IconContainer'
 import IconChipList, {
   IconChip,
 } from '@/app/service/map/_components/Review/IconChipList';
-import clsx from 'clsx';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +19,7 @@ import * as React from 'react';
 import { COLOR } from '@/styles/color';
 import { MoreHorizontal } from 'lucide-react';
 import useReviewStore from '@/store/review/reviewStore';
+import { cn } from '@/lib/utils';
 
 function OneReview({ item, handleImageOpen }: OneReviewProps) {
   const {
@@ -37,14 +37,22 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
 
   const [isRatingModalOpen, setIsRatingModalOpen] = useState<boolean>(false);
   const [reviewReaction, setReviewReaction] = useState({
-    review_reaction,
+    review_reaction: review_reaction.map(value => {
+      return {
+        type: value.type,
+        count: value.type === my_reaction ? value.count - 1 : value.count,
+      };
+    }),
     my_reaction,
   });
 
-  const TouchClassName = clsx(
-    'flex duration-500 items-center gap-1 rounded-3xl p-2',
-    { 'bg-white shadow': !isRatingModalOpen },
+  const TouchClassName = cn(
+    'flex duration-500 shadow items-center gap-1 bg-white rounded-3xl p-2',
     { 'bg-gray-100': isRatingModalOpen },
+    {
+      'font-bold text-primary shadow-primary bg-gray-100':
+        !!reviewReaction.my_reaction,
+    },
   );
 
   const setFixMode = useReviewStore(state => state.setFixMode);
@@ -115,7 +123,10 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
           onClick={() => setIsRatingModalOpen(false)}
         />
       )}
-      <IconChipList item={reviewReaction.review_reaction} />
+      <IconChipList
+        myReaction={reviewReaction.my_reaction}
+        item={reviewReaction.review_reaction}
+      />
       <div className="relative flex pt-2 justify-between">
         <button
           type="button"
