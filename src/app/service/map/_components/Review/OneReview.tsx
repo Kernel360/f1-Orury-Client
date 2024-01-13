@@ -82,6 +82,18 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
     }
   };
 
+  const TouchClassName = clsx(
+    'flex duration-500 items-center gap-1 rounded-3xl p-2',
+    { 'bg-white shadow': !isRatingModalOpen },
+    { 'bg-gray-100': isRatingModalOpen },
+  );
+
+  const setFixMode = useReviewStore(state => state.setFixMode);
+
+  const onFixHandling = () => {
+    setFixMode(id);
+  };
+
   return (
     <div className="p-[1rem] shadow">
       <div className="flex justify-between">
