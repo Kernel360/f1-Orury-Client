@@ -50,8 +50,7 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
     'flex duration-500 shadow items-center gap-1 bg-white rounded-3xl p-2',
     { 'bg-gray-100': isRatingModalOpen },
     {
-      'font-bold scale-95 text-primary bg-gray-100':
-        reviewReaction.my_reaction,
+      'font-bold scale-95 text-primary bg-gray-100': reviewReaction.my_reaction,
     },
   );
 
@@ -80,18 +79,6 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
         };
       });
     }
-  };
-
-  const TouchClassName = clsx(
-    'flex duration-500 items-center gap-1 rounded-3xl p-2',
-    { 'bg-white shadow': !isRatingModalOpen },
-    { 'bg-gray-100': isRatingModalOpen },
-  );
-
-  const setFixMode = useReviewStore(state => state.setFixMode);
-
-  const onFixHandling = () => {
-    setFixMode(id);
   };
 
   return (
