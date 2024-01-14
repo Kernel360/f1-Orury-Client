@@ -9,7 +9,7 @@ import { MapCarouselProps } from '@/types/map/BottomSheetProps';
 
 function MapCarousel({
   handleImageOpen,
-  img_urls,
+  images,
   width = 'w-[95%]',
 }: MapCarouselProps) {
   return (
@@ -20,7 +20,7 @@ function MapCarousel({
       className={`${width} mx-auto my-0`}
     >
       <CarouselContent className="h-[6.5rem]">
-        {img_urls.map(url => (
+        {images?.map(url => (
           <CarouselItem key={uuid()} className="relative basis-1/3">
             <div className="p-[0.5rem] rounded-xl overflow-hidden h-full relative">
               <Image

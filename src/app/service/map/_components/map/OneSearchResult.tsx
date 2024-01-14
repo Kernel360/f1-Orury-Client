@@ -15,7 +15,8 @@ function OneSearchResult({
   onMovePosition,
   handleCarouselOpen,
 }: OneSearchResultProps) {
-  const { review_count, review_score, place_title, img, title, is_like } = item;
+  const { review_count, review_score, place_title, images, title, is_like } =
+    item;
 
   const [isLike, setIsLike] = useState<boolean>(is_like);
 
@@ -25,7 +26,7 @@ function OneSearchResult({
   };
 
   const onCarouselOpen = () => {
-    handleCarouselOpen(img);
+    handleCarouselOpen(images);
   };
 
   const onSearchClick = () => {
@@ -77,15 +78,15 @@ function OneSearchResult({
         >
           <Image
             className="cursor-pointer"
-            src={img[0]}
+            src={images[0]}
             onClick={onCarouselOpen}
             alt={`${title} 메인 이미지`}
             width={88}
             height={88}
           />
-          {img.length > 1 ? (
+          {images.length > 1 ? (
             <div className="absolute rounded-3xl flex items-center justify-center text-sm w-5 h-5 right-1 bottom-1 bg-primary text-white opacity-70">
-              {img.length}
+              {images.length}
             </div>
           ) : null}
         </button>

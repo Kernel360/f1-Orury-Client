@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import IconContainer, {
   customIcons,
 } from '@/app/service/map/_components/Review/IconContainer';
+import { IconChip } from '@/app/service/map/_components/Review/IconChipList';
 
 const SatisfiedRating = styled(Rating)(({ theme }) => ({
   '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
@@ -49,7 +50,14 @@ export default function RadioGroupRating({
           const target = e.target as typeof e.target & {
             value: number;
           };
-          handlePoint(() => target.value);
+          handlePoint(
+            IconChip[target.value] as
+              | 'help'
+              | 'interest'
+              | 'like'
+              | 'thumb'
+              | 'angry',
+          );
         }}
         name="highlight-selected-only"
         defaultValue={3}

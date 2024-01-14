@@ -5,8 +5,9 @@ import RadioGroupRating from '@/app/service/map/_components/Review/SatisfiedRati
 import { useState } from 'react';
 import type { OneReviewProps } from '@/types/map/ReviewProps';
 import { customIcons } from '@/app/service/map/_components/Review/IconContainer';
-import IconChipList from '@/app/service/map/_components/Review/IconChipList';
-import clsx from 'clsx';
+import IconChipList, {
+  IconChip,
+} from '@/app/service/map/_components/Review/IconChipList';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,33 +19,66 @@ import * as React from 'react';
 import { COLOR } from '@/styles/color';
 import { MoreHorizontal } from 'lucide-react';
 import useReviewStore from '@/store/review/reviewStore';
+import { cn } from '@/lib/utils';
 
 function OneReview({ item, handleImageOpen }: OneReviewProps) {
   const {
     id,
     isMine,
     create_at,
-    img_urls,
-    like_point,
+    images,
+    score,
     writer,
     update_at,
     content,
     review_reaction,
+    my_reaction,
   } = item;
 
   const [isRatingModalOpen, setIsRatingModalOpen] = useState<boolean>(false);
-  const [point, setPoint] = useState<number>(isMine?.point ?? 0);
+  const [reviewReaction, setReviewReaction] = useState({
+    review_reaction: review_reaction.map(value => {
+      return {
+        type: value.type,
+        count: value.type === my_reaction ? value.count - 1 : value.count,
+      };
+    }),
+    my_reaction,
+  });
 
-  const TouchClassName = clsx(
-    'flex duration-500 items-center gap-1 rounded-3xl p-2',
-    { 'bg-white shadow': !isRatingModalOpen },
+  const TouchClassName = cn(
+    'flex duration-500 shadow items-center gap-1 bg-white rounded-3xl p-2',
     { 'bg-gray-100': isRatingModalOpen },
+    {
+      'font-bold scale-95 text-primary bg-gray-100': reviewReaction.my_reaction,
+    },
   );
 
   const setFixMode = useReviewStore(state => state.setFixMode);
 
   const onFixHandling = () => {
     setFixMode(id);
+  };
+
+  const handlePoint = (
+    type: 'help' | 'interest' | 'like' | 'thumb' | 'angry',
+  ) => {
+    if (type === undefined) return;
+    if (reviewReaction.my_reaction === type) {
+      setReviewReaction(prev => {
+        return {
+          ...prev,
+          my_reaction: null,
+        };
+      });
+    } else {
+      setReviewReaction(prev => {
+        return {
+          ...prev,
+          my_reaction: type,
+        };
+      });
+    }
   };
 
   return (
@@ -69,14 +103,14 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
             </DropdownMenu>
           )}
         </div>
-        <Rating size="small" value={like_point} readOnly />
+        <Rating size="small" value={score} readOnly />
       </div>
       {content && <div>{content}</div>}
-      {img_urls && img_urls?.length !== 0 && (
+      {images && images?.length !== 0 && (
         <div className="mt-4">
           <MapCarousel
             width="w-full"
-            img_urls={img_urls}
+            images={images}
             handleImageOpen={handleImageOpen}
           />
         </div>
@@ -88,22 +122,28 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
           onClick={() => setIsRatingModalOpen(false)}
         />
       )}
-      <IconChipList item={review_reaction} />
+      <IconChipList
+        myReaction={reviewReaction.my_reaction}
+        item={reviewReaction.review_reaction}
+      />
       <div className="relative flex pt-2 justify-between">
         <button
           type="button"
           onClick={() => setIsRatingModalOpen(true)}
           className={TouchClassName}
         >
-          {point === 0 ? (
+          {reviewReaction.my_reaction === null ? (
             <SentimentSatisfiedAltIcon sx={{ color: COLOR.default }} />
           ) : (
-            customIcons[point]?.icon
+            customIcons[IconChip[reviewReaction.my_reaction]]?.icon
           )}
           <span>반응 남기기</span>
         </button>
         {isRatingModalOpen && (
-          <RadioGroupRating isOpen={isRatingModalOpen} handlePoint={setPoint} />
+          <RadioGroupRating
+            isOpen={isRatingModalOpen}
+            handlePoint={handlePoint}
+          />
         )}
         <div>
           {create_at === update_at

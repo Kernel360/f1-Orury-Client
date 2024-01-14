@@ -13,7 +13,7 @@ export const searchMock: SearchKeywordListType = {
         lat: 37.5063849225134,
         lng: 127.02224662277956,
       },
-      img: ['https://source.unsplash.com/random/300x300/?cat'],
+      images: ['https://source.unsplash.com/random/300x300/?cat'],
     },
     {
       id: 2,
@@ -26,7 +26,7 @@ export const searchMock: SearchKeywordListType = {
         lat: 37.48522589024053,
         lng: 127.03601194974847,
       },
-      img: [
+      images: [
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
@@ -43,7 +43,7 @@ export const searchMock: SearchKeywordListType = {
         lat: 37.52111687308989,
         lng: 127.01919671596526,
       },
-      img: [
+      images: [
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
@@ -60,7 +60,7 @@ export const searchMock: SearchKeywordListType = {
         lat: 37.508263519405965,
         lng: 127.02223869761437,
       },
-      img: [
+      images: [
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
@@ -77,7 +77,7 @@ export const searchMock: SearchKeywordListType = {
         lat: 37.47444934741218,
         lng: 126.98145113891935,
       },
-      img: [
+      images: [
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
@@ -94,7 +94,7 @@ export const searchMock: SearchKeywordListType = {
         lat: 37.48521688274289,
         lng: 127.03600346537529,
       },
-      img: [
+      images: [
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
@@ -110,7 +110,7 @@ export const searchMock: SearchKeywordListType = {
 
 export const detailMarkerMock: DetailPlaceType = {
   id: 1,
-  img_urls: [
+  images: [
     'https://source.unsplash.com/random/300x300/?cat',
     'https://source.unsplash.com/random/300x300/?cat',
     'https://source.unsplash.com/random/300x300/?cat',

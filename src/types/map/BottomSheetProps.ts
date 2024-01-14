@@ -40,13 +40,13 @@ interface SearchResultProps {
   searchResult: SearchKeywordListType;
   isSearching: boolean;
   onSearchingBlur: () => void;
-  handleCarouselOpen: (imgUrls: string[]) => void;
+  handleCarouselOpen: (images: string[]) => void;
   handleMovePosition: (item: OneSearchKeywordType) => void;
 }
 
 interface MapCarouselProps {
   width?: string;
-  img_urls: string[];
+  images: string[];
   handleImageOpen: (url: string) => void;
 }
 

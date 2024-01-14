@@ -1,5 +1,4 @@
 import type { ReactionType, ReviewDataType } from '@/types/map/review';
-import type { Dispatch, SetStateAction } from 'react';
 
 interface ReviewProps {
   position: 'center' | 'right';
@@ -20,7 +19,30 @@ interface ReviewListProps {
 
 interface RadioGroupRatingProps {
   isOpen: boolean;
-  handlePoint: Dispatch<SetStateAction<number>>;
+  handlePoint: (type: 'help' | 'interest' | 'like' | 'thumb' | 'angry') => void;
+}
+
+interface OneReviewProps {
+  item: ReviewDataType;
+  handleImageOpen: (url: string) => void;
+}
+
+interface IconChipListProps {
+  item: ReactionType[];
+  myReaction: 'help' | 'interest' | 'like' | 'thumb' | 'angry' | null;
+}
+
+interface ReviewStoreProps {
+  isOpen: boolean;
+  state: 'create' | 'fix';
+  reviewId: number | null;
+  setCreateMode: () => void;
+  setFixMode: (reviewId: number) => void;
+  reset: () => void;
+}
+
+interface ReviewRegisterModalProps {
+  isOpen: boolean;
 }
 
 interface OneReviewProps {
