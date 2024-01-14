@@ -45,6 +45,28 @@ interface ReviewRegisterModalProps {
   isOpen: boolean;
 }
 
+interface OneReviewProps {
+  item: ReviewDataType;
+  handleImageOpen: (url: string) => void;
+}
+
+interface IconChipListProps {
+  item: ReactionType[];
+}
+
+interface ReviewStoreProps {
+  isOpen: boolean;
+  state: 'create' | 'fix';
+  reviewId: number | null;
+  setCreateMode: () => void;
+  setFixMode: (reviewId: number) => void;
+  reset: () => void;
+}
+
+interface ReviewRegisterModalProps {
+  isOpen: boolean;
+}
+
 export type {
   ReviewProps,
   FirstReviewModalProps,
