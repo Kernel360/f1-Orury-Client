@@ -50,8 +50,8 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
     'flex duration-500 shadow items-center gap-1 bg-white rounded-3xl p-2',
     { 'bg-gray-100': isRatingModalOpen },
     {
-      'font-bold text-primary shadow-primary bg-gray-100':
-        !!reviewReaction.my_reaction,
+      'font-bold scale-95 text-primary bg-gray-100':
+        reviewReaction.my_reaction,
     },
   );
 
