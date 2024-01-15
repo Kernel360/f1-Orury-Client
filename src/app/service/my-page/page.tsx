@@ -6,7 +6,7 @@ import {
   Privacy,
   Activity,
   Withdrawal,
-} from '@/app/service/my-page/_components';
+} from '@/app/service/my-page/_components/index';
 import { profileMock } from '@/__mock__/data/profile.mock';
 import SignOut from '@/app/_components/buttons/SignOut';
 

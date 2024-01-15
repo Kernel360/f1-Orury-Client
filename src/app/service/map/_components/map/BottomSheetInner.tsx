@@ -2,7 +2,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import OneSiteUrl from '@/app/service/map/_components/map/OneSiteUrl';
 import BarRatingChart from '@/app/service/map/_components/map/BarRatingChart';
-import getAvgPoint from '@/util/getAvgPoint';
+import getAvgPoint from '@/utils/getAvgPoint';
 import LineRatingChart from '@/app/service/map/_components/map/LineRatingChart';
 import { BottomSheetInnerProps } from '@/types/map/BottomSheetProps';
 import { Smartphone } from 'lucide-react';

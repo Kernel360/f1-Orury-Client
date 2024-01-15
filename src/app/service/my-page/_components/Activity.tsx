@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import Heading from '@/app/service/my-page/_components/Heading';
-import { right } from '$/my-page';
 import { ACTIVITY_TITLE, ACTIVITY_LIST } from '@/constants/my-page/activity';
 import { randomUUID } from 'crypto';
+import { ChevronRight } from 'lucide-react';
 
 function Activity() {
   return (
@@ -17,7 +16,7 @@ function Activity() {
             href={value.href}
           >
             {value.content}
-            <Image src={right} alt="바로가기" />
+            <ChevronRight color="#96A2AC" strokeWidth={1.5} />
           </Link>
         ))}
       </div>

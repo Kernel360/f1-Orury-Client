@@ -1,16 +1,10 @@
-import { BIRTHDAY_INPUT } from '@/constants/signup';
-import Image from 'next/image';
+import { CheckCircle } from 'lucide-react';
 
 function Check({ isChecked }: { isChecked?: boolean }) {
-  const { checked, unChecked, alt } = BIRTHDAY_INPUT;
-
-  return (
-    <Image
-      src={isChecked ? checked : unChecked}
-      sizes="20"
-      alt={alt}
-      priority
-    />
+  return isChecked ? (
+    <CheckCircle color="#96A2AC" strokeWidth={0.5} />
+  ) : (
+    <CheckCircle color="#96A2AC" strokeWidth={0.5} />
   );
 }
 

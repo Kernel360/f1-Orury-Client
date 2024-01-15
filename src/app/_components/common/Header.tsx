@@ -1,24 +1,32 @@
 'use client';
 
-import clsx from 'clsx';
 import { useState } from 'react';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import Modal from '@/app/_components/common/Modal';
+import { useRouter, useParams } from 'next/navigation';
+import { ChevronLeft, MoreVertical, X } from 'lucide-react';
+import { getPostListKey } from '@/utils/getKeys';
+import { usePostsState } from '@/store/community/postsStore';
+import { fetcher } from '@/utils/fetcher';
 import { MODAL } from '@/constants/ui/common/modal';
-import HeaderProps from '@/types/ui/common/header';
-import { back, ellipsis, x_mark } from '$/header';
-import {
-  Menubar,
-  MenubarCheckboxItem,
-  MenubarContent,
-  MenubarMenu,
-  MenubarTrigger,
-} from '@/app/_components/ui/menubar';
 
-function Header({ title, isBack, isExit, isEllipsis }: HeaderProps) {
+import clsx from 'clsx';
+import Modal from '@/app/_components/common/Modal';
+import HeaderProps from '@/types/ui/common/header';
+import deletePost from '@/app/service/community/[id]/api/deletePost';
+import * as M from '@/app/_components/ui/menubars';
+import useSWRInfinite from 'swr/infinite';
+
+function Header({ ...props }: HeaderProps) {
+  const { title, isBack, isExit, isEllipsis, editHandler, exitHandler } = props;
+  const { categoryId } = usePostsState();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const router = useRouter();
+  const params = useParams<{ id: string }>();
+  const { mutate } = useSWRInfinite(
+    (pageIndex, previousPageData) =>
+      getPostListKey(categoryId, pageIndex, previousPageData),
+    fetcher,
+    { revalidateFirstPage: false },
+  );
 
   const onBackHandler = () => {
     router.back();
@@ -28,18 +36,18 @@ function Header({ title, isBack, isExit, isEllipsis }: HeaderProps) {
     setOpenDeleteModal(openDeleteModal => !openDeleteModal);
   };
 
+  const okHandler = async () => {
+    await deletePost({ postId: Number(params.id) });
+    await mutate();
+    setOpenDeleteModal(openDeleteModal => !openDeleteModal);
+    router.back();
+  };
+
   const buttonClassName = (isBack?: boolean) => {
     return clsx('absolute', {
       'left-4': isBack,
       'right-4': !isBack,
     });
-  };
-
-  const renderIcon = () => {
-    if (isBack) return <Image src={back} alt={title} />;
-    if (isExit) return <Image src={x_mark} alt={title} />;
-
-    return null;
   };
 
   return (
@@ -49,38 +57,46 @@ function Header({ title, isBack, isExit, isEllipsis }: HeaderProps) {
         onClick={onBackHandler}
         className={buttonClassName(isBack)}
       >
-        {renderIcon()}
+        {isBack && <ChevronLeft />}
       </button>
       <span className="font-medium">{title}</span>
-      <div className="absolute right-4">
+      <div className="absolute right-4 h-6">
         {isEllipsis && (
-          <Menubar className="border-none">
-            <MenubarMenu>
-              <MenubarTrigger>
-                <Image src={ellipsis} width={24} alt="더보기" />
-              </MenubarTrigger>
-              <MenubarContent>
-                <MenubarCheckboxItem className="bg-white">
+          <M.Menubar className="border-none">
+            <M.MenubarMenu>
+              <M.MenubarTrigger>
+                <MoreVertical />
+              </M.MenubarTrigger>
+              <M.MenubarContent>
+                <M.MenubarCheckboxItem
+                  onClick={editHandler}
+                  className="bg-white"
+                >
                   수정
-                </MenubarCheckboxItem>
-                <MenubarCheckboxItem
+                </M.MenubarCheckboxItem>
+                <M.MenubarCheckboxItem
                   className="text-warning bg-white"
                   onClick={cancelHandler}
                 >
                   삭제
-                </MenubarCheckboxItem>
-              </MenubarContent>
-            </MenubarMenu>
+                </M.MenubarCheckboxItem>
+              </M.MenubarContent>
+            </M.MenubarMenu>
             {openDeleteModal && (
               <Modal
                 title={MODAL.deletePost.title}
                 content={MODAL.deletePost.content}
                 okContent={MODAL.deletePost.okContent}
                 cancelHandler={cancelHandler}
-                okHandler={() => {}}
+                okHandler={okHandler}
               />
             )}
-          </Menubar>
+          </M.Menubar>
+        )}
+        {isExit && (
+          <button type="button" onClick={exitHandler}>
+            <X />
+          </button>
         )}
       </div>
     </header>

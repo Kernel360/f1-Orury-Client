@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import TABS from '@/constants/community/tabs';
-import usePostsState from '@/store/community/postsStore';
+import { usePostsState } from '@/store/community/postsStore';
 
 function Tabs() {
   const { categoryId, setCategoryId } = usePostsState();
@@ -25,7 +25,7 @@ function Tabs() {
   };
 
   return (
-    <ul className="grid grid-cols-3 h-12">
+    <ul className="grid grid-cols-3 h-12 pt-1">
       {Object.values(TABS).map(tab => (
         <li key={tab.title} className={liClassName(tab.id)}>
           <button

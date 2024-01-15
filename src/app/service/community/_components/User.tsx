@@ -1,24 +1,26 @@
 'use client';
 
 import Image from 'next/image';
-import getTimeDiff from '@/util/getTimeDiff';
-import POST from '@/constants/community/post';
+import getTimeDiff from '@/utils/getTimeDiff';
 import { UserProps } from '@/types/community/user';
-import { like_outline, comment } from '$/community';
 import { useState } from 'react';
-import { like_active_red } from '$/community/active';
-import CommentButtons from '@/app/service/community/_components/comment/CommentButtons';
+import CommentButtons from '@/app/service/community/[id]/_components/comment/CommentButtons';
+import { Heart, MessageCircle } from 'lucide-react';
 
-function User({
-  user_profile_image,
-  user_nickname,
-  created_at,
-  like_count,
-  id,
-  comment_count,
-  is_like,
-  hasButton,
-}: UserProps) {
+function User({ ...props }: UserProps) {
+  const {
+    user_profile_image,
+    user_nickname,
+    created_at,
+    like_count,
+    comment_id,
+    post_id,
+    parent_id,
+    comment_count,
+    is_like,
+    hasButton,
+  } = props;
+
   // 댓글의 좋아요 수 (number)
   const [likes, setLikes] = useState(like_count);
 
@@ -28,16 +30,15 @@ function User({
   const renderLikeCount = (likes?: number) => {
     if (likes) {
       return (
-        <>
-          <Image
-            src={isLike ? like_active_red : like_outline}
-            alt="좋아요"
-            width={12}
-            height={12}
-            quality={100}
+        <div className="flex mr-1 gap-[2px]">
+          <Heart
+            size={12}
+            color="#FF006B"
+            strokeWidth={2.5}
+            className="mt-[2px]"
           />
-          <span className="text-red text-xs">{likes}</span>
-        </>
+          <span className="text-red text-xs pl-[1px]">{likes}</span>
+        </div>
       );
     }
 
@@ -47,16 +48,15 @@ function User({
   const renderCommentCount = (commentCount?: number) => {
     if (commentCount) {
       return (
-        <>
-          <Image
-            src={comment}
-            alt="댓글"
-            quality={100}
-            width={12}
-            height={12}
+        <div className="flex gap-[2px]">
+          <MessageCircle
+            size={12}
+            strokeWidth={2.5}
+            color="#855AFF"
+            className="mt-[2px]"
           />
           <span className="text-primary text-xs">{commentCount}</span>
-        </>
+        </div>
       );
     }
 
@@ -66,13 +66,16 @@ function User({
   return (
     <div className="flex w-full justify-between">
       <div className="flex gap-2">
-        <Image
-          src={user_profile_image}
-          alt="image"
-          width={POST.imageSize}
-          height={POST.imageSize}
-          className="rounded-full"
-        />
+        {user_profile_image && (
+          <Image
+            src="http://via.placeholder.com/360x360"
+            alt="image"
+            width={36}
+            height={36}
+            className="rounded-full"
+          />
+        )}
+
         <div className="flex flex-col">
           <span className="text-sm font-semibold">{user_nickname}</span>
           <div className="flex gap-[6px]">
@@ -89,7 +92,9 @@ function User({
       </div>
       {hasButton && (
         <CommentButtons
-          id={id}
+          commentId={comment_id}
+          postId={post_id}
+          parentId={parent_id}
           isLike={isLike}
           setLikes={setLikes}
           setIsLike={setisLike}

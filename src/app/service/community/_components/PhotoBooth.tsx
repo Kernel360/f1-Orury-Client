@@ -1,4 +1,4 @@
-import PhotoBoothButton from '@/app/write/_components/PhotoBoothButton';
+import PhotoBoothButton from '@/app/service/community/_components/PhotoBoothButton';
 
 function PhotoBooth() {
   return (

@@ -1,38 +1,53 @@
 'use client';
 
-import Image from 'next/image';
-import { magnifying_glass } from '$/community/searchBar';
-import { x_mark } from '$/header';
-import { useState } from 'react';
+import clsx from 'clsx';
 
-function SearchBar() {
-  const [text, setText] = useState<string>('');
+import { useRef, useState } from 'react';
+import { Search } from 'lucide-react';
+import type { SearchBarProps } from '@/types/community/searchBar';
 
-  const textHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+function SearchBar({ ...props }: SearchBarProps) {
+  const [text, setText] = useState('');
+  const { setIsSearchingFocus, setSearchText, isSearchingFocus } = props;
+
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  const onTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
 
-  const clearTextHandler = () => {
-    setText('');
+  const handleTextBlur = () => {
+    setSearchText(text);
   };
 
+  const handleSearchFocus = () => {
+    setIsSearchingFocus(true);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleTextBlur();
+  };
+
+  const sectionClassName = clsx(
+    'flex justify-center relative z-[9] left-1/2 translate-x-[-50%] duration-500',
+    { 'top-0 h-8 w-full px-2': isSearchingFocus },
+    { 'top-0 h-8 w-[96%] my-2': !isSearchingFocus },
+  );
+
   return (
-    <section className="relative mx-4 my-2">
-      <button type="button" className="absolute left-2.5 top-2.5">
-        <Image src={magnifying_glass} alt="검색" />
-      </button>
+    <section className={sectionClassName}>
       <input
-        className="w-full h-10 pl-10 pr-2 rounded-md outline-none bg-grey-100 placeholder:text-grey-500"
+        className="w-full h-10 pl-4 pr-10 rounded-xl outline-none bg-grey-100 border-2 border-white placeholder:text-grey-500 focus:border-2 focus:border-primary"
+        ref={searchRef}
         placeholder="검색어를 입력해주세요"
-        onChange={textHandler}
+        onChange={onTextChange}
+        onBlur={handleTextBlur}
+        onFocus={handleSearchFocus}
+        onKeyDown={handleKeyDown}
         value={text}
       />
-      <button
-        type="button"
-        onClick={clearTextHandler}
-        className="absolute right-2.5 top-2 cursor-pointer"
-      >
-        <Image src={x_mark} alt="삭제" />
+      <button type="button" className="absolute right-4 top-2">
+        <Search color="#747C84" />
       </button>
     </section>
   );

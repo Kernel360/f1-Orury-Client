@@ -1,10 +1,9 @@
-import { reply } from '$/community';
 import clsx from 'clsx';
-import Image from 'next/image';
+import { CornerDownRight } from 'lucide-react';
 
 function Deleted({ isChild }: { isChild?: boolean }) {
   const containerClass = clsx(
-    'h-[5rem] flex justify-start items-center border-b py-4',
+    'h-[96px] flex justify-start items-center border-b py-4 bg-grey-50',
     {
       'px-4': !isChild,
       'bg-grey-100': isChild,
@@ -13,8 +12,10 @@ function Deleted({ isChild }: { isChild?: boolean }) {
 
   return (
     <div className={containerClass}>
-      {isChild && <Image src={reply} alt="답글" className="mr-4" />}
-      <span className="text-grey-400 text-sm">
+      {isChild && (
+        <CornerDownRight size={16} color="#855AFF" strokeWidth={1.5} />
+      )}
+      <span className="text-grey-400 text-md">
         {isChild ? '삭제된 답글입니다.' : '삭제된 댓글입니다.'}
       </span>
     </div>

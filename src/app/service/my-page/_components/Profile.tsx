@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { camera, pencil } from '$/my-page';
 import ModifyInput from '@/app/_components/common/ModifyInput';
+import { Camera, Pencil } from 'lucide-react';
 
 function Profile({ ...props }: GetMyPageProps) {
   const [isToggled, setIsToggled] = useState(false);
@@ -29,7 +29,7 @@ function Profile({ ...props }: GetMyPageProps) {
           className="flex justify-center items-center w-8 h-8 absolute right-0 bottom-0 bg-purple-200 rounded-full"
           type="button"
         >
-          <Image src={camera} alt="사진 변경" priority />
+          <Camera size={24} stroke="#D7DCE3" strokeWidth={1.5} fill="#855AFF" />
         </button>
       </div>
 
@@ -41,7 +41,12 @@ function Profile({ ...props }: GetMyPageProps) {
         <div className={`${isToggled ? 'hidden' : 'block'}`}>
           <div className="flex gap-2 justify-center">
             <span className="font-bold ml-6">{nickname}</span>
-            <Image src={pencil} alt="수정하기" />
+            <Pencil
+              size={16}
+              color="#855AFF"
+              strokeWidth={2.5}
+              className="mt-1"
+            />
           </div>
           <span className="font-light text-grey-500">{props.email}</span>
         </div>

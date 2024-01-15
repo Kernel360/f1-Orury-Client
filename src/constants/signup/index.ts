@@ -1,5 +1,3 @@
-import { checked, unChecked } from '$/signup';
-
 const SIGNUP_BUTTON = {
   content: '회원가입',
   color: 'primary',
@@ -9,10 +7,7 @@ const BIRTHDAY_INPUT = {
   label: '생년월일',
   placeholder: 'YYYY-MM-DD',
   type: 'text',
-  alt: '체크',
   maxLength: 8,
-  checked,
-  unChecked,
 } as const;
 
 const GENDER = {
