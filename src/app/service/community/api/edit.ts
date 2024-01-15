@@ -1,20 +1,22 @@
 import CustomError from '@/error/CustomError';
-import { PostsProps } from '@/types/community/posts';
 import { axiosInstance } from '@/lib/axios/axios-instance';
 import { END_POINT } from '@/constants/api/end-point';
+import type { PostDataProps } from '@/types/community/post';
 
-const getPosts = async (id: number) => {
+interface EditPostType extends PostDataProps {
+  id: number;
+}
+
+const editPost = async (data: EditPostType) => {
   try {
-    const { data: posts } = await axiosInstance.get<PostsProps[]>(
-      END_POINT.posts(id),
-    );
-    return posts;
+    await axiosInstance.patch(END_POINT.post.default, data);
   } catch (error: unknown) {
     if (error instanceof CustomError) {
       throw new Error(error.message);
     }
+
     throw new Error(error as any);
   }
 };
 
-export default getPosts;
+export default editPost;

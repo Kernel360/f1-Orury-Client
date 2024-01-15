@@ -3,16 +3,15 @@ interface PostDetailProps {
   title: string;
   content: string;
   view_count: number;
+  comment_count: number;
+  like_count: number;
   images: string[];
   category: number;
   created_at: string;
   updated_at: string;
-  user_id: number;
+  is_mine: boolean;
   user_nickname: string;
   user_profile_image: string;
-  like_count: number;
-  comment_count: number;
-  is_writer: boolean;
   is_like: boolean;
 }
 
