@@ -1,7 +1,9 @@
-import CustomError from '@/error/CustomError';
 import { axiosInstance } from '@/lib/axios/axios-instance';
 import { END_POINT } from '@/constants/api/end-point';
 import { TResponse } from '@/types/common/response';
+import { PostDetailProps } from '@/types/community/post';
+
+import CustomError from '@/error/CustomError';
 
 const getPostDetail = async (id: number) => {
   try {

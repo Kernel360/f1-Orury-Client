@@ -10,6 +10,7 @@ export interface CommentProps {
   like_count: number;
   is_like: boolean;
   deleted: number;
+  childComments?: CommentProps[];
 }
 
 export interface CommentListData {
@@ -36,4 +37,8 @@ export interface ModifyContentProps {
   comment_id: number;
   post_id: number;
   content: string;
+}
+
+export interface OneCommentType extends CommentProps {
+  post_id: number;
 }

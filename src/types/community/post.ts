@@ -14,6 +14,23 @@ export interface PostsProps {
   comment_count: number;
 }
 
+export interface PostDetailProps {
+  id: number;
+  title: string;
+  content: string;
+  view_count: number;
+  comment_count: number;
+  like_count: number;
+  images: string[];
+  category: number;
+  created_at: string;
+  updated_at: string;
+  is_mine: boolean;
+  user_nickname: string;
+  user_profile_image: string;
+  is_like: boolean;
+}
+
 export type PostListData = {
   posts: PostsProps[];
   cursor: number;

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useOnePostState } from '@/store/community/postsStore';
+import { PostDetailProps } from '@/types/community/post';
 
 import HEADER from '@/constants/ui/common/header';
 import Header from '@/app/_components/common/Header';

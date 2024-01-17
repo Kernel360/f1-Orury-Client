@@ -1,3 +1,5 @@
+import { PostDetailProps } from '@/types/community/post';
+
 import User from '@/app/service/community/_components/User';
 import Counts from '@/app/service/community/_components/Counts';
 
