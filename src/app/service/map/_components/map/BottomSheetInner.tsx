@@ -75,7 +75,7 @@ function BottomSheetInner({
           <OneSiteUrl key={v.url} item={v} />
         ))}
         <div className="flex gap-2">
-          <Smartphone stroke={COLOR.default} size={20} strokeWidth={1.25} />
+          <Smartphone stroke={COLOR.primary} size={20} strokeWidth={1.25} />
           <a className="cursor-pointer" href={`tel:${phone}`}>
             {phone}
           </a>

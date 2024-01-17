@@ -12,46 +12,48 @@ import {
   UserRound,
   UsersRound,
 } from 'lucide-react';
+import { COLOR } from '@/styles/color';
 
 function Navbar() {
   const pathname = usePathname();
   const HOME = '/service';
+  const { grey300, white, primary } = COLOR;
 
   const getInActiveIcon = (text: string) => {
     switch (text) {
       case '지도':
-        return <Map color="#C3C6CC" strokeWidth={2} />;
+        return <Map color={grey300} strokeWidth={2} />;
       case '커뮤니티':
-        return <MessageSquareText color="#C3C6CC" strokeWidth={2} />;
+        return <MessageSquareText color={grey300} strokeWidth={2} />;
       case '홈':
-        return <Home color="#C3C6CC" strokeWidth={2} />;
+        return <Home color={grey300} strokeWidth={2} />;
       case '크루':
-        return <UsersRound color="#C3C6CC" strokeWidth={2} />;
+        return <UsersRound color={grey300} strokeWidth={2} />;
       default:
-        return <UserRound color="#C3C6CC" strokeWidth={2} />;
+        return <UserRound color={grey300} strokeWidth={2} />;
     }
   };
 
   const getActiveIcon = (text: string) => {
     switch (text) {
       case '지도':
-        return <Map color="#fff" strokeWidth={1} fill="#855AFF" />;
+        return <Map color={white} strokeWidth={1} fill={primary} />;
       case '커뮤니티':
         return (
-          <MessageSquareText stroke="#fff" strokeWidth={1} fill="#855AFF" />
+          <MessageSquareText stroke={white} strokeWidth={1} fill={primary} />
         );
       case '홈':
-        return <Home color="#fff" strokeWidth={1} fill="#855AFF" />;
+        return <Home color={white} strokeWidth={1} fill={primary} />;
       case '크루':
-        return <UsersRound color="#855AFF" strokeWidth={2} fill="#855AFF" />;
+        return <UsersRound color={primary} strokeWidth={2} fill={primary} />;
       default:
-        return <UserRound color="#855AFF" strokeWidth={2} fill="#855AFF" />;
+        return <UserRound color={primary} strokeWidth={2} fill={primary} />;
     }
   };
 
   const renderIcons = ({ value }: { value: NavbarProps }) => {
     if (pathname === HOME && value.href === HOME) {
-      return <Home color="#F8F8F8" strokeWidth={2} fill="#855AFF" />;
+      return <Home color="#F8F8F8" strokeWidth={2} fill={primary} />;
     }
 
     if (value.href !== HOME) {

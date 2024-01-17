@@ -59,7 +59,7 @@ function ReviewModal({
           size="large"
           className="fixed bottom-6 right-6 z-[50] rounded-3xl bg-primary w-[3rem] h-[3rem] shadow-main"
         >
-          <PenSquare fill="#ffffff" stroke={COLOR.default} strokeWidth={1.5} />
+          <PenSquare fill="#ffffff" stroke={COLOR.primary} strokeWidth={1.5} />
         </IconButton>
       </div>
     </div>

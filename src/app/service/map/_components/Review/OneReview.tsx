@@ -133,7 +133,7 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
           className={TouchClassName}
         >
           {reviewReaction.my_reaction === null ? (
-            <SentimentSatisfiedAltIcon sx={{ color: COLOR.default }} />
+            <SentimentSatisfiedAltIcon sx={{ color: COLOR.primary }} />
           ) : (
             customIcons[IconChip[reviewReaction.my_reaction]]?.icon
           )}

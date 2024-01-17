@@ -14,7 +14,7 @@ export const customIcons: {
   };
 } = {
   1: {
-    icon: <SentimentSatisfiedOutlinedIcon sx={{ color: COLOR.default }} />,
+    icon: <SentimentSatisfiedOutlinedIcon sx={{ color: COLOR.primary }} />,
     label: '흥미진진',
   },
   2: {

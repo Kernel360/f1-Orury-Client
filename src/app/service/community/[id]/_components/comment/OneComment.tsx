@@ -1,18 +1,17 @@
 'use client';
 
-import { CommentProps } from '@/types/community/comment';
+import { CornerDownRight } from 'lucide-react';
+import { OneCommentType } from '@/types/community/comment';
+import { COLOR } from '@/styles/color';
+
+import clsx from 'clsx';
 import User from '@/app/service/community/_components/User';
 import Deleted from '@/app/service/community/[id]/_components/comment/Deleted';
 import ModifyContent from '@/app/service/community/[id]/_components/comment/ModifyContent';
-import { CornerDownRight } from 'lucide-react';
 import useCommentStore from '@/store/community/commentStore';
-import clsx from 'clsx';
-
-interface OneCommentType extends CommentProps {
-  post_id: number;
-}
 
 function OneComment({ ...props }: OneCommentType) {
+  const { grey400, purple700 } = COLOR;
   const { isFocus, commentId } = useCommentStore();
   const {
     parent_id,
@@ -37,7 +36,7 @@ function OneComment({ ...props }: OneCommentType) {
       {parent_id ? (
         <CornerDownRight
           size={32}
-          color={deleted ? '#96A2AC' : '#7140FF'}
+          color={deleted ? grey400 : purple700}
           strokeWidth={1.5}
           className=" h-[96px] pl-2"
         />
