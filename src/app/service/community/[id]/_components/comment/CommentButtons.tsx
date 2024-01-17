@@ -4,16 +4,14 @@ import * as M from '@/app/_components/ui/menubars';
 import Modal from '@/app/_components/common/Modal';
 import useCommentStore from '@/store/community/commentStore';
 import deleteComment from '@/app/service/community/[id]/api/deleteComment';
-import useSWRInfinite from 'swr/infinite';
 import postCommentLike from '@/app/service/community/[id]/api/postCommentLike';
 import deleteCommentLike from '@/app/service/community/[id]/api/deleteCommentLike';
+import useCommentListInfinite from '@/hooks/community/useCommentListInfinite';
 
 import { useState } from 'react';
 import { Heart, MessageCircle, MoreVertical } from 'lucide-react';
 import { MODAL } from '@/constants/ui/common/modal';
 import { useToast } from '@/app/_components/ui/use-toast';
-import { fetcher } from '@/utils/fetcher';
-import { getCommentKey } from '@/utils/getKeys';
 import type { CommentBtnProps } from '@/types/community/commentButtons';
 
 function CommentButtons({ ...props }: CommentBtnProps) {
@@ -32,17 +30,7 @@ function CommentButtons({ ...props }: CommentBtnProps) {
     setParentId,
   } = useCommentStore();
 
-  const { mutate } = useSWRInfinite(
-    (pageIndex, previousPageData) => {
-      if (postId) {
-        return getCommentKey(postId, pageIndex, previousPageData);
-      }
-    },
-    fetcher,
-    {
-      revalidateFirstPage: false,
-    },
-  );
+  const { mutate } = useCommentListInfinite(postId);
 
   const cancelHandler = () => {
     setOpenDeleteModal(openDeleteModal => !openDeleteModal);

@@ -12,28 +12,14 @@ import { useForm } from 'react-hook-form';
 import { cn } from '@/lib/utils';
 import { Button } from '@/app/_components/ui/button';
 import { CATEGORIES } from '@/constants/common/form';
-import { getPostListKey } from '@/utils/getKeys';
-import { fetcher } from '@/utils/fetcher';
 import { useOnePostState, usePostsState } from '@/store/community/postsStore';
+import { FormSchema, FormSchemaType } from '@/app/schema';
 import type { FormType } from '@/types/common/form';
 
-import * as z from 'zod';
 import * as C from '@/app/_components/ui/command';
 import * as P from '@/app/_components/ui/popover';
 import * as F from '@/app/_components/ui/form';
-import useSWRInfinite from 'swr/infinite';
-
-const FormSchema = z.object({
-  category: z.string({
-    required_error: '카테고리를 선택해주세요.',
-  }),
-  title: z.string({
-    required_error: '글 제목을 입력해주세요.',
-  }),
-  content: z.string({
-    required_error: '글 내용을 입력해주세요.',
-  }),
-});
+import usePostListInfinite from '@/hooks/community/usePostListInfinite';
 
 function Form({ ...props }: FormType) {
   const {
@@ -48,18 +34,13 @@ function Form({ ...props }: FormType) {
   } = props;
   const { categoryId } = usePostsState();
   const { setTitle, setContent } = useOnePostState();
-  const { mutate } = useSWRInfinite(
-    (pageIndex, previousPageData) =>
-      getPostListKey(categoryId, pageIndex, previousPageData),
-    fetcher,
-    { revalidateFirstPage: false },
-  );
+  const { mutate } = usePostListInfinite(categoryId);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
+  const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
   });
 
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+  const onSubmit = async (data: FormSchemaType) => {
     if (isPost && setIsSheetOpen) {
       await post(data);
       await mutate();

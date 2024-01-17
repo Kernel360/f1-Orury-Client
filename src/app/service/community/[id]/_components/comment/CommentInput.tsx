@@ -4,12 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowUpCircle } from 'lucide-react';
 import postComment from '@/app/service/community/[id]/api/postComment';
 import { useParams } from 'next/navigation';
-import { TResponse } from '@/types/common/response';
-import { CommentListData } from '@/types/community/comment';
+
 import useCommentStore from '@/store/community/commentStore';
-import useSWRInfinite from 'swr/infinite';
-import { getCommentKey } from '@/utils/getKeys';
-import { fetcher } from '@/utils/fetcher';
+import useCommentListInfinite from '@/hooks/community/useCommentListInfinite';
 
 function CommentInput() {
   const params = useParams<{ id: string }>();
@@ -17,12 +14,7 @@ function CommentInput() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [content, setContent] = useState('');
   const { isReplyMode, setIsFocus, parentId, isFocus } = useCommentStore();
-  const { mutate } = useSWRInfinite<TResponse<CommentListData>>(
-    (pageIndex, previousPageData) =>
-      getCommentKey(postId, pageIndex, previousPageData),
-    fetcher,
-    { revalidateFirstPage: false },
-  );
+  const { mutate } = useCommentListInfinite(postId);
 
   useEffect(() => {
     if (inputRef.current && isFocus) {

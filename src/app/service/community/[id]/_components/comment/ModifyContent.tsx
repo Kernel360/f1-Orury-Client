@@ -2,13 +2,11 @@
 
 import useCommentStore from '@/store/community/commentStore';
 import editComment from '@/app/service/community/[id]/api/editComment';
-import useSWRInfinite from 'swr/infinite';
+import useCommentListInfinite from '@/hooks/community/useCommentListInfinite';
 
 import { Check, X } from 'lucide-react';
 import { useToast } from '@/app/_components/ui/use-toast';
 import { ChangeEvent, useMemo, useState } from 'react';
-import { fetcher } from '@/utils/fetcher';
-import { getCommentKey } from '@/utils/getKeys';
 import type { ModifyContentProps } from '@/types/community/comment';
 
 function ModifyContent({ ...props }: ModifyContentProps) {
@@ -20,13 +18,7 @@ function ModifyContent({ ...props }: ModifyContentProps) {
   const [isToggled, setIsToggled] = useState(false);
   const beforeValue = content;
 
-  const { mutate } = useSWRInfinite(
-    () => getCommentKey(post_id, 0, undefined, 0),
-    fetcher,
-    {
-      revalidateFirstPage: false,
-    },
-  );
+  const { mutate } = useCommentListInfinite(post_id);
 
   const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = '2em';

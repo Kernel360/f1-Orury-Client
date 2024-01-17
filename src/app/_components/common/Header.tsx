@@ -3,30 +3,23 @@
 import { useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { ChevronLeft, MoreVertical, X } from 'lucide-react';
-import { getPostListKey } from '@/utils/getKeys';
 import { usePostsState } from '@/store/community/postsStore';
-import { fetcher } from '@/utils/fetcher';
 import { MODAL } from '@/constants/ui/common/modal';
 
 import clsx from 'clsx';
 import Modal from '@/app/_components/common/Modal';
 import HeaderProps from '@/types/ui/common/header';
 import deletePost from '@/app/service/community/[id]/api/deletePost';
+import usePostListInfinite from '@/hooks/community/usePostListInfinite';
 import * as M from '@/app/_components/ui/menubars';
-import useSWRInfinite from 'swr/infinite';
 
-function Header({ ...props }: HeaderProps) {
+function Header({ ...props }: Partial<HeaderProps>) {
   const { title, isBack, isExit, isEllipsis, editHandler, exitHandler } = props;
   const { categoryId } = usePostsState();
+  const { mutate } = usePostListInfinite(categoryId);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const router = useRouter();
   const params = useParams<{ id: string }>();
-  const { mutate } = useSWRInfinite(
-    (pageIndex, previousPageData) =>
-      getPostListKey(categoryId, pageIndex, previousPageData),
-    fetcher,
-    { revalidateFirstPage: false },
-  );
 
   const onBackHandler = () => {
     router.back();

@@ -1,29 +1,20 @@
 'use client';
 
+import { v4 } from 'uuid';
 import { useMemo, useState } from 'react';
-import useSWRInfinite from 'swr/infinite';
+import { CommentProps } from '@/types/community/comment';
+
 import useIntersect from '@/hooks/common/useIntersection';
-import { TResponse } from '@/types/common/response';
-import { CommentListData } from '@/types/community/comment';
-import { fetcher } from '@/utils/fetcher';
 import OneComment from '@/app/service/community/[id]/_components/comment/OneComment';
 import CommentInput from '@/app/service/community/[id]/_components/comment/CommentInput';
-import { getCommentKey } from '@/utils/getKeys';
-import { v4 } from 'uuid';
+import useCommentListInfinite from '@/hooks/community/useCommentListInfinite';
 
 function CommentList({ postId }: { postId: number }) {
   const [commentList, setCommentList] = useState<CommentProps[] | undefined>(
     [],
   );
 
-  const { data, size, setSize, isValidating } = useSWRInfinite<
-    TResponse<CommentListData>
-  >(
-    (pageIndex, previousPageData) =>
-      getCommentKey(postId, pageIndex, previousPageData),
-    fetcher,
-    { revalidateFirstPage: false },
-  );
+  const { data, size, setSize, isValidating } = useCommentListInfinite(postId);
 
   useMemo(() => {
     setCommentList(data?.flatMap(page => page.data.comments));
