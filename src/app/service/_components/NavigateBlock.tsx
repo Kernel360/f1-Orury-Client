@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { NavigateBlockProps } from '@/types/ui/navigateBlock';
 import { giants } from '@/styles/fonts';
 
-function NavigateBlock({ blockProps }: { blockProps: NavigateBlockProps }) {
-  const { href, src, sub, title, index } = blockProps;
+function NavigateBlock({ ...props }: NavigateBlockProps) {
+  const { href, src, sub, title, index } = props;
 
   return (
     <Link href={href} className={clsx(index ? 'w-[calc(50%-8px)]' : 'w-full')}>

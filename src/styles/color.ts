@@ -1,6 +1,10 @@
 export const COLOR = {
-  default: '#855AFF',
+  primary: '#855AFF',
   star: '#F1C644',
   black: '#000000',
+  white: '#FFFFFF',
   gray: '#999999',
+  grey300: '#C3C6CC',
+  grey400: '#96A2AC',
+  purple700: '#7140FF',
 };

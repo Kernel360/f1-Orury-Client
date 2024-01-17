@@ -1,4 +1,5 @@
 export interface CountsProps {
+  postId: number;
   size: number;
   likes: number;
   comments: number;
@@ -6,9 +7,8 @@ export interface CountsProps {
 }
 
 export interface CountItemProps {
-  icon: string;
-  activeIcon?: string;
+  postId: number;
   count: number;
   color: string;
-  size: number;
+  icon: string;
 }

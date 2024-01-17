@@ -1,5 +1,5 @@
 import { Avatar, Rating } from '@mui/material';
-import getTimeDiff from '@/util/getTimeDiff';
+import getTimeDiff from '@/utils/getTimeDiff';
 import MapCarousel from '@/app/service/map/_components/MapCarousel';
 import RadioGroupRating from '@/app/service/map/_components/Review/SatisfiedRating';
 import { useState } from 'react';
@@ -133,7 +133,7 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
           className={TouchClassName}
         >
           {reviewReaction.my_reaction === null ? (
-            <SentimentSatisfiedAltIcon sx={{ color: COLOR.default }} />
+            <SentimentSatisfiedAltIcon sx={{ color: COLOR.primary }} />
           ) : (
             customIcons[IconChip[reviewReaction.my_reaction]]?.icon
           )}

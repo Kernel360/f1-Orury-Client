@@ -1,7 +1,7 @@
 const TABS = {
-  announcement: {
+  hot: {
     title: '인기',
-    id: 2,
+    id: 3,
   },
   main: {
     title: '자유게시판',
@@ -9,7 +9,7 @@ const TABS = {
   },
   qna: {
     title: 'QnA',
-    id: 3,
+    id: 2,
   },
 } as const;
 

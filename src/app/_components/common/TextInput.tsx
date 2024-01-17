@@ -1,10 +1,20 @@
+import { forwardRef } from 'react';
+
 import { InputProps } from '@/types/ui/common/input';
 import { Textarea } from '@/app/_components/ui/textarea';
 
-function TextInput({ placeholder, onChange, value }: InputProps) {
-  return (
-    <Textarea placeholder={placeholder} onChange={onChange} value={value} />
-  );
-}
+const TextInput = forwardRef<HTMLTextAreaElement, InputProps>(
+  ({ placeholder, defaultValue, onChange, value }, ref) => {
+    return (
+      <Textarea
+        placeholder={placeholder}
+        onChange={onChange}
+        defaultValue={defaultValue}
+        value={value}
+        ref={ref}
+      />
+    );
+  },
+);
 
 export default TextInput;

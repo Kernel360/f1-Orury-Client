@@ -1,10 +1,11 @@
 'use client';
 
+import { signIn } from 'next-auth/react';
+
 import kakao from 'public/kakao.svg';
 import BUTTON from '@/constants/ui/button';
 import ICON from '@/constants/ui/icon';
 import Image from 'next/image';
-import { signIn } from 'next-auth/react';
 import URL from '@/constants/url';
 
 function Kakao() {

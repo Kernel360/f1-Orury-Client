@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import Providers from '@/app/providers';
 import { pretendard } from '@/styles/fonts';
+import { Toaster } from '@/app/_components/ui/toaster';
 
 export const metadata: Metadata = {
   title: 'Orury',
@@ -17,7 +18,10 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       />
       <body className={`${pretendard.className} antialiased bg-slate-100`}>
         <div className="max-w-[768px] mx-auto h-screen pb-safe bg-white">
-          <Providers>{children}</Providers>
+          <Providers>
+            {children}
+            <Toaster />
+          </Providers>
         </div>
       </body>
     </html>

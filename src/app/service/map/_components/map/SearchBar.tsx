@@ -48,7 +48,7 @@ function SearchBar({ isSearching, onSearchingFocus }: SearchKeyWordProps) {
           type="submit"
           className="absolute right-2 top-1/2 translate-y-[-50%]"
         >
-          <Search stroke={COLOR.default} />
+          <Search stroke={COLOR.primary} />
         </button>
       </form>
     </div>

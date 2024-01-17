@@ -48,7 +48,7 @@ function SearchResultModal({
           className="flex items-center text-sm gap-2"
         >
           <span className="text-sm text-gray-400">지도 보기</span>
-          <Map size={20} stroke={COLOR.default} />
+          <Map size={20} stroke={COLOR.primary} />
         </button>
       </div>
       {isEmptyResult ? (

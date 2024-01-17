@@ -2,7 +2,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import OneSiteUrl from '@/app/service/map/_components/map/OneSiteUrl';
 import BarRatingChart from '@/app/service/map/_components/map/BarRatingChart';
-import getAvgPoint from '@/util/getAvgPoint';
+import getAvgPoint from '@/utils/getAvgPoint';
 import LineRatingChart from '@/app/service/map/_components/map/LineRatingChart';
 import { BottomSheetInnerProps } from '@/types/map/BottomSheetProps';
 import { Smartphone } from 'lucide-react';
@@ -75,7 +75,7 @@ function BottomSheetInner({
           <OneSiteUrl key={v.url} item={v} />
         ))}
         <div className="flex gap-2">
-          <Smartphone stroke={COLOR.default} size={20} strokeWidth={1.25} />
+          <Smartphone stroke={COLOR.primary} size={20} strokeWidth={1.25} />
           <a className="cursor-pointer" href={`tel:${phone}`}>
             {phone}
           </a>

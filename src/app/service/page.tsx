@@ -12,7 +12,7 @@ function Page() {
         <Notice />
         <div className="flex flex-wrap justify-between gap-4 mx-4">
           {Object.values(NAVIGATE_BLOCKS).map(value => (
-            <NavigateBlock key={value.title} blockProps={value} />
+            <NavigateBlock key={value.title} {...value} />
           ))}
         </div>
       </div>

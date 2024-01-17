@@ -1,6 +1,5 @@
-import Image from 'next/image';
 import { ModifyInputProps } from '@/types/common/modifyInput';
-import { x_mark } from '$/header';
+import { X } from 'lucide-react';
 import TextInput from './TextInput';
 import Button from '../buttons/Button';
 
@@ -45,17 +44,12 @@ function ModifyInput({
         onClick={clearHandler}
         className="absolute right-2 top-1.5 cursor-pointer"
       >
-        <Image src={x_mark} alt="삭제" />
+        <X />
       </button>
 
       <div className="flex justify-end w-full">
         <div className="flex gap-2 w-40 h-10 mt-8">
-          <Button
-            content="취소"
-            onClick={cancelHandler}
-            color="black"
-            outline
-          />
+          <X onClick={cancelHandler} color="black" />
           <Button content="변경" onClick={clickHandler} color="primary" />
         </div>
       </div>

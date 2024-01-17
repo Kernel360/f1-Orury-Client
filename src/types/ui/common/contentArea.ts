@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 
-export interface ContentAreaType {
+export interface ContentAreaProps {
   placeholder: string;
   content?: string;
+
   setContent?: Dispatch<SetStateAction<string>>;
 }
