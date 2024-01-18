@@ -55,7 +55,3 @@ export const getPostListKey = (
     END_POINT.post.getPostList(categoryId, previousPageData?.data.cursor)
   );
 };
-
-export const mutatePostListKey = (categoryId: number, cursor: number) => {
-  return BACK_URL + END_POINT.post.getPostList(categoryId, cursor);
-};
