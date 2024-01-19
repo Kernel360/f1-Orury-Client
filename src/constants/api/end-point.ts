@@ -5,6 +5,9 @@ export const END_POINT = {
 
     // POST
     refresh: '/auth/refresh',
+
+    // KAKAO
+    kakao: 'oauth2/authorizaion/kakao',
   },
   post: {
     // DEFAULT
