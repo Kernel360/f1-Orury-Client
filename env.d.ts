@@ -9,6 +9,8 @@ declare global {
       NEXTAUTH_URL: string;
       NEXT_PUBLIC_API_URL: string;
       NEXT_PUBLIC_KAKAO_APP_KEY: string;
+      NEXT_PUBLIC_ACCESS_TOKEN: string;
+      NEXT_PUBLIC_REFRESH_TOKEN: string;
     }
   }
 }
