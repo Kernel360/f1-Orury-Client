@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/deploy
+    overwrite: yes
+permissions:
+  - object: /home/ubuntu/deploy
+    owner: ubuntu
+    group: ubuntu
+    mode: 755
+hooks:
+  ApplicationStart:
+    - location: deploy.sh
+      timeout: 500
+      runas: ubuntu
