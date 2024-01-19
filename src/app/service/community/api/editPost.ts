@@ -9,7 +9,7 @@ interface EditPostType extends PostDataProps {
 
 const editPost = async (data: EditPostType) => {
   try {
-    await axiosInstance.patch(END_POINT.post.default, data);
+    await axiosInstance.patch(END_POINT.post.main, data);
   } catch (error: unknown) {
     if (error instanceof CustomError) {
       throw new Error(error.message);
