@@ -37,7 +37,6 @@
 
 <img src="https://img.shields.io/badge/Zustand-FB542B?style=flat-square&logo=zustand&logoColor=white" />
 <img src="https://img.shields.io/badge/SWR-fff?style=flat-square&logo=swr&logoColor=black" />
-<br />
 
 ### API Testing
 
