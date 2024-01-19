@@ -26,25 +26,32 @@
 
 ### Programming Language / FrameWrok
 
+<p>
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white" />
 <img src="https://img.shields.io/badge/NEXT.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" />
+</p>
 
 ### Styling
 
-<img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=flatsquare&logo=tailwindcss&logoColor=white"/></a> <img src="https://img.shields.io/badge/shadcn/ui-000000?style=flat-square&logo=shadcnui&logoColor=white" />
+<img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=flatsquare&logo=tailwindcss&logoColor=white"/></a><img src="https://img.shields.io/badge/shadcn/ui-000000?style=flat-square&logo=shadcnui&logoColor=white" />
 
 ### State Management
 
+<p>
 <img src="https://img.shields.io/badge/Zustand-FB542B?style=flat-square&logo=zustand&logoColor=white" />
 <img src="https://img.shields.io/badge/SWR-fff?style=flat-square&logo=swr&logoColor=black" />
+</p>
 
 ### API Testing
 
+<p>
 <img src="https://img.shields.io/badge/Mock Service Worker-FF6A33?style=flat-square&logo=mockserviceworker&logoColor=white" />
 <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=postman&logoColor=white" />
+</p>
 
 ### Built-in Rules
 
+<p>
 <img src="https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=eslint&logoColor=white" />
 <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=prettier&logoColor=white" />
 </p>
