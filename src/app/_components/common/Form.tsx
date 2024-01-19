@@ -4,7 +4,7 @@ import TextInput from '@/app/_components/common/TextInput';
 import Content from '@/app/_components/common/Content';
 import post from '@/app/service/community/api/post';
 import PhotoBooth from '@/app/service/community/_components/PhotoBooth';
-import editPost from '@/app/service/community/api/edit';
+import editPost from '@/app/service/community/api/editPost';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChevronsDown } from 'lucide-react';
