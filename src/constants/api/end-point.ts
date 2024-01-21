@@ -38,4 +38,9 @@ export const END_POINT = {
     // DELETE
     deleteComment: (commentId: number) => `/comment/${commentId}`,
   },
+  map: {
+    main: '/map',
+    // KEYWORD
+    search: (keyword: string) => `/map?keyword=${keyword}`,
+  },
 };

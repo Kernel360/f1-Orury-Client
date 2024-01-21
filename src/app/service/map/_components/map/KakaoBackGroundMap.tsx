@@ -43,7 +43,7 @@ function KakaoBackGroundMap({
         level={3}
       >
         <MarkerClusterer averageCenter minLevel={10}>
-          {positionList.length !== 0
+          {positionList
             ? positionList.map(marker => (
                 <MapMarker
                   onClick={() => onMovePosition(marker)}

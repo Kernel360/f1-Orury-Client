@@ -31,17 +31,10 @@ function SearchResultModal({
     { 'z-50 top-0': isSearching },
   );
 
-  const { item, total } = searchResult;
-
-  const isEmptyResult = total === 0;
-
   return (
     <div className={modalClassName}>
       <div className="flex justify-between">
-        <span>
-          장소
-          {total}
-        </span>
+        <span>장소</span>
         <button
           type="button"
           onClick={handleSearchModalClose}
@@ -51,20 +44,20 @@ function SearchResultModal({
           <Map size={20} stroke={COLOR.primary} />
         </button>
       </div>
-      {isEmptyResult ? (
+      {searchResult?.total === 0 ? (
         <div className="flex h-full justify-center items-center">
           검색 결과가 없습니다.
         </div>
       ) : (
         <div className="flex flex-col pt-2 mt-2 border-t-[1px] gap-2">
-          {item.map(value => (
-            <OneSearchResult
-              key={value.id}
-              item={value}
-              onMovePosition={() => handleMovePosition(value)}
-              handleCarouselOpen={handleCarouselOpen}
-            />
-          ))}
+          {searchResult?.item.map(value => (
+              <OneSearchResult
+                key={value.id}
+                item={value}
+                onMovePosition={() => handleMovePosition(value)}
+                handleCarouselOpen={handleCarouselOpen}
+              />
+            ))}
         </div>
       )}
     </div>

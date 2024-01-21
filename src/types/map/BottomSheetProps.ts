@@ -12,7 +12,7 @@ interface OneSearchResultProps {
 }
 
 interface BottomSheetProps {
-  selectMarkerId: number | null;
+  selectMarkerId: string;
   isSheetOpen: boolean;
   onDisMiss: () => void;
   handleImageOpen: (url: string) => void;
@@ -32,12 +32,12 @@ interface SearchKeyWordProps {
 
 interface KakaoBackGroundMapProps {
   mapInfo: MapMoveControlType;
-  positionList: OneSearchKeywordType[];
+  positionList?: OneSearchKeywordType[];
   handleMovePosition: (item: OneSearchKeywordType) => void;
 }
 
 interface SearchResultProps {
-  searchResult: SearchKeywordListType;
+  searchResult?: SearchKeywordListType;
   isSearching: boolean;
   onSearchingBlur: () => void;
   handleCarouselOpen: (images: string[]) => void;
