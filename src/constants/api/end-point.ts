@@ -5,10 +5,13 @@ export const END_POINT = {
 
     // POST
     refresh: '/auth/refresh',
+
+    // KAKAO
+    kakao: 'auth/login',
   },
   post: {
     // DEFAULT
-    main: '/post',
+    main: '/posts',
 
     // POST
     likePost: (postId: number) => `/post/like/${postId}`,

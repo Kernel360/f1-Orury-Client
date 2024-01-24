@@ -5,7 +5,6 @@ import { getCookie } from '@/lib/cookie';
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  withCredentials: true,
 });
 
 let accessToken = decrypt(getCookie({ name: 'access_token' }));
@@ -13,7 +12,7 @@ const refreshToken = decrypt(getCookie({ name: 'refresh_token' }));
 
 axiosInstance.interceptors.request.use(
   req => {
-    req.headers.accessToken = `Bearer ${accessToken}`;
+    req.headers.Authorization = `Bearer ${accessToken}`;
 
     return req;
   },
@@ -31,10 +30,10 @@ axiosInstance.interceptors.response.use(
       originalRequest.retry = true;
 
       return axios
-        .post('/refresh', { refresh_token: refreshToken })
+        .post('/refresh', { Authorization: refreshToken })
         .then((refreshRes: AxiosResponse) => {
           accessToken = refreshRes.data.access_token;
-          originalRequest.headers.accessToken = `Bearer ${accessToken}`;
+          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
           return axios(originalRequest);
         });
     }
