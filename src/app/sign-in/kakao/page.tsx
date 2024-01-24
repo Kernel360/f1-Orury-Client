@@ -39,20 +39,24 @@ function Page() {
       }
 
       // 로그인 성공
-      if (response?.status === STATUS_CODE.ok) router.push(service);
+      if (response?.status === STATUS_CODE.ok) {
+        router.push(service);
+      }
 
       // 올바르지 않은 형식의 이메일을 가진 유저일 경우
       if (response?.status === invalidEmail) {
         router.push(home);
         toast({
+          variant: 'warning',
           description: response.message,
         });
       }
 
       // 가입된 계정이 존재하지 않은 비회원인 경우
       if (response?.status === noAccount) {
-        router.push(service);
+        router.push(home);
         toast({
+          variant: 'warning',
           description: response.message,
         });
       }
@@ -61,6 +65,7 @@ function Page() {
       if (response?.status === haveAnotherAccount) {
         router.push(home);
         toast({
+          variant: 'warning',
           description: response.message,
         });
       }
