@@ -5,7 +5,7 @@ import type { PostDataProps } from '@/types/community/post';
 
 const post = async (data: PostDataProps) => {
   try {
-    await axiosInstance.post(END_POINT.post.default, data, {
+    await axiosInstance.post(END_POINT.post.main, data, {
       withCredentials: true,
     });
   } catch (error: unknown) {

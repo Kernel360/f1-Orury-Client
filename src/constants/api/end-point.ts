@@ -1,7 +1,14 @@
 export const END_POINT = {
+  auth: {
+    // DEFAULT
+    main: '/auth',
+
+    // POST
+    refresh: '/auth/refresh',
+  },
   post: {
     // DEFAULT
-    default: '/post',
+    main: '/post',
 
     // POST
     likePost: (postId: number) => `/post/like/${postId}`,
@@ -19,7 +26,7 @@ export const END_POINT = {
   },
   comment: {
     // DEFAULT
-    default: '/comment',
+    main: '/comment',
 
     // POST
     likeComment: (commentId: number) => `/comment/like/${commentId}`,

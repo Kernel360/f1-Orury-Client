@@ -4,7 +4,7 @@ import { Skeleton } from '@/app/_components/ui/skeleton';
 import { v4 } from 'uuid';
 
 function PostListSkeleton() {
-  const { innerHeight } = window;
+  const innerHeight = typeof window !== 'undefined' ? window.innerHeight : 0;
   const skeletonHeight = Math.floor(innerHeight / 120);
 
   return (
