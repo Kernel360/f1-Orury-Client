@@ -28,7 +28,9 @@ export const fetcher = (url: string): Promise<any> => {
             .then((refreshRes: AxiosResponse) => {
               accessToken = refreshRes.data.access_token;
               axios
-                .get(url, { headers: { accessToken: `Bearer ${accessToken}` } })
+                .get(url, {
+                  headers: { Authorization: `Bearer ${accessToken}` },
+                })
                 .then(retryRes => resolve(retryRes.data))
                 .catch(err => reject(err));
             })

@@ -16,13 +16,13 @@
     "incremental": true,
     "plugins": [
       {
-        "name": "next"
-      }
+        "name": "next",
+      },
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "$/*": ["./assets/*"]
-    }
+      "$/*": ["./assets/*"],
+    },
   },
   "include": [
     "next-env.d.ts",
@@ -32,7 +32,7 @@
     ".next/types/**/*.ts",
     "/public/*.js",
     "src",
-    "jest.config.ts"
+    "jest.config.ts",
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

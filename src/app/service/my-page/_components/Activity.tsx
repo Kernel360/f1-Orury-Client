@@ -1,8 +1,9 @@
-import Link from 'next/link';
-import Heading from '@/app/service/my-page/_components/Heading';
 import { ACTIVITY_TITLE, ACTIVITY_LIST } from '@/constants/my-page/activity';
 import { randomUUID } from 'crypto';
 import { ChevronRight } from 'lucide-react';
+
+import Link from 'next/link';
+import Heading from '@/app/service/my-page/_components/Heading';
 
 function Activity() {
   return (

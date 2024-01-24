@@ -14,10 +14,10 @@ export const END_POINT = {
     main: '/posts',
 
     // POST
-    likePost: (postId: number) => `/post/like/${postId}`,
+    likePost: (postId: number) => `/posts/like/${postId}`,
 
     // GET
-    getPostDetail: (postId: number) => `/post/${postId}`,
+    getPostDetail: (postId: number) => `/posts/${postId}`,
     getHotPostList: (page?: number) => `/posts/hot?page=${page}`,
     getPostList: (category: number, cursor?: number) =>
       `/posts/${category}?cursor=${cursor}`,
@@ -40,5 +40,9 @@ export const END_POINT = {
 
     // DELETE
     deleteComment: (commentId: number) => `/comment/${commentId}`,
+  },
+  mypage: {
+    // DEFAULT
+    main: '/mypage',
   },
 };

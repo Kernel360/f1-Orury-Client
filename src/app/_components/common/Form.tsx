@@ -1,11 +1,7 @@
 'use client';
 
-import TextInput from '@/app/_components/common/TextInput';
-import Content from '@/app/_components/common/Content';
-import post from '@/app/service/community/api/post';
-import PhotoBooth from '@/app/service/community/_components/PhotoBooth';
-import editPost from '@/app/service/community/api/editPost';
-
+import { useState } from 'react';
+import { getFormData } from '@/utils/getFormData';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChevronsDown } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -16,10 +12,15 @@ import { useOnePostState, usePostsState } from '@/store/community/postsStore';
 import { FormSchema, FormSchemaType } from '@/app/schema';
 import type { FormType } from '@/types/common/form';
 
+import TextInput from '@/app/_components/common/TextInput';
+import Content from '@/app/_components/common/Content';
+import post from '@/app/service/community/api/post';
+import PhotoBooth from '@/app/service/community/_components/PhotoBooth';
+import editPost from '@/app/service/community/api/editPost';
+import usePostListInfinite from '@/hooks/community/usePostListInfinite';
 import * as C from '@/app/_components/ui/command';
 import * as P from '@/app/_components/ui/popover';
 import * as F from '@/app/_components/ui/form';
-import usePostListInfinite from '@/hooks/community/usePostListInfinite';
 
 function Form({ ...props }: FormType) {
   const {
@@ -35,6 +36,7 @@ function Form({ ...props }: FormType) {
   const { categoryId } = usePostsState();
   const { setTitle, setContent } = useOnePostState();
   const { mutate } = usePostListInfinite(categoryId);
+  const [images, setImages] = useState<string[]>([]);
 
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
@@ -42,7 +44,9 @@ function Form({ ...props }: FormType) {
 
   const onSubmit = async (data: FormSchemaType) => {
     if (isPost && setIsSheetOpen) {
-      await post(data);
+      const formData = getFormData({ jsonData: JSON.stringify(data), images });
+
+      await post(formData);
       await mutate();
       setIsSheetOpen(false);
     }
@@ -153,7 +157,8 @@ function Form({ ...props }: FormType) {
         </div>
 
         <div className="flex flex-col items-end w-full gap-2 pb-4 z-50 bg-white">
-          <PhotoBooth />
+          <PhotoBooth images={images} setImages={setImages} />
+
           <Button type="submit" color="white" className="w-full">
             작성 완료
           </Button>
