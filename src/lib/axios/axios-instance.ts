@@ -5,7 +5,6 @@ import { getCookie } from '@/lib/cookie';
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  withCredentials: true,
 });
 
 let accessToken = decrypt(getCookie({ name: 'access_token' }));
