@@ -14,9 +14,12 @@ function Page() {
   const { signUpType } = useSignInState();
 
   useEffect(() => {
-    const signin = async () => {
-      const code = new URL(window.location.href).searchParams.get('code');
-      const response = await getUserInfo({ code, signUpType });
+    const signIn = async () => {
+      const authCode = new URL(window.location.href).searchParams.get('code');
+      const response = await getUserInfo({
+        code: authCode,
+        signUpType,
+      });
 
       if (response) {
         setCookie({
@@ -25,7 +28,7 @@ function Page() {
         });
         setCookie({
           name: 'refresh_token',
-          value: encrypt(response.data.access_token),
+          value: encrypt(response.data.refresh_token),
         });
       }
 
@@ -34,8 +37,8 @@ function Page() {
       if (response?.status === 404) router.push('/sign-up');
     };
 
-    signin();
-  }, []);
+    signIn();
+  }, [router, signUpType]);
 
   return <div />;
 }
