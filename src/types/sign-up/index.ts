@@ -1,4 +1,4 @@
-export interface SignupState {
+export interface SignUpState {
   isValidBirth: boolean;
   isValidGender: boolean;
   setIsValidBirth: (value: boolean) => void;
