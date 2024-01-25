@@ -51,13 +51,13 @@ function SearchResultModal({
       ) : (
         <div className="flex flex-col pt-2 mt-2 border-t-[1px] gap-2">
           {searchResult?.item.map(value => (
-              <OneSearchResult
-                key={value.id}
-                item={value}
-                onMovePosition={() => handleMovePosition(value)}
-                handleCarouselOpen={handleCarouselOpen}
-              />
-            ))}
+            <OneSearchResult
+              key={value.id}
+              item={value}
+              onMovePosition={() => handleMovePosition(value)}
+              handleCarouselOpen={handleCarouselOpen}
+            />
+          ))}
         </div>
       )}
     </div>

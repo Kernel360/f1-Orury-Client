@@ -1,9 +1,15 @@
 import ImageCarousel from '@/app/_components/common/ImageCarousel';
-import { ImageSliderModalProps } from '@/types/ui/modal/ImageSliderModal';
 import { X } from 'lucide-react';
 import { COLOR } from '@/styles/color';
+import type { ImageSliderModalProps } from '@/types/ui/modal/ImageModal';
 
-function ImageSliderModal({ images, onCloseModal }: ImageSliderModalProps) {
+function ImageSliderModal({
+  isOpen,
+  images,
+  onCloseModal,
+}: ImageSliderModalProps) {
+  if (!isOpen) return;
+
   return (
     <div className="z-[9999] flex items-center justify-center absolute w-full h-screen">
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}

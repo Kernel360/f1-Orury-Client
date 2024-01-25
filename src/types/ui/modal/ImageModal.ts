@@ -13,6 +13,13 @@ export interface ImagesStoreType {
 }
 
 export interface ImageModalProps {
+  isOpen: boolean;
   onCloseModal: () => void;
   image: string | null;
+}
+
+export interface ImageSliderModalProps {
+  isOpen: boolean;
+  onCloseModal: () => void;
+  images: string[];
 }

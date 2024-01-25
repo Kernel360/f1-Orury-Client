@@ -77,12 +77,19 @@ function Page() {
         searchResult.item.filter(v => v.id === Number(selectId))[0],
       );
     }
-  }, [selectId]);
+  }, [selectId, searchResult]);
 
   // 검색 창을 누르면, 바텀 시트가 올라온다.
   useEffect(() => {
     serachKeyWord();
   }, [keyword, serachKeyWord]);
+
+  useEffect(() => {
+    return () => {
+      handleImageClosed();
+      handleCarouselClosed();
+    };
+  }, []);
 
   const isBottomSheetOpen = isSheetOpen && !isSearching;
 
@@ -95,15 +102,16 @@ function Page() {
         onCloseModal={onReviewModalClose}
         handleImageOpen={handleImageOpen}
       />
-      {isImageModalOpen && (
-        <ImageModal image={imageModalUrl} onCloseModal={handleImageClosed} />
-      )}
-      {carouselModalIsOpen && (
-        <ImageSliderModal
-          images={carouselImages}
-          onCloseModal={handleCarouselClosed}
-        />
-      )}
+      <ImageModal
+        isOpen={isImageModalOpen}
+        image={imageModalUrl}
+        onCloseModal={handleImageClosed}
+      />
+      <ImageSliderModal
+        isOpen={carouselModalIsOpen}
+        images={carouselImages}
+        onCloseModal={handleCarouselClosed}
+      />
       <KakaoBackGroundMap
         mapInfo={mapInfo}
         positionList={searchResult?.item}

@@ -3,8 +3,11 @@ import Image from 'next/image';
 import { X } from 'lucide-react';
 import { COLOR } from '@/styles/color';
 
-function ImageModal({ image, onCloseModal }: ImageModalProps) {
+function ImageModal({ isOpen, image, onCloseModal }: ImageModalProps) {
   const width = window.outerWidth;
+
+  if (!isOpen && !image) return;
+
   return (
     <div className="z-[9999] flex items-center justify-center absolute w-full h-screen">
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
