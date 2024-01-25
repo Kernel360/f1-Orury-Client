@@ -13,7 +13,7 @@ export const fetcher = (url: string): Promise<any> => {
     axios
       .get(url, {
         headers: {
-          accessToken: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
           withCredentials: true,
         },
       })
@@ -23,7 +23,7 @@ export const fetcher = (url: string): Promise<any> => {
         if (res.status === 900) {
           axios
             .post(END_POINT.auth.refresh, {
-              refreshToken: `Bearer ${refreshToken}`,
+              Authorization: `Bearer ${refreshToken}`,
             })
             .then((refreshRes: AxiosResponse) => {
               accessToken = refreshRes.data.access_token;
