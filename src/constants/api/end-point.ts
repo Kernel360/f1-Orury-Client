@@ -20,7 +20,7 @@ export const END_POINT = {
     getPostDetail: (postId: number) => `/posts/${postId}`,
     getHotPostList: (page?: number) => `/posts/hot?page=${page}`,
     getPostList: (category: number, cursor?: number) =>
-      `/posts/${category}?cursor=${cursor}`,
+      `/posts/category/${category}?cursor=${cursor}`,
     getSearchList: (searchWord: string, cursor: number) =>
       `/posts?searchWord=${searchWord}&cursor=${cursor}`,
 
