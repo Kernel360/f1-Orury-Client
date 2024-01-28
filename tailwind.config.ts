@@ -80,7 +80,7 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        green: '#8FCAAA',
+        green: '#6BCB77',
         red: '#FF006B',
         kakao: '#FEE500',
         disabled: '#96A2AC',
