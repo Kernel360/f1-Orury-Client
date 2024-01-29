@@ -39,6 +39,7 @@ interface KakaoBackGroundMapProps {
 interface SearchResultProps {
   searchResult?: SearchKeywordListType;
   isSearching: boolean;
+  searchLoading: boolean;
   onSearchingBlur: () => void;
   handleCarouselOpen: (images: string[]) => void;
   handleMovePosition: (item: OneSearchKeywordType) => void;

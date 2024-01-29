@@ -1,35 +1,37 @@
 'use client';
 
-import SearchBar from '@/app/service/map/_components/map/SearchBar';
-import BottomSheetContainer from '@/app/service/map/_components/map/BottomSheetContainer';
-import SearchResultModal from '@/app/service/map/_components/map/SearchResultModal';
-import KakaoBackGroundMap from '@/app/service/map/_components/map/KakaoBackGroundMap';
+import SearchBar from '@/app/service/map/_components/search/SearchBar';
+import BottomSheetContainer from '@/app/service/map/_components/bottom-sheet/BottomSheetContainer';
+import SearchResultModal from '@/app/service/map/_components/search/SearchResultModal';
+import KakaoBackGroundMap from '@/app/service/map/_components/kakao/KakaoBackGroundMap';
 import ImageSliderModal from '@/app/_components/modal/ImageSliderModal';
 import ImageModal from '@/app/_components/modal/ImageModal';
-import ReviewModal from '@/app/service/map/_components/Review/ReviewModal';
+import ReviewModal from '@/app/service/map/_components/review-modal/ReviewModal';
 import ReviewStoreProps from '@/store/review/reviewStore';
-import ReviewRegisterModal from '@/app/service/map/_components/Review/ReviewRegisterModal';
+import ReviewRegisterModal from '@/app/service/map/_components/review-modal/ReviewRegisterModal';
 import type { MapMoveControlType, OneSearchKeywordType } from '@/types/map/map';
 import { useEffect, useState } from 'react';
 import { DEFAULT_POSITION } from '@/constants/map';
 import { useRouter, useSearchParams } from 'next/navigation';
-import useGetMapList from '@/hooks/map/useGetMapList';
 import { useImagesStore, useImageStore } from '@/store/modal/imageModalStore';
+import useOruryMap from '@/app/service/map/_services/hook/useOruryMap';
 
 function Page() {
   const router = useRouter();
   const isOpen = ReviewStoreProps(state => state.isOpen);
-  const keyword = useSearchParams().get('keyword') ?? '';
+  const keyword = useSearchParams().get('keyword') ?? 'default';
   const selectId = useSearchParams().get('selectId') ?? '';
 
   // 첫 화면으로 검색창에 default 값으로 들어간다.
-  const { data: searchResult, mutate: serachKeyWord } = useGetMapList(keyword);
+  const { searchLoading, searchResult } = useOruryMap.getList(keyword);
+
   const {
     isOpen: isImageModalOpen,
     setModalOpen: handleImageOpen,
     setModalClose: handleImageClosed,
     image: imageModalUrl,
   } = useImageStore(state => state);
+
   const {
     isOpen: carouselModalIsOpen,
     setModalOpen: handleCarouselOpen,
@@ -39,6 +41,7 @@ function Page() {
 
   // 맵상에서 선택된 지도가 있는지 판단하는 state
   const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
+
   // 검색중인지 판단하는 state
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
@@ -66,8 +69,11 @@ function Page() {
 
     if (isSearching) setIsSearching(false);
 
-    if (isSheetOpen) setIsSheetOpen(false);
-    router.push(`?selectId=${item.id}&keyword=${keyword}`);
+    if (keyword) {
+      router.push(`?selectId=${item.id}&keyword=${keyword}`);
+    } else {
+      router.push(`?selectId=${item.id}`);
+    }
     setIsSheetOpen(true);
   };
 
@@ -77,21 +83,15 @@ function Page() {
         searchResult.item.filter(v => v.id === Number(selectId))[0],
       );
     }
-  }, [selectId, searchResult]);
+  }, []);
 
-  // 검색 창을 누르면, 바텀 시트가 올라온다.
-  useEffect(() => {
-    serachKeyWord();
-  }, [keyword, serachKeyWord]);
-
+  // 해당 맵 페이지 나갈시에 모든 modal close
   useEffect(() => {
     return () => {
       handleImageClosed();
       handleCarouselClosed();
     };
   }, []);
-
-  const isBottomSheetOpen = isSheetOpen && !isSearching;
 
   return (
     <div className="h-full relative">
@@ -115,7 +115,7 @@ function Page() {
       <KakaoBackGroundMap
         mapInfo={mapInfo}
         positionList={searchResult?.item}
-        handleMovePosition={() => setIsReviewModalOpen(true)}
+        handleMovePosition={handleMovePosition}
       />
       <SearchBar
         isSearching={isSearching}
@@ -124,12 +124,13 @@ function Page() {
       <SearchResultModal
         searchResult={searchResult}
         isSearching={isSearching}
+        searchLoading={searchLoading}
         onSearchingBlur={() => setIsSearching(false)}
         handleMovePosition={handleMovePosition}
         handleCarouselOpen={handleCarouselOpen}
       />
       <BottomSheetContainer
-        isSheetOpen={isBottomSheetOpen}
+        isSheetOpen={isSheetOpen && !isSearching}
         selectMarkerId={selectId}
         onDisMiss={() => setIsSheetOpen(false)}
         handleImageOpen={handleImageOpen}

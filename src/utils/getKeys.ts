@@ -4,6 +4,7 @@ import TABS from '@/constants/community/tabs';
 import { TResponse } from '@/types/common/response';
 import { CommentListData } from '@/types/community/comment';
 import { PostListData } from '@/types/community/post';
+import { ReviewResponseType } from '@/types/map/review';
 
 export const getCommentKey = (
   postId: number,
@@ -54,4 +55,20 @@ export const getPostListKey = (
     BACK_URL +
     END_POINT.post.getPostList(categoryId, previousPageData?.data.cursor)
   );
+};
+
+export const getReviewKey = (
+  reviewId: number,
+  pageIndex: number,
+  previousPageData?: TResponse<ReviewResponseType>,
+  cursor?: number,
+): string => {
+  if (previousPageData && previousPageData.data.cursor === -1) return '';
+  if (!previousPageData && pageIndex === 0) {
+    return BACK_URL + END_POINT.reviews.getReviews(reviewId, 0);
+  }
+
+  const currentCursor = cursor || previousPageData?.data.cursor;
+
+  return BACK_URL + END_POINT.reviews.getReviews(reviewId, currentCursor);
 };

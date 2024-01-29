@@ -42,7 +42,7 @@ function OneSearchResult({
             <button
               type="button"
               key="title"
-              className="cursor-pointer"
+              className="cursor-pointer ellipsis max-w-52"
               onClick={onSearchClick}
               tabIndex={0}
             >

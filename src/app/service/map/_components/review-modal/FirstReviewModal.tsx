@@ -5,6 +5,9 @@ import { useState } from 'react';
 import { X } from 'lucide-react';
 import { Rating } from '@mui/material';
 
+/*
+처음 조회했는지 여부에 따라서 해당 모달이 열린다.
+*/
 function FirstReviewModal({ title, isFirst }: FirstReviewModalProps) {
   const [isOpen, setIsOpen] = useState<boolean>(isFirst);
   return (

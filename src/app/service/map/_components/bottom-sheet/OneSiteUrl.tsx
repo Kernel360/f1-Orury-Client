@@ -17,12 +17,17 @@ function OneSiteUrl({ item }: { item: URLType }) {
         return <Home size={20} strokeWidth={1.25} />;
     }
   };
+
+  const handleDeepLink = () => {
+    window.location.replace(url);
+  };
+
   return (
     <div className="flex gap-2 items-center">
       <div>{getSvg()}</div>
-      <a href={url} target="_blank" rel="noreferrer">
+      <button onClick={handleDeepLink} type="button" rel="noreferrer">
         {label}
-      </a>
+      </button>
     </div>
   );
 }

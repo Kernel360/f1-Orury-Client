@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import clsx from 'clsx';
-import OneSiteUrl from '@/app/service/map/_components/map/OneSiteUrl';
-import BarRatingChart from '@/app/service/map/_components/map/BarRatingChart';
+import OneSiteUrl from '@/app/service/map/_components/bottom-sheet/OneSiteUrl';
+import BarRatingChart from '@/app/service/map/_components/chart/BarRatingChart';
 import getAvgPoint from '@/utils/getAvgPoint';
-import LineRatingChart from '@/app/service/map/_components/map/LineRatingChart';
+import LineRatingChart from '@/app/service/map/_components/chart/LineRatingChart';
 import { BottomSheetInnerProps } from '@/types/map/BottomSheetProps';
 import { Smartphone } from 'lucide-react';
 import { COLOR } from '@/styles/color';
 import { aBeeZee } from '@/styles/fonts';
-import MapCarousel from '@/app/service/map/_components/MapCarousel';
+import MapCarousel from '@/app/service/map/_components/review-component/MapCarousel';
 
 /**
  * @description 바텀시트의 내부 콘테이너로서 내용물을 보여주는데 초점을 두고 있습니다.

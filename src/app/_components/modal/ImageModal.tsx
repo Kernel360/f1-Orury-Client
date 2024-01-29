@@ -6,7 +6,7 @@ import { COLOR } from '@/styles/color';
 function ImageModal({ isOpen, image, onCloseModal }: ImageModalProps) {
   const width = window.outerWidth;
 
-  if (!isOpen && !image) return;
+  if (!isOpen && typeof image) return;
 
   return (
     <div className="z-[9999] flex items-center justify-center absolute w-full h-screen">
@@ -24,8 +24,8 @@ function ImageModal({ isOpen, image, onCloseModal }: ImageModalProps) {
       />
       <Image
         className="z-[101]"
-        src={image}
-        alt={image}
+        src={image as string}
+        alt={image as string}
         width={width}
         height={width}
       />

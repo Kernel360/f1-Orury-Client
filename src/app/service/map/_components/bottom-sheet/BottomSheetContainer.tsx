@@ -1,9 +1,11 @@
-import { useRef } from 'react';
-import { detailMarkerMock } from '@/__mock__/data/map.mock';
+import { Suspense, useRef } from 'react';
 import useCss from '@/hooks/common/useCss';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
-import BottomSheetInner from '@/app/service/map/_components/map/BottomSheetInner';
+import BottomSheetInner from '@/app/service/map/_components/bottom-sheet/BottomSheetInner';
 import type { BottomSheetProps } from '@/types/map/BottomSheetProps';
+import useOruryMap from '../../_services/hook/useOruryMap';
+import BottomSheetInnerSkeleton from '../skeleton/BottomSheetInnerSkeleton';
+import { Skeleton } from '@mui/material';
 
 /**
  * @description 바텀시트의 외부 컴포넌트입니다.
@@ -12,6 +14,7 @@ import type { BottomSheetProps } from '@/types/map/BottomSheetProps';
  * @param selectMarkerId 전달받은 markerId 값 (mapId) 값으로 상세정보를 불러옵니다.
  */
 function BottomSheetContainer({
+  selectMarkerId,
   isSheetOpen,
   onDisMiss,
   handleImageOpen,
@@ -19,9 +22,12 @@ function BottomSheetContainer({
 }: BottomSheetProps) {
   useCss('https://unpkg.com/react-spring-bottom-sheet/dist/style.css');
 
-  const data = detailMarkerMock;
+  const { detailInfo, isDetailLoading } = useOruryMap.getDetail(selectMarkerId);
+
   const focusRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<BottomSheetRef>(null);
+
+  const isDataNull = detailInfo && !isDetailLoading;
 
   return (
     <BottomSheet
@@ -37,17 +43,25 @@ function BottomSheetContainer({
       }}
       header={
         <h1 className="flex items-center text-xl justify-center font-bold text-gray-800">
-          {data.title}
+          {isDataNull ? (
+            detailInfo.title
+          ) : (
+            <Skeleton className="w-[100px] h-[28px] bg-gray-200" />
+          )}
         </h1>
       }
       onDismiss={onDisMiss}
       expandOnContentDrag={isSheetOpen}
     >
-      <BottomSheetInner
-        handleReviewOpen={handleReviewOpen}
-        handleImageOpen={handleImageOpen}
-        data={data}
-      />
+      {isDataNull ? (
+        <BottomSheetInner
+          handleReviewOpen={handleReviewOpen}
+          handleImageOpen={handleImageOpen}
+          data={detailInfo}
+        />
+      ) : (
+        <BottomSheetInnerSkeleton />
+      )}
     </BottomSheet>
   );
 }

@@ -42,8 +42,22 @@ export const END_POINT = {
     deleteComment: (commentId: number) => `/comment/${commentId}`,
   },
   map: {
+    // DEFAULT
     main: '/map',
-    // KEYWORD
-    search: (keyword: string) => `/map?keyword=${keyword}`,
+    // GET
+    search: (keyword: string) => `/keyword?keyword=${keyword}`,
+    detail: (detailId: string) => `/map/detail?detailId=${detailId}`,
+  },
+  reviews: {
+    // DEFAULT
+    default: '/review',
+    // GET
+    getReviews: (reviewId: number, cursor?: number) => {
+      let url = new URLSearchParams(`${END_POINT.reviews.default}/${reviewId}`);
+      if (cursor !== undefined) {
+        url.append('cursor', String(cursor));
+      }
+      return String(url);
+    },
   },
 };

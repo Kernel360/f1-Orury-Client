@@ -1,8 +1,8 @@
 import type { ReviewProps } from '@/types/map/ReviewProps';
 import { ChevronDown, ChevronLeft, PenSquare } from 'lucide-react';
 import { reviewMock } from '@/__mock__/data/review.mock';
-import FirstReviewModal from '@/app/service/map/_components/Review/FirstReviewModal';
-import ReviewList from '@/app/service/map/_components/Review/ReviewList';
+import FirstReviewModal from '@/app/service/map/_components/review-modal/FirstReviewModal';
+import ReviewList from '@/app/service/map/_components/review-component/ReviewList';
 import { IconButton } from '@mui/material';
 import { COLOR } from '@/styles/color';
 import { cn } from '@/lib/utils';
