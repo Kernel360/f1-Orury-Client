@@ -39,6 +39,8 @@
     "lucide-react": "^0.299.0",
     "next": "14.0.3",
     "next-auth": "^4.24.5",
+    "next-compose-plugins": "^2.2.1",
+    "next-pwa": "^5.6.0",
     "postcss-custom-properties-fallback": "^1.0.2",
     "react": "^18",
     "react-cookie": "^7.0.1",
@@ -71,6 +73,7 @@
     "@typescript-eslint/parser": "^6.13.2",
     "autoprefixer": "^10.0.1",
     "concurrently": "^8.2.2",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.55.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",
@@ -90,8 +93,7 @@
     "postcss": "^8",
     "prettier": "^3.1.0",
     "tailwindcss": "^3.3.0",
-    "ts-node": "^10.9.2",
-    "env-cmd": "^10.1.0"
+    "ts-node": "^10.9.2"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
