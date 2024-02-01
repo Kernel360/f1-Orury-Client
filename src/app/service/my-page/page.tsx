@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '@/app/_components/common/Header';
-import HEADER from '@/constants/ui/common/header';
 import {
   Profile,
   Privacy,
@@ -15,7 +13,6 @@ function page() {
 
   return (
     <div>
-      <Header title={HEADER.myPage} isBack />
       <Profile {...data} />
       <Privacy
         email={data.email}
