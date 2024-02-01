@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormSchemaType, formSchema } from '@/app/sign-up/schema';
+import { useRouter } from 'next/navigation';
 import {
   BIRTHDAY_INPUT,
   GENDER_INPUT,
@@ -13,8 +14,10 @@ import {
 import Button from '@/app/_components/buttons/Button';
 import useUserStore from '@/store/user/userStore';
 import postSignUp from '@/app/sign-up/api/postSignUp';
+import CALLBACK_URL from '@/constants/url';
 
 function SignUpForm() {
+  const router = useRouter();
   const { signUpType, email, profile_image } = useUserStore();
   const {
     handleSubmit,
@@ -39,8 +42,6 @@ function SignUpForm() {
     trigger('gender');
   };
 
-  // TOFIXED: 현재 회원가입 단계에서 프로필 이미지를 설정하지 않지만, 서버에서 요구하고 있음
-  // TOFIXED: API request에서 profile_image 삭제될 예정
   const onSubmit: SubmitHandler<FormSchemaType> = async formData => {
     await postSignUp({
       ...formData,
@@ -48,6 +49,8 @@ function SignUpForm() {
       email,
       profile_image,
     });
+
+    router.push(CALLBACK_URL.service);
   };
 
   return (

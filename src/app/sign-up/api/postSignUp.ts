@@ -6,7 +6,7 @@ import { PostSignUpProps } from '@/types/sign-up';
 const postSignUp = async ({ ...data }: PostSignUpProps) => {
   try {
     await axiosInstance.post(END_POINT.auth.signUp, {
-      data,
+      ...data,
     });
   } catch (error: unknown) {
     if (error instanceof CustomError) {
