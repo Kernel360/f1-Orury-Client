@@ -1,6 +1,6 @@
 #!/bin/bash
-REPOSITORY=/home/ec2-user/front
-REPOSITORY_PROD=/home/ec2-user/front
+REPOSITORY=/home/ec2-user/orury-front
+REPOSITORY_PROD=/home/ec2-user/orury-front
 echo "개발 서버 배포"
 cd "${REPOSITORY}"
 sudo npm install

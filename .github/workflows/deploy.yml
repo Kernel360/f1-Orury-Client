@@ -2,12 +2,12 @@ name: Deploy
 on:
   push:
     branches:
-      - develop
+      - main
 
 env:
   S3_BUCKET_NAME: orury-bepo-bucket
   CODE_DEPLOY_APPLICATION_NAME: orury-code-deploy
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: orury-code-deploy-group
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: orury-client-deploy-group
 jobs:
   build:
     environment: develop
@@ -73,7 +73,7 @@ jobs:
 
       - name: Upload to S3
         run: |
-          aws s3 cp --region ap-northeast-2 ./orury-dev.zip s3://$S3_BUCKET_NAME/orury-dev.zip
+          aws s3 cp --region ap-northeast-2 ./orury-dev.zip s3://$S3_BUCKET_NAME/orury-front/orury-dev.zip
 
       - name: Deploy For Development
         run: |
@@ -81,4 +81,4 @@ jobs:
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
           --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
-          --s3-location bucket=$S3_BUCKET_NAME,key=orury-dev.zip,bundleType=zip
+          --s3-location bucket=$S3_BUCKET_NAME/orury-front,key=orury-dev.zip,bundleType=zip
