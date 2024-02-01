@@ -1,15 +1,14 @@
 import CustomError from '@/error/CustomError';
 import { axiosInstance } from '@/lib/axios/axios-instance';
 import { END_POINT } from '@/constants/api/end-point';
-import type { PostDataProps } from '@/types/community/post';
 
-interface EditPostType extends PostDataProps {
-  id: number;
-}
-
-const editPost = async (data: EditPostType) => {
+const editPost = async (formData: FormData) => {
   try {
-    await axiosInstance.patch(END_POINT.post.main, data);
+    await axiosInstance.patch(END_POINT.post.main, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   } catch (error: unknown) {
     if (error instanceof CustomError) {
       throw new Error(error.message);

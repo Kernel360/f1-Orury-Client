@@ -52,7 +52,12 @@ function Form({ ...props }: FormType) {
     }
 
     if (isPostDetail && postId && editHandler) {
-      await editPost({ ...data, id: postId });
+      const formData = getFormData({
+        jsonData: JSON.stringify({ ...data, id: postId }),
+        images,
+      });
+
+      await editPost(formData);
       await mutate();
       editHandler();
       setTitle(data.title);
