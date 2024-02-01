@@ -36,6 +36,7 @@
     "cmdk": "^0.2.0",
     "crypto-js": "^4.2.0",
     "embla-carousel-react": "^8.0.0-rc17",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.299.0",
     "next": "14.0.3",
     "next-auth": "^4.24.5",
@@ -62,6 +63,7 @@
     "@testing-library/react": "^14.1.2",
     "@types/crypto-js": "^4.2.1",
     "@types/jest": "^29.5.11",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.10.4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -71,6 +73,7 @@
     "@typescript-eslint/parser": "^6.13.2",
     "autoprefixer": "^10.0.1",
     "concurrently": "^8.2.2",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.55.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",
@@ -90,8 +93,7 @@
     "postcss": "^8",
     "prettier": "^3.1.0",
     "tailwindcss": "^3.3.0",
-    "ts-node": "^10.9.2",
-    "env-cmd": "^10.1.0"
+    "ts-node": "^10.9.2"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
