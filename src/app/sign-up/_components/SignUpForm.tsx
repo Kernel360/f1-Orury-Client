@@ -2,11 +2,20 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Button from '@/app/_components/buttons/Button';
-import { BIRTHDAY_INPUT, GENDER, rBirthform } from '@/constants/signup';
 import { FormSchemaType, formSchema } from '@/app/sign-up/schema';
+import {
+  BIRTHDAY_INPUT,
+  GENDER_INPUT,
+  NICKNAME_INPUT,
+  rBirthform,
+} from '@/constants/sign-up';
+
+import Button from '@/app/_components/buttons/Button';
+import useUserStore from '@/store/user/userStore';
+import postSignUp from '@/app/sign-up/api/postSignUp';
 
 function SignUpForm() {
+  const { signUpType, email, profile_image } = useUserStore();
   const {
     handleSubmit,
     register,
@@ -30,14 +39,48 @@ function SignUpForm() {
     trigger('gender');
   };
 
-  const onSubmit: SubmitHandler<FormSchemaType> = () => {};
+  // TOFIXED: 현재 회원가입 단계에서 프로필 이미지를 설정하지 않지만, 서버에서 요구하고 있음
+  // TOFIXED: API request에서 profile_image 삭제될 예정
+  const onSubmit: SubmitHandler<FormSchemaType> = async formData => {
+    await postSignUp({
+      ...formData,
+      sign_up_type: signUpType,
+      email,
+      profile_image,
+    });
+  };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col px-4 pt-4 pb-16 justify-between h-[60dvh]"
+      className="flex flex-col px-4 pt-4 pb-4 justify-between h-[60dvh]"
     >
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-4">
+        {/* 닉네임 */}
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-2">
+            {NICKNAME_INPUT.label}
+            {errors.nickname && (
+              <p className="text-warning text-sm leading-5">
+                {errors.nickname.message}
+              </p>
+            )}
+          </div>
+          <input
+            {...register('nickname')}
+            className={`outline-none border-b-2 focus:border-b-primary ${
+              errors.birthday && 'border-b-warning focus:border-b-warning'
+            }`}
+            type={NICKNAME_INPUT.type}
+            placeholder={NICKNAME_INPUT.placeholder}
+            onChange={e => {
+              setValue('nickname', e.target.value);
+            }}
+            onBlur={() => trigger('nickname')}
+          />
+        </div>
+
+        {/* 생년월일 */}
         <div className="flex flex-col gap-2">
           <div className="flex gap-2">
             {BIRTHDAY_INPUT.label}
@@ -62,9 +105,10 @@ function SignUpForm() {
           />
         </div>
 
+        {/* 성별 */}
         <div className="flex flex-col gap-2">
           <div className="flex gap-2">
-            {GENDER.label}
+            {GENDER_INPUT.label}
             {errors.gender && (
               <p className="text-warning text-sm">{errors.gender.message}</p>
             )}
@@ -72,18 +116,22 @@ function SignUpForm() {
           <div className="flex gap-4">
             <Button
               outline
-              content={GENDER.man}
-              onClick={() => handleButtonClick(GENDER.manIdx)}
+              content={GENDER_INPUT.man}
+              onClick={() => handleButtonClick(GENDER_INPUT.manIdx)}
               color={
-                getValues('gender') === GENDER.manIdx ? 'primary' : 'disabled'
+                getValues('gender') === GENDER_INPUT.manIdx
+                  ? 'primary'
+                  : 'disabled'
               }
             />
             <Button
               outline
-              content={GENDER.woman}
-              onClick={() => handleButtonClick(GENDER.womanIdx)}
+              content={GENDER_INPUT.woman}
+              onClick={() => handleButtonClick(GENDER_INPUT.womanIdx)}
               color={
-                getValues('gender') === GENDER.womanIdx ? 'primary' : 'disabled'
+                getValues('gender') === GENDER_INPUT.womanIdx
+                  ? 'primary'
+                  : 'disabled'
               }
             />
           </div>

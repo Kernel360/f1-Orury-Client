@@ -1,4 +1,4 @@
-import { INVALID_MESSAGE } from '@/constants/signup';
+import { INVALID_MESSAGE } from '@/constants/sign-up';
 import { z } from 'zod';
 
 export const formSchema = z.object({
@@ -13,6 +13,9 @@ export const formSchema = z.object({
     { message: INVALID_MESSAGE.birth },
   ),
   gender: z.number({ required_error: INVALID_MESSAGE.gender }),
+  nickname: z.string().refine(value => value.length >= 2 && value.length <= 8, {
+    message: INVALID_MESSAGE.nickname,
+  }),
 });
 
 export type FormSchemaType = z.infer<typeof formSchema>;

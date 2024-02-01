@@ -1,6 +1,11 @@
-export interface SignInStateProps {
+export interface UserStateProps {
   signUpType: number;
+  id: number;
+  email: string;
+  profile_image: string;
   setSignUpType: (value: number) => void;
+  setId: (value: number) => void;
+  setEmail: (value: string) => void;
 }
 
 export interface GetUserInfoProps {

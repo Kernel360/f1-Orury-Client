@@ -8,6 +8,8 @@ export const END_POINT = {
 
     // KAKAO
     kakao: 'auth/login',
+
+    signUp: '/auth/sign-up',
   },
   post: {
     // DEFAULT
@@ -25,21 +27,21 @@ export const END_POINT = {
       `/posts?searchWord=${searchWord}&cursor=${cursor}`,
 
     // DELETE
-    deletePost: (postId: number) => `/post/${postId}`,
+    deletePost: (postId: number) => `/posts/${postId}`,
   },
   comment: {
     // DEFAULT
-    main: '/comment',
+    main: '/comments',
 
     // POST
-    likeComment: (commentId: number) => `/comment/like/${commentId}`,
+    likeComment: (commentId: number) => `/comments/like/${commentId}`,
 
     // GET
     getComment: (postId: number, cursor?: number) =>
       `/comments/${postId}?cursor=${cursor}`,
 
     // DELETE
-    deleteComment: (commentId: number) => `/comment/${commentId}`,
+    deleteComment: (commentId: number) => `/comments/${commentId}`,
   },
   mypage: {
     // DEFAULT
