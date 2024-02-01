@@ -1,9 +1,6 @@
 #!/bin/bash
-
-REPOSITORY=/home/ubuntu/deploy
-REPOSITORY_PROD=/home/ubuntu/deploy
-
-
+REPOSITORY=/home/ec2-user/front
+REPOSITORY_PROD=/home/ec2-user/front
 echo "개발 서버 배포"
 cd "${REPOSITORY}"
 sudo npm install
