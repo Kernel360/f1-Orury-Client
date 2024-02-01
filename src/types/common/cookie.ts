@@ -23,3 +23,8 @@ export interface GetCookieProps {
   name: string;
   options?: Partial<CookieGetOptions>;
 }
+
+export interface RemoveCookieProps {
+  name: string;
+  options?: Partial<CookieSetOptions>;
+}

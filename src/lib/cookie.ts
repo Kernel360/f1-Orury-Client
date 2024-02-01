@@ -1,4 +1,8 @@
-import { GetCookieProps, SetCookieProps } from '@/types/common/cookie';
+import {
+  GetCookieProps,
+  RemoveCookieProps,
+  SetCookieProps,
+} from '@/types/common/cookie';
 import { Cookies } from 'react-cookie';
 
 const cookies = new Cookies();
@@ -24,6 +28,6 @@ export const getCookie = ({ name, options }: GetCookieProps) => {
 /** Key를 받아 쿠키를 삭제
  * @param {string} name
  */
-export const removeCookie = (name: string) => {
-  return cookies.remove(name);
+export const removeCookie = ({ name, options }: RemoveCookieProps) => {
+  return cookies.remove(name, { ...options });
 };

@@ -1,12 +1,13 @@
 import CustomError from '@/error/CustomError';
 import { axiosInstance } from '@/lib/axios/axios-instance';
 import { END_POINT } from '@/constants/api/end-point';
-import type { PostDataProps } from '@/types/community/post';
 
-const post = async (data: PostDataProps) => {
+const post = async (formData: FormData) => {
   try {
-    await axiosInstance.post(END_POINT.post.main, data, {
-      withCredentials: true,
+    await axiosInstance.post(END_POINT.post.main, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
   } catch (error: unknown) {
     if (error instanceof CustomError) {

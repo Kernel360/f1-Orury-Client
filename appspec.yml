@@ -2,15 +2,21 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/deploy
+    destination: /home/ec2-user/orury-front/
     overwrite: yes
 permissions:
-  - object: /home/ubuntu/deploy
-    owner: ubuntu
-    group: ubuntu
-    mode: 755
+  - object: /
+    pattern: "**"
+    mode: '755'
+    owner: ec2-user
+    group: ec2-user
 hooks:
+  BeforeInstall:
+    - location: deploy.sh
+      timeout: 60
+      runas: ec2-user
+      command: chmod +x /home/ec2-user/orury-front/deploy.sh
   ApplicationStart:
     - location: deploy.sh
       timeout: 500
-      runas: ubuntu
+      runas: ec2-user

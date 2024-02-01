@@ -1,4 +1,6 @@
-export interface PhotoBoothButtonProps {
-  id: string;
-  onClick: () => void;
+import { Dispatch, SetStateAction } from 'react';
+
+export interface PhotoBoothProps {
+  images: string[];
+  setImages: Dispatch<SetStateAction<string[]>>;
 }

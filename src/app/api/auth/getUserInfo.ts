@@ -11,7 +11,7 @@ const getUserInfo = async ({ code, signUpType }: GetUserInfoProps) => {
       TResponse<UserInfoProps>
     >(END_POINT.auth.kakao, {
       code,
-      signUpType,
+      sign_up_type: signUpType,
     });
 
     return response;

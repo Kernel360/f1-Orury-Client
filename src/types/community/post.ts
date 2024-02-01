@@ -37,11 +37,16 @@ export type PostListData = {
   next_page?: number;
 };
 
-export interface PostDataProps {
+export interface PostRequestProps {
   title: string;
   content: string;
   category: string;
-  images?: string[];
+  images: string;
+}
+
+export interface PostFormDataProps {
+  request: PostRequestProps;
+  images: File[];
 }
 
 export interface PostsStateProps {

@@ -12,7 +12,7 @@ const refreshToken = decrypt(getCookie({ name: 'refresh_token' }));
 
 axiosInstance.interceptors.request.use(
   req => {
-    req.headers.Authorization = `Bearer ${accessToken}`;
+    req.headers.Authorization = `Bearer ${decrypt(getCookie({ name: 'access_token' }))}`;
 
     return req;
   },
@@ -22,10 +22,13 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-  res => res,
+  res => {
+    return res;
+  },
+
   error => {
     const originalRequest = error.config;
-    // TOFIXED: 추후 에러코드 논의
+
     if (error.response?.status === 900 && !originalRequest.retry) {
       originalRequest.retry = true;
 
@@ -34,7 +37,7 @@ axiosInstance.interceptors.response.use(
         .then((refreshRes: AxiosResponse) => {
           accessToken = refreshRes.data.access_token;
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-          return axios(originalRequest);
+          return axiosInstance(originalRequest);
         });
     }
 

@@ -9,4 +9,4 @@ export const ACTIVITY_LIST = {
     href: '/my-page',
     content: '댓글 보기',
   },
-};
+} as const;
