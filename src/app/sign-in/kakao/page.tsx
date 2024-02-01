@@ -4,66 +4,75 @@ import { useEffect } from 'react';
 import { setCookie } from '@/lib/cookie';
 import { encrypt } from '@/utils/crypto';
 import { useRouter } from 'next/navigation';
+import { getEmail } from '@/utils/getEmail';
 import { useToast } from '@/app/_components/ui/use-toast';
 import { ERROR_CODE, STATUS_CODE } from '@/constants/api/statusCode';
 
 import CALLBACK_URL from '@/constants/url';
 import getUserInfo from '@/app/api/auth/getUserInfo';
-import useSignInState from '@/store/sign-in/signInStore';
+import useUserStore from '@/store/user/userStore';
 
 // 카카오 소셜 로그인 REDIRECT URI PAGE
 function Page() {
-  const { home, service } = CALLBACK_URL;
+  const { home, service, signUp } = CALLBACK_URL;
   const { invalidEmail, noAccount, haveAnotherAccount } = ERROR_CODE;
   const { toast } = useToast();
+  const { signUpType, setId, setEmail } = useUserStore();
   const router = useRouter();
-  const { signUpType } = useSignInState();
 
   useEffect(() => {
     const signIn = async () => {
-      const authCode = new URL(window.location.href).searchParams.get('code');
-      const response = await getUserInfo({
-        code: authCode,
-        signUpType,
-      });
+      let email;
+      const code = new URL(window.location.href).searchParams.get('code');
+      const response = await getUserInfo({ code, signUpType });
 
-      if (response) {
+      if (response && response.data && response.data.refresh_token) {
         setCookie({
           name: 'access_token',
           value: encrypt(response.data.access_token),
+          options: { path: '/' },
         });
         setCookie({
           name: 'refresh_token',
           value: encrypt(response.data.refresh_token),
+          options: { path: '/' },
         });
       }
 
-      // 로그인 성공
-      if (response?.status === STATUS_CODE.ok) router.push(service);
+      switch (response?.status) {
+        case STATUS_CODE.ok:
+          router.push(service);
+          setId(response.data.id);
+          break;
 
-      // 올바르지 않은 형식의 이메일을 가진 유저일 경우
-      if (response?.status === invalidEmail) {
-        router.push(home);
-        toast({
-          description: response.message,
-        });
+        case invalidEmail:
+          router.push(home);
+          break;
+
+        case noAccount:
+          email = getEmail(response?.data.access_token);
+
+          setCookie({
+            name: 'access_token',
+            value: encrypt(response.data.access_token),
+            options: { path: '/' },
+          });
+
+          if (email) setEmail(email as string);
+
+          router.push(signUp);
+          break;
+
+        case haveAnotherAccount:
+          router.push(home);
+          break;
+
+        default:
+          router.push(home);
+          break;
       }
 
-      // 가입된 계정이 존재하지 않은 비회원인 경우
-      if (response?.status === noAccount) {
-        router.push(service);
-        toast({
-          description: response.message,
-        });
-      }
-
-      // 다른 소셜 마디어를 통해 가입된 이력이 있는 경우
-      if (response?.status === haveAnotherAccount) {
-        router.push(home);
-        toast({
-          description: response.message,
-        });
-      }
+      toast({ variant: 'default', description: response?.message });
     };
 
     signIn();
@@ -74,6 +83,9 @@ function Page() {
     noAccount,
     router,
     service,
+    setEmail,
+    setId,
+    signUp,
     signUpType,
     toast,
   ]);

@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { Camera, Pencil } from 'lucide-react';
+
 import Image from 'next/image';
 import ModifyInput from '@/app/_components/common/ModifyInput';
-import { Camera, Pencil } from 'lucide-react';
+import { COLOR } from '@/styles/color';
 
 function Profile({ ...props }: GetMyPageProps) {
   const [isToggled, setIsToggled] = useState(false);
@@ -14,7 +16,7 @@ function Profile({ ...props }: GetMyPageProps) {
   };
 
   return (
-    <section className="flex flex-col items-center gap-4 bg-white p-4 shadow-xl none">
+    <section className="flex flex-col items-center gap-4 bg-white p-4 shadow-xl">
       <div className="relative">
         <Image
           src={props.profile_image}
@@ -25,12 +27,19 @@ function Profile({ ...props }: GetMyPageProps) {
           priority
           className="rounded-full"
         />
-        <button
+
+        <label
+          htmlFor="photo"
           className="flex justify-center items-center w-8 h-8 absolute right-0 bottom-0 bg-purple-200 rounded-full"
-          type="button"
         >
-          <Camera size={24} stroke="#D7DCE3" strokeWidth={1.5} fill="#855AFF" />
-        </button>
+          <Camera
+            size={24}
+            stroke={COLOR.grey200}
+            strokeWidth={1.5}
+            fill={COLOR.primary}
+          />
+        </label>
+        <input type="file" id="photo" accept="image/*" className="hidden" />
       </div>
 
       <button

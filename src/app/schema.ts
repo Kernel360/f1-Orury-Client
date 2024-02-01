@@ -1,14 +1,17 @@
+import { INVALID_MESSAGE } from '@/constants/common/form';
 import * as z from 'zod';
+
+const { category, title, content } = INVALID_MESSAGE;
 
 export const FormSchema = z.object({
   category: z.string({
-    required_error: '카테고리를 선택해주세요.',
+    required_error: category,
   }),
   title: z.string({
-    required_error: '글 제목을 입력해주세요.',
+    required_error: title,
   }),
   content: z.string({
-    required_error: '글 내용을 입력해주세요.',
+    required_error: content,
   }),
 });
 
