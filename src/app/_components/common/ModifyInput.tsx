@@ -20,9 +20,7 @@ function ModifyInput({ ...props }: ModifyInputProps) {
     },
   });
 
-  const onSubmit = async (data: FormSchemaType) => {
-    console.log(data);
-  };
+  const onSubmit = async () => {};
 
   const inputHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
