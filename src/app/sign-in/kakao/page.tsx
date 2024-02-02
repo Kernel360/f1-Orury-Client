@@ -1,16 +1,17 @@
 'use client';
 
+import CALLBACK_URL from '@/constants/url';
+import useUserStore from '@/store/user/userStore';
+import getUserInfo from '@/app/api/auth/getUserInfo';
+
 import { useEffect } from 'react';
 import { setCookie } from '@/lib/cookie';
 import { encrypt } from '@/utils/crypto';
 import { useRouter } from 'next/navigation';
 import { getEmail } from '@/utils/getEmail';
 import { useToast } from '@/app/_components/ui/use-toast';
+import { setTokensInCookies } from '@/utils/setTokensInCookies';
 import { ERROR_CODE, STATUS_CODE } from '@/constants/api/statusCode';
-
-import CALLBACK_URL from '@/constants/url';
-import getUserInfo from '@/app/api/auth/getUserInfo';
-import useUserStore from '@/store/user/userStore';
 
 // 카카오 소셜 로그인 REDIRECT URI PAGE
 function Page() {
@@ -27,15 +28,9 @@ function Page() {
       const response = await getUserInfo({ code, signUpType });
 
       if (response && response.data && response.data.refresh_token) {
-        setCookie({
-          name: 'access_token',
-          value: encrypt(response.data.access_token),
-          options: { path: '/' },
-        });
-        setCookie({
-          name: 'refresh_token',
-          value: encrypt(response.data.refresh_token),
-          options: { path: '/' },
+        setTokensInCookies({
+          accessToken: response.data.access_token,
+          refreshToken: response.data.refresh_token,
         });
       }
 
