@@ -13,3 +13,8 @@ export interface PostSignUpProps {
   birthday: string;
   profile_image: string;
 }
+
+export interface SetTokensInCookiesProps {
+  accessToken: string;
+  refreshToken: string;
+}

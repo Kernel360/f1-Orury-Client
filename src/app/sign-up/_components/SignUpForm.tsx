@@ -1,9 +1,10 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { setTokensInCookies } from '@/utils/setTokensInCookies';
 import { FormSchemaType, formSchema } from '@/app/sign-up/schema';
-import { useRouter } from 'next/navigation';
 import {
   BIRTHDAY_INPUT,
   GENDER_INPUT,
@@ -43,12 +44,19 @@ function SignUpForm() {
   };
 
   const onSubmit: SubmitHandler<FormSchemaType> = async formData => {
-    await postSignUp({
+    const response = await postSignUp({
       ...formData,
       sign_up_type: signUpType,
       email,
       profile_image,
     });
+
+    if (response && response.data) {
+      setTokensInCookies({
+        accessToken: response.data.access_token,
+        refreshToken: response.data.refresh_token,
+      });
+    }
 
     router.push(CALLBACK_URL.service);
   };
