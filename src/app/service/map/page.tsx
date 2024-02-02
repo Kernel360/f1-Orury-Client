@@ -7,24 +7,35 @@ import KakaoBackGroundMap from '@/app/service/map/_components/kakao/KakaoBackGro
 import ImageSliderModal from '@/app/_components/modal/ImageSliderModal';
 import ImageModal from '@/app/_components/modal/ImageModal';
 import ReviewModal from '@/app/service/map/_components/review-modal/ReviewModal';
-import ReviewStoreProps from '@/store/review/reviewStore';
-import ReviewRegisterModal from '@/app/service/map/_components/review-modal/ReviewRegisterModal';
 import type { MapMoveControlType, OneSearchKeywordType } from '@/types/map/map';
 import { useEffect, useState } from 'react';
 import { DEFAULT_POSITION } from '@/constants/map';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useImagesStore, useImageStore } from '@/store/modal/imageModalStore';
 import useOruryMap from '@/app/service/map/_services/hook/useOruryMap';
+import useReviewStore from '@/store/review/reviewStore';
+import { useGeoLocation } from '@/hooks/map/useGeoLocation';
+import { BACK_URL } from '@/constants/api';
 
 function Page() {
   const router = useRouter();
-  const isOpen = ReviewStoreProps(state => state.isOpen);
-  const keyword = useSearchParams().get('keyword') ?? 'default';
-  const selectId = useSearchParams().get('selectId') ?? '';
+  const closeModal = useReviewStore(state => state.reset);
+  const keyword = useSearchParams().get('keyword') ?? '';
+  const selectId = useSearchParams().get('selectId') ?? null;
 
-  // 첫 화면으로 검색창에 default 값으로 들어간다.
-  const { searchLoading, searchResult } = useOruryMap.getList(keyword);
+  // 현재 지도의 좌표와 이동시 부드럽게 움직이는지 여부를 나타냅니다.
+  const [mapInfo, setMapInfo] = useState<MapMoveControlType>({
+    center: { lat: DEFAULT_POSITION.latitude, lng: DEFAULT_POSITION.longitude },
+    isPanto: false,
+  });
 
+  // // 첫 화면으로 검색창에 default 값으로 들어간다.
+  // const { searchLoading, searchResult } = useOruryMap.getSearchList(
+  //   mapInfo.center,
+  //   keyword,
+  // );
+  // console.log(searchResult);
+  return <div>:)</div>;
   const {
     isOpen: isImageModalOpen,
     setModalOpen: handleImageOpen,
@@ -45,20 +56,16 @@ function Page() {
   // 검색중인지 판단하는 state
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
-  // 현재 지도의 좌표와 이동시 부드럽게 움직이는지 여부를 나타냅니다.
-  const [mapInfo, setMapInfo] = useState<MapMoveControlType>({
-    center: DEFAULT_POSITION,
-    isPanto: false,
-  });
+  const { location } = useGeoLocation();
 
-  // 리뷰 모달의 열고 닫힘을 관리합니다. 모달이 열리기 위해서는 리뷰 아이디가 선택이 되어있어야 합니다.
-  const [isReviewModalOpen, setIsReviewModalOpen] = useState<boolean>(false);
-
-  // 리뷰 모달을 닫기 위한 함수입니다.
-  const onReviewModalClose = () => {
-    router.push(`?keyword=${keyword}`);
-    setIsReviewModalOpen(false);
-  };
+  useEffect(() => {
+    setMapInfo(() => {
+      return {
+        isPanto: true,
+        center: { lat: location.latitude, lng: location.longitude },
+      };
+    });
+  }, []);
 
   // 좌표를 이동 시키고 열어주는 함수
   const handleMovePosition = (item: OneSearchKeywordType) => {
@@ -78,30 +85,16 @@ function Page() {
   };
 
   useEffect(() => {
-    if (selectId && searchResult) {
-      handleMovePosition(
-        searchResult.item.filter(v => v.id === Number(selectId))[0],
-      );
-    }
-  }, []);
-
-  // 해당 맵 페이지 나갈시에 모든 modal close
-  useEffect(() => {
     return () => {
       handleImageClosed();
       handleCarouselClosed();
+      closeModal();
     };
   }, []);
 
   return (
     <div className="h-full relative">
-      <ReviewRegisterModal isOpen={isOpen} />
-      <ReviewModal
-        position="right"
-        isOpen={isReviewModalOpen}
-        onCloseModal={onReviewModalClose}
-        handleImageOpen={handleImageOpen}
-      />
+      <ReviewModal position="right" handleImageOpen={handleImageOpen} />
       <ImageModal
         isOpen={isImageModalOpen}
         image={imageModalUrl}
@@ -131,10 +124,8 @@ function Page() {
       />
       <BottomSheetContainer
         isSheetOpen={isSheetOpen && !isSearching}
-        selectMarkerId={selectId}
         onDisMiss={() => setIsSheetOpen(false)}
         handleImageOpen={handleImageOpen}
-        handleReviewOpen={() => setIsReviewModalOpen(false)}
       />
     </div>
   );

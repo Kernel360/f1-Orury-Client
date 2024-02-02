@@ -131,6 +131,10 @@ export const detailMarkerMock: DetailPlaceType = {
       label: 'instagram',
       url: 'http://www.instagram.com',
     },
+    {
+      label: 'kakaomap',
+      url: 'https://kko.to/m3PxlFswg2',
+    },
   ],
   state: true,
   week_day: '평일 10:00 ~ 23:00',

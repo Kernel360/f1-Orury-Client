@@ -1,3 +1,5 @@
+import { PositionType } from '@/types/map/map';
+
 export const END_POINT = {
   auth: {
     // DEFAULT
@@ -7,7 +9,7 @@ export const END_POINT = {
     refresh: '/auth/refresh',
 
     // KAKAO
-    kakao: 'auth/login',
+    kakao: '/auth/login',
 
     signUp: '/auth/sign-up',
   },
@@ -64,6 +66,22 @@ export const END_POINT = {
         url.append('cursor', String(cursor));
       }
       return String(url);
+    },
+  },
+  gymController: {
+    // DEFAULT
+    default: '/gyms',
+    // GET
+    searchList: (position: PositionType, keyword: string) => {
+      let url = new URLSearchParams();
+
+      const { lat, lng } = position;
+
+      url.append('search_word', keyword);
+      url.append('latitude', String(lat));
+      url.append('longitude', String(lng));
+
+      return `${END_POINT.gymController.default}/search?${url.toString()}`;
     },
   },
 };

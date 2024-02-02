@@ -4,7 +4,7 @@ interface PositionType {
 }
 
 interface URLType {
-  label: 'homepage' | 'instagram' | 'facebook';
+  label: 'homepage' | 'instagram' | 'facebook' | 'kakaomap';
   url: string;
 }
 
@@ -16,12 +16,13 @@ interface SearchKeywordListType {
 
 interface OneSearchKeywordType {
   id: number;
+  is_like: boolean;
   images: string[];
   title: string;
-  place_title: string;
-  is_like: boolean;
-  review_score: number;
+  name: string;
+  road_address: string;
   review_count: number;
+  score_average: number;
   position: PositionType;
 }
 

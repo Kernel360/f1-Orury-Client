@@ -6,6 +6,7 @@ import type { BottomSheetProps } from '@/types/map/BottomSheetProps';
 import useOruryMap from '../../_services/hook/useOruryMap';
 import BottomSheetInnerSkeleton from '../skeleton/BottomSheetInnerSkeleton';
 import { Skeleton } from '@mui/material';
+import { useSearchParams } from 'next/navigation';
 
 /**
  * @description 바텀시트의 외부 컴포넌트입니다.
@@ -14,15 +15,16 @@ import { Skeleton } from '@mui/material';
  * @param selectMarkerId 전달받은 markerId 값 (mapId) 값으로 상세정보를 불러옵니다.
  */
 function BottomSheetContainer({
-  selectMarkerId,
   isSheetOpen,
   onDisMiss,
   handleImageOpen,
-  handleReviewOpen,
 }: BottomSheetProps) {
   useCss('https://unpkg.com/react-spring-bottom-sheet/dist/style.css');
+  const selectId = useSearchParams().get('selectId') ?? undefined;
 
-  const { detailInfo, isDetailLoading } = useOruryMap.getDetail(selectMarkerId);
+  if (selectId === undefined) return;
+
+  const { detailInfo, isDetailLoading } = useOruryMap.getDetail(selectId);
 
   const focusRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<BottomSheetRef>(null);
@@ -54,11 +56,7 @@ function BottomSheetContainer({
       expandOnContentDrag={isSheetOpen}
     >
       {isDataNull ? (
-        <BottomSheetInner
-          handleReviewOpen={handleReviewOpen}
-          handleImageOpen={handleImageOpen}
-          data={detailInfo}
-        />
+        <BottomSheetInner handleImageOpen={handleImageOpen} data={detailInfo} />
       ) : (
         <BottomSheetInnerSkeleton />
       )}

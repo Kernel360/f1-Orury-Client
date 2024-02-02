@@ -61,4 +61,5 @@ export const reviewMock: ReviewResponseType = {
       update_at: new Date().toString(),
     },
   ],
+  cursor: 1,
 };

@@ -9,6 +9,8 @@ import { Smartphone } from 'lucide-react';
 import { COLOR } from '@/styles/color';
 import { aBeeZee } from '@/styles/fonts';
 import MapCarousel from '@/app/service/map/_components/review-component/MapCarousel';
+import useReviewStore from '@/store/review/reviewStore';
+import useOruryReview from '../../_services/hook/useOruryReview';
 
 /**
  * @description 바텀시트의 내부 콘테이너로서 내용물을 보여주는데 초점을 두고 있습니다.
@@ -16,11 +18,7 @@ import MapCarousel from '@/app/service/map/_components/review-component/MapCarou
  * @param handleImageOpen 단일 image Modal을 열기 위해서 사용되는 값입니다.
  * @param handleReviewOpen 해당 리뷰의 정보를 불러오기 위한 모달을 열어주기 위해 사용되는 함수입니다.
  */
-function BottomSheetInner({
-  data,
-  handleImageOpen,
-  handleReviewOpen,
-}: BottomSheetInnerProps) {
+function BottomSheetInner({ data, handleImageOpen }: BottomSheetInnerProps) {
   const {
     id,
     state,
@@ -36,14 +34,16 @@ function BottomSheetInner({
     phone,
   } = data;
 
+  const onReview = useReviewStore(state => state.onReview);
+  // const reviewInfinity = useOruryReview.getReviews(id);
   const stateClassName = clsx('text-[0.75rem] leading-[1.063rem]', {
     'text-green': state,
     'text-end-time': !state,
   });
 
-  const onModalOpen = () => {
-    handleReviewOpen(id);
-  };
+  // const onModalOpen = () => {
+  //   onReview(reviewInfinity);
+  // };
 
   return (
     <>

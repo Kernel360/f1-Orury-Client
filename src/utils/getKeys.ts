@@ -56,19 +56,3 @@ export const getPostListKey = (
     END_POINT.post.getPostList(categoryId, previousPageData?.data.cursor)
   );
 };
-
-export const getReviewKey = (
-  reviewId: number,
-  pageIndex: number,
-  previousPageData?: TResponse<ReviewResponseType>,
-  cursor?: number,
-): string => {
-  if (previousPageData && previousPageData.data.cursor === -1) return '';
-  if (!previousPageData && pageIndex === 0) {
-    return BACK_URL + END_POINT.reviews.getReviews(reviewId, 0);
-  }
-
-  const currentCursor = cursor || previousPageData?.data.cursor;
-
-  return BACK_URL + END_POINT.reviews.getReviews(reviewId, currentCursor);
-};

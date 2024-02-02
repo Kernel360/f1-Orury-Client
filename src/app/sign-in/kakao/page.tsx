@@ -28,6 +28,8 @@ function Page() {
       const response = await getUserInfo({ code, signUpType });
 
       if (response && response.data && response.data.refresh_token) {
+        console.log(response.data.refresh_token);
+
         setTokensInCookies({
           accessToken: response.data.access_token,
           refreshToken: response.data.refresh_token,

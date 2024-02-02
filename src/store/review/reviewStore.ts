@@ -3,11 +3,14 @@ import type { ReviewStoreProps } from '@/types/map/ReviewProps';
 
 const useReviewStore = create<ReviewStoreProps>(set => ({
   isOpen: false,
-  state: 'create',
+  state: null,
   reviewId: null,
-  setCreateMode: () => set({ state: 'create', isOpen: true }),
-  setFixMode: reviewId => set({ state: 'fix', reviewId, isOpen: true }),
-  reset: () => set({ isOpen: false }),
+  onMyPage: () => set({ state: 'mypage', isOpen: true }),
+  onReview: () => set({ state: null, isOpen: true }),
+  setFixMode: reviewId => set({ state: 'fix', reviewId }),
+  setCreateMode: () => set({ state: 'create' }),
+  closeMode: () => set({ state: null, isOpen: true }),
+  reset: () => set({ state: null, reviewId: null, isOpen: false }),
 }));
 
 export default useReviewStore;
