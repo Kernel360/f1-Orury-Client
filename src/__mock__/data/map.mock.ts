@@ -115,7 +115,15 @@ export const searchMock: SearchKeywordListType = {
 };
 
 export const detailMarkerMock: DetailPlaceType = {
-  business_hours: [{ key: 'MONDAY', value: '10시' }],
+  business_hours: [
+    { MONDAY: '5' },
+    { TUESDAY: '11' },
+    { WEDNESDAY: '12' },
+    { THURSDAY: '12' },
+    { FRIDAY: '12' },
+    { SATURDAY: '123' },
+    { SUNDAY: '123' },
+  ],
   doing_business: false,
   images: [
     'https://source.unsplash.com/random/300x300/?cat',
@@ -127,25 +135,16 @@ export const detailMarkerMock: DetailPlaceType = {
   ],
   isLike: false,
   id: 1,
-  logo_img: 'https://source.unsplash.com/random/300x300/?cat',
   phone_number: '010-1234-5678',
   name: '더클라임 봉은사점',
   road_address: '서울 강남구 영동대로 618',
-  site_urls: [
-    {
-      label: 'homepage',
-      url: 'http://www.naver.com',
-    },
-    {
-      label: 'instagram',
-      url: 'http://www.instagram.com',
-    },
-    {
-      label: 'kakaomap',
-      url: 'https://kko.to/m3PxlFswg2',
-    },
-  ],
-  state: true,
+  homepage_link: 'http://www.naver.com',
+  instagram_link: 'http://www.instagram.com',
+  kakao_map_link: 'https://kko.to/m3PxlFswg2',
+  review_count: 0,
+  address: '가가가가가',
+  score_average: 0,
+  brand: '신세계',
   setting_day: '목요일',
   position: {
     latitude: 37.27943075229118,

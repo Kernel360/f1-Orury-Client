@@ -108,11 +108,7 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
       {content && <div>{content}</div>}
       {images && images?.length !== 0 && (
         <div className="mt-4">
-          <MapCarousel
-            width="w-full"
-            images={images}
-            handleImageOpen={handleImageOpen}
-          />
+          <MapCarousel width="w-full" images={images} />
         </div>
       )}
       {isRatingModalOpen && (
