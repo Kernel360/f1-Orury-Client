@@ -1,11 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
 import OneSearchResult from '@/app/service/map/_components/search/OneSearchResult';
 import type { SearchResultProps } from '@/types/map/BottomSheetProps';
 import { Map } from 'lucide-react';
 import { COLOR } from '@/styles/color';
 import SearchSkeletonList from '../skeleton/SearchSkeletonList';
+import { cn } from '@/lib/utils';
 
 /**
  * @description 해당 Modal은 검색의 결과를 나타내기 위한 Modal입니다.
@@ -20,14 +20,13 @@ function SearchResultModal({
   searchLoading,
   onSearchingBlur,
   handleMovePosition,
-  handleCarouselOpen,
   searchResult,
 }: SearchResultProps) {
   const handleSearchModalClose = () => {
     onSearchingBlur();
   };
 
-  const modalClassName = clsx(
+  const modalClassName = cn(
     'absolute border-t-[1px] border-primary left-1/2 overflow-y-scroll translate-x-[-50%] duration-500 p-5 mt-14 h-[calc(100vh-3.5rem)] w-full bg-white',
     { 'opacity-0 top-1/2 z-0': !isSearching },
     { 'z-50 top-0': isSearching },
@@ -46,21 +45,20 @@ function SearchResultModal({
           <Map size={20} stroke={COLOR.primary} />
         </button>
       </div>
-      {searchResult?.total === 0 ? (
+      {searchResult?.length === 0 ? (
         <div className="flex h-full justify-center items-center">
           검색 결과가 없습니다.
         </div>
       ) : (
         <div className="flex flex-col pt-2 mt-2 border-t-[1px] gap-2">
-          {searchLoading ? (
+          {searchLoading || searchResult === undefined ? (
             <SearchSkeletonList />
           ) : (
-            searchResult?.item.map(value => (
+            searchResult.map(value => (
               <OneSearchResult
                 key={value.id}
                 item={value}
                 onMovePosition={() => handleMovePosition(value)}
-                handleCarouselOpen={handleCarouselOpen}
               />
             ))
           )}

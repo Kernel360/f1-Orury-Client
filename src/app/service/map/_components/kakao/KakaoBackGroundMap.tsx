@@ -18,8 +18,8 @@ import type { OneSearchKeywordType } from '@/types/map/map';
  */
 function KakaoBackGroundMap({
   positionList,
-  handleMovePosition,
   mapInfo,
+  handleMovePosition,
 }: KakaoBackGroundMapProps) {
   useKakaoLoader({
     appkey: process.env.NEXT_PUBLIC_KAKAO_APP_KEY,
@@ -43,15 +43,18 @@ function KakaoBackGroundMap({
         level={3}
       >
         <MarkerClusterer averageCenter minLevel={10}>
-          {positionList
-            ? positionList.map(marker => (
-                <MapMarker
-                  onClick={() => onMovePosition(marker)}
-                  key={`${marker.position.lat}-${marker.position.lng}`}
-                  position={marker.position}
-                />
-              ))
-            : null}
+          <>
+            {positionList.map(marker => (
+              <MapMarker
+                onClick={() => onMovePosition(marker)}
+                key={`${marker.position.latitude}-${marker.position.longitude}`}
+                position={{
+                  lat: marker.position.latitude,
+                  lng: marker.position.longitude,
+                }}
+              />
+            ))}
+          </>
         </MarkerClusterer>
       </Map>
     </div>

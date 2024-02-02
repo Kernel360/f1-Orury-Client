@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import useReviewStore from '@/store/review/reviewStore';
 import ReviewRegisterModal from './ReviewRegisterModal';
 import { useSearchParams } from 'next/navigation';
-import useInfinityFetch from '../../_services/hook/useReviewInfinity';
+import useInfinityFetch from '@/apis/map/hook/useReviewInfinity';
 
 /**
  * @description 지도 위에 띄위기 위해서 Modal로 구현을 합니다.

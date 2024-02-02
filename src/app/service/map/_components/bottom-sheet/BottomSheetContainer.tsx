@@ -3,10 +3,9 @@ import useCss from '@/hooks/common/useCss';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 import BottomSheetInner from '@/app/service/map/_components/bottom-sheet/BottomSheetInner';
 import type { BottomSheetProps } from '@/types/map/BottomSheetProps';
-import useOruryMap from '../../_services/hook/useOruryMap';
+import useOruryMap from '../../../../../apis/map/hook/useOruryMap';
 import BottomSheetInnerSkeleton from '../skeleton/BottomSheetInnerSkeleton';
 import { Skeleton } from '@mui/material';
-import { useSearchParams } from 'next/navigation';
 
 /**
  * @description 바텀시트의 외부 컴포넌트입니다.
@@ -17,19 +16,16 @@ import { useSearchParams } from 'next/navigation';
 function BottomSheetContainer({
   isSheetOpen,
   onDisMiss,
-  handleImageOpen,
+  selectId,
 }: BottomSheetProps) {
   useCss('https://unpkg.com/react-spring-bottom-sheet/dist/style.css');
-  const selectId = useSearchParams().get('selectId') ?? undefined;
 
-  if (selectId === undefined) return;
-
-  const { detailInfo, isDetailLoading } = useOruryMap.getDetail(selectId);
+  const { data, isLoading } = useOruryMap.getDetail(selectId);
 
   const focusRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<BottomSheetRef>(null);
 
-  const isDataNull = detailInfo && !isDetailLoading;
+  const isDataNull = !data || isLoading;
 
   return (
     <BottomSheet
@@ -46,20 +42,16 @@ function BottomSheetContainer({
       header={
         <h1 className="flex items-center text-xl justify-center font-bold text-gray-800">
           {isDataNull ? (
-            detailInfo.title
-          ) : (
             <Skeleton className="w-[100px] h-[28px] bg-gray-200" />
+          ) : (
+            data?.data?.data.name
           )}
         </h1>
       }
       onDismiss={onDisMiss}
       expandOnContentDrag={isSheetOpen}
     >
-      {isDataNull ? (
-        <BottomSheetInner handleImageOpen={handleImageOpen} data={detailInfo} />
-      ) : (
-        <BottomSheetInnerSkeleton />
-      )}
+      <BottomSheetInner data={data?.data?.data} />
     </BottomSheet>
   );
 }

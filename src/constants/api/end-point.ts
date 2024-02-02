@@ -1,4 +1,4 @@
-import { PositionType } from '@/types/map/map';
+import { CenterType, PositionType } from '@/types/map/map';
 
 export const END_POINT = {
   auth: {
@@ -72,7 +72,7 @@ export const END_POINT = {
     // DEFAULT
     default: '/gyms',
     // GET
-    searchList: (position: PositionType, keyword: string) => {
+    searchList: (position: CenterType, keyword: string) => {
       let url = new URLSearchParams();
 
       const { lat, lng } = position;
@@ -83,5 +83,7 @@ export const END_POINT = {
 
       return `${END_POINT.gymController.default}/search?${url.toString()}`;
     },
+    detail: (detailId: string) =>
+      `${END_POINT.gymController.default}/${detailId}`,
   },
 };

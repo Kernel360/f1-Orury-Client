@@ -6,12 +6,11 @@ import {
 import { v4 as uuid } from 'uuid';
 import Image from 'next/image';
 import { MapCarouselProps } from '@/types/map/BottomSheetProps';
+import { useImageStore } from '@/store/modal/imageModalStore';
 
-function MapCarousel({
-  handleImageOpen,
-  images,
-  width = 'w-[95%]',
-}: MapCarouselProps) {
+function MapCarousel({ images, width = 'w-[95%]' }: MapCarouselProps) {
+  const handleImageOpen = useImageStore(state => state.setModalOpen);
+
   return (
     <Carousel
       opts={{
