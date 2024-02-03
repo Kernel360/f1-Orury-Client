@@ -21,16 +21,11 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
   if (!data) return <BottomSheetInnerSkeleton />;
   const {
     address,
-    brand,
     business_hours,
-    doing_business,
     homepage_link,
     id,
     instagram_link,
-    isLike,
     kakao_map_link,
-    position,
-    review_count,
     road_address,
     score_average,
     setting_day,
@@ -43,8 +38,6 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
 
   const onReview = useReviewStore(state => state.onReview);
 
-  // const reviewInfinity = useOruryReview.getReviews(id);
-
   const state = getGymState({ business_hours: business_hours });
 
   const stateClassName = cn('text-[0.75rem] leading-[1.063rem]', {
@@ -52,11 +45,9 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
     'text-end-time': state === 1,
   });
 
-  // const onModalOpen = () => {
-  //   onReview(reviewInfinity);
-  // };
-
-  console.log(Object.values(business_hours[0])[0]);
+  const onModalOpen = () => {
+    onReview(id);
+  };
 
   return (
     <>
@@ -77,12 +68,12 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
               </div>
             )}
             <>
-              {Object.values(business_hours[new Date().getDay() - 1])[0] && (
+              {Object.values(business_hours[new Date().getDay() - 1 === -1 ? 6 : new Date().getDay() - 1])[0] && (
                 <div className="text-[0.875rem]">운영시간</div>
               )}
               {
                 <div className="text-[0.688rem]">
-                  {Object.values(business_hours[new Date().getDay() - 1])[0]}
+                  {Object.values(business_hours[new Date().getDay() - 1 === -1 ? 6 : new Date().getDay() - 1])[0]}
                 </div>
               }
             </>
@@ -119,7 +110,7 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
       <div className="flex justify-end p-[0.75rem]">
         <button
           type="button"
-          onClick={() => console.log('리뷰 더보기 창을 엽니다.')}
+          onClick={onModalOpen}
         >
           리뷰 더보기
         </button>
