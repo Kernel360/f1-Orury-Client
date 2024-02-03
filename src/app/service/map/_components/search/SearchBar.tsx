@@ -3,6 +3,7 @@ import { FormEvent, useRef } from 'react';
 import { Search } from 'lucide-react';
 import clsx from 'clsx';
 import { COLOR } from '@/styles/color';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 /**
  * @description 검색을 하기 위한 컴포넌트
@@ -11,6 +12,8 @@ import { COLOR } from '@/styles/color';
  */
 function SearchBar({ isSearching, onSearchingFocus }: SearchKeyWordProps) {
   const searchRef = useRef<HTMLInputElement>(null);
+  const keyword = useSearchParams().get('keyword') ?? '';
+  const router = useRouter();
 
   const handleSearchFocus = () => {
     onSearchingFocus();
@@ -18,12 +21,19 @@ function SearchBar({ isSearching, onSearchingFocus }: SearchKeyWordProps) {
 
   const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const target = e.target as typeof e.target & {
+      searchKeyword: {
+        value: string;
+      };
+    };
+
+    router.push(`?keyword=${target.searchKeyword.value}`);
   };
 
   const containerClassName = clsx(
-    'z-20 absolute left-1/2 translate-x-[-50%] duration-500',
-    { 'top-0 h-8 w-full': isSearching },
-    { 'top-2 h-8 w-[94%]': !isSearching },
+    'z-20 h-8 absolute left-1/2 translate-x-[-50%] duration-500',
+    { 'top-0 w-full': isSearching },
+    { 'top-2 w-[94%]': !isSearching },
   );
   const formClassName = clsx(
     'relative bg-white pl-3 pr-8 duration-500',
@@ -36,6 +46,8 @@ function SearchBar({ isSearching, onSearchingFocus }: SearchKeyWordProps) {
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="searchKeyword">
           <input
+            defaultValue={keyword}
+            name="searchKeyword"
             id="searchKeyword"
             ref={searchRef}
             placeholder="오늘은 어디를 가볼까?"

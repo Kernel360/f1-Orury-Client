@@ -1,13 +1,13 @@
 import { Avatar, Rating } from '@mui/material';
 import getTimeDiff from '@/utils/getTimeDiff';
-import MapCarousel from '@/app/service/map/_components/MapCarousel';
-import RadioGroupRating from '@/app/service/map/_components/Review/SatisfiedRating';
+import MapCarousel from '@/app/service/map/_components/review-component/MapCarousel';
+import RadioGroupRating from '@/app/service/map/_components/review-component/SatisfiedRating';
 import { useState } from 'react';
 import type { OneReviewProps } from '@/types/map/ReviewProps';
-import { customIcons } from '@/app/service/map/_components/Review/IconContainer';
+import { customIcons } from '@/app/service/map/_components/review-component/IconContainer';
 import IconChipList, {
   IconChip,
-} from '@/app/service/map/_components/Review/IconChipList';
+} from '@/app/service/map/_components/review-component/IconChipList';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -108,11 +108,7 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
       {content && <div>{content}</div>}
       {images && images?.length !== 0 && (
         <div className="mt-4">
-          <MapCarousel
-            width="w-full"
-            images={images}
-            handleImageOpen={handleImageOpen}
-          />
+          <MapCarousel width="w-full" images={images} />
         </div>
       )}
       {isRatingModalOpen && (

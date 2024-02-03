@@ -4,21 +4,27 @@ import { Star } from 'lucide-react';
 import { useState } from 'react';
 import { IconButton, Rating } from '@mui/material';
 import { COLOR } from '@/styles/color';
+import { useImageStore, useImagesStore } from '@/store/modal/imageModalStore';
 
 /**
  * @description 검색 결과의 항목을 하나씩 보여주기 위한 소단위의 컴포넌트입니다.
  * @param item 정보를 하나씩 받아와 보여주기 위해 가져옵니다.
  * @param handleMovePosition 마커를 눌렀을 시에 해당 마커로 이동시키기 위해서 사용합니다.
  */
-function OneSearchResult({
-  item,
-  onMovePosition,
-  handleCarouselOpen,
-}: OneSearchResultProps) {
-  const { review_count, review_score, place_title, images, title, is_like } =
-    item;
+function OneSearchResult({ item, onMovePosition }: OneSearchResultProps) {
+  const {
+    is_like,
+    name,
+    review_count,
+    road_address,
+    score_average,
+    thumbnail_image,
+  } = item;
 
   const [isLike, setIsLike] = useState<boolean>(is_like);
+
+  const handleImageModalOpen = useImageStore(state => state.setModalOpen);
+  const handleCarouselOpen = useImagesStore(state => state.setModalOpen);
 
   // 북마크 혹은 좋아요를 눌렀을 때 일어나는 함수
   const handleLikeEvent = () => {
@@ -26,7 +32,11 @@ function OneSearchResult({
   };
 
   const onCarouselOpen = () => {
-    handleCarouselOpen(images);
+    if (typeof thumbnail_image === 'string') {
+      handleImageModalOpen(thumbnail_image);
+    } else {
+      handleCarouselOpen(thumbnail_image);
+    }
   };
 
   const onSearchClick = () => {
@@ -42,11 +52,11 @@ function OneSearchResult({
             <button
               type="button"
               key="title"
-              className="cursor-pointer"
+              className="cursor-pointer ellipsis max-w-52"
               onClick={onSearchClick}
               tabIndex={0}
             >
-              {title}
+              {name}
             </button>
             <IconButton
               onClick={handleLikeEvent}
@@ -66,10 +76,10 @@ function OneSearchResult({
             type="button"
             onClick={onSearchClick}
           >
-            <Rating value={review_score} readOnly />
-            {`${review_score} / 리뷰 ${review_count}건`}
+            <Rating value={score_average} readOnly />
+            {`${score_average} / 리뷰 ${review_count}건`}
           </button>
-          <div>{place_title}</div>
+          <div>{road_address}</div>
         </div>
         <button
           type="button"
@@ -78,17 +88,21 @@ function OneSearchResult({
         >
           <Image
             className="cursor-pointer"
-            src={images[0]}
+            src={
+              typeof thumbnail_image === 'object'
+                ? thumbnail_image[0]
+                : thumbnail_image
+            }
             onClick={onCarouselOpen}
-            alt={`${title} 메인 이미지`}
+            alt={`${name} 메인 이미지`}
             width={88}
             height={88}
           />
-          {images.length > 1 ? (
+          {thumbnail_image.length > 1 ?? (
             <div className="absolute rounded-3xl flex items-center justify-center text-sm w-5 h-5 right-1 bottom-1 bg-primary text-white opacity-70">
-              {images.length}
+              {thumbnail_image.length}
             </div>
-          ) : null}
+          )}
         </button>
       </div>
     </div>

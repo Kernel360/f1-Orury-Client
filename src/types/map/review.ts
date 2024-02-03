@@ -26,6 +26,19 @@ interface ReviewResponseType {
   title: string;
   is_first: boolean;
   review_list: ReviewDataType[];
+  cursor: number;
 }
 
-export type { ReactionType, ReviewDataType, ReviewResponseType };
+interface ReviewModalStore {
+  isOpen: boolean;
+  callback: () => void;
+  setModalOpen: (callback: () => void) => void;
+  setModalClose: () => void;
+}
+
+export type {
+  ReactionType,
+  ReviewDataType,
+  ReviewResponseType,
+  ReviewModalStore,
+};

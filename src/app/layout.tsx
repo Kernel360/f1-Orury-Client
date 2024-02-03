@@ -1,4 +1,3 @@
-/* eslint-disable react/no-invalid-html-attribute */
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import Providers from '@/app/providers';
@@ -22,7 +21,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
         name="viewport"
         content="viewport-fit=cover, width=device-width, initial-scale=1.0"
       />
-      <link rel="manifest" href="/manifest.json" />
+      <link rel="/manifest" href="/manifest.json" />
       <link rel="apple-touch-icon" href="/favicons/apple-icon.png" />
 
       <link

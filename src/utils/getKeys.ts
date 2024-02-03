@@ -4,6 +4,7 @@ import TABS from '@/constants/community/tabs';
 import { TResponse } from '@/types/common/response';
 import { CommentListData } from '@/types/community/comment';
 import { PostListData } from '@/types/community/post';
+import { ReviewResponseType } from '@/types/map/review';
 
 export const getCommentKey = (
   postId: number,

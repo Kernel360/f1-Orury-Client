@@ -1,100 +1,106 @@
 import type { DetailPlaceType, SearchKeywordListType } from '@/types/map/map';
 
 export const searchMock: SearchKeywordListType = {
-  item: [
+  data: [
     {
+      doing_business: false,
       id: 1,
-      title: '더클라임 강남점',
-      place_title: '서울 강남구 테헤란로',
+      name: '더클라임 강남점',
+      road_address: '서울 강남구 테헤란로',
       is_like: true,
-      review_score: 4.5,
+      score_average: 4.5,
       review_count: 15,
       position: {
-        lat: 37.5063849225134,
-        lng: 127.02224662277956,
+        latitude: 37.5063849225134,
+        longitude: 127.02224662277956,
       },
-      images: ['https://source.unsplash.com/random/300x300/?cat'],
+      thumbnail_image: ['https://source.unsplash.com/random/300x300/?cat'],
     },
     {
+      doing_business: false,
       id: 2,
-      title: '더클라임 양재점',
-      place_title: '서울 강남구 남부 순환로',
+      name: '더클라임 양재점',
+      road_address: '서울 강남구 남부 순환로',
       is_like: false,
-      review_score: 4.5,
+      score_average: 4.5,
       review_count: 12,
       position: {
-        lat: 37.48522589024053,
-        lng: 127.03601194974847,
+        latitude: 37.48522589024053,
+        longitude: 127.03601194974847,
       },
-      images: [
+      thumbnail_image: [
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
       ],
     },
     {
+      doing_business: false,
       id: 3,
-      title: '더클라임 신사점',
-      place_title: '서울 강남구 압구정로2길',
+      name: '더클라임 신사점',
+      road_address: '서울 강남구 압구정로2길',
       is_like: false,
-      review_score: 4.5,
+      score_average: 4.5,
       review_count: 5,
       position: {
-        lat: 37.52111687308989,
-        lng: 127.01919671596526,
+        latitude: 37.52111687308989,
+        longitude: 127.01919671596526,
       },
-      images: [
+      thumbnail_image: [
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
       ],
     },
     {
+      doing_business: false,
       id: 4,
-      title: '더클라임 논현점',
-      place_title: '서울 서초구 강남대로',
+      name: '더클라임 논현점',
+      road_address: '서울 서초구 강남대로',
       is_like: true,
-      review_score: 5,
+      score_average: 5,
       review_count: 25,
       position: {
-        lat: 37.508263519405965,
-        lng: 127.02223869761437,
+        latitude: 37.508263519405965,
+        longitude: 127.02223869761437,
       },
-      images: [
+      thumbnail_image: [
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
       ],
     },
     {
+      doing_business: false,
       id: 5,
-      title: '더클라임 사당점',
-      place_title: '서울 관악구 과천대로',
+      name: '더클라임 사당점',
+      road_address: '서울 관악구 과천대로',
       is_like: false,
-      review_score: 0,
+      score_average: 0,
       review_count: 0,
       position: {
-        lat: 37.47444934741218,
-        lng: 126.98145113891935,
+        latitude: 37.47444934741218,
+        longitude: 126.98145113891935,
       },
-      images: [
+      thumbnail_image: [
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
       ],
     },
     {
+      doing_business: false,
       id: 6,
-      title: '더클라임 서울대점',
-      place_title: '서울 강남구 남부 순환로 2615 지하 1층',
+      name: '더클라임 서울대점',
+      road_address: '서울 강남구 남부 순환로 2615 지하 1층',
       is_like: false,
-      review_score: 4.4,
+      score_average: 4.4,
       review_count: 3,
       position: {
-        lat: 37.48521688274289,
-        lng: 127.03600346537529,
+        latitude: 37.48521688274289,
+        longitude: 127.03600346537529,
       },
-      images: [
+      thumbnail_image: [
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
         'https://source.unsplash.com/random/300x300/?cat',
@@ -109,7 +115,16 @@ export const searchMock: SearchKeywordListType = {
 };
 
 export const detailMarkerMock: DetailPlaceType = {
-  id: 1,
+  business_hours: [
+    { MONDAY: '5' },
+    { TUESDAY: '11' },
+    { WEDNESDAY: '12' },
+    { THURSDAY: '12' },
+    { FRIDAY: '12' },
+    { SATURDAY: '123' },
+    { SUNDAY: '123' },
+  ],
+  doing_business: false,
   images: [
     'https://source.unsplash.com/random/300x300/?cat',
     'https://source.unsplash.com/random/300x300/?cat',
@@ -118,27 +133,22 @@ export const detailMarkerMock: DetailPlaceType = {
     'https://source.unsplash.com/random/300x300/?cat',
     'https://source.unsplash.com/random/300x300/?cat',
   ],
-  logo_img: 'https://source.unsplash.com/random/300x300/?cat',
-  phone: '010-1234-5678',
-  title: '더클라임 봉은사점',
-  place_title: '서울 강남구 영동대로 618',
-  site_urls: [
-    {
-      label: 'homepage',
-      url: 'http://www.naver.com',
-    },
-    {
-      label: 'instagram',
-      url: 'http://www.instagram.com',
-    },
-  ],
-  state: true,
-  week_day: '평일 10:00 ~ 23:00',
-  week_end: '공휴일(토, 일 포함) 10:00 ~ 20:00',
+  isLike: false,
+  id: 1,
+  phone_number: '010-1234-5678',
+  name: '더클라임 봉은사점',
+  road_address: '서울 강남구 영동대로 618',
+  homepage_link: 'http://www.naver.com',
+  instagram_link: 'http://www.instagram.com',
+  kakao_map_link: 'https://kko.to/m3PxlFswg2',
+  review_count: 0,
+  address: '가가가가가',
+  score_average: 0,
+  brand: '신세계',
   setting_day: '목요일',
   position: {
-    lat: 37.27943075229118,
-    lng: 127.01763998406159,
+    latitude: 37.27943075229118,
+    longitude: 127.01763998406159,
   },
   bar_chart_data: [
     {

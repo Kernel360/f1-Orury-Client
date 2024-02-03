@@ -1,9 +1,11 @@
-import { useRef } from 'react';
-import { detailMarkerMock } from '@/__mock__/data/map.mock';
+import { Suspense, useRef } from 'react';
 import useCss from '@/hooks/common/useCss';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
-import BottomSheetInner from '@/app/service/map/_components/map/BottomSheetInner';
+import BottomSheetInner from '@/app/service/map/_components/bottom-sheet/BottomSheetInner';
 import type { BottomSheetProps } from '@/types/map/BottomSheetProps';
+import useOruryMap from '../../../../../apis/map/hook/useOruryMap';
+import BottomSheetInnerSkeleton from '../skeleton/BottomSheetInnerSkeleton';
+import { Skeleton } from '@mui/material';
 
 /**
  * @description 바텀시트의 외부 컴포넌트입니다.
@@ -14,14 +16,16 @@ import type { BottomSheetProps } from '@/types/map/BottomSheetProps';
 function BottomSheetContainer({
   isSheetOpen,
   onDisMiss,
-  handleImageOpen,
-  handleReviewOpen,
+  selectId,
 }: BottomSheetProps) {
   useCss('https://unpkg.com/react-spring-bottom-sheet/dist/style.css');
 
-  const data = detailMarkerMock;
+  const { data, isLoading } = useOruryMap.getDetail(selectId);
+
   const focusRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<BottomSheetRef>(null);
+
+  const isDataNull = !data || isLoading;
 
   return (
     <BottomSheet
@@ -37,17 +41,17 @@ function BottomSheetContainer({
       }}
       header={
         <h1 className="flex items-center text-xl justify-center font-bold text-gray-800">
-          {data.title}
+          {isDataNull ? (
+            <Skeleton className="w-[100px] h-[28px] bg-gray-200" />
+          ) : (
+            data?.data?.data.name
+          )}
         </h1>
       }
       onDismiss={onDisMiss}
       expandOnContentDrag={isSheetOpen}
     >
-      <BottomSheetInner
-        handleReviewOpen={handleReviewOpen}
-        handleImageOpen={handleImageOpen}
-        data={data}
-      />
+      <BottomSheetInner data={data?.data?.data} />
     </BottomSheet>
   );
 }

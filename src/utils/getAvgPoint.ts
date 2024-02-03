@@ -2,8 +2,9 @@ import type { PointChartDataType } from '@/types/map/map';
 
 // 전달받은 차트 데이터의 평균 값을 구하는 함수
 function getAvgPoint(data: PointChartDataType[]) {
-  let totalCount = 0;
+  if (data.length === 0) return 0;
 
+  let totalCount = 0;
   return (
     Math.floor(
       (data

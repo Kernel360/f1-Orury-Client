@@ -12,7 +12,6 @@ const postSignUp = async ({ ...data }: PostSignUpProps) => {
     >(END_POINT.auth.signUp, {
       ...data,
     });
-
     return response;
   } catch (error: unknown) {
     if (error instanceof CustomError) {

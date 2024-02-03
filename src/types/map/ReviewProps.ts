@@ -1,9 +1,8 @@
 import type { ReactionType, ReviewDataType } from '@/types/map/review';
+import { SWRInfiniteResponse } from 'swr/infinite';
 
 interface ReviewProps {
   position: 'center' | 'right';
-  isOpen: boolean;
-  onCloseModal: () => void;
   handleImageOpen: (url: string) => void;
 }
 
@@ -34,10 +33,13 @@ interface IconChipListProps {
 
 interface ReviewStoreProps {
   isOpen: boolean;
-  state: 'create' | 'fix';
+  state: 'create' | 'fix' | 'mypage' | null;
   reviewId: number | null;
-  setCreateMode: () => void;
+  onMyPage: () => void;
+  onReview: (callBack: SWRInfiniteResponse) => void;
   setFixMode: (reviewId: number) => void;
+  setCreateMode: () => void;
+  closeMode: () => void;
   reset: () => void;
 }
 
@@ -52,19 +54,6 @@ interface OneReviewProps {
 
 interface IconChipListProps {
   item: ReactionType[];
-}
-
-interface ReviewStoreProps {
-  isOpen: boolean;
-  state: 'create' | 'fix';
-  reviewId: number | null;
-  setCreateMode: () => void;
-  setFixMode: (reviewId: number) => void;
-  reset: () => void;
-}
-
-interface ReviewRegisterModalProps {
-  isOpen: boolean;
 }
 
 export type {

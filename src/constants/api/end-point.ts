@@ -1,3 +1,5 @@
+import { CenterType, PositionType } from '@/types/map/map';
+
 export const END_POINT = {
   auth: {
     // DEFAULT
@@ -7,7 +9,7 @@ export const END_POINT = {
     refresh: '/auth/refresh',
 
     // KAKAO
-    kakao: 'auth/login',
+    kakao: '/auth/login',
 
     signUp: '/auth/sign-up',
   },
@@ -46,5 +48,42 @@ export const END_POINT = {
   mypage: {
     // DEFAULT
     main: '/mypage',
+  },
+  map: {
+    // DEFAULT
+    main: '/map',
+    // GET
+    search: (keyword: string) => `/keyword?keyword=${keyword}`,
+    detail: (detailId: string) => `/map/detail?detailId=${detailId}`,
+  },
+  reviews: {
+    // DEFAULT
+    default: '/review',
+    // GET
+    getReviews: (reviewId: number, cursor?: number) => {
+      let url = new URLSearchParams(`${END_POINT.reviews.default}/${reviewId}`);
+      if (cursor !== undefined) {
+        url.append('cursor', String(cursor));
+      }
+      return String(url);
+    },
+  },
+  gymController: {
+    // DEFAULT
+    default: '/gyms',
+    // GET
+    searchList: (position: CenterType, keyword: string) => {
+      let url = new URLSearchParams();
+
+      const { lat, lng } = position;
+
+      url.append('search_word', keyword);
+      url.append('latitude', String(lat));
+      url.append('longitude', String(lng));
+
+      return `${END_POINT.gymController.default}/search?${url.toString()}`;
+    },
+    detail: (detailId: string) =>
+      `${END_POINT.gymController.default}/${detailId}`,
   },
 };
