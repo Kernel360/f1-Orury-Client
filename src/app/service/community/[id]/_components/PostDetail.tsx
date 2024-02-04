@@ -2,6 +2,7 @@ import { PostDetailProps } from '@/types/community/post';
 
 import User from '@/app/service/community/_components/User';
 import Counts from '@/app/service/community/_components/Counts';
+import Image from 'next/image';
 
 function PostDetail({ ...props }: PostDetailProps) {
   const {
@@ -15,6 +16,7 @@ function PostDetail({ ...props }: PostDetailProps) {
     comment_count,
     view_count,
     id,
+    images,
   } = props;
 
   return (
@@ -29,6 +31,11 @@ function PostDetail({ ...props }: PostDetailProps) {
       <div className="flex flex-col gap-4">
         <span className="font-bold text-xl">{title}</span>
         <span>{content}</span>
+      </div>
+      <div className="w-32 h-32 relative">
+        {images.map((image, index) => (
+          <Image src={image} alt={`image-${index}`} fill />
+        ))}
       </div>
       <div className="flex justify-evenly">
         <Counts

@@ -1,6 +1,7 @@
 import CALLBACK_URL from '@/constants/url';
 import { NextRequest, NextResponse } from 'next/server';
 import { decrypt } from '@/utils/crypto';
+
 export async function middleware(req: NextRequest) {
   const { cookies } = req;
   const hasCookie = cookies.has('access_token');

@@ -2,17 +2,17 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "jest": true,
+    "jest": true
   },
   "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
-      "jsx": true,
+      "jsx": true
     },
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": ["./tsconfig.json"],
+    "project": ["./tsconfig.json"]
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
@@ -37,11 +37,11 @@
     "jsx-a11y/label-has-associated-control": [
       2,
       {
-        "labelAttributes": ["htmlFor"],
-      },
-    ],
+        "labelAttributes": ["htmlFor"]
+      }
+    ]
   },
   "globals": {
-    "React": "writable",
-  },
+    "React": "writable"
+  }
 }
