@@ -60,3 +60,10 @@ export interface UseOnePostState {
   setTitle: (value: string) => void;
   setContent: (value: string) => void;
 }
+
+export interface PostCountState {
+  likeCount: number;
+  commentCount: number;
+  setLikeCount: (value: number) => void;
+  setCommentCount: (value: number) => void;
+}

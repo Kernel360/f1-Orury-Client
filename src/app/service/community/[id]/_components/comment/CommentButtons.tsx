@@ -15,11 +15,12 @@ import { useToast } from '@/app/_components/ui/use-toast';
 import type { CommentBtnProps } from '@/types/community/commentButtons';
 
 function CommentButtons({ ...props }: CommentBtnProps) {
+  const { commentId, isLike, setLikes, setIsLike, postId, parentId } = props;
   const { toast } = useToast();
+  const { mutate } = useCommentListInfinite(postId);
 
   const [isClicked, setIsClicked] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const { commentId, isLike, setLikes, setIsLike, postId, parentId } = props;
   const {
     setCommentId,
     triggerModify,
@@ -30,8 +31,6 @@ function CommentButtons({ ...props }: CommentBtnProps) {
     setParentId,
   } = useCommentStore();
 
-  const { mutate } = useCommentListInfinite(postId);
-
   const cancelHandler = () => {
     setOpenDeleteModal(openDeleteModal => !openDeleteModal);
   };
@@ -41,6 +40,7 @@ function CommentButtons({ ...props }: CommentBtnProps) {
       setParentId(commentId);
       setCommentId(commentId);
     }
+
     setIsReplyMode(true);
     setIsFocus(true);
   };
@@ -55,6 +55,7 @@ function CommentButtons({ ...props }: CommentBtnProps) {
       } else {
         await postCommentLike({ comment_id: commentId });
       }
+      mutate();
     }
 
     if (setLikes) {

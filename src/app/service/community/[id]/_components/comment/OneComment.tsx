@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
 'use client';
 
 import { CornerDownRight } from 'lucide-react';
@@ -12,7 +14,7 @@ import useCommentStore from '@/store/community/commentStore';
 
 function OneComment({ ...props }: OneCommentType) {
   const { grey400, purple700 } = COLOR;
-  const { isFocus, commentId } = useCommentStore();
+  const { isFocus, commentId, setParentId } = useCommentStore();
   const {
     parent_id,
     deleted,
@@ -31,6 +33,13 @@ function OneComment({ ...props }: OneCommentType) {
     'bg-white': !isFocus || commentId !== id,
   });
 
+  const iconClassName = clsx('h-[96px] pl-2', {
+    'bg-grey-50': deleted,
+    'bg-white': !deleted,
+  });
+
+  const handleMouseDown = () => setParentId(0);
+
   return (
     <li className={liClassName}>
       {parent_id ? (
@@ -38,10 +47,10 @@ function OneComment({ ...props }: OneCommentType) {
           size={32}
           color={deleted ? grey400 : purple700}
           strokeWidth={1.5}
-          className=" h-[96px] pl-2"
+          className={iconClassName}
         />
       ) : null}
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full" onMouseDown={handleMouseDown}>
         {deleted ? (
           <Deleted />
         ) : (

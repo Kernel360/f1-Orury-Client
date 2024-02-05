@@ -1,5 +1,9 @@
 import { create } from 'zustand';
-import { UsePostsStateProps, UseOnePostState } from '@/types/community/post';
+import {
+  UsePostsStateProps,
+  UseOnePostState,
+  PostCountState,
+} from '@/types/community/post';
 
 export const usePostsState = create<UsePostsStateProps>(set => ({
   categoryId: 1,
@@ -11,4 +15,11 @@ export const useOnePostState = create<UseOnePostState>(set => ({
   content: '',
   setTitle: value => set({ title: value }),
   setContent: value => set({ content: value }),
+}));
+
+export const postCountState = create<PostCountState>(set => ({
+  likeCount: 0,
+  commentCount: 0,
+  setLikeCount: value => set({ likeCount: value }),
+  setCommentCount: value => set({ commentCount: value }),
 }));
