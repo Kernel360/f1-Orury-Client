@@ -34,7 +34,7 @@ function Form({ ...props }: FormType) {
     editHandler,
   } = props;
   const { toast } = useToast();
-  const { categoryId } = usePostsState();
+  const { categoryId, setCategoryId } = usePostsState();
   const { setTitle, setContent } = useOnePostState();
   const { mutate } = usePostListInfinite(categoryId);
   const [images, setImages] = useState<File[]>([]);
@@ -46,8 +46,8 @@ function Form({ ...props }: FormType) {
   const onSubmit = async (data: FormSchemaType) => {
     if (isPost && setIsSheetOpen) {
       const formData = getFormData({ jsonData: JSON.stringify(data), images });
-
       const message = await post(formData);
+
       await mutate();
       setIsSheetOpen(false);
 
@@ -114,6 +114,7 @@ function Form({ ...props }: FormType) {
                         textValue={category.label}
                         onSelect={() => {
                           form.setValue('category', category.value);
+                          setCategoryId(category.value);
                         }}
                       >
                         {category.label}
