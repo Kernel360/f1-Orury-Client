@@ -9,7 +9,7 @@ function ImageSliderModal() {
   if (!isOpen || image.length === 0) return;
 
   return (
-    <div className="z-[9999] flex items-center justify-center absolute w-full h-screen">
+    <div className="z-[9999] flex items-center justify-center absolute w-full h-screen-safe">
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
       <button
         type="button"
