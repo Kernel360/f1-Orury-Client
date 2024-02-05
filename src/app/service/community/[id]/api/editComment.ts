@@ -9,7 +9,7 @@ type EditCommentType = {
 
 const editComment = async ({ id, content }: EditCommentType) => {
   try {
-    await axiosInstance.patch(END_POINT.comment.main, {
+    await axiosInstance.patch(END_POINT.commentController.main, {
       id,
       content,
     });

@@ -9,7 +9,7 @@ const getPostDetail = async (id: number) => {
   try {
     const { data: postDetail } = await axiosInstance<
       TResponse<PostDetailProps>
-    >(END_POINT.post.getPostDetail(id));
+    >(END_POINT.postController.getPostDetail(id));
 
     return postDetail.data;
   } catch (error: unknown) {
