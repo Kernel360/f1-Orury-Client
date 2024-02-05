@@ -2,15 +2,21 @@
 
 import clsx from 'clsx';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Search } from 'lucide-react';
 import type { SearchBarProps } from '@/types/community/searchBar';
 
 function SearchBar({ ...props }: SearchBarProps) {
-  const [text, setText] = useState('');
   const { setIsSearchingFocus, setSearchText, isSearchingFocus } = props;
-
+  const [text, setText] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!isSearchingFocus) {
+      setText('');
+      setSearchText('');
+    }
+  }, [isSearchingFocus]);
 
   const onTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
