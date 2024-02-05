@@ -1,5 +1,14 @@
 'use client';
 
+import TextInput from '@/app/_components/common/TextInput';
+import Content from '@/app/_components/common/Content';
+import post from '@/app/service/community/api/post';
+import PhotoBooth from '@/app/service/community/_components/PhotoBooth';
+import editPost from '@/app/service/community/api/editPost';
+import usePostListInfinite from '@/hooks/community/usePostListInfinite';
+import * as D from '@/app/_components/ui/dropdown-menu';
+import * as F from '@/app/_components/ui/form';
+
 import { useState } from 'react';
 import { getFormData } from '@/utils/getFormData';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,17 +19,8 @@ import { Button } from '@/app/_components/ui/button';
 import { CATEGORIES } from '@/constants/common/form';
 import { useOnePostState, usePostsState } from '@/store/community/postsStore';
 import { FormSchema, FormSchemaType } from '@/app/schema';
+import { useToast } from '@/app/_components/ui/use-toast';
 import type { FormType } from '@/types/common/form';
-
-import TextInput from '@/app/_components/common/TextInput';
-import Content from '@/app/_components/common/Content';
-import post from '@/app/service/community/api/post';
-import PhotoBooth from '@/app/service/community/_components/PhotoBooth';
-import editPost from '@/app/service/community/api/editPost';
-import usePostListInfinite from '@/hooks/community/usePostListInfinite';
-import * as C from '@/app/_components/ui/command';
-import * as P from '@/app/_components/ui/popover';
-import * as F from '@/app/_components/ui/form';
 
 function Form({ ...props }: FormType) {
   const {
@@ -33,10 +33,11 @@ function Form({ ...props }: FormType) {
     setIsSheetOpen,
     editHandler,
   } = props;
+  const { toast } = useToast();
   const { categoryId } = usePostsState();
   const { setTitle, setContent } = useOnePostState();
   const { mutate } = usePostListInfinite(categoryId);
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<File[]>([]);
 
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
@@ -46,9 +47,11 @@ function Form({ ...props }: FormType) {
     if (isPost && setIsSheetOpen) {
       const formData = getFormData({ jsonData: JSON.stringify(data), images });
 
-      await post(formData);
+      const message = await post(formData);
       await mutate();
       setIsSheetOpen(false);
+
+      toast({ variant: 'success', description: message });
     }
 
     if (isPostDetail && postId && editHandler) {
@@ -81,8 +84,8 @@ function Form({ ...props }: FormType) {
             name="category"
             render={({ field }) => (
               <F.FormItem className="w-full flex flex-col">
-                <P.Popover>
-                  <P.PopoverTrigger asChild>
+                <D.DropdownMenu>
+                  <D.DropdownMenuTrigger asChild>
                     <F.FormControl>
                       <Button
                         variant="underline"
@@ -101,26 +104,23 @@ function Form({ ...props }: FormType) {
                         <ChevronsDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                       </Button>
                     </F.FormControl>
-                  </P.PopoverTrigger>
-                  <P.PopoverContent className="w-full p-0">
-                    <C.Command>
-                      <C.CommandGroup>
-                        {CATEGORIES.map(category => (
-                          <C.CommandItem
-                            value={category.label}
-                            key={category.value}
-                            className="w-full justify-center"
-                            onSelect={() => {
-                              form.setValue('category', category.value);
-                            }}
-                          >
-                            {category.label}
-                          </C.CommandItem>
-                        ))}
-                      </C.CommandGroup>
-                    </C.Command>
-                  </P.PopoverContent>
-                </P.Popover>
+                  </D.DropdownMenuTrigger>
+
+                  <D.DropdownMenuContent className="w-screen max-w-[734px] p-0">
+                    {CATEGORIES.map(category => (
+                      <D.DropdownMenuItem
+                        {...field}
+                        className="bg-white justify-center"
+                        textValue={category.label}
+                        onSelect={() => {
+                          form.setValue('category', category.value);
+                        }}
+                      >
+                        {category.label}
+                      </D.DropdownMenuItem>
+                    ))}
+                  </D.DropdownMenuContent>
+                </D.DropdownMenu>
                 <F.FormMessage className="text-warning pl-2 text-sm" />
               </F.FormItem>
             )}
