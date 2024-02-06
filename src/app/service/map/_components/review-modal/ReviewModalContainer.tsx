@@ -1,5 +1,6 @@
 import { ReviewModalContainerProps } from '@/types/map/ReviewProps';
 import useReviewStore from '@/store/review/reviewStore';
+import { useEffect } from 'react';
 import ReviewModal from './ReviewModal';
 import MyReviewModal from './MyReviewModal';
 import ReviewModalSkeleton from '../skeleton/ReviwModalSkeleton';
@@ -8,8 +9,8 @@ function ReviewModalContainer({
   isMyPage,
   openPosition,
 }: ReviewModalContainerProps) {
-  const reviewId = useReviewStore(state => state.reviewId);
-
+  const { reviewId, state } = useReviewStore(state => state);
+  useEffect(() => {}, [reviewId, state]);
   if (!isMyPage && reviewId === null) {
     return <ReviewModalSkeleton openPosition={openPosition} />;
   }

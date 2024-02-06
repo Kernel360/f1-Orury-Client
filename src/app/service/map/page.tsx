@@ -13,7 +13,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import useReviewStore from '@/store/review/reviewStore';
 import { useImageStore, useImagesStore } from '@/store/modal/imageModalStore';
 import useMap from '@/apis/map/hooks/useMap';
-import { useGeoLocation } from '@/hooks/map/useGeoLocation';
 import ReviewModalContainer from './_components/review-modal/ReviewModalContainer';
 
 function Page() {
@@ -40,16 +39,11 @@ function Page() {
   const handleImageClosed = useImageStore(state => state.setModalClose);
   const handleCarouselClosed = useImagesStore(state => state.setModalClose);
 
-  const { location } = useGeoLocation();
-
   useEffect(() => {
-    setMapInfo(() => {
-      return {
-        isPanto: true,
-        center: { lat: location.latitude, lng: location.longitude },
-      };
-    });
-  }, [location]);
+    if (isSearching && isSheetOpen) {
+      setIsSheetOpen(false);
+    }
+  }, [isSearching]);
 
   // 좌표를 이동 시키고 열어주는 함수
   const handleMovePosition = (item: OneSearchKeywordType) => {
@@ -70,12 +64,22 @@ function Page() {
   };
 
   useEffect(() => {
+    if (selectId !== '') {
+      const selectItem = data?.data.data.filter(
+        v => v.id === Number(selectId),
+      )[0];
+
+      if (selectItem) {
+        handleMovePosition(selectItem);
+      }
+    }
+
     return () => {
       handleImageClosed();
       handleCarouselClosed();
       closeModal();
     };
-  }, []);
+  }, [data]);
 
   const isEmptyData = !data || isLoading;
 
