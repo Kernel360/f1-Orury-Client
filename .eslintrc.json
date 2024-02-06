@@ -34,6 +34,7 @@
     "jsx-a11y/control-has-associated-label": "off",
     "react/jsx-wrap-multilines": "off",
     "react/jsx-indent": "off",
+    "react/no-invalid-html-attribute": "off",
     "jsx-a11y/label-has-associated-control": [
       2,
       {
