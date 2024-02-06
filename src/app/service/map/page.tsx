@@ -13,6 +13,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import useReviewStore from '@/store/review/reviewStore';
 import { useImageStore, useImagesStore } from '@/store/modal/imageModalStore';
 import useMap from '@/apis/map/hooks/useMap';
+import { useGeoLocation } from '@/hooks/map/useGeoLocation';
 import ReviewModalContainer from './_components/review-modal/ReviewModalContainer';
 
 function Page() {
@@ -39,16 +40,16 @@ function Page() {
   const handleImageClosed = useImageStore(state => state.setModalClose);
   const handleCarouselClosed = useImagesStore(state => state.setModalClose);
 
-  // const { location } = useGeoLocation();
+  const { location } = useGeoLocation();
 
-  // useEffect(() => {
-  //   setMapInfo(() => {
-  //     return {
-  //       isPanto: true,
-  //       center: { lat: location.latitude, lng: location.longitude },
-  //     };
-  //   });
-  // }, []);
+  useEffect(() => {
+    setMapInfo(() => {
+      return {
+        isPanto: true,
+        center: { lat: location.latitude, lng: location.longitude },
+      };
+    });
+  }, [location]);
 
   // 좌표를 이동 시키고 열어주는 함수
   const handleMovePosition = (item: OneSearchKeywordType) => {
