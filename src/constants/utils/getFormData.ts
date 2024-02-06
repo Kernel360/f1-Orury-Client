@@ -1,4 +1,4 @@
 export interface GetFormDataProps {
   jsonData: BlobPart;
-  images: string[];
+  images: File[];
 }

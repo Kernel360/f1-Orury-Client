@@ -2,12 +2,15 @@
 
 import Image from 'next/image';
 import getTimeDiff from '@/utils/getTimeDiff';
-import { UserProps } from '@/types/community/user';
-import { useState } from 'react';
 import CommentButtons from '@/app/service/community/[id]/_components/comment/CommentButtons';
+
+import { useState } from 'react';
+import { COLOR } from '@/styles/color';
+import { UserProps } from '@/types/community/user';
 import { Heart, MessageCircle } from 'lucide-react';
 
 function User({ ...props }: UserProps) {
+  const { red } = COLOR;
   const {
     user_profile_image,
     user_nickname,
@@ -31,12 +34,7 @@ function User({ ...props }: UserProps) {
     if (likes) {
       return (
         <div className="flex mr-1 gap-[2px]">
-          <Heart
-            size={12}
-            color="#FF006B"
-            strokeWidth={2.5}
-            className="mt-[2px]"
-          />
+          <Heart size={12} color={red} strokeWidth={2.5} className="mt-[2px]" />
           <span className="text-red text-xs pl-[1px]">{likes}</span>
         </div>
       );
@@ -68,7 +66,7 @@ function User({ ...props }: UserProps) {
       <div className="flex gap-2">
         {user_profile_image && (
           <Image
-            src="http://via.placeholder.com/360x360"
+            src={user_profile_image}
             alt="image"
             width={36}
             height={36}

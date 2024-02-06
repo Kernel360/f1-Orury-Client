@@ -1,4 +1,4 @@
-export interface PostsProps {
+export interface OnePostProps {
   id: number;
   title: string;
   content: string;
@@ -32,7 +32,7 @@ export interface PostDetailProps {
 }
 
 export type PostListData = {
-  posts: PostsProps[];
+  posts: OnePostProps[];
   cursor: number;
   next_page?: number;
 };
@@ -49,14 +49,21 @@ export interface PostFormDataProps {
   images: File[];
 }
 
-export interface PostsStateProps {
+export interface UsePostsStateProps {
   categoryId: number;
   setCategoryId: (value: number) => void;
 }
 
-export interface OnePostProps {
+export interface UseOnePostState {
   title: string;
   content: string;
   setTitle: (value: string) => void;
   setContent: (value: string) => void;
+}
+
+export interface PostCountState {
+  likeCount: number;
+  commentCount: number;
+  setLikeCount: (value: number) => void;
+  setCommentCount: (value: number) => void;
 }

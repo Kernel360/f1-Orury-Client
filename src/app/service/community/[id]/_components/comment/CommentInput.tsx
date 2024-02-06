@@ -13,7 +13,14 @@ function CommentInput() {
   const postId = Number(params.id);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [content, setContent] = useState('');
-  const { isReplyMode, setIsFocus, parentId, isFocus } = useCommentStore();
+  const {
+    isReplyMode,
+    setIsFocus,
+    parentId,
+    isFocus,
+    setParentId,
+    setIsReplyMode,
+  } = useCommentStore();
   const { mutate } = useCommentListInfinite(postId);
 
   useEffect(() => {
@@ -32,10 +39,13 @@ function CommentInput() {
 
     setContent('');
     setIsFocus(false);
+    setIsReplyMode(false);
+    setParentId(0);
   };
 
   const onBlurHandler = () => {
     setIsFocus(false);
+    setIsReplyMode(false);
   };
 
   return (

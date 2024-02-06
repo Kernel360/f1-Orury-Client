@@ -1,10 +1,11 @@
 import Image from 'next/image';
-import { PostsProps } from '@/types/community/post';
 import Link from 'next/link';
 import User from '@/app/service/community/_components/User';
 
-function OnePost({ ...props }: PostsProps) {
-  const { id, title, content } = props;
+import type { OnePostProps } from '@/types/community/post';
+
+function OnePost({ ...props }: OnePostProps) {
+  const { id, title, content, thumbnail_image } = props;
 
   return (
     <li>
@@ -22,13 +23,15 @@ function OnePost({ ...props }: PostsProps) {
           </div>
         </div>
 
-        <Image
-          src="http://via.placeholder.com/360x360"
-          alt="image"
-          width={96}
-          height={96}
-          className="rounded-lg"
-        />
+        {thumbnail_image && (
+          <Image
+            src={thumbnail_image}
+            alt="image"
+            width={96}
+            height={96}
+            className="rounded-lg"
+          />
+        )}
       </Link>
     </li>
   );

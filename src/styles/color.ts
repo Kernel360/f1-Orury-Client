@@ -8,4 +8,5 @@ export const COLOR = {
   grey300: '#C3C6CC',
   grey400: '#96A2AC',
   purple700: '#7140FF',
+  red: '#FF006B',
 };

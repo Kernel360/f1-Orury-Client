@@ -7,6 +7,8 @@ import type {
 } from '@/app/_components/ui/toast';
 
 const TOAST_LIMIT = 1;
+
+// FIXME: 아래 number 기본값은 (1000000(ms))로 추정, 그러나 그 값을 변경시켜도 토스트가 사라지는 데 소요되는 시간이 변함이 없음
 const TOAST_REMOVE_DELAY = 1000000;
 
 type ToasterToast = ToastProps & {

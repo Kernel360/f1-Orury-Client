@@ -24,9 +24,8 @@ function PhotoBooth({ ...props }: PhotoBoothProps) {
     const { files } = event.target;
 
     if (files && files.length <= 5) {
-      const newImages = Array.from(files, file => {
-        return URL.createObjectURL(file);
-      });
+      const newImages = Array.from(files);
+
       setImages(prevImages => [...prevImages, ...newImages]);
     } else {
       toast({
@@ -34,26 +33,6 @@ function PhotoBooth({ ...props }: PhotoBoothProps) {
         description: '이미지는 최대 5장까지 업로드할 수 있습니다.',
       });
     }
-  };
-
-  const renderImages = () => {
-    return images.map((image, index) => (
-      <div key={v4()} className="w-16 h-16 sm:w-32 sm:h-32 relative">
-        <Image
-          src={image}
-          alt={`selected-image-${index}`}
-          className="rounded-lg"
-          fill
-        />
-        <button
-          type="button"
-          onClick={() => handleRemoveImage(index)}
-          className="absolute right-[-8px] top-[-8px]"
-        >
-          <XCircle size={20} color="#ffffff" fill="000" />
-        </button>
-      </div>
-    ));
   };
 
   useMemo(() => {
@@ -73,7 +52,25 @@ function PhotoBooth({ ...props }: PhotoBoothProps) {
 
   return (
     <div className="w-full flex justify-between ml-auto">
-      {renderImages()}
+      <ul className="flex gap-5">
+        {images.map((image, index) => (
+          <li key={v4()} className="w-16 h-16 sm:w-32 sm:h-32 relative">
+            <Image
+              src={URL.createObjectURL(image)}
+              alt={`selected-image-${index}`}
+              className="rounded-lg"
+              fill
+            />
+            <button
+              type="button"
+              onClick={() => handleRemoveImage(index)}
+              className="absolute right-[-8px] top-[-8px]"
+            >
+              <XCircle size={20} color="#ffffff" fill="000" />
+            </button>
+          </li>
+        ))}
+      </ul>
       {!isImageLengthFull && (
         <div className="flex justify-end ml-auto">
           <label

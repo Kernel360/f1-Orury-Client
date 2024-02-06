@@ -10,6 +10,7 @@ import PostDetail from '@/app/service/community/[id]/_components/PostDetail';
 import getPostDetail from '@/app/service/community/[id]/api/getPostDetail';
 import CommentList from '@/app/service/community/[id]/_components/comment/CommentList';
 import Form from '@/app/_components/common/Form';
+import ImageSliderModal from '@/app/_components/modal/ImageSliderModal';
 
 function Page({ params }: { params: { id: string } }) {
   const { title, content, setTitle, setContent } = useOnePostState();
@@ -34,7 +35,7 @@ function Page({ params }: { params: { id: string } }) {
   }, [content, postId, setContent, setTitle, title]);
 
   return (
-    <section>
+    <section className="relative h-full-size-omit-nav">
       <Header
         title={isEditButtonClicked ? HEADER.edit : HEADER.community}
         isEllipsis={postDetail?.is_mine && !isEditButtonClicked}
@@ -43,6 +44,7 @@ function Page({ params }: { params: { id: string } }) {
         exitHandler={editHandler}
         editHandler={editHandler}
       />
+      <ImageSliderModal />
       <div className="flex flex-col  relative h-full-size-omit-nav">
         {!isEditButtonClicked && postDetail && <PostDetail {...postDetail} />}
         {!isEditButtonClicked && <CommentList postId={postId} />}
