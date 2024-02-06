@@ -13,7 +13,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import useReviewStore from '@/store/review/reviewStore';
 import { useImageStore, useImagesStore } from '@/store/modal/imageModalStore';
 import useMap from '@/apis/map/hooks/useMap';
-import ReviewModalContainer from './_components/review-modal/ReviewModalContainer';
+import ReviewModalContainer from '../../_components/review/review-modal/ReviewModalContainer';
 
 function Page() {
   const router = useRouter();

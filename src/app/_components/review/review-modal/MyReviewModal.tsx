@@ -1,28 +1,23 @@
 import type { ReviewProps } from '@/types/map/ReviewProps';
-import { ChevronDown, ChevronLeft, PenSquare } from 'lucide-react';
-import { IconButton } from '@mui/material';
-import { COLOR } from '@/styles/color';
+import { ChevronDown, ChevronLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import useReviewStore from '@/store/review/reviewStore';
 import useIntersect from '@/hooks/common/useIntersection';
 import useReviewApi from '@/apis/review/hooks/useReview';
 import { v4 } from 'uuid';
 import { useEffect } from 'react';
-import ReviewRegisterModal from './ReviewRegisterModal';
-import ReviewModalSkeleton from '../skeleton/ReviwModalSkeleton';
+import ReviewModalSkeleton from './ReviwModalSkeleton';
 import OneReview from './OneReview';
 
 /**
  * @description 지도 위에 띄위기 위해서 Modal로 구현을 합니다.
  * @param position 어느 방향에서 모달이 열릴지 결정합니다.
  */
-function ReviewModal({ openPosition }: ReviewProps) {
-  const { isOpen, reset, setCreateMode, reviewId } = useReviewStore(
-    state => state,
-  );
+function MyReviewModal({ openPosition }: ReviewProps) {
+  const { isOpen, reset, state } = useReviewStore(state => state);
 
   const { data, mutate, size, setSize, isLoading, isValidating } =
-    useReviewApi.useGetReviews(reviewId as number);
+    useReviewApi.useGetMyReviews();
 
   const reviews = data ? data.flat() : [];
 
@@ -59,23 +54,19 @@ function ReviewModal({ openPosition }: ReviewProps) {
     { ' left-3': openPosition === 'right' },
   );
 
-  if (isLoadingMore || isEmpty) {
+  if (isLoading || !data || data[0] === undefined) {
     return <ReviewModalSkeleton openPosition={openPosition} />;
   }
 
   return (
-    <>
-      <ReviewRegisterModal
-        mutate={mutate}
-        gym_name={reviews[0].data.data.gym_name}
-      />
-      <div className={ModalClassName}>
-        <div className="w-full max-w-[768px] z-[101] px-1 h-[3.5rem] fixed shadow flex items-center justify-center">
-          <button type="button" className={PositionClassName} onClick={reset}>
-            {openPosition === 'center' ? <ChevronDown /> : <ChevronLeft />}
-          </button>
-          {reviews[0].data.data.gym_name}
-        </div>
+    <div className={ModalClassName}>
+      <div className="w-full max-w-[768px] z-[101] px-1 h-[3.5rem] fixed shadow flex items-center justify-center">
+        <button type="button" className={PositionClassName} onClick={reset}>
+          {openPosition === 'center' ? <ChevronDown /> : <ChevronLeft />}
+        </button>
+        내가 작성한 리뷰
+      </div>
+      {state !== 'mypage' && (
         <div className="relative mt-[3.5rem]">
           {reviews
             .map(v => v.data.data.reviews)
@@ -84,21 +75,10 @@ function ReviewModal({ openPosition }: ReviewProps) {
               <OneReview mutate={mutate} key={v4()} list={data} />
             ))}
           <div ref={bottomRef} />
-          <IconButton
-            onClick={setCreateMode}
-            size="large"
-            className="fixed bottom-6 right-6 z-[50] rounded-3xl bg-primary w-[3rem] h-[3rem] shadow-main"
-          >
-            <PenSquare
-              fill="#ffffff"
-              stroke={COLOR.primary}
-              strokeWidth={1.5}
-            />
-          </IconButton>
         </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 }
 
-export default ReviewModal;
+export default MyReviewModal;

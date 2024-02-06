@@ -3,7 +3,7 @@ import useReviewStore from '@/store/review/reviewStore';
 import { useEffect } from 'react';
 import ReviewModal from './ReviewModal';
 import MyReviewModal from './MyReviewModal';
-import ReviewModalSkeleton from '../skeleton/ReviwModalSkeleton';
+import ReviewModalSkeleton from './ReviwModalSkeleton';
 
 function ReviewModalContainer({
   isMyPage,

@@ -1,5 +1,5 @@
 import type { ReviewListProps } from '@/types/map/ReviewProps';
-import OneReview from '@/app/service/map/_components/review-modal/OneReview';
+import OneReview from '@/app/_components/review/review-modal/OneReview';
 import { v4 } from 'uuid';
 
 function ReviewList({ list, mutate }: ReviewListProps) {

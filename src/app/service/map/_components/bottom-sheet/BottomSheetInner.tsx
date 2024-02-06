@@ -6,7 +6,7 @@ import { BottomSheetInnerProps } from '@/types/map/BottomSheetProps';
 import { Smartphone } from 'lucide-react';
 import { COLOR } from '@/styles/color';
 import { aBeeZee } from '@/styles/fonts';
-import MapCarousel from '@/app/service/map/_components/review-component/MapCarousel';
+import MapCarousel from '@/app/_components/review/review-component/MapCarousel';
 import useReviewStore from '@/store/review/reviewStore';
 import { cn } from '@/lib/utils';
 import getGymState from '@/utils/getGymState';

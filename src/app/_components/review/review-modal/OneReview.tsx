@@ -1,13 +1,13 @@
 import { Avatar, Rating } from '@mui/material';
 import getTimeDiff from '@/utils/getTimeDiff';
-import MapCarousel from '@/app/service/map/_components/review-component/MapCarousel';
-import RadioGroupRating from '@/app/service/map/_components/review-component/SatisfiedRating';
+import MapCarousel from '@/app/_components/review/review-component/MapCarousel';
+import RadioGroupRating from '@/app/_components/review/review-component/SatisfiedRating';
 import { useState } from 'react';
 import type { OneReviewProps } from '@/types/map/ReviewProps';
-import { customIcons } from '@/app/service/map/_components/review-component/IconContainer';
+import { customIcons } from '@/app/_components/review/review-component/IconContainer';
 import IconChipList, {
   IconChip,
-} from '@/app/service/map/_components/review-component/IconChipList';
+} from '@/app/_components/review/review-component/IconChipList';
 import {
   DropdownMenu,
   DropdownMenuContent,
