@@ -14,7 +14,7 @@ const postComment = async ({
   post_id,
 }: PostCommentType) => {
   try {
-    await axiosInstance.post(END_POINT.comment.main, {
+    await axiosInstance.post(END_POINT.commentController.main, {
       content,
       parent_id,
       post_id,

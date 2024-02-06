@@ -4,7 +4,7 @@ import COUNT_ITEM from '@/constants/community/counts';
 import { v4 } from 'uuid';
 
 function Counts({ ...props }: CountsProps) {
-  const { postId, likes, comments, views } = props;
+  const { postId, likes, comments, views, isLike, category } = props;
   const getCount = (index: number) => {
     if (!index) return likes;
     if (index === 1) return comments;
@@ -21,6 +21,8 @@ function Counts({ ...props }: CountsProps) {
           count={getCount(index)}
           color={value}
           icon={key}
+          isLike={isLike}
+          category={category}
         />
       ))}
     </div>

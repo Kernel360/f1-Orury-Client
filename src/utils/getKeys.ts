@@ -5,6 +5,26 @@ import { TResponse } from '@/types/common/response';
 import { CommentListData } from '@/types/community/comment';
 import { PostListData } from '@/types/community/post';
 
+export const getSearchPostListKey = (
+  searchText: string,
+  pageIndex: number,
+  previousPageData: TResponse<PostListData>,
+) => {
+  if (previousPageData && previousPageData.data.cursor === -1) return null;
+
+  if (!previousPageData && pageIndex === 0) {
+    return BACK_URL + END_POINT.postController.getSearchList(searchText, 0);
+  }
+
+  return (
+    BACK_URL +
+    END_POINT.postController.getSearchList(
+      searchText,
+      previousPageData.data.cursor,
+    )
+  );
+};
+
 export const getCommentKey = (
   postId: number,
   pageIndex: number,
@@ -13,12 +33,14 @@ export const getCommentKey = (
 ): string => {
   if (previousPageData && previousPageData.data.cursor === -1) return '';
   if (!previousPageData && pageIndex === 0) {
-    return BACK_URL + END_POINT.comment.getComment(postId, 0);
+    return BACK_URL + END_POINT.commentController.getComment(postId, 0);
   }
 
   const currentCursor = cursor || previousPageData?.data.cursor;
 
-  return BACK_URL + END_POINT.comment.getComment(postId, currentCursor);
+  return (
+    BACK_URL + END_POINT.commentController.getComment(postId, currentCursor)
+  );
 };
 
 export const getPostListKey = (
@@ -37,21 +59,25 @@ export const getPostListKey = (
   }
 
   if (!previousPageData && categoryId === TABS.hot.id) {
-    return BACK_URL + END_POINT.post.getHotPostList(0);
+    return BACK_URL + END_POINT.postController.getHotPostList(0);
   }
 
   if (!previousPageData && pageIndex === 0) {
-    return BACK_URL + END_POINT.post.getPostList(categoryId, 0);
+    return BACK_URL + END_POINT.postController.getPostList(categoryId, 0);
   }
 
   if (categoryId === 3) {
     return (
-      BACK_URL + END_POINT.post.getHotPostList(previousPageData?.data.next_page)
+      BACK_URL +
+      END_POINT.postController.getHotPostList(previousPageData?.data.next_page)
     );
   }
 
   return (
     BACK_URL +
-    END_POINT.post.getPostList(categoryId, previousPageData?.data.cursor)
+    END_POINT.postController.getPostList(
+      categoryId,
+      previousPageData?.data.cursor,
+    )
   );
 };

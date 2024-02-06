@@ -4,7 +4,7 @@ import * as z from 'zod';
 const { category, title, content } = INVALID_MESSAGE;
 
 export const FormSchema = z.object({
-  category: z.string({
+  category: z.number({
     required_error: category,
   }),
   title: z.string({

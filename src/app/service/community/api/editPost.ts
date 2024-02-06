@@ -4,7 +4,7 @@ import { END_POINT } from '@/constants/api/end-point';
 
 const editPost = async (formData: FormData) => {
   try {
-    await axiosInstance.patch(END_POINT.post.main, formData, {
+    await axiosInstance.patch(END_POINT.postController.main, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
