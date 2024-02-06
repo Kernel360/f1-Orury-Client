@@ -5,8 +5,8 @@ import {
   Activity,
   Withdrawal,
 } from '@/app/service/my-page/_components/index';
-import { profileMock } from '@/__mock__/data/profile.mock';
 import SignOut from '@/app/_components/buttons/SignOut';
+import { profileMock } from '@/__mock__/data/profile.mock';
 
 function page() {
   const data = profileMock;
