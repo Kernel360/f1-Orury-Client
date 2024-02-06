@@ -1,16 +1,16 @@
 import type { ReviewListProps } from '@/types/map/ReviewProps';
 import OneReview from '@/app/service/map/_components/review-modal/OneReview';
 
-function ReviewList({ list, handleImageOpen }: ReviewListProps) {
+function ReviewList({ list }: ReviewListProps) {
+  console.log(list);
   return (
     <>
-      {list.map(item => (
-        <OneReview
-          key={item.id}
-          handleImageOpen={handleImageOpen}
-          item={item}
-        />
-      ))}
+      {list.map(data => {
+        {
+          console.log(data);
+          return <OneReview key={data.id} data={data} />;
+        }
+      })}
     </>
   );
 }

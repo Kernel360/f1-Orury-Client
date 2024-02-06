@@ -20,27 +20,32 @@ import { COLOR } from '@/styles/color';
 import { MoreHorizontal } from 'lucide-react';
 import useReviewStore from '@/store/review/reviewStore';
 import { cn } from '@/lib/utils';
+import { useImageStore } from '@/store/modal/imageModalStore';
 
-function OneReview({ item, handleImageOpen }: OneReviewProps) {
+function OneReview({ data }: OneReviewProps) {
   const {
-    id,
-    isMine,
-    create_at,
-    images,
-    score,
-    writer,
-    update_at,
     content,
-    review_reaction,
+    create_at,
+    id,
+    images,
+    is_mine,
     my_reaction,
-  } = item;
+    review_reaction_count,
+    score,
+    update_at,
+    writer,
+  } = data;
 
+  const handleImageOpen = useImageStore(state => state.setModalOpen);
   const [isRatingModalOpen, setIsRatingModalOpen] = useState<boolean>(false);
   const [reviewReaction, setReviewReaction] = useState({
-    review_reaction: review_reaction.map(value => {
+    review_reaction: review_reaction_count.map(value => {
       return {
         type: value.type,
-        count: value.type === my_reaction ? value.count - 1 : value.count,
+        count:
+          my_reaction !== null && value.type === my_reaction
+            ? value.count - 1
+            : value.count,
       };
     }),
     my_reaction,
@@ -85,9 +90,9 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
     <div className="p-[1rem] shadow">
       <div className="flex justify-between">
         <div className="flex gap-2">
-          <Avatar className="w-8 h-8" src={writer.img} />
-          <span className="text-m font-bold">{writer.name}</span>
-          {isMine?.status && (
+          <Avatar className="w-8 h-8" src={writer.profileImage} />
+          <span className="text-m font-bold">{writer.nickname}</span>
+          {is_mine && (
             <DropdownMenu>
               <DropdownMenuTrigger className="relative z-10">
                 <MoreHorizontal size={20} />

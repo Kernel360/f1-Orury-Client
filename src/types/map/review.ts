@@ -5,27 +5,24 @@ interface ReactionType {
 
 interface ReviewDataType {
   id: number;
-  isMine?: {
-    status: boolean;
-    point: number;
-  };
+  is_mine: boolean;
   my_reaction: 'interest' | 'like' | 'help' | 'thumb' | 'angry' | null;
-  review_reaction: ReactionType[];
-  writer: {
-    name: string;
-    img: string;
-  };
-  content?: string;
+  review_reaction_count: ReactionType[];
+  content: string | null;
   images: string[];
   score: number;
   create_at: string;
   update_at: string;
+  writer: {
+    id: number;
+    nickname: string;
+    profileImage: string;
+  };
 }
 
 interface ReviewResponseType {
-  title: string;
-  is_first: boolean;
-  review_list: ReviewDataType[];
+  reviews: ReviewDataType[];
+  gym_name: string;
   cursor: number;
 }
 

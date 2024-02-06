@@ -47,7 +47,12 @@ export const END_POINT = {
   },
   mypage: {
     // DEFAULT
-    main: '/mypage',
+    default: '/user',
+
+    // GET
+    getReviews: (cursor: number) => `${END_POINT.mypage.default}/reviews`,
+    getPosts: (cursor: number) => `${END_POINT.mypage.default}/posts`,
+    getComments: (cursor: number) => `${END_POINT.mypage.default}/comments`,
   },
   map: {
     // DEFAULT
@@ -56,16 +61,25 @@ export const END_POINT = {
     search: (keyword: string) => `/keyword?keyword=${keyword}`,
     detail: (detailId: string) => `/map/detail?detailId=${detailId}`,
   },
-  reviews: {
+  reviewsController: {
     // DEFAULT
-    default: '/review',
+    default: '/reviews',
     // GET
-    getReviews: (reviewId: number, cursor?: number) => {
-      let url = new URLSearchParams(`${END_POINT.reviews.default}/${reviewId}`);
-      if (cursor !== undefined) {
-        url.append('cursor', String(cursor));
-      }
-      return String(url);
+    getReviews: (reviewId: number, cursor: number) => {
+      let url = new URLSearchParams();
+      url.append('cursor', String(cursor));
+      return `${END_POINT.reviewsController.default}/gym/${reviewId}?${url.toString()}`;
+    },
+    getDetailReview: (reviewId: number) => {
+      return `${END_POINT.reviewsController.default}/${reviewId}`;
+    },
+    // DELETE
+    deleteReview: (deleteReviewId: number) => {
+      return `${END_POINT.reviewsController.default}/${deleteReviewId}`;
+    },
+    // PATCH
+    patchReview: (deleteReviewId: number) => {
+      return `${END_POINT.reviewsController.default}/${deleteReviewId}`;
     },
   },
   gymController: {

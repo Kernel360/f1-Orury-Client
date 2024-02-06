@@ -10,9 +10,10 @@ import type { MapMoveControlType, OneSearchKeywordType } from '@/types/map/map';
 import { useEffect, useState } from 'react';
 import { DEFAULT_POSITION } from '@/constants/map';
 import { useRouter, useSearchParams } from 'next/navigation';
-import useOruryMap from '@/apis/map/hook/useOruryMap';
 import useReviewStore from '@/store/review/reviewStore';
 import { useImageStore, useImagesStore } from '@/store/modal/imageModalStore';
+import useOruryMap from '@/apis/map/hooks/useOruryMap';
+import ReviewModal from '@/app/service/map/_components/review-modal/ReviewModal';
 
 function Page() {
   const router = useRouter();
@@ -50,24 +51,23 @@ function Page() {
   //   });
   // }, []);
 
-  // 좌표를 이동 시키고 열어주는 함수
-  const handleMovePosition = (item: OneSearchKeywordType) => {
-    console.log(item);
-    const { latitude, longitude } = item.position;
-    setMapInfo({
-      center: { lat: latitude, lng: longitude },
-      isPanto: true,
-    });
+// 좌표를 이동 시키고 열어주는 함수
+const handleMovePosition = (item: OneSearchKeywordType) => {
+  const { latitude, longitude } = item.position;
+  setMapInfo({
+    center: { lat: latitude, lng: longitude },
+    isPanto: true,
+  });
 
-    if (isSearching) setIsSearching(false);
+  if (isSearching) setIsSearching(false);
 
-    if (keyword) {
-      router.push(`?selectId=${item.id}&keyword=${keyword}`);
-    } else {
-      router.push(`?selectId=${item.id}`);
-    }
-    setIsSheetOpen(true);
-  };
+  if (keyword) {
+    router.push(`?selectId=${item.id}&keyword=${keyword}`);
+  } else {
+    router.push(`?selectId=${item.id}`);
+  }
+  setIsSheetOpen(true);
+};
 
   useEffect(() => {
     return () => {
@@ -79,7 +79,7 @@ function Page() {
 
   return (
     <div className="h-full relative">
-      {/* <ReviewModal position="right" handleImageOpen={handleImageOpen} /> */}
+      <ReviewModal position="right" />
       <ImageModal />
       <ImageSliderModal />
       <KakaoBackGroundMap

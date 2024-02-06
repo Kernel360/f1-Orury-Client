@@ -16,3 +16,9 @@ export const FormSchema = z.object({
 });
 
 export type FormSchemaType = z.infer<typeof FormSchema>;
+
+export const ReviewSchema = z.object({
+  content: z?.string(),
+});
+
+export type ReviewSchemaType = z.infer<typeof ReviewSchema>;

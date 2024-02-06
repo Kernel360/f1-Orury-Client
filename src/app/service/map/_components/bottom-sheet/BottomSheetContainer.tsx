@@ -1,11 +1,10 @@
-import { Suspense, useRef } from 'react';
+import { useRef } from 'react';
 import useCss from '@/hooks/common/useCss';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 import BottomSheetInner from '@/app/service/map/_components/bottom-sheet/BottomSheetInner';
 import type { BottomSheetProps } from '@/types/map/BottomSheetProps';
-import useOruryMap from '../../../../../apis/map/hook/useOruryMap';
-import BottomSheetInnerSkeleton from '../skeleton/BottomSheetInnerSkeleton';
 import { Skeleton } from '@mui/material';
+import useOruryMap from "@/apis/map/hooks/useOruryMap";
 
 /**
  * @description 바텀시트의 외부 컴포넌트입니다.

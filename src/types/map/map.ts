@@ -4,6 +4,10 @@ interface SWRResponseWithData<T> {
   status: number;
 }
 
+interface SWRInfinityWithData<T> {
+  data: T
+}
+
 interface PositionType {
   latitude: number;
   longitude: number;
@@ -113,6 +117,7 @@ export type {
   OneSearchKeywordType,
   URLType,
   CenterType,
+  SWRInfinityWithData,
   DetailPlaceType,
   PointChartDataType,
   AvgChartDataType,

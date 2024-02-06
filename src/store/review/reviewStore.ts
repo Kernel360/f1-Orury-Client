@@ -5,11 +5,11 @@ const useReviewStore = create<ReviewStoreProps>(set => ({
   isOpen: false,
   state: null,
   reviewId: null,
+  onReview: (reviewId) => set({ state: 'review', reviewId, isOpen: true }),
   onMyPage: () => set({ state: 'mypage', isOpen: true }),
-  onReview: () => set({ state: null, isOpen: true }),
-  setFixMode: reviewId => set({ state: 'fix', reviewId }),
+  setFixMode: () => set({ state: 'fix' }),
   setCreateMode: () => set({ state: 'create' }),
-  closeMode: () => set({ state: null, isOpen: true }),
+  closeMode: () => set({ state: 'review' }),
   reset: () => set({ state: null, reviewId: null, isOpen: false }),
 }));
 

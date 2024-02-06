@@ -3,7 +3,6 @@ import { SWRInfiniteResponse } from 'swr/infinite';
 
 interface ReviewProps {
   position: 'center' | 'right';
-  handleImageOpen: (url: string) => void;
 }
 
 interface FirstReviewModalProps {
@@ -13,7 +12,6 @@ interface FirstReviewModalProps {
 
 interface ReviewListProps {
   list: ReviewDataType[];
-  handleImageOpen: (url: string) => void;
 }
 
 interface RadioGroupRatingProps {
@@ -22,8 +20,7 @@ interface RadioGroupRatingProps {
 }
 
 interface OneReviewProps {
-  item: ReviewDataType;
-  handleImageOpen: (url: string) => void;
+  data: ReviewDataType;
 }
 
 interface IconChipListProps {
@@ -33,10 +30,10 @@ interface IconChipListProps {
 
 interface ReviewStoreProps {
   isOpen: boolean;
-  state: 'create' | 'fix' | 'mypage' | null;
+  state: 'review' | 'create' | 'fix' | 'mypage' | null;
   reviewId: number | null;
   onMyPage: () => void;
-  onReview: (callBack: SWRInfiniteResponse) => void;
+  onReview: (reviewId: number) => void;
   setFixMode: (reviewId: number) => void;
   setCreateMode: () => void;
   closeMode: () => void;
