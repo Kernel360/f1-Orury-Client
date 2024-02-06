@@ -20,23 +20,23 @@ import { COLOR } from '@/styles/color';
 import { MoreHorizontal } from 'lucide-react';
 import useReviewStore from '@/store/review/reviewStore';
 import { cn } from '@/lib/utils';
-import { useImageStore } from '@/store/modal/imageModalStore';
+import reviewApi from '@/apis/review/apis/review';
+import { convertURLtoFile } from '@/utils/convertURLtoFile';
 
-function OneReview({ data }: OneReviewProps) {
+function OneReview({ list, mutate }: OneReviewProps) {
   const {
     content,
-    create_at,
+    created_at,
     id,
     images,
     is_mine,
     my_reaction,
     review_reaction_count,
     score,
-    update_at,
+    updated_at,
     writer,
-  } = data;
+  } = list;
 
-  const handleImageOpen = useImageStore(state => state.setModalOpen);
   const [isRatingModalOpen, setIsRatingModalOpen] = useState<boolean>(false);
   const [reviewReaction, setReviewReaction] = useState({
     review_reaction: review_reaction_count.map(value => {
@@ -50,7 +50,6 @@ function OneReview({ data }: OneReviewProps) {
     }),
     my_reaction,
   });
-
   const TouchClassName = cn(
     'flex duration-500 shadow items-center gap-1 bg-white rounded-3xl p-2',
     { 'bg-gray-100': isRatingModalOpen },
@@ -58,14 +57,24 @@ function OneReview({ data }: OneReviewProps) {
       'font-bold scale-95 text-primary bg-gray-100': reviewReaction.my_reaction,
     },
   );
-
   const setFixMode = useReviewStore(state => state.setFixMode);
-
-  const onFixHandling = () => {
-    setFixMode(id);
+  const onFixHandling = async () => {
+    const convertedImages = await Promise.all(
+      images.map(v => convertURLtoFile(v)),
+    );
+    setFixMode({
+      prevContent: content,
+      prevImages: convertedImages,
+      prevScore: score,
+      prevId: id,
+    });
+  };
+  const onDeleteHandling = async () => {
+    await reviewApi.deleteReview(id);
+    mutate();
   };
 
-  const handlePoint = (
+  const handlePoint = async (
     type: 'help' | 'interest' | 'like' | 'thumb' | 'angry',
   ) => {
     if (type === undefined) return;
@@ -84,13 +93,19 @@ function OneReview({ data }: OneReviewProps) {
         };
       });
     }
+
+    await reviewApi.postReaction(id, IconChip[type]);
   };
 
   return (
     <div className="p-[1rem] shadow">
       <div className="flex justify-between">
         <div className="flex gap-2">
-          <Avatar className="w-8 h-8" src={writer.profileImage} />
+          <Avatar
+            className="w-8 h-8"
+            src={writer.profileImage}
+            alt={writer.nickname}
+          />
           <span className="text-m font-bold">{writer.nickname}</span>
           {is_mine && (
             <DropdownMenu>
@@ -101,7 +116,10 @@ function OneReview({ data }: OneReviewProps) {
                 <DropdownMenuItem onClick={onFixHandling}>
                   수정
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-warning">
+                <DropdownMenuItem
+                  onClick={onDeleteHandling}
+                  className="text-warning"
+                >
                   삭제
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -147,9 +165,9 @@ function OneReview({ data }: OneReviewProps) {
           />
         )}
         <div>
-          {create_at === update_at
-            ? getTimeDiff(create_at)
-            : `수정 됨 ${getTimeDiff(update_at)}`}
+          {created_at === updated_at
+            ? getTimeDiff(created_at)
+            : `수정 됨 ${getTimeDiff(updated_at)}`}
         </div>
       </div>
     </div>

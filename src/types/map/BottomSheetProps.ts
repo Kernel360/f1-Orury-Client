@@ -2,7 +2,6 @@ import {
   DetailPlaceType,
   MapMoveControlType,
   OneSearchKeywordType,
-  SearchKeywordListType,
 } from '@/types/map/map';
 
 interface OneSearchResultProps {
@@ -17,7 +16,7 @@ interface BottomSheetProps {
 }
 
 interface BottomSheetInnerProps {
-  data?: DetailPlaceType;
+  data: DetailPlaceType;
 }
 
 interface SearchKeyWordProps {
@@ -27,7 +26,7 @@ interface SearchKeyWordProps {
 
 interface KakaoBackGroundMapProps {
   mapInfo: MapMoveControlType;
-  positionList: OneSearchKeywordType[];
+  positionList?: OneSearchKeywordType[];
   handleMovePosition: (item: OneSearchKeywordType) => void;
 }
 

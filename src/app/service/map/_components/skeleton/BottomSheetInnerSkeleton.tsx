@@ -1,5 +1,3 @@
-import { Smartphone } from 'lucide-react';
-import { COLOR } from '@/styles/color';
 import { aBeeZee } from '@/styles/fonts';
 import { Skeleton } from '@/app/_components/ui/skeleton';
 import { cn } from '@/lib/utils';

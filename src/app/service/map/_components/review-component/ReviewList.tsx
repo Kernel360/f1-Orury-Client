@@ -1,16 +1,13 @@
 import type { ReviewListProps } from '@/types/map/ReviewProps';
 import OneReview from '@/app/service/map/_components/review-modal/OneReview';
+import { v4 } from 'uuid';
 
-function ReviewList({ list }: ReviewListProps) {
-  console.log(list);
+function ReviewList({ list, mutate }: ReviewListProps) {
   return (
     <>
-      {list.map(data => {
-        {
-          console.log(data);
-          return <OneReview key={data.id} data={data} />;
-        }
-      })}
+      {list.map(data => (
+        <OneReview mutate={mutate} key={v4()} list={data} />
+      ))}
     </>
   );
 }

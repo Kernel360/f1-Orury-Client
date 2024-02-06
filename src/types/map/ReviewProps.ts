@@ -1,17 +1,26 @@
-import type { ReactionType, ReviewDataType } from '@/types/map/review';
-import { SWRInfiniteResponse } from 'swr/infinite';
+import type {
+  ReactionType,
+  ReviewDataType,
+  ReviewStateType,
+} from '@/types/map/review';
 
-interface ReviewProps {
-  position: 'center' | 'right';
+interface ResetAPI {
+  mutate: () => void;
 }
+
+interface ReviewRegisterProps extends ResetAPI {
+  gym_name?: string;
+}
+
+interface OpenPosition {
+  openPosition: 'center' | 'right';
+}
+
+interface ReviewProps extends OpenPosition {}
 
 interface FirstReviewModalProps {
   title: string;
   isFirst: boolean;
-}
-
-interface ReviewListProps {
-  list: ReviewDataType[];
 }
 
 interface RadioGroupRatingProps {
@@ -19,8 +28,12 @@ interface RadioGroupRatingProps {
   handlePoint: (type: 'help' | 'interest' | 'like' | 'thumb' | 'angry') => void;
 }
 
-interface OneReviewProps {
-  data: ReviewDataType;
+interface ReviewListProps extends ResetAPI {
+  list: ReviewDataType[];
+}
+
+interface OneReviewProps extends ResetAPI {
+  list: ReviewDataType;
 }
 
 interface IconChipListProps {
@@ -32,9 +45,10 @@ interface ReviewStoreProps {
   isOpen: boolean;
   state: 'review' | 'create' | 'fix' | 'mypage' | null;
   reviewId: number | null;
-  onMyPage: () => void;
+  reviewState: ReviewStateType;
   onReview: (reviewId: number) => void;
-  setFixMode: (reviewId: number) => void;
+  onMyPage: () => void;
+  setFixMode: (reviewState: ReviewStateType) => void;
   setCreateMode: () => void;
   closeMode: () => void;
   reset: () => void;
@@ -44,17 +58,17 @@ interface ReviewRegisterModalProps {
   isOpen: boolean;
 }
 
-interface OneReviewProps {
-  item: ReviewDataType;
-  handleImageOpen: (url: string) => void;
-}
-
 interface IconChipListProps {
   item: ReactionType[];
 }
 
+interface ReviewModalContainerProps extends OpenPosition {
+  isMyPage: boolean;
+}
+
 export type {
   ReviewProps,
+  ReviewRegisterProps,
   FirstReviewModalProps,
   ReviewListProps,
   RadioGroupRatingProps,
@@ -63,4 +77,5 @@ export type {
   ReviewDataType,
   ReviewStoreProps,
   ReviewRegisterModalProps,
+  ReviewModalContainerProps,
 };

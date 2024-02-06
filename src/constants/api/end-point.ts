@@ -93,9 +93,14 @@ export const END_POINT = {
     search: (keyword: string) => `/keyword?keyword=${keyword}`,
     detail: (detailId: string) => `/map/detail?detailId=${detailId}`,
   },
+  gymLikeController: {
+    // DEFAULT
+    default: (gymId: number) => `/gyms/like/${gymId}`,
+  },
   reviewsController: {
     // DEFAULT
     default: '/reviews',
+    reaction: () => `${END_POINT.reviewsController.default}/reaction`,
     // GET
     getReviews: (reviewId: number, cursor: number) => {
       const url = new URLSearchParams();

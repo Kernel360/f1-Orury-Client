@@ -8,11 +8,11 @@ interface ReviewDataType {
   is_mine: boolean;
   my_reaction: 'interest' | 'like' | 'help' | 'thumb' | 'angry' | null;
   review_reaction_count: ReactionType[];
-  content: string | null;
+  content: string;
   images: string[];
   score: number;
-  create_at: string;
-  update_at: string;
+  created_at: string;
+  updated_at: string;
   writer: {
     id: number;
     nickname: string;
@@ -26,16 +26,16 @@ interface ReviewResponseType {
   cursor: number;
 }
 
-interface ReviewModalStore {
-  isOpen: boolean;
-  callback: () => void;
-  setModalOpen: (callback: () => void) => void;
-  setModalClose: () => void;
+interface ReviewStateType {
+  prevImages: File[] | null;
+  prevScore: number | null;
+  prevContent: string | null;
+  prevId: number | null;
 }
 
 export type {
   ReactionType,
   ReviewDataType,
   ReviewResponseType,
-  ReviewModalStore,
+  ReviewStateType,
 };

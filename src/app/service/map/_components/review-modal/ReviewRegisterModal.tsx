@@ -15,63 +15,89 @@ import { aBeeZee } from '@/styles/fonts';
 import { Rating, Skeleton } from '@mui/material';
 import { getFormData } from '@/utils/getFormData';
 import reviewApi from '@/apis/review/apis/review';
-import { mutate } from 'swr';
-import { BACK_URL } from '@/constants/api';
-import { END_POINT } from '@/constants/api/end-point';
+import { cn } from '@/lib/utils';
+import { ReviewRegisterProps } from '@/types/map/ReviewProps';
 
-function ReviewRegisterModal({ gym_name }: { gym_name?: string }) {
-  const { closeMode, setCreateMode, setFixMode, state, reviewId } =
-    useReviewStore(state => state);
+function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
+  const { closeMode, reviewState, state, reviewId } = useReviewStore(
+    state => state,
+  );
+
+  let newContent: string = '';
+  let newImages: File[] = [];
+  let newScore: number = 5;
+  let fixId: number = -1;
+
+  if (state === 'fix') {
+    const { prevContent, prevImages, prevScore, prevId } = reviewState;
+    newContent = prevContent as string;
+    newImages = prevImages as File[];
+    newScore = prevScore as number;
+    fixId = prevId as number;
+  }
 
   const isOpen = state === 'create' || state === 'fix';
 
-  const [ratingValue, setRatingValue] = useState<number>(5);
-  const [images, setImages] = useState<string[]>([]);
+  const ModalClassName = cn(
+    'w-full px-1 max-w-[768px] bg-white overflow-y-scroll duration-1000 h-full top-0 right-0 absolute bg-white',
+    { 'opacity-0 z-0': !isOpen },
+    { 'opacity-1 z-[1000]': isOpen },
+  );
+
+  const [ratingValue, setRatingValue] = useState<number>(newScore);
+  const [images, setImages] = useState<File[]>(newImages);
 
   const form = useForm<ReviewSchemaType>({
     resolver: zodResolver(ReviewSchema),
   });
 
-  const onSubmit = (d: ReviewSchemaType) => {
+  const onSubmit = async (d: ReviewSchemaType) => {
     if (reviewId === null) return;
-    const data = {
+
+    let data: { score: number; content: string; gym_id?: number } = {
       score: ratingValue,
       content: d.content ? d.content : '',
-      gym_id: reviewId,
     };
-    const formData = getFormData({ jsonData: JSON.stringify(data), images });
 
     switch (state) {
-      case 'create':
-        reviewApi.postReview(formData);
+      case 'fix': {
+        const formData = getFormData({
+          jsonData: JSON.stringify(data),
+          images,
+        });
+        await reviewApi.patchReview(fixId, formData);
+        mutate();
         break;
-      case 'fix':
-        reviewApi.patchReview(reviewId, formData);
+      }
+      case 'create': {
+        data = { ...data, gym_id: reviewId };
+        const formData = getFormData({
+          jsonData: JSON.stringify(data),
+          images,
+        });
+        await reviewApi.postReview(formData);
+        mutate();
+        break;
+      }
+      default:
         break;
     }
-
-    mutate(`${BACK_URL}/${END_POINT.reviews.getReviews(reviewId, 0)}`);
-
     closeMode();
   };
 
-  if (!isOpen) return <></>;
   return (
-    <div className="w-full max-w-[768px] fixed z-[1000] bg-white px-1">
+    <div className={ModalClassName}>
       <div className=" h-[3.5rem] shadow flex items-center justify-center">
         <button type="button" className="absolute right-3" onClick={closeMode}>
           <X />
         </button>
-        {state === 'create'
-          ? '리뷰 작성'
-          : state === 'fix'
-            ? '리뷰 수정'
-            : gym_name}
+        {state === 'create' ?? <span>리뷰작성</span>}
+        {state === 'fix' ?? <span>리뷰 수정</span>}
       </div>
       <div
         className={`mx-4 pt-4 text-[20px] border-b border-primary ${aBeeZee.className}`}
       >
-        {gym_name ? (
+        {typeof gym_name !== 'undefined' ? (
           `${gym_name}`
         ) : (
           <Skeleton className="w-[140px] h-[54px] bg-gray-200" />
@@ -80,13 +106,13 @@ function ReviewRegisterModal({ gym_name }: { gym_name?: string }) {
       <F.Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="px-4 flex flex-col bottom-0 fixed justify-between w-full h-[calc(100%-7rem)]"
+          className="max-w-[768px] px-4 flex flex-col bottom-0 fixed justify-between w-full h-[calc(100%-7rem)]"
         >
           <div>
             <Rating
               name="rating"
               size="large"
-              value={ratingValue}
+              defaultValue={ratingValue}
               onChange={(_, newValue) => {
                 if (typeof newValue === 'number') {
                   setRatingValue(newValue);
@@ -95,7 +121,7 @@ function ReviewRegisterModal({ gym_name }: { gym_name?: string }) {
                 }
               }}
             />
-            <div className="py-4 space-y-4">
+            <div className="py-4 space-y-4 ">
               <F.FormField
                 control={form.control}
                 name="content"
@@ -105,6 +131,7 @@ function ReviewRegisterModal({ gym_name }: { gym_name?: string }) {
                       <Content
                         maxLength={520}
                         placeholder="리뷰 내용"
+                        content={newContent}
                         {...field}
                       />
                     </F.FormControl>

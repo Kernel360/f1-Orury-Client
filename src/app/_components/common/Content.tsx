@@ -6,6 +6,7 @@ const Content = forwardRef<HTMLTextAreaElement, ContentAreaProps>(
   ({ placeholder, content, maxLength, ...props }, ref) => {
     const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
       e.target.style.height = '2em';
+      // eslint-disable-next-line no-nested-ternary
       e.target.style.height = maxLength
         ? maxLength < e.target.scrollHeight
           ? `${maxLength}px`
