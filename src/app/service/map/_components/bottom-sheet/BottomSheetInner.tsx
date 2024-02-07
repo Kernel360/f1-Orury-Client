@@ -99,12 +99,14 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
         <OneSiteUrl label="homepage" url={homepage_link} />
         <OneSiteUrl label="instagram" url={instagram_link} />
         <OneSiteUrl label="kakaomap" url={kakao_map_link} />
-        <div className="flex gap-2">
-          <Smartphone stroke={COLOR.primary} size={20} strokeWidth={1.25} />
-          <a className="cursor-pointer" href={`tel:${phone_number}`}>
-            {phone_number}
-          </a>
-        </div>
+        {phone_number ? (
+          <div className="flex gap-2">
+            <Smartphone stroke={COLOR.primary} size={20} strokeWidth={1.25} />
+            <a className="cursor-pointer" href={`tel:${phone_number}`}>
+              {phone_number}
+            </a>
+          </div>
+        ) : null}
       </div>
       <div className="shadow-custom-line h-[1px] py-1" />
       <div className="flex justify-between p-[0.75rem]">
