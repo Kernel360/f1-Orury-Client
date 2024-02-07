@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 
 interface ButtonProps {
-  onClick: () => void;
   content: string;
   color: string;
   submit?: boolean;
   outline?: boolean;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
 function Button({
