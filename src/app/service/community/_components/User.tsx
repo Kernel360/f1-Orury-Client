@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import getTimeDiff from '@/utils/getTimeDiff';
+import useUserStore from '@/store/user/userStore';
 import CommentButtons from '@/app/service/community/[id]/_components/comment/CommentButtons';
 
 import { useState } from 'react';
@@ -11,6 +12,7 @@ import { Heart, MessageCircle } from 'lucide-react';
 
 function User({ ...props }: UserProps) {
   const { red } = COLOR;
+  const { id } = useUserStore();
   const {
     user_profile_image,
     user_nickname,
@@ -21,7 +23,9 @@ function User({ ...props }: UserProps) {
     parent_id,
     comment_count,
     is_like,
+    is_mine,
     hasButton,
+    user_id,
   } = props;
 
   // 댓글의 좋아요 수 (number)
@@ -50,7 +54,7 @@ function User({ ...props }: UserProps) {
           <MessageCircle
             size={12}
             strokeWidth={2.5}
-            color="#855AFF"
+            color={COLOR.primary}
             className="mt-[2px]"
           />
           <span className="text-primary text-xs">{commentCount}</span>
@@ -75,7 +79,10 @@ function User({ ...props }: UserProps) {
         )}
 
         <div className="flex flex-col">
-          <span className="text-sm font-semibold">{user_nickname}</span>
+          <div className="flex gap-1">
+            <span className="text-sm font-semibold">{user_nickname}</span>
+            <span className="text-sm text-grey-500">{`#${user_id || id}`}</span>
+          </div>
           <div className="flex gap-[6px]">
             <span className="text-xs text-grey-500">
               {getTimeDiff(created_at)}
@@ -96,6 +103,7 @@ function User({ ...props }: UserProps) {
           isLike={isLike}
           setLikes={setLikes}
           setIsLike={setisLike}
+          isMine={is_mine}
         />
       )}
     </div>

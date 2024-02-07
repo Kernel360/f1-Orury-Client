@@ -1,6 +1,7 @@
-import { giants } from '@/styles/fonts';
 import Lottie from 'react-lottie';
 import searching from '$/lotties/searching.json';
+
+import { giants } from '@/styles/fonts';
 
 function NotSearched({ content }: { content: string }) {
   const defaultOptions = {

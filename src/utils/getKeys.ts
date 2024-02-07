@@ -5,6 +5,36 @@ import { TResponse } from '@/types/common/response';
 import { CommentListData } from '@/types/community/comment';
 import { PostListData } from '@/types/community/post';
 
+export const getUserPostListKey = (
+  pageIndex: number,
+  type: 'post' | 'comment',
+  previousPageData?: TResponse<PostListData>,
+) => {
+  if (previousPageData && previousPageData.data.cursor === -1) return null;
+
+  if (type === 'post') {
+    if (!previousPageData && pageIndex === 0) {
+      return BACK_URL + END_POINT.userController.getMyPosts(0);
+    }
+
+    return (
+      BACK_URL +
+      END_POINT.userController.getMyPosts(previousPageData?.data.cursor)
+    );
+  }
+
+  if (type === 'comment') {
+    if (!previousPageData && pageIndex === 0) {
+      return BACK_URL + END_POINT.userController.getMyComments(0);
+    }
+  }
+
+  return (
+    BACK_URL +
+    END_POINT.userController.getMyComments(previousPageData?.data.cursor)
+  );
+};
+
 export const getSearchPostListKey = (
   searchText: string,
   pageIndex: number,
