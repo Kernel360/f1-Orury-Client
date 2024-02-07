@@ -1,16 +1,27 @@
 'use client';
 
-import TEAM from '@/constants/team';
 import Kakao from '@/app/_components/buttons/Kakao';
 import Title from '@/app/_components/common/Title';
+import Content from '@/app/_components/home/Content';
+import Button from '@/app/_components/buttons/Button';
 import CALLBACK_URL from '@/constants/url';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getCookie } from '@/lib/cookie';
 import { useRouter } from 'next/navigation';
+import TempModal from './_components/home/TempModal';
 
 function Page() {
   const router = useRouter();
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsClicked(true);
+  };
+
+  const handleCloseModalClick = () => {
+    setIsClicked(false);
+  };
 
   useEffect(() => {
     if (getCookie({ name: 'access_token' })) {
@@ -19,16 +30,22 @@ function Page() {
   }, []);
 
   return (
-    <div className="flex pt-[8rem] flex-col justify-between h-screen bg-white">
-      <div className="flex flex-col max-w-[480px] mx-auto">
+    <div className="flex pt-24 flex-col justify-between h-screen bg-[url('../../assets/images/background.webp')] bg-cover bg-opacity-90">
+      <div className="flex flex-col items-center max-w-[30rem] mx-auto gap-7 ">
         <Title />
-        <span className="mx-auto text-xl font-semibold font-pretendard drop-shadow-xl">
-          {TEAM.content}
-        </span>
+        <Content />
+        <div className="flex justify-center w-32">
+          <Button
+            content="앱 다운로드"
+            color="primary"
+            onClick={handleButtonClick}
+          />
+        </div>
       </div>
       <div className="flex justify-center pb-[8rem] mx-4">
         <Kakao />
       </div>
+      {isClicked && <TempModal cancelHandler={handleCloseModalClick} />}
     </div>
   );
 }

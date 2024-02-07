@@ -8,7 +8,7 @@ import Floating from '@/app/_components/buttons/Floating';
 import Header from '@/app/_components/common/Header';
 import HEADER from '@/constants/ui/common/header';
 import BottomSheetContainer from '@/app/service/community/_components/BottomSheetContainer';
-import SearchPostSection from '@/app/service/community/_components/SearchPostSection';
+import CommunityModal from '@/app/service/community/_components/CommunityModal';
 
 function Page() {
   const bottomSheetTitle = '게시글 작성';
@@ -40,7 +40,7 @@ function Page() {
       />
       <Tabs />
       {!isSearchingFocus && <PostList />}
-      {isSearchingFocus && <SearchPostSection searchText={searchText} />}
+      {isSearchingFocus && <CommunityModal searchText={searchText} />}
       <BottomSheetContainer
         bottomSheetTitle={bottomSheetTitle}
         isSheetOpen={isSheetOpen}
