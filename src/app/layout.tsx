@@ -17,11 +17,17 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       <meta name="theme-color" content={COLOR.primary} />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-title" content="Orury" />
+      <meta name="theme-color" content={COLOR.primary} />
+
       <meta
         name="viewport"
         content="viewport-fit=cover, width=device-width, initial-scale=1.0"
       />
-      <link rel="/manifest" href="/manifest.json" />
+      <link
+        crossOrigin="use-credentials"
+        rel="manifest"
+        href="/manifest.json"
+      />
       <link rel="apple-touch-icon" href="/favicons/apple-icon.png" />
 
       <link
@@ -36,7 +42,6 @@ function RootLayout({ children }: { children: React.ReactNode }) {
         type="image/png"
         sizes="32x32"
       />
-
       <body className={`${pretendard.className} antialiased bg-slate-100`}>
         <div className="max-w-[768px] mx-auto h-screen pb-safe bg-white">
           <Providers>
