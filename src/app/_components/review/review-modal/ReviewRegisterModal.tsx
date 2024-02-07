@@ -84,15 +84,15 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
     }
     closeMode();
   };
-
   return (
     <div className={ModalClassName}>
       <div className=" h-[3.5rem] shadow flex items-center justify-center">
         <button type="button" className="absolute right-3" onClick={closeMode}>
           <X />
         </button>
-        {state === 'create' ?? <span>리뷰작성</span>}
-        {state === 'fix' ?? <span>리뷰 수정</span>}
+        <span>
+          {state === 'create' ? '리뷰작성' : state === 'fix' ?? '리뷰 수정'}
+        </span>
       </div>
       <div
         className={`mx-4 pt-4 text-[20px] border-b border-primary ${aBeeZee.className}`}
