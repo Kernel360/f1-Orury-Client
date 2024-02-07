@@ -39,7 +39,7 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
   const isOpen = state === 'create' || state === 'fix';
 
   const ModalClassName = cn(
-    'w-full px-1 max-w-[768px] bg-white overflow-y-scroll duration-1000 h-full top-0 right-0 absolute bg-white',
+    'w-full max-w-[768px] bg-white overflow-y-scroll duration-1000 h-full top-0 right-0 absolute bg-white',
     { 'opacity-0 z-0': !isOpen },
     { 'opacity-1 z-[1000]': isOpen },
   );

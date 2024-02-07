@@ -4,8 +4,11 @@ import { COLOR } from '@/styles/color';
 import { useImageStore } from '@/store/modal/imageModalStore';
 
 function ImageModal() {
-  const width = window.outerWidth;
+  let width = 0;
 
+  if (typeof window !== 'undefined') {
+    width = window.outerWidth;
+  }
   const { image, isOpen, setModalClose } = useImageStore(state => state);
 
   if (!isOpen || typeof image !== 'string') return;
