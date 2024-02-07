@@ -84,15 +84,23 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
     }
     closeMode();
   };
+
+  let header = null;
+  let submit = null;
+  if (state === 'create') {
+    header = '리뷰 작성';
+    submit = '작성 완료';
+  } else if (state === 'fix') {
+    header = '리뷰 수정';
+    submit = '수정 완료';
+  }
   return (
     <div className={ModalClassName}>
       <div className=" h-[3.5rem] shadow flex items-center justify-center">
         <button type="button" className="absolute right-3" onClick={closeMode}>
           <X />
         </button>
-        <span>
-          {state === 'create' ? '리뷰작성' : state === 'fix' ?? '리뷰 수정'}
-        </span>
+        {header}
       </div>
       <div
         className={`mx-4 pt-4 text-[20px] border-b border-primary ${aBeeZee.className}`}
@@ -145,7 +153,7 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
           <div className="flex flex-col items-end w-full gap-2 pb-4 z-50 bg-white">
             <PhotoBooth images={images} setImages={setImages} />
             <Button type="submit" color="white" className="w-full">
-              작성 완료
+              {submit}
             </Button>
           </div>
         </form>
