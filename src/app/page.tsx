@@ -5,11 +5,11 @@ import Title from '@/app/_components/common/Title';
 import Content from '@/app/_components/home/Content';
 import Button from '@/app/_components/buttons/Button';
 import CALLBACK_URL from '@/constants/url';
+import GuideModal from '@/app/_components/home/GuideModal';
 
 import { useEffect, useState } from 'react';
 import { getCookie } from '@/lib/cookie';
 import { useRouter } from 'next/navigation';
-import TempModal from './_components/home/TempModal';
 
 function Page() {
   const router = useRouter();
@@ -45,7 +45,7 @@ function Page() {
       <div className="flex justify-center pb-[8rem] mx-4">
         <Kakao />
       </div>
-      {isClicked && <TempModal cancelHandler={handleCloseModalClick} />}
+      {isClicked && <GuideModal cancelHandler={handleCloseModalClick} />}
     </div>
   );
 }
