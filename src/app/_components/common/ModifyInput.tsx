@@ -1,41 +1,56 @@
-import { X } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ModifyInputProps } from '@/types/common/modifyInput';
-import { FormSchema, FormSchemaType } from '@/app/service/my-page/schema';
-
 import * as F from '@/app/_components/ui/form';
 import Button from '@/app/_components/buttons/Button';
 import TextInput from '@/app/_components/common/TextInput';
 
+import { useSWRConfig } from 'swr';
+import { X } from 'lucide-react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ModifyInputProps } from '@/types/common/modifyInput';
+import { FormSchema, FormSchemaType } from '@/app/service/user/schema';
+import { editUserData } from '@/app/service/user/api/editUserData';
+import { useToast } from '@/app/_components/ui/use-toast';
+
 function ModifyInput({ ...props }: ModifyInputProps) {
-  const { inputTitle, value, setValue, isToggled, setIsToggled } = props;
-  const beforeValue = value;
+  const { toast } = useToast();
+  const { mutate } = useSWRConfig();
+  const {
+    inputTitle,
+    value,
+    setValue,
+    isToggled,
+    setIsToggled,
+    originNickname,
+  } = props;
+
+  const clearCache = () => {
+    mutate(() => true, undefined, { revalidate: false });
+  };
 
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      id: 2,
       nickname: value,
     },
   });
 
-  const onSubmit = async () => {};
+  const onSubmit: SubmitHandler<FormSchemaType> = async data => {
+    await editUserData(data);
+    setValue(data.nickname);
 
-  const inputHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(event.target.value);
+    clearCache();
+    setIsToggled(isToggled => !isToggled);
+
+    toast({ variant: 'success', description: '닉네임이 변경되었습니다.' });
   };
 
   const clearHandler = () => {
-    setValue('');
+    form.setValue('nickname', '');
   };
 
   const cancelHandler = () => {
-    setValue(beforeValue);
-    setIsToggled(isToggled => !isToggled);
-  };
-
-  const clickHandler = () => {
+    setValue(originNickname);
+    form.setValue('nickname', originNickname);
     setIsToggled(isToggled => !isToggled);
   };
 
@@ -45,36 +60,51 @@ function ModifyInput({ ...props }: ModifyInputProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="px-4 flex flex-col justify-between z-50 w-full"
       >
-        <div className={`${isToggled ? 'block' : 'hidden'} w-full`}>
-          <span className="w-16 font-thin inline-block">{inputTitle}</span>
-          <div className="relative">
-            <TextInput
-              placeholder={value}
-              onChange={inputHandler}
-              value={value}
-              width="w-[calc(100%-4rem)]"
-              isFocus
-            />
-            <button
-              type="button"
-              onClick={clearHandler}
-              className="absolute right-2 top-[2px] cursor-pointer"
-            >
-              <X />
-            </button>
-          </div>
-          <div className="flex justify-end w-full">
-            <div className="flex gap-2 w-40 h-10 mt-8">
-              <Button
-                content="취소"
-                onClick={cancelHandler}
-                color="primary"
-                outline
-              />
-              <Button content="변경" onClick={clickHandler} color="primary" />
+        <F.FormField
+          control={form.control}
+          name="nickname"
+          render={({ field }) => (
+            <div className={`${isToggled ? 'block' : 'hidden'} w-full`}>
+              <span className="w-16 font-thin inline-block">{inputTitle}</span>
+
+              <div className="relative">
+                <TextInput
+                  placeholder={`${value} (2글자 이상, 8글자 이하)`}
+                  defaultValue={value}
+                  width="w-[calc(100%-4rem)]"
+                  isFocus
+                  {...field}
+                />
+
+                {form.formState.errors.nickname && (
+                  <p className="text-warning text-sm leading-5">
+                    {form.formState.errors.nickname.message}
+                  </p>
+                )}
+
+                <button
+                  type="button"
+                  onClick={clearHandler}
+                  className="absolute right-2 top-[2px] cursor-pointer"
+                >
+                  <X />
+                </button>
+              </div>
+              <div className="flex justify-end w-full">
+                <div className="flex gap-2 w-40 h-10 mt-8">
+                  <Button
+                    content="취소"
+                    onClick={cancelHandler}
+                    color="primary"
+                    outline
+                  />
+
+                  <Button content="변경" color="primary" submit />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          )}
+        />
       </form>
     </F.Form>
   );
