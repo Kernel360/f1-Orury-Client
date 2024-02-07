@@ -70,7 +70,7 @@ function ReviewModal({ openPosition }: ReviewProps) {
         gym_name={reviews[0].data.data.gym_name}
       />
       <div className={ModalClassName}>
-        <div className="w-full max-w-[768px] z-[101] px-1 h-[3.5rem] fixed shadow flex items-center justify-center">
+        <div className="w-full max-w-[768px] z-[101] h-[3.5rem] fixed shadow flex items-center justify-center">
           <button type="button" className={PositionClassName} onClick={reset}>
             {openPosition === 'center' ? <ChevronDown /> : <ChevronLeft />}
           </button>
