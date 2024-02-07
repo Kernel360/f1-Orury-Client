@@ -1,5 +1,8 @@
-// eslint-disable-next-line import/no-unresolved
-import { map, board, crew } from 'public/index';
+/* eslint-disable import/no-absolute-path */
+import map from '$/icons/map.svg';
+import board from '$/icons/board.svg';
+import soon from '$/images/commingSoon.png';
+// import crew from '$/icons/crew.svg';
 
 const NAVIGATE_BLOCKS = {
   MAP: {
@@ -19,7 +22,7 @@ const NAVIGATE_BLOCKS = {
   CREW: {
     index: 2,
     href: '/service/crew',
-    src: crew,
+    src: soon,
     sub: '',
     title: '크루',
   },
