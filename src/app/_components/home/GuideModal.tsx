@@ -50,7 +50,7 @@ function GuideModal({ cancelHandler }: { cancelHandler: () => void }) {
                           <br />
                           <span>
                             2. 주소창 우측에 위치한 앱 다운로드 아이콘을
-                            클릭해줍니다.
+                            클릭합니다.
                           </span>
                           <Image
                             src={guide_web_1}
@@ -65,7 +65,7 @@ function GuideModal({ cancelHandler }: { cancelHandler: () => void }) {
                       <A.AccordionItem value="item-2">
                         <A.AccordionTrigger>IOS</A.AccordionTrigger>
                         <A.AccordionContent>
-                          <span>1. 사파리에서 </span>
+                          <span>1. Safari에서 </span>
                           <Link
                             href="https://orury.com"
                             target="_blank"
@@ -103,13 +103,15 @@ function GuideModal({ cancelHandler }: { cancelHandler: () => void }) {
                           </Link>
                           <span>에 접속합니다.</span>
                           <br />
-                          <span>2. 상단의 메뉴 버튼을 클릭해줍니다.</span>
+                          <span>2. 상단의 메뉴 버튼을 클릭합니다.</span>
                           <Image
                             src={guide_and_1}
                             alt="guide_and_1"
                             width={400}
                           />
-                          3. 메뉴 항목 중 앱 설치 메뉴를 클릭해줍니다.
+                          3. 메뉴 항목 중 앱 설치 메뉴를 클릭합니다.
+                          <br />
+                          4.
                           <b>앱 설치 </b>
                           버튼을 클릭하여 설치합니다.
                         </A.AccordionContent>
