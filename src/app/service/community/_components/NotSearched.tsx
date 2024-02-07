@@ -14,7 +14,7 @@ function NotSearched({ content }: { content: string }) {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-208px)] sm:pt-0 pt-8 sm:justify-center items-center">
+    <div className="flex flex-col h-[calc(100vh-208px)] sm:pt-0 pt-8 sm:justify-center items-center z-[102]">
       <Lottie options={defaultOptions} width={200} height={200} />
       <span
         className={`text-lg sm:text-xl text-grey-600 pt-4 ${giants.className}`}

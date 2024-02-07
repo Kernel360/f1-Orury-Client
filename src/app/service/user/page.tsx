@@ -31,9 +31,7 @@ function Page() {
     fetchData();
   }, []);
 
-  const handleExit = () => {
-    setState('');
-  };
+  const handleExit = () => setState('');
 
   const getHeaderTitle = (state: string) => {
     if (state === 'post') return post;
@@ -74,7 +72,10 @@ function Page() {
             user_id={userData.id}
           />
         )}
-        <ReviewModalContainer isMyPage={false} openPosition="right" />
+        <ReviewModalContainer
+          isMyPage={state === 'review'}
+          openPosition="right"
+        />
       </section>
     </div>
   );

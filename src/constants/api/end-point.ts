@@ -74,17 +74,37 @@ export const END_POINT = {
     // DELETE: 댓글 삭제
     deleteComment: (commentId: number) => `/comments/${commentId}`,
   },
-  mypage: {
+  userController: {
     // DEFAULT
-    default: '/user',
+    main: '/user',
+
+    // PATCH
+    profileImage: 'user/profile-image',
 
     // GET
-    getReviews: (cursor: number) =>
-      `${END_POINT.mypage.default}/reviews?cursor=${cursor}`,
-    getPosts: (cursor: number) =>
-      `${END_POINT.mypage.default}/posts?cursor=${cursor}`,
-    getComments: (cursor: number) =>
-      `${END_POINT.mypage.default}/comments?cursor=${cursor}`,
+    getMyPosts: (cursor?: number) => {
+      const url = new URLSearchParams();
+
+      url.append('cursor', String(cursor));
+
+      return `${END_POINT.userController.main}/posts?${url}`;
+    },
+
+    getMyComments: (cursor?: number) => {
+      const url = new URLSearchParams();
+
+      url.append('cursor', String(cursor));
+
+      return `${END_POINT.userController.main}/comments?${url}`;
+    },
+
+    getMyReviews: (cursor?: number) => {
+      const url = new URLSearchParams();
+
+      url.append('cursor', String(cursor));
+
+      return `${END_POINT.userController.main}/reviews?${url}`;
+    },
   },
   map: {
     // DEFAULT

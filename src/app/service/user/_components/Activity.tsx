@@ -19,9 +19,8 @@ function Activity({ setState }: ActivityProps) {
   const { onMyPage } = useReviewStore(state => state);
 
   const handleClick = (key: string) => {
-    if (key === 'review') {
-      onMyPage();
-    }
+    if (key === 'review') onMyPage();
+
     setState(key);
   };
 

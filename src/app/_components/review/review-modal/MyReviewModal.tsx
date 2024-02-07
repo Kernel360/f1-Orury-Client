@@ -6,6 +6,7 @@ import useIntersect from '@/hooks/common/useIntersection';
 import useReviewApi from '@/apis/review/hooks/useReview';
 import { v4 } from 'uuid';
 import { useEffect } from 'react';
+import NotSearched from '@/app/service/community/_components/NotSearched';
 import ReviewModalSkeleton from './ReviwModalSkeleton';
 import OneReview from './OneReview';
 
@@ -66,14 +67,16 @@ function MyReviewModal({ openPosition }: ReviewProps) {
         </button>
         내가 작성한 리뷰
       </div>
-      {state !== 'mypage' && (
+      {state === 'mypage' && (
         <div className="relative mt-[3.5rem]">
-          {reviews
-            .map(v => v.data.data.reviews)
-            .flat()
-            .map(data => (
-              <OneReview mutate={mutate} key={v4()} list={data} />
-            ))}
+          {reviews[0].data.data.cursor !== -2 ? (
+            reviews
+              .map(v => v.data.data.reviews)
+              .flat()
+              .map(data => <OneReview mutate={mutate} key={v4()} list={data} />)
+          ) : (
+            <NotSearched content="나의 리뷰가 존재하지 않습니다." />
+          )}
           <div ref={bottomRef} />
         </div>
       )}
