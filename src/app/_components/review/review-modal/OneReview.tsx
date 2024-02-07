@@ -3,7 +3,7 @@ import getTimeDiff from '@/utils/getTimeDiff';
 import MapCarousel from '@/app/_components/review/review-component/MapCarousel';
 import RadioGroupRating from '@/app/_components/review/review-component/SatisfiedRating';
 import { useState } from 'react';
-import type { OneReviewProps } from '@/types/map/ReviewProps';
+import type { OneReviewProps } from '@/types/review/ReviewProps';
 import { customIcons } from '@/app/_components/review/review-component/IconContainer';
 import IconChipList, {
   IconChip,

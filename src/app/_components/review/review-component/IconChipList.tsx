@@ -1,4 +1,4 @@
-import { IconChipListProps } from '@/types/map/ReviewProps';
+import { IconChipListProps } from '@/types/review/ReviewProps';
 import IconContainer from '@/app/_components/review/review-component/IconContainer';
 import { Chip, Stack } from '@mui/material';
 import { v4 } from 'uuid';

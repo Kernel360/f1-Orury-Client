@@ -16,7 +16,7 @@ import { Rating, Skeleton } from '@mui/material';
 import { getFormData } from '@/utils/getFormData';
 import reviewApi from '@/apis/review/apis/review';
 import { cn } from '@/lib/utils';
-import { ReviewRegisterProps } from '@/types/map/ReviewProps';
+import { ReviewRegisterProps } from '@/types/review/ReviewProps';
 
 function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
   const { closeMode, reviewState, state, reviewId } = useReviewStore(

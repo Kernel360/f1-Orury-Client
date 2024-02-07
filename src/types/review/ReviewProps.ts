@@ -2,46 +2,46 @@ import type {
   ReactionType,
   ReviewDataType,
   ReviewStateType,
-} from '@/types/map/review';
+} from '@/types/review/review';
 
-interface ResetAPI {
+export interface ResetAPI {
   mutate: () => void;
 }
 
-interface ReviewRegisterProps extends ResetAPI {
+export interface ReviewRegisterProps extends ResetAPI {
   gym_name?: string;
 }
 
-interface OpenPosition {
+export interface OpenPosition {
   openPosition: 'center' | 'right';
 }
 
-interface ReviewProps extends OpenPosition {}
+export interface ReviewProps extends OpenPosition {}
 
-interface FirstReviewModalProps {
+export interface FirstReviewModalProps {
   title: string;
   isFirst: boolean;
 }
 
-interface RadioGroupRatingProps {
+export interface RadioGroupRatingProps {
   isOpen: boolean;
   handlePoint: (type: 'help' | 'interest' | 'like' | 'thumb' | 'angry') => void;
 }
 
-interface ReviewListProps extends ResetAPI {
+export interface ReviewListProps extends ResetAPI {
   list: ReviewDataType[];
 }
 
-interface OneReviewProps extends ResetAPI {
+export interface OneReviewProps extends ResetAPI {
   list: ReviewDataType;
 }
 
-interface IconChipListProps {
+export interface IconChipListProps {
   item: ReactionType[];
   myReaction: 'help' | 'interest' | 'like' | 'thumb' | 'angry' | null;
 }
 
-interface ReviewStoreProps {
+export interface ReviewStoreProps {
   isOpen: boolean;
   state: 'review' | 'create' | 'fix' | 'mypage' | null;
   reviewId: number | null;
@@ -54,28 +54,10 @@ interface ReviewStoreProps {
   reset: () => void;
 }
 
-interface ReviewRegisterModalProps {
+export interface ReviewRegisterModalProps {
   isOpen: boolean;
 }
 
-interface IconChipListProps {
-  item: ReactionType[];
-}
-
-interface ReviewModalContainerProps extends OpenPosition {
+export interface ReviewModalContainerProps extends OpenPosition {
   isMyPage: boolean;
 }
-
-export type {
-  ReviewProps,
-  ReviewRegisterProps,
-  FirstReviewModalProps,
-  ReviewListProps,
-  RadioGroupRatingProps,
-  IconChipListProps,
-  OneReviewProps,
-  ReviewDataType,
-  ReviewStoreProps,
-  ReviewRegisterModalProps,
-  ReviewModalContainerProps,
-};

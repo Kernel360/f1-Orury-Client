@@ -1,4 +1,4 @@
-import type { ReviewProps } from '@/types/map/ReviewProps';
+import type { ReviewProps } from '@/types/review/ReviewProps';
 import { ChevronDown, ChevronLeft, PenSquare } from 'lucide-react';
 import { IconButton } from '@mui/material';
 import { COLOR } from '@/styles/color';

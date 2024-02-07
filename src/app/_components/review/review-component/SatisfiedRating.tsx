@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
-import { RadioGroupRatingProps } from '@/types/map/ReviewProps';
+import { RadioGroupRatingProps } from '@/types/review/ReviewProps';
 import { useEffect } from 'react';
 import IconContainer, {
   customIcons,

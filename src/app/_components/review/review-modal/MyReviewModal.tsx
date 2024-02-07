@@ -1,4 +1,4 @@
-import type { ReviewProps } from '@/types/map/ReviewProps';
+import type { ReviewProps } from '@/types/review/ReviewProps';
 import { ChevronDown, ChevronLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import useReviewStore from '@/store/review/reviewStore';

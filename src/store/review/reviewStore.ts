@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import type { ReviewStoreProps } from '@/types/map/ReviewProps';
-import { ReviewStateType } from '@/types/map/review';
+import type { ReviewStoreProps } from '@/types/review/ReviewProps';
+import { ReviewStateType } from '@/types/review/review';
 
 const useReviewStore = create<ReviewStoreProps>(set => ({
   isOpen: false,

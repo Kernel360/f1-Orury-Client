@@ -1,4 +1,4 @@
-import { ReviewModalContainerProps } from '@/types/map/ReviewProps';
+import { ReviewModalContainerProps } from '@/types/review/ReviewProps';
 import useReviewStore from '@/store/review/reviewStore';
 import { useEffect } from 'react';
 import ReviewModal from './ReviewModal';

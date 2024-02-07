@@ -1,4 +1,4 @@
-import type { ReviewListProps } from '@/types/map/ReviewProps';
+import type { ReviewListProps } from '@/types/review/ReviewProps';
 import OneReview from '@/app/_components/review/review-modal/OneReview';
 import { v4 } from 'uuid';
 
