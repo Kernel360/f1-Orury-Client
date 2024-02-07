@@ -5,6 +5,7 @@ export interface CommentBtnProps {
   postId?: number;
   parentId?: number;
   isLike?: boolean;
+  isMine?: boolean;
   setIsLike: Dispatch<SetStateAction<boolean | undefined>>;
   setLikes?: Dispatch<SetStateAction<number | undefined>>;
 }
