@@ -1,4 +1,4 @@
-import { HeadingProps } from '@/types/my-page/privacy';
+import { HeadingProps } from '@/types/user/privacy';
 
 function Heading({ content }: HeadingProps) {
   return (

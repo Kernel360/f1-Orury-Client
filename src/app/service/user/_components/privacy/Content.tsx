@@ -1,4 +1,4 @@
-import { ContentProps } from '@/types/my-page/privacy';
+import { ContentProps } from '@/types/user/privacy';
 
 function Content({ ...props }: ContentProps) {
   return (
