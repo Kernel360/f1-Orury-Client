@@ -1,4 +1,4 @@
-import { CenterType, PositionType } from '@/types/map/map';
+import { CenterType } from '@/types/map/map';
 
 export const END_POINT = {
   auth: {
@@ -12,13 +12,6 @@ export const END_POINT = {
     kakao: '/auth/login',
 
     signUp: '/auth/sign-up',
-  },
-  getReviews: (reviewId: number, cursor?: number) => {
-    const url = new URLSearchParams(`${END_POINT.reviews.default}/${reviewId}`);
-    if (cursor !== undefined) {
-      url.append('cursor', String(cursor));
-    }
-    return String(url);
   },
   postController: {
     // DEFAULT
@@ -83,7 +76,15 @@ export const END_POINT = {
   },
   mypage: {
     // DEFAULT
-    main: '/mypage',
+    default: '/user',
+
+    // GET
+    getReviews: (cursor: number) =>
+      `${END_POINT.mypage.default}/reviews?cursor=${cursor}`,
+    getPosts: (cursor: number) =>
+      `${END_POINT.mypage.default}/posts?cursor=${cursor}`,
+    getComments: (cursor: number) =>
+      `${END_POINT.mypage.default}/comments?cursor=${cursor}`,
   },
   map: {
     // DEFAULT
@@ -92,18 +93,30 @@ export const END_POINT = {
     search: (keyword: string) => `/keyword?keyword=${keyword}`,
     detail: (detailId: string) => `/map/detail?detailId=${detailId}`,
   },
-  reviews: {
+  gymLikeController: {
     // DEFAULT
-    default: '/review',
+    default: (gymId: number) => `/gyms/like/${gymId}`,
+  },
+  reviewsController: {
+    // DEFAULT
+    default: '/reviews',
+    reaction: () => `${END_POINT.reviewsController.default}/reaction`,
     // GET
-    getReviews: (reviewId: number, cursor?: number) => {
-      const url = new URLSearchParams(
-        `${END_POINT.reviews.default}/${reviewId}`,
-      );
-      if (cursor !== undefined) {
-        url.append('cursor', String(cursor));
-      }
-      return String(url);
+    getReviews: (reviewId: number, cursor: number) => {
+      const url = new URLSearchParams();
+      url.append('cursor', String(cursor));
+      return `${END_POINT.reviewsController.default}/gym/${reviewId}?${url.toString()}`;
+    },
+    getDetailReview: (reviewId: number) => {
+      return `${END_POINT.reviewsController.default}/${reviewId}`;
+    },
+    // DELETE
+    deleteReview: (deleteReviewId: number) => {
+      return `${END_POINT.reviewsController.default}/${deleteReviewId}`;
+    },
+    // PATCH
+    patchReview: (deleteReviewId: number) => {
+      return `${END_POINT.reviewsController.default}/${deleteReviewId}`;
     },
   },
   gymController: {

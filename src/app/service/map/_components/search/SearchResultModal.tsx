@@ -4,8 +4,8 @@ import OneSearchResult from '@/app/service/map/_components/search/OneSearchResul
 import type { SearchResultProps } from '@/types/map/BottomSheetProps';
 import { Map } from 'lucide-react';
 import { COLOR } from '@/styles/color';
-import SearchSkeletonList from '../skeleton/SearchSkeletonList';
 import { cn } from '@/lib/utils';
+import SearchSkeletonList from '../skeleton/SearchSkeletonList';
 
 /**
  * @description 해당 Modal은 검색의 결과를 나타내기 위한 Modal입니다.

@@ -35,6 +35,9 @@
     "react/jsx-wrap-multilines": "off",
     "react/jsx-indent": "off",
     "react/no-invalid-html-attribute": "off",
+    "eslint-plugin-import/no-cycle": "off",
+    "import/no-cycle":"off",
+    "no-param-reassign":"off",
     "jsx-a11y/label-has-associated-control": [
       2,
       {

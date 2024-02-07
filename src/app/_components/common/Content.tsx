@@ -3,10 +3,15 @@ import { forwardRef, ChangeEvent } from 'react';
 import { ContentAreaProps } from '@/types/ui/common/contentArea';
 
 const Content = forwardRef<HTMLTextAreaElement, ContentAreaProps>(
-  ({ placeholder, content, ...props }, ref) => {
+  ({ placeholder, content, maxLength, ...props }, ref) => {
     const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
       e.target.style.height = '2em';
-      e.target.style.height = `${e.target.scrollHeight}px`;
+      // eslint-disable-next-line no-nested-ternary
+      e.target.style.height = maxLength
+        ? maxLength < e.target.scrollHeight
+          ? `${maxLength}px`
+          : `${e.target.scrollHeight}px`
+        : `${e.target.scrollHeight}px`;
     };
 
     const textareaClass = clsx(

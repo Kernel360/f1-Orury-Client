@@ -10,9 +10,10 @@ import type { MapMoveControlType, OneSearchKeywordType } from '@/types/map/map';
 import { useEffect, useState } from 'react';
 import { DEFAULT_POSITION } from '@/constants/map';
 import { useRouter, useSearchParams } from 'next/navigation';
-import useOruryMap from '@/apis/map/hook/useOruryMap';
 import useReviewStore from '@/store/review/reviewStore';
 import { useImageStore, useImagesStore } from '@/store/modal/imageModalStore';
+import useMap from '@/apis/map/hooks/useMap';
+import ReviewModalContainer from '../../_components/review/review-modal/ReviewModalContainer';
 
 function Page() {
   const router = useRouter();
@@ -27,8 +28,7 @@ function Page() {
   });
 
   // // 첫 화면으로 검색창에 default 값으로 들어간다.
-  const { isLoading: searchLoading, data: searchResult } =
-    useOruryMap.getSearchList(mapInfo.center, keyword);
+  const { isLoading, data } = useMap.useGetSearchList(mapInfo.center, keyword);
 
   // 맵상에서 선택된 지도가 있는지 판단하는 state
   const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
@@ -39,20 +39,14 @@ function Page() {
   const handleImageClosed = useImageStore(state => state.setModalClose);
   const handleCarouselClosed = useImagesStore(state => state.setModalClose);
 
-  // const { location } = useGeoLocation();
-
-  // useEffect(() => {
-  //   setMapInfo(() => {
-  //     return {
-  //       isPanto: true,
-  //       center: { lat: location.latitude, lng: location.longitude },
-  //     };
-  //   });
-  // }, []);
+  useEffect(() => {
+    if (isSearching && isSheetOpen) {
+      setIsSheetOpen(false);
+    }
+  }, [isSearching]);
 
   // 좌표를 이동 시키고 열어주는 함수
   const handleMovePosition = (item: OneSearchKeywordType) => {
-    console.log(item);
     const { latitude, longitude } = item.position;
     setMapInfo({
       center: { lat: latitude, lng: longitude },
@@ -70,21 +64,33 @@ function Page() {
   };
 
   useEffect(() => {
+    if (selectId !== '') {
+      const selectItem = data?.data.data.filter(
+        v => v.id === Number(selectId),
+      )[0];
+
+      if (selectItem) {
+        handleMovePosition(selectItem);
+      }
+    }
+
     return () => {
       handleImageClosed();
       handleCarouselClosed();
       closeModal();
     };
-  }, []);
+  }, [data]);
+
+  const isEmptyData = !data || isLoading;
 
   return (
     <div className="h-full relative">
-      {/* <ReviewModal position="right" handleImageOpen={handleImageOpen} /> */}
+      <ReviewModalContainer isMyPage={false} openPosition="right" />
       <ImageModal />
       <ImageSliderModal />
       <KakaoBackGroundMap
         mapInfo={mapInfo}
-        positionList={searchResult?.data.data ? searchResult?.data.data : []}
+        positionList={isEmptyData ? [] : data.data.data}
         handleMovePosition={handleMovePosition}
       />
       <SearchBar
@@ -92,9 +98,9 @@ function Page() {
         onSearchingFocus={() => setIsSearching(true)}
       />
       <SearchResultModal
-        searchResult={searchResult?.data.data}
+        searchResult={isEmptyData ? [] : data.data.data}
         isSearching={isSearching}
-        searchLoading={searchLoading}
+        searchLoading={isLoading}
         onSearchingBlur={() => setIsSearching(false)}
         handleMovePosition={handleMovePosition}
       />

@@ -1,26 +1,18 @@
-interface SWRResponseWithData<T> {
-  data: T;
-  message: string;
-  status: number;
-}
-
-interface PositionType {
+export interface PositionType {
   latitude: number;
   longitude: number;
 }
 
-interface URLType {
+export interface URLType {
   label: 'homepage' | 'instagram' | 'kakaomap';
   url: string;
 }
 
-interface SearchKeywordListType {
+export interface SearchKeywordListType {
   data: OneSearchKeywordType[];
-  keyword: string;
-  total: number;
 }
 
-interface OneSearchKeywordType {
+export interface OneSearchKeywordType {
   doing_business: boolean;
   id: number;
   is_like: boolean;
@@ -32,38 +24,38 @@ interface OneSearchKeywordType {
   position: PositionType;
 }
 
-interface PointChartDataType {
+export interface PointChartDataType {
   point: number;
   count: number;
 }
 
-interface AvgChartDataType {
+export interface AvgChartDataType {
   month: number;
   avg: number;
   count: number;
 }
 
-interface AxisChartPointType {
+export interface AxisChartPointType {
   index: number;
   x: number;
   y: number;
   data: PointChartDataType[];
 }
 
-interface AxisChartAvgType {
+export interface AxisChartAvgType {
   index: number;
   x: number;
   y: number;
   data: AvgChartDataType[];
 }
 
-interface SearchIdDetailMapType {
+export interface SearchIdDetailMapType {
   data: DetailPlaceType;
   message: string;
   status: number;
 }
 
-interface BusinessHoursType {
+export interface BusinessHoursType {
   business_hours: [
     { MONDAY: string },
     { TUESDAY: string },
@@ -75,7 +67,7 @@ interface BusinessHoursType {
   ];
 }
 
-interface DetailPlaceType extends BusinessHoursType {
+export interface DetailPlaceType extends BusinessHoursType {
   id: number;
   name: string;
   road_address: string;
@@ -96,29 +88,12 @@ interface DetailPlaceType extends BusinessHoursType {
   line_chart_data: AvgChartDataType[];
 }
 
-interface CenterType {
+export interface CenterType {
   lat: number;
   lng: number;
 }
 
-interface MapMoveControlType {
+export interface MapMoveControlType {
   center: CenterType;
   isPanto: boolean;
 }
-
-export type {
-  SWRResponseWithData,
-  PositionType,
-  BusinessHoursType,
-  OneSearchKeywordType,
-  URLType,
-  CenterType,
-  DetailPlaceType,
-  PointChartDataType,
-  AvgChartDataType,
-  SearchIdDetailMapType,
-  AxisChartPointType,
-  AxisChartAvgType,
-  SearchKeywordListType,
-  MapMoveControlType,
-};

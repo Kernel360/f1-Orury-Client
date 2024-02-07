@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { IconButton, Rating } from '@mui/material';
 import { COLOR } from '@/styles/color';
 import { useImageStore, useImagesStore } from '@/store/modal/imageModalStore';
+import mapApi from '@/apis/map/apis/map';
 
 /**
  * @description 검색 결과의 항목을 하나씩 보여주기 위한 소단위의 컴포넌트입니다.
@@ -13,6 +14,7 @@ import { useImageStore, useImagesStore } from '@/store/modal/imageModalStore';
  */
 function OneSearchResult({ item, onMovePosition }: OneSearchResultProps) {
   const {
+    id,
     is_like,
     name,
     review_count,
@@ -21,7 +23,7 @@ function OneSearchResult({ item, onMovePosition }: OneSearchResultProps) {
     thumbnail_image,
   } = item;
 
-  const [isLike, setIsLike] = useState<boolean>(is_like);
+  const [isLike, setIsLike] = useState<boolean>(() => is_like);
 
   const handleImageModalOpen = useImageStore(state => state.setModalOpen);
   const handleCarouselOpen = useImagesStore(state => state.setModalOpen);
@@ -29,6 +31,11 @@ function OneSearchResult({ item, onMovePosition }: OneSearchResultProps) {
   // 북마크 혹은 좋아요를 눌렀을 때 일어나는 함수
   const handleLikeEvent = () => {
     setIsLike(prev => !prev);
+    if (!isLike) {
+      mapApi.postGymLike(id);
+    } else {
+      mapApi.deleteGymLike(id);
+    }
   };
 
   const onCarouselOpen = () => {

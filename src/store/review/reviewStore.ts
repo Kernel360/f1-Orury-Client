@@ -1,15 +1,32 @@
 import { create } from 'zustand';
-import type { ReviewStoreProps } from '@/types/map/ReviewProps';
+import type { ReviewStoreProps } from '@/types/review/ReviewProps';
+import { ReviewStateType } from '@/types/review/review';
 
 const useReviewStore = create<ReviewStoreProps>(set => ({
   isOpen: false,
   state: null,
   reviewId: null,
+  reviewState: {
+    prevImages: null,
+    prevScore: null,
+    prevContent: null,
+    prevId: null,
+  },
+  onReview: reviewId => set({ state: 'review', reviewId, isOpen: true }),
   onMyPage: () => set({ state: 'mypage', isOpen: true }),
-  onReview: () => set({ state: null, isOpen: true }),
-  setFixMode: reviewId => set({ state: 'fix', reviewId }),
+  setFixMode: (reviewState: ReviewStateType) =>
+    set({ state: 'fix', reviewState }),
   setCreateMode: () => set({ state: 'create' }),
-  closeMode: () => set({ state: null, isOpen: true }),
+  closeMode: () =>
+    set({
+      state: 'review',
+      reviewState: {
+        prevImages: null,
+        prevScore: null,
+        prevContent: null,
+        prevId: null,
+      },
+    }),
   reset: () => set({ state: null, reviewId: null, isOpen: false }),
 }));
 

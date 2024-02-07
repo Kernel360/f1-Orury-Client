@@ -1,11 +1,11 @@
-import { Suspense, useRef } from 'react';
+import { useRef } from 'react';
 import useCss from '@/hooks/common/useCss';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 import BottomSheetInner from '@/app/service/map/_components/bottom-sheet/BottomSheetInner';
 import type { BottomSheetProps } from '@/types/map/BottomSheetProps';
-import useOruryMap from '../../../../../apis/map/hook/useOruryMap';
-import BottomSheetInnerSkeleton from '../skeleton/BottomSheetInnerSkeleton';
 import { Skeleton } from '@mui/material';
+import useMap from '@/apis/map/hooks/useMap';
+import BottomSheetInnerSkeleton from '../skeleton/BottomSheetInnerSkeleton';
 
 /**
  * @description 바텀시트의 외부 컴포넌트입니다.
@@ -20,12 +20,12 @@ function BottomSheetContainer({
 }: BottomSheetProps) {
   useCss('https://unpkg.com/react-spring-bottom-sheet/dist/style.css');
 
-  const { data, isLoading } = useOruryMap.getDetail(selectId);
+  const { data, isLoading } = useMap.useGetDetail(selectId);
 
   const focusRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<BottomSheetRef>(null);
 
-  const isDataNull = !data || isLoading;
+  const isDataNull = typeof data === 'undefined' || isLoading;
 
   return (
     <BottomSheet
@@ -44,14 +44,18 @@ function BottomSheetContainer({
           {isDataNull ? (
             <Skeleton className="w-[100px] h-[28px] bg-gray-200" />
           ) : (
-            data?.data?.data.name
+            data.data.data.name
           )}
         </h1>
       }
       onDismiss={onDisMiss}
       expandOnContentDrag={isSheetOpen}
     >
-      <BottomSheetInner data={data?.data?.data} />
+      {isDataNull ? (
+        <BottomSheetInnerSkeleton />
+      ) : (
+        <BottomSheetInner data={data.data.data} />
+      )}
     </BottomSheet>
   );
 }

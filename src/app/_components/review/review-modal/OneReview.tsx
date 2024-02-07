@@ -1,13 +1,13 @@
 import { Avatar, Rating } from '@mui/material';
 import getTimeDiff from '@/utils/getTimeDiff';
-import MapCarousel from '@/app/service/map/_components/review-component/MapCarousel';
-import RadioGroupRating from '@/app/service/map/_components/review-component/SatisfiedRating';
+import MapCarousel from '@/app/_components/review/review-component/MapCarousel';
+import RadioGroupRating from '@/app/_components/review/review-component/SatisfiedRating';
 import { useState } from 'react';
-import type { OneReviewProps } from '@/types/map/ReviewProps';
-import { customIcons } from '@/app/service/map/_components/review-component/IconContainer';
+import type { OneReviewProps } from '@/types/review/ReviewProps';
+import { customIcons } from '@/app/_components/review/review-component/IconContainer';
 import IconChipList, {
   IconChip,
-} from '@/app/service/map/_components/review-component/IconChipList';
+} from '@/app/_components/review/review-component/IconChipList';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,32 +20,36 @@ import { COLOR } from '@/styles/color';
 import { MoreHorizontal } from 'lucide-react';
 import useReviewStore from '@/store/review/reviewStore';
 import { cn } from '@/lib/utils';
+import reviewApi from '@/apis/review/apis/review';
+import { convertURLtoFile } from '@/utils/convertURLtoFile';
 
-function OneReview({ item, handleImageOpen }: OneReviewProps) {
+function OneReview({ list, mutate }: OneReviewProps) {
   const {
-    id,
-    isMine,
-    create_at,
-    images,
-    score,
-    writer,
-    update_at,
     content,
-    review_reaction,
+    created_at,
+    id,
+    images,
+    is_mine,
     my_reaction,
-  } = item;
+    review_reaction_count,
+    score,
+    updated_at,
+    writer,
+  } = list;
 
   const [isRatingModalOpen, setIsRatingModalOpen] = useState<boolean>(false);
   const [reviewReaction, setReviewReaction] = useState({
-    review_reaction: review_reaction.map(value => {
+    review_reaction: review_reaction_count.map(value => {
       return {
         type: value.type,
-        count: value.type === my_reaction ? value.count - 1 : value.count,
+        count:
+          my_reaction !== null && value.type === my_reaction
+            ? value.count - 1
+            : value.count,
       };
     }),
     my_reaction,
   });
-
   const TouchClassName = cn(
     'flex duration-500 shadow items-center gap-1 bg-white rounded-3xl p-2',
     { 'bg-gray-100': isRatingModalOpen },
@@ -53,14 +57,24 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
       'font-bold scale-95 text-primary bg-gray-100': reviewReaction.my_reaction,
     },
   );
-
   const setFixMode = useReviewStore(state => state.setFixMode);
-
-  const onFixHandling = () => {
-    setFixMode(id);
+  const onFixHandling = async () => {
+    const convertedImages = await Promise.all(
+      images.map(v => convertURLtoFile(v)),
+    );
+    setFixMode({
+      prevContent: content,
+      prevImages: convertedImages,
+      prevScore: score,
+      prevId: id,
+    });
+  };
+  const onDeleteHandling = async () => {
+    await reviewApi.deleteReview(id);
+    mutate();
   };
 
-  const handlePoint = (
+  const handlePoint = async (
     type: 'help' | 'interest' | 'like' | 'thumb' | 'angry',
   ) => {
     if (type === undefined) return;
@@ -79,15 +93,21 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
         };
       });
     }
+
+    await reviewApi.postReaction(id, IconChip[type]);
   };
 
   return (
     <div className="p-[1rem] shadow">
       <div className="flex justify-between">
         <div className="flex gap-2">
-          <Avatar className="w-8 h-8" src={writer.img} />
-          <span className="text-m font-bold">{writer.name}</span>
-          {isMine?.status && (
+          <Avatar
+            className="w-8 h-8"
+            src={writer.profileImage}
+            alt={writer.nickname}
+          />
+          <span className="text-m font-bold">{writer.nickname}</span>
+          {is_mine && (
             <DropdownMenu>
               <DropdownMenuTrigger className="relative z-10">
                 <MoreHorizontal size={20} />
@@ -96,7 +116,10 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
                 <DropdownMenuItem onClick={onFixHandling}>
                   수정
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-warning">
+                <DropdownMenuItem
+                  onClick={onDeleteHandling}
+                  className="text-warning"
+                >
                   삭제
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -142,9 +165,9 @@ function OneReview({ item, handleImageOpen }: OneReviewProps) {
           />
         )}
         <div>
-          {create_at === update_at
-            ? getTimeDiff(create_at)
-            : `수정 됨 ${getTimeDiff(update_at)}`}
+          {created_at === updated_at
+            ? getTimeDiff(created_at)
+            : `수정 됨 ${getTimeDiff(updated_at)}`}
         </div>
       </div>
     </div>

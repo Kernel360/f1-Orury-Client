@@ -17,7 +17,7 @@ import type { OneSearchKeywordType } from '@/types/map/map';
  * @param mapInfo 현재 맵의 중심 좌표 값을 간직하고 있습니다.
  */
 function KakaoBackGroundMap({
-  positionList,
+  positionList = [],
   mapInfo,
   handleMovePosition,
 }: KakaoBackGroundMapProps) {

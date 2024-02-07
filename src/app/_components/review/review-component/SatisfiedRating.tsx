@@ -3,12 +3,12 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
-import { RadioGroupRatingProps } from '@/types/map/ReviewProps';
+import { RadioGroupRatingProps } from '@/types/review/ReviewProps';
 import { useEffect } from 'react';
 import IconContainer, {
   customIcons,
-} from '@/app/service/map/_components/review-component/IconContainer';
-import { IconChip } from '@/app/service/map/_components/review-component/IconChipList';
+} from '@/app/_components/review/review-component/IconContainer';
+import { IconChip } from '@/app/_components/review/review-component/IconChipList';
 
 const SatisfiedRating = styled(Rating)(({ theme }) => ({
   '& .MuiRating-iconEmpty .MuiSvgIcon-root': {

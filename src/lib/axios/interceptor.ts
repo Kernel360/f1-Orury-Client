@@ -1,9 +1,9 @@
 import { decrypt } from '@/utils/crypto';
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { getCookie } from '../cookie';
 import { ERROR_CODE, STATUS_CODE } from '@/constants/api/statusCode';
-import { axiosInstance } from './axios-instance';
 import { getNewAccessToken } from '@/apis/auth/getNewAccessToken';
+import { getCookie } from '../cookie';
+import { axiosInstance } from './axios-instance';
 
 export interface ErrorResponseData {
   statusCode: number;
@@ -29,12 +29,14 @@ export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
 export const handleError = async (error: AxiosError<ErrorResponseData>) => {
   const originalRequest = error.config;
 
-  if (!error.response || !originalRequest)
+  if (!error.response || !originalRequest) {
     throw new Error('에러가 발생했습니다.');
+  }
 
   const { data, status } = error.response;
 
   if (data.code !== ERROR_CODE.invalidEmail) {
+    throw new Error('잘못된 이메일 에러가 발생했습니다.');
   }
 
   if (status === STATUS_CODE.unauthorized) {

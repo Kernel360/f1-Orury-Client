@@ -1,37 +1,36 @@
-import {
+import type {
   DetailPlaceType,
   MapMoveControlType,
   OneSearchKeywordType,
-  SearchKeywordListType,
 } from '@/types/map/map';
 
-interface OneSearchResultProps {
+export interface OneSearchResultProps {
   item: OneSearchKeywordType;
   onMovePosition: () => void;
 }
 
-interface BottomSheetProps {
+export interface BottomSheetProps {
   isSheetOpen: boolean;
   selectId: string;
   onDisMiss: () => void;
 }
 
-interface BottomSheetInnerProps {
-  data?: DetailPlaceType;
+export interface BottomSheetInnerProps {
+  data: DetailPlaceType;
 }
 
-interface SearchKeyWordProps {
+export interface SearchKeyWordProps {
   isSearching: boolean;
   onSearchingFocus: () => void;
 }
 
-interface KakaoBackGroundMapProps {
+export interface KakaoBackGroundMapProps {
   mapInfo: MapMoveControlType;
-  positionList: OneSearchKeywordType[];
+  positionList?: OneSearchKeywordType[];
   handleMovePosition: (item: OneSearchKeywordType) => void;
 }
 
-interface SearchResultProps {
+export interface SearchResultProps {
   searchResult?: OneSearchKeywordType[];
   isSearching: boolean;
   searchLoading: boolean;
@@ -39,17 +38,7 @@ interface SearchResultProps {
   handleMovePosition: (item: OneSearchKeywordType) => void;
 }
 
-interface MapCarouselProps {
+export interface MapCarouselProps {
   width?: string;
   images: string[];
 }
-
-export type {
-  BottomSheetProps,
-  OneSearchResultProps,
-  BottomSheetInnerProps,
-  KakaoBackGroundMapProps,
-  SearchKeyWordProps,
-  SearchResultProps,
-  MapCarouselProps,
-};
