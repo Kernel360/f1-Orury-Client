@@ -13,7 +13,7 @@ function ReviewModalSkeleton({
 
   const ModalClassName = cn(
     'w-full max-w-[768px] bg-white overflow-y-scroll duration-1000 h-full top-0 right-0 absolute bg-white',
-    { 'opacity-0 z-0': !isOpen },
+    { 'opacity-0 z-[-1]': !isOpen },
     { 'opacity-1 z-[100]': isOpen },
     { 'top-1/2': openPosition === 'center' && !isOpen },
     { 'right-1/2': openPosition === 'right' && !isOpen },
