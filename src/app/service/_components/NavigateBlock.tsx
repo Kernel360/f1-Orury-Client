@@ -17,7 +17,7 @@ function NavigateBlock({ ...props }: NavigateBlockProps) {
           {
             'bg-primary': index === 0,
             'bg-red': index === 1,
-            'bg-green': index === 2,
+            'bg-disabled': index === 2,
           },
         )}
       >

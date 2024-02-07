@@ -10,6 +10,7 @@ export interface CommentProps {
   like_count: number;
   is_like: boolean;
   deleted: number;
+  is_mine: boolean;
   childComments?: CommentProps[];
 }
 

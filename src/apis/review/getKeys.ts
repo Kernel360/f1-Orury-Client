@@ -9,12 +9,12 @@ export const getMyReviewKey = (
 ): string => {
   if (previousPageData && previousPageData.data.cursor === -1) return '';
   if (!previousPageData && pageIndex === 0) {
-    return END_POINT.mypage.getReviews(0);
+    return END_POINT.userController.getMyReviews(0);
   }
 
   const currentCursor = cursor || (previousPageData?.data.cursor as number);
 
-  return END_POINT.mypage.getReviews(currentCursor);
+  return END_POINT.userController.getMyReviews(currentCursor);
 };
 
 export const getReviewKey = (

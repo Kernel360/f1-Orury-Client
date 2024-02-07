@@ -3,7 +3,10 @@ import OnePost from '@/app/service/community/_components/OnePost';
 import NotSearched from '@/app/service/community/_components/NotSearched';
 import useSearchPostListInfinite from '@/hooks/community/useSearchPostListInfinite';
 
-function SearchPostSection({ searchText }: { searchText: string }) {
+import { CommunityModalProps } from '@/types/user';
+
+function CommunityModal({ ...props }: CommunityModalProps) {
+  const { searchText } = props;
   const { data, size, setSize, isValidating } =
     useSearchPostListInfinite(searchText);
   const posts = data?.flatMap(page => page.data.posts);
@@ -25,4 +28,4 @@ function SearchPostSection({ searchText }: { searchText: string }) {
   );
 }
 
-export default SearchPostSection;
+export default CommunityModal;

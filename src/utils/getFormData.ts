@@ -7,13 +7,15 @@ import type { GetFormDataProps } from '@/constants/utils/getFormData';
  * @param options.images - 이미지 파일을 담은 배열
  * @returns 생성된 FormData 객체
  */
-export const getFormData = ({ jsonData, images }: GetFormDataProps) => {
+export const getFormData = ({ images, jsonData }: GetFormDataProps) => {
   const formData = new FormData();
 
-  formData.append(
-    'request',
-    new Blob([jsonData], { type: 'application/json' }),
-  );
+  if (jsonData) {
+    formData.append(
+      'request',
+      new Blob([jsonData], { type: 'application/json' }),
+    );
+  }
 
   images.forEach(image => formData.append('image', image));
 

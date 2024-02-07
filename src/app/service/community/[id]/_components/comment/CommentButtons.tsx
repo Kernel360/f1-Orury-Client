@@ -15,12 +15,14 @@ import { useToast } from '@/app/_components/ui/use-toast';
 import type { CommentBtnProps } from '@/types/community/commentButtons';
 
 function CommentButtons({ ...props }: CommentBtnProps) {
-  const { commentId, isLike, setLikes, setIsLike, postId, parentId } = props;
   const { toast } = useToast();
+  const { commentId, isLike, setLikes, setIsLike, postId, parentId, isMine } =
+    props;
   const { mutate } = useCommentListInfinite(postId);
 
   const [isClicked, setIsClicked] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
   const {
     setCommentId,
     triggerModify,
@@ -110,22 +112,25 @@ function CommentButtons({ ...props }: CommentBtnProps) {
       </M.MenubarMenu>
 
       {/* 더보기 */}
-      <M.MenubarMenu>
-        <M.MenubarTrigger>
-          <MoreVertical color="#96A2AC" size={16} strokeWidth={1.5} />
-        </M.MenubarTrigger>
-        <M.MenubarContent>
-          <M.MenubarCheckboxItem onClick={modifyHandler} className="bg-white">
-            수정
-          </M.MenubarCheckboxItem>
-          <M.MenubarCheckboxItem
-            className="text-warning bg-white"
-            onClick={() => setOpenDeleteModal(true)}
-          >
-            삭제
-          </M.MenubarCheckboxItem>
-        </M.MenubarContent>
-      </M.MenubarMenu>
+      {isMine && (
+        <M.MenubarMenu>
+          <M.MenubarTrigger>
+            <MoreVertical color="#96A2AC" size={16} strokeWidth={1.5} />
+          </M.MenubarTrigger>
+          <M.MenubarContent>
+            <M.MenubarCheckboxItem onClick={modifyHandler} className="bg-white">
+              수정
+            </M.MenubarCheckboxItem>
+            <M.MenubarCheckboxItem
+              className="text-warning bg-white"
+              onClick={() => setOpenDeleteModal(true)}
+            >
+              삭제
+            </M.MenubarCheckboxItem>
+          </M.MenubarContent>
+        </M.MenubarMenu>
+      )}
+
       {openDeleteModal && (
         <Modal
           title={MODAL.deleteComment.title}

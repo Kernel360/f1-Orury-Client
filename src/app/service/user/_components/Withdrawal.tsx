@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Modal from '@/app/_components/common/Modal';
-import { signOut } from 'next-auth/react';
 import { MODAL } from '@/constants/ui/common/modal';
 
 function Withdrawal() {
@@ -20,10 +19,10 @@ function Withdrawal() {
       {isClicked && (
         <Modal
           title={MODAL.withdrawal.title}
-          content={MODAL.withdrawal.content}
+          content="아직 준비중입니다."
           okContent={MODAL.withdrawal.okContent}
           cancelHandler={clickHandler}
-          okHandler={() => signOut({ callbackUrl: '/' })}
+          okHandler={() => {}}
         />
       )}
     </div>

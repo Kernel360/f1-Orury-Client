@@ -8,7 +8,7 @@ function Page() {
   return (
     <main className="flex flex-col justify-between pb-16 bg-white">
       <div>
-        <Title />
+        <Title black />
         <Notice />
         <div className="flex flex-wrap justify-between gap-4 mx-4">
           {Object.values(NAVIGATE_BLOCKS).map(value => (

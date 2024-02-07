@@ -3,6 +3,9 @@
 import CALLBACK_URL from '@/constants/url';
 import useUserStore from '@/store/user/userStore';
 import getUserInfo from '@/app/api/auth/getUserInfo';
+import loadingJson from '$/lotties/loading.json';
+import Lottie from 'react-lottie';
+import lottieOption from '@/utils/lottieOption';
 
 import { useEffect } from 'react';
 import { setCookie } from '@/lib/cookie';
@@ -85,7 +88,11 @@ function Page() {
     toast,
   ]);
 
-  return <div />;
+  return (
+    <div className="flex flex-col h-full-size-omit-nav justify-center items-center">
+      <Lottie options={lottieOption(loadingJson)} width={200} height={200} />
+    </div>
+  );
 }
 
 export default Page;

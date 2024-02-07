@@ -16,7 +16,7 @@ const NAVBAR = {
     text: '크루',
   },
   my: {
-    href: '/service/my-page',
+    href: '/service/user',
     text: 'MY',
   },
 } as const;

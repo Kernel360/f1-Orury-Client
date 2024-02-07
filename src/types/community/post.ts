@@ -12,6 +12,7 @@ export interface OnePostProps {
   updated_at: string;
   like_count: number;
   comment_count: number;
+  post_id?: number;
 }
 
 export interface PostDetailProps {
@@ -67,3 +68,9 @@ export interface PostCountState {
   setLikeCount: (value: number) => void;
   setCommentCount: (value: number) => void;
 }
+
+export type MyPostListData = {
+  list: OnePostProps[];
+  cursor: number;
+  next_page?: number;
+};
