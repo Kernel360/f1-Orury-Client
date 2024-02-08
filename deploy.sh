@@ -1,12 +1,10 @@
 #!/bin/bash
-REPOSITORY=/home/ec2-user/f1-Orury-Client
-REPOSITORY_PROD=/home/ec2-user/f1-Orury-Client
-
-echo "폴더 생성"
-mkdir -p ${REPOSITORY}
+REPOSITORY=/home/ec2-user
+REPOSITORY_PROD=/home/ec2-user
 
 echo "개발 서버 배포"
 cd ${REPOSITORY}
+
 sudo npm install
 
 if [ $? -eq 0 ]; then
