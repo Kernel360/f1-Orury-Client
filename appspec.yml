@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user/f1-Orury-Client/
+    destination: /home/ec2-user/
     overwrite: yes
 permissions:
   - object: /
@@ -15,7 +15,7 @@ hooks:
     - location: deploy.sh
       timeout: 60
       runas: ec2-user
-      command: chmod +x /home/ec2-user/f1-Orury-Client/deploy.sh
+      command: chmod +x /home/ec2-user/deploy.sh
   ApplicationStart:
     - location: deploy.sh
       timeout: 500
