@@ -1,9 +1,11 @@
 #!/bin/bash
-REPOSITORY=/home/ec2-user/orury-front
-REPOSITORY_PROD=/home/ec2-user/orury-front
+REPOSITORY=/home/ec2-user/f1-Orury-Client
+REPOSITORY_PROD=/home/ec2-user/f1-Orury-Client
+
 echo "개발 서버 배포"
-cd "${REPOSITORY}"
+cd ${REPOSITORY}
 sudo npm install
+
 if [ $? -eq 0 ]; then
   # 실행 중인 경우
   echo "til-dev 프로세스가 실행 중입니다."
