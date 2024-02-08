@@ -37,38 +37,42 @@ function Page() {
         });
       }
 
-      switch (response?.status) {
-        case STATUS_CODE.ok:
-          router.push(service);
-          setId(response.data.id);
-          break;
+      async function trySwitch() {
+        switch (response?.status) {
+          case STATUS_CODE.ok:
+            router.push(service);
+            setId(response.data.id);
+            break;
 
-        case invalidEmail:
-          router.push(home);
-          break;
+          case invalidEmail:
+            router.push(home);
+            break;
 
-        case noAccount:
-          email = getEmail(response?.data.access_token);
+          case noAccount:
+            email = getEmail(response?.data.access_token);
 
-          setCookie({
-            name: 'access_token',
-            value: encrypt(response.data.access_token),
-            options: { path: '/' },
-          });
+            setCookie({
+              name: 'access_token',
+              value: encrypt(response.data.access_token),
+              options: { path: '/' },
+            });
 
-          if (email) setEmail(email as string);
+            if (email) setEmail(email as string);
 
-          router.push(signUp);
-          break;
+            router.push(signUp);
+            break;
 
-        case haveAnotherAccount:
-          router.push(home);
-          break;
+          case haveAnotherAccount:
+            router.push(home);
+            break;
 
-        default:
-          router.push(home);
-          break;
+          default:
+            router.push(home);
+            break;
+        }
       }
+
+      await trySwitch();
 
       toast({ variant: 'default', description: response?.message });
     };
