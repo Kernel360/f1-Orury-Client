@@ -36,6 +36,18 @@ function PhotoBooth({ ...props }: PhotoBoothProps) {
   };
 
   useMemo(() => {
+    // 사진 용량 최대 1MB로 제한
+    const maxSize = 1024 * 1024;
+    const fileSize = images[0].size;
+
+    if (fileSize > maxSize) {
+      setImages(images => images.slice(1));
+      toast({
+        variant: 'default',
+        description: '이미지는 1MB 크기 이하만 가능합니다.',
+      });
+    }
+
     if (images.length > 5) {
       setImages(prevImages => prevImages.splice(0, 5));
       toast({
@@ -43,11 +55,8 @@ function PhotoBooth({ ...props }: PhotoBoothProps) {
         description: '이미지는 최대 5장까지 업로드할 수 있습니다.',
       });
     }
-    if (images.length === 5) {
-      setIsImageLengthFull(true);
-    } else {
-      setIsImageLengthFull(false);
-    }
+    if (images.length === 5) setIsImageLengthFull(true);
+    else setIsImageLengthFull(false);
   }, [images.length, setImages, toast]);
 
   return (
