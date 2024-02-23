@@ -7,7 +7,7 @@ import { CommentProps } from '@/types/community/comment';
 import useIntersect from '@/hooks/common/useIntersection';
 import OneComment from '@/app/service/community/[id]/_components/comment/OneComment';
 import CommentInput from '@/app/service/community/[id]/_components/comment/CommentInput';
-import useCommentListInfinite from '@/hooks/community/useCommentListInfinite';
+import useCommentListInfinite from '@/hooks/community/get/infinite/useCommentListInfinite';
 
 function CommentList({ postId }: { postId: number }) {
   const [commentList, setCommentList] = useState<CommentProps[] | undefined>(

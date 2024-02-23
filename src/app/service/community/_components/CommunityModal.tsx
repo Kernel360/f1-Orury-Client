@@ -1,7 +1,7 @@
 import useIntersect from '@/hooks/common/useIntersection';
 import OnePost from '@/app/service/community/_components/OnePost';
 import NotSearched from '@/app/service/community/_components/NotSearched';
-import useSearchPostListInfinite from '@/hooks/community/useSearchPostListInfinite';
+import useSearchPostListInfinite from '@/hooks/community/get/infinite/useSearchPostListInfinite';
 
 import { CommunityModalProps } from '@/types/user';
 

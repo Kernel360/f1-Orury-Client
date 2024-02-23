@@ -7,7 +7,7 @@ import useIntersect from '@/hooks/common/useIntersection';
 import PostListSkeleton from '@/app/service/community/_components/PostListSkeleton';
 import NotSearched from '@/app/service/community/_components/NotSearched';
 import OnePost from '@/app/service/community/_components/OnePost';
-import usePostListInfinite from '@/hooks/community/usePostListInfinite';
+import usePostListInfinite from '@/hooks/community/get/infinite/usePostListInfinite';
 
 function PostList() {
   const { categoryId } = usePostsState();

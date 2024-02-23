@@ -2,7 +2,7 @@
 
 import postPostLike from '@/app/service/community/[id]/api/postPostLike';
 import deletePostLike from '@/app/service/community/[id]/api/deletePostLike';
-import usePostListInfinite from '@/hooks/community/usePostListInfinite';
+import usePostListInfinite from '@/hooks/community/get/infinite/usePostListInfinite';
 
 import { useState } from 'react';
 import { CountItemProps } from '@/types/community/counts';
