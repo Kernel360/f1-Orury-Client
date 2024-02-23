@@ -8,7 +8,6 @@ import Lottie from 'react-lottie';
 import lottieOption from '@/utils/lottieOption';
 
 import { useEffect } from 'react';
-import { setCookie } from '@/lib/cookie';
 import { encrypt } from '@/utils/crypto';
 import { useRouter } from 'next/navigation';
 import { getEmail } from '@/utils/getEmail';
@@ -37,44 +36,45 @@ function Page() {
         });
       }
 
-      async function trySwitch() {
-        switch (response?.status) {
-          case STATUS_CODE.ok:
-            router.push(service);
-            setId(response.data.id);
-            break;
+      switch (response?.status) {
+        case STATUS_CODE.ok:
+          router.push(service);
+          setId(response.data.id);
+          break;
 
-          case invalidEmail:
-            router.push(home);
-            break;
+        case invalidEmail:
+          router.push(home);
+          break;
 
-          case noAccount:
-            email = getEmail(response?.data.access_token);
+        case noAccount:
+          email = getEmail(response?.data.access_token);
 
-            setCookie({
-              name: 'access_token',
-              value: encrypt(response.data.access_token),
-              options: { path: '/' },
-            });
+          sessionStorage.setItem(
+            'auth_token',
+            encrypt(response.data.access_token) as string,
+          );
 
-            if (email) setEmail(email as string);
+          if (email) setEmail(email as string);
 
-            router.push(signUp);
-            break;
+          router.push(signUp);
+          break;
 
-          case haveAnotherAccount:
-            router.push(home);
-            break;
+        case haveAnotherAccount:
+          router.push(home);
+          break;
 
-          default:
-            router.push(home);
-            break;
-        }
+        default:
+          router.push(home);
+          break;
       }
 
-      await trySwitch();
-
-      toast({ variant: 'default', description: response?.message });
+      toast({
+        variant: 'default',
+        description:
+          response?.message ||
+          '로그인 과정에서 문제가 생겼습니다. 같은 문제가 반복된다면 앱 삭제 후 다시 설치해주세요.',
+        duration: 2000,
+      });
     };
 
     signIn();

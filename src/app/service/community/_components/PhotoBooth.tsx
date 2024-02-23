@@ -26,12 +26,17 @@ function PhotoBooth({ ...props }: PhotoBoothProps) {
     if (files && files.length <= 5) {
       const newImages = Array.from(files);
 
-      setImages(prevImages => [...prevImages, ...newImages]);
-    } else {
-      toast({
-        title: '이미지 초과',
-        description: '이미지는 최대 5장까지 업로드할 수 있습니다.',
-      });
+      // 첨부되는 사진이 5MB 이하일때만 허용
+      if (newImages.every(newImage => newImage.size <= 5 * 1024 * 1024)) {
+        setImages(prevImages => [...prevImages, ...newImages]);
+      } else {
+        toast({
+          title: '이미지 용량 초과',
+          description: '최대 1MB까지의 이미지만 업로드할 수 있습니다.',
+          variant: 'warning',
+          duration: 2000,
+        });
+      }
     }
   };
 
@@ -41,6 +46,8 @@ function PhotoBooth({ ...props }: PhotoBoothProps) {
       toast({
         title: '이미지 초과',
         description: '이미지는 최대 5장까지 업로드할 수 있습니다.',
+        variant: 'warning',
+        duration: 2000,
       });
     }
     if (images.length === 5) setIsImageLengthFull(true);
