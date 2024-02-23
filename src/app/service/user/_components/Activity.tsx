@@ -5,7 +5,6 @@ import Heading from '@/app/service/user/_components/Heading';
 
 import { v4 } from 'uuid';
 import { COLOR } from '@/styles/color';
-import { ActivityProps } from '@/types/user';
 import { ACTIVITY_TITLE, ACTIVITY_LIST } from '@/constants/my-page/activity';
 import {
   BookCheck,
@@ -13,15 +12,17 @@ import {
   GanttChartSquare,
   MessageSquareText,
 } from 'lucide-react';
+import useUserStore from '@/store/user/userStore';
 
-function Activity({ setState }: ActivityProps) {
+function Activity() {
   const { purple300, black, primary, purple100 } = COLOR;
   const { onMyPage } = useReviewStore(state => state);
+  const { setCategory } = useUserStore();
 
   const handleClick = (key: string) => {
     if (key === 'review') onMyPage();
 
-    setState(key);
+    setCategory(key);
   };
 
   return (
