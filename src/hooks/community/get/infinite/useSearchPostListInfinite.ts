@@ -1,5 +1,5 @@
 import { PostListData } from '@/types/community/post';
-import { fetcher } from '@/utils/fetcher';
+import { getFetcher } from '@/utils/fetcher';
 import { getSearchPostListKey } from '@/utils/getKeys';
 import { AxiosResponse } from 'axios';
 
@@ -9,7 +9,7 @@ function useSearchPostListInfinite(searchText: string) {
   return useSWRInfinite<AxiosResponse<PostListData>>(
     (pageIndex, previousPageData) =>
       getSearchPostListKey(searchText, pageIndex, previousPageData),
-    fetcher,
+    getFetcher,
     { revalidateFirstPage: false },
   );
 }

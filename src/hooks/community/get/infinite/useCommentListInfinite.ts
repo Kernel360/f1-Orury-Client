@@ -1,5 +1,5 @@
 import { getCommentKey } from '@/utils/getKeys';
-import { fetcher } from '@/utils/fetcher';
+import { getFetcher } from '@/utils/fetcher';
 import { CommentListData } from '@/types/community/comment';
 import { TResponse } from '@/types/common/response';
 
@@ -12,7 +12,7 @@ function useCommentListInfinite(postId?: number) {
         return getCommentKey(postId, pageIndex, previousPageData);
       }
     },
-    fetcher,
+    getFetcher,
     {
       revalidateFirstPage: false,
     },
