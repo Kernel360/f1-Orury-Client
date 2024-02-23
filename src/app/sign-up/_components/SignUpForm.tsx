@@ -1,10 +1,17 @@
 'use client';
 
+import Button from '@/app/_components/buttons/Button';
+import useUserStore from '@/store/user/userStore';
+import postSignUp from '@/app/sign-up/api/postSignUp';
+import CALLBACK_URL from '@/constants/url';
+import TosSummary from '@/app/sign-up/_components/TosSummary';
+
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { setTokensInCookies } from '@/utils/setTokensInCookies';
 import { FormSchemaType, formSchema } from '@/app/sign-up/schema';
+import { useToast } from '@/app/_components/ui/use-toast';
 import {
   BIRTHDAY_INPUT,
   GENDER_INPUT,
@@ -12,13 +19,11 @@ import {
   rBirthform,
 } from '@/constants/sign-up';
 
-import Button from '@/app/_components/buttons/Button';
-import useUserStore from '@/store/user/userStore';
-import postSignUp from '@/app/sign-up/api/postSignUp';
-import CALLBACK_URL from '@/constants/url';
+import type { TosProps } from '@/types/sign-up';
 
-function SignUpForm() {
+function SignUpForm({ handleOpenModal }: TosProps) {
   const router = useRouter();
+  const { toast } = useToast();
   const { signUpType, email, profile_image } = useUserStore();
   const {
     handleSubmit,
@@ -51,10 +56,22 @@ function SignUpForm() {
       profile_image,
     });
 
+    // 회원가입에 성공했을 때
     if (response && response.data) {
+      // 응답으로 온 토큰 저장
       setTokensInCookies({
         accessToken: response.data.access_token,
         refreshToken: response.data.refresh_token,
+      });
+
+      // 세션 스토리지 내 auth token 삭제
+      sessionStorage.clear();
+
+      // 회원가입 성공 토스트 출력
+      toast({
+        variant: 'success',
+        description: response?.message,
+        duration: 2000,
       });
     }
 
@@ -80,7 +97,7 @@ function SignUpForm() {
           <input
             {...register('nickname')}
             className={`outline-none border-b-2 focus:border-b-primary ${
-              errors.birthday && 'border-b-warning focus:border-b-warning'
+              errors.nickname && 'border-b-warning focus:border-b-warning'
             }`}
             type={NICKNAME_INPUT.type}
             placeholder={NICKNAME_INPUT.placeholder}
@@ -113,6 +130,7 @@ function SignUpForm() {
               setValue('birthday', formattedValue);
             }}
             onBlur={() => trigger('birthday')}
+            maxLength={8}
           />
         </div>
 
@@ -148,8 +166,10 @@ function SignUpForm() {
           </div>
         </div>
       </div>
-
-      <Button onClick={() => {}} content="회원 가입" color="primary" submit />
+      <div className="flex flex-col gap-4">
+        <TosSummary handleOpenModal={handleOpenModal} />
+        <Button content="회원 가입" color="primary" submit />
+      </div>
     </form>
   );
 }
