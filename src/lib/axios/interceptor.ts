@@ -12,13 +12,19 @@ export interface ErrorResponseData {
 }
 
 export const checkAndSetToken = (config: InternalAxiosRequestConfig) => {
+  let accessToken;
+
   if (!config.useAuth || config.headers.Authorization) return config;
 
-  const accessToken = decrypt(getCookie({ name: 'access_token' }));
+  accessToken = decrypt(getCookie({ name: 'access_token' }));
 
   if (!accessToken) {
-    // 엑세스 토큰이 없을 때의 로직
-    throw new Error('토큰이 유효하지 않습니다');
+    if (sessionStorage.getItem('auth_token')) {
+      accessToken = decrypt(sessionStorage.getItem('auth_token') as string);
+    } else {
+      // 엑세스 토큰이 없을 때의 로직
+      throw new Error('토큰이 유효하지 않습니다');
+    }
   }
 
   config.headers.Authorization = `Bearer ${accessToken}`;
