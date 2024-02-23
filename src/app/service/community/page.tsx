@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PostList from '@/app/service/community/_components/PostList';
 import SearchBar from '@/app/service/community/_components/SearchBar';
 import Tabs from '@/app/service/community/_components/Tabs';
@@ -23,6 +23,22 @@ function Page() {
   const exitHandler = () => {
     setIsSearchingFocus(false);
   };
+
+  const browserPreventEvent = useCallback(() => {
+    window.history.pushState(null, '', '');
+    onDisMiss();
+    exitHandler();
+  }, []);
+
+  useEffect(() => {
+    window.history.pushState(null, '', '');
+
+    window.addEventListener('popstate', browserPreventEvent);
+
+    return () => {
+      window.removeEventListener('popstate', browserPreventEvent);
+    };
+  }, []);
 
   return (
     <div className="relative bg-white pb-16">
