@@ -6,12 +6,13 @@ import useCommentStore from '@/store/community/commentStore';
 import deleteComment from '@/app/service/community/[id]/api/deleteComment';
 import postCommentLike from '@/app/service/community/[id]/api/postCommentLike';
 import deleteCommentLike from '@/app/service/community/[id]/api/deleteCommentLike';
-import useCommentListInfinite from '@/hooks/community/useCommentListInfinite';
+import useCommentListInfinite from '@/hooks/community/get/infinite/useCommentListInfinite';
 
 import { useState } from 'react';
 import { Heart, MessageCircle, MoreVertical } from 'lucide-react';
 import { MODAL } from '@/constants/ui/common/modal';
 import { useToast } from '@/app/_components/ui/use-toast';
+import { useDebouncedCallback } from 'use-debounce';
 import type { CommentBtnProps } from '@/types/community/commentButtons';
 
 function CommentButtons({ ...props }: CommentBtnProps) {
@@ -57,7 +58,7 @@ function CommentButtons({ ...props }: CommentBtnProps) {
       } else {
         await postCommentLike({ comment_id: commentId });
       }
-      mutate();
+      await mutate();
     }
 
     if (setLikes) {
@@ -77,7 +78,7 @@ function CommentButtons({ ...props }: CommentBtnProps) {
     setTriggerModify(!triggerModify);
   };
 
-  const okHandler = async () => {
+  const okHandler = useDebouncedCallback(async () => {
     if (commentId) await deleteComment({ commentId });
     await mutate();
     setOpenDeleteModal(openDeleteModal => !openDeleteModal);
@@ -85,8 +86,9 @@ function CommentButtons({ ...props }: CommentBtnProps) {
       title: '댓글 삭제',
       description: '댓글이 삭제되었습니다.',
       variant: 'warning',
+      duration: 2000,
     });
-  };
+  }, 300);
 
   return (
     <M.Menubar>
