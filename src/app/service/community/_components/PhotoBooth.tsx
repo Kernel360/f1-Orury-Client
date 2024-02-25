@@ -32,7 +32,7 @@ function PhotoBooth({ ...props }: PhotoBoothProps) {
       } else {
         toast({
           title: '이미지 용량 초과',
-          description: '최대 1MB까지의 이미지만 업로드할 수 있습니다.',
+          description: '최대 5MB까지의 이미지만 업로드할 수 있습니다.',
           variant: 'warning',
           duration: 2000,
         });

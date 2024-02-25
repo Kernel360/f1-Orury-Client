@@ -1,8 +1,9 @@
 import { decrypt } from '@/utils/crypto';
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { ERROR_CODE, STATUS_CODE } from '@/constants/api/statusCode';
-import { getNewAccessToken } from '@/apis/auth/getNewAccessToken';
-import { getCookie } from '../cookie';
+import { ERROR_CODE } from '@/constants/api/statusCode';
+import { getNewToken } from '@/apis/auth/getNewToken';
+import { setTokensInCookies } from '@/utils/setTokensInCookies';
+import { getCookie, removeCookie } from '../cookie';
 import { axiosInstance } from './axios-instance';
 
 export interface ErrorResponseData {
@@ -41,14 +42,27 @@ export const handleError = async (error: AxiosError<ErrorResponseData>) => {
 
   const { data, status } = error.response;
 
-  if (data.code !== ERROR_CODE.invalidEmail) {
+  if (data.code === ERROR_CODE.invalidEmail) {
     throw new Error('잘못된 이메일 에러가 발생했습니다.');
   }
 
-  if (status === STATUS_CODE.unauthorized) {
-    const newAccessToken = await getNewAccessToken();
-    originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+  if (status === ERROR_CODE.invalidAccessToken) {
+    const data = await getNewToken();
+
+    originalRequest.headers.Authorization = `Bearer ${data.access_token}`;
+
+    setTokensInCookies({
+      accessToken: data.access_token,
+      refreshToken: data.refresh_token,
+    });
 
     return axiosInstance(originalRequest);
+  }
+
+  if (status === ERROR_CODE.invalidRefreshToken) {
+    removeCookie({ name: 'refresh_token', options: { path: '/' } });
+    removeCookie({ name: 'access_token', options: { path: '/' } });
+
+    return window.location.replace('/');
   }
 };
