@@ -7,7 +7,7 @@ import PhotoBooth from '@/app/service/community/_components/PhotoBooth';
 import editPost from '@/app/service/community/api/editPost';
 import * as R from '@/app/_components/ui/radio-group';
 import * as F from '@/app/_components/ui/form';
-import usePostListInfinite from '@/hooks/community/get/infinite/usePostListInfinite';
+import usePostListApi from '@/hooks/community/usePostList';
 
 import { useState } from 'react';
 import { getFormData } from '@/utils/getFormData';
@@ -35,7 +35,7 @@ function Form({ ...props }: FormType) {
   const { toast } = useToast();
   const { categoryId, setCategoryId } = usePostsState();
   const { setTitle, setContent } = useOnePostState();
-  const { mutate } = usePostListInfinite(categoryId);
+  const { mutate } = usePostListApi.useGetPostList(categoryId);
   const [images, setImages] = useState<File[]>([]);
 
   const form = useForm<FormSchemaType>({

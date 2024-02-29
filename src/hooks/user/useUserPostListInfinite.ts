@@ -1,5 +1,5 @@
 import { TResponse } from '@/types/common/response';
-import { getFetcher } from '@/utils/fetcher';
+import { axiosInstance } from '@/lib/axios/axios-instance';
 import { getUserPostListKey } from '@/utils/getKeys';
 import type { MyPostListData } from '@/types/community/post';
 
@@ -9,7 +9,7 @@ function useUserPostListInfinite(state: 'post' | 'comment') {
   return useSWRInfinite<TResponse<MyPostListData>>(
     (pageIndex, previousPageData) =>
       getUserPostListKey(pageIndex, state, previousPageData),
-    getFetcher,
+    axiosInstance.get,
     { revalidateFirstPage: false },
   );
 }

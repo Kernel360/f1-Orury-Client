@@ -2,7 +2,7 @@
 
 import postComment from '@/app/service/community/[id]/api/postComment';
 import useCommentStore from '@/store/community/commentStore';
-import useCommentListInfinite from '@/hooks/community/get/infinite/useCommentListInfinite';
+import useCommentListApi from '@/hooks/community/useCommentList';
 import * as F from '@/app/_components/ui/form';
 
 import { useEffect, useRef } from 'react';
@@ -31,7 +31,7 @@ function CommentInput() {
     setParentId,
     setIsReplyMode,
   } = useCommentStore();
-  const { mutate } = useCommentListInfinite(postId);
+  const { mutate } = useCommentListApi.useGetCommentList(postId);
   const form = useForm<CommentSchemaType>({
     resolver: zodResolver(CommentSchema),
   });

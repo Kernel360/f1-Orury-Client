@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Modal from '@/app/_components/common/Modal';
 import HeaderProps from '@/types/ui/common/header';
 import deletePost from '@/app/service/community/[id]/api/deletePost';
-import usePostListInfinite from '@/hooks/community/get/infinite/usePostListInfinite';
+import usePostListApi from '@/hooks/community/usePostList';
 import * as M from '@/app/_components/ui/menubars';
 
 import { useState } from 'react';
@@ -19,7 +19,7 @@ function Header({ ...props }: Partial<HeaderProps>) {
   const { title, isBack, isExit, isEllipsis, editHandler, exitHandler } = props;
   const { toast } = useToast();
   const { categoryId } = usePostsState();
-  const { mutate } = usePostListInfinite(categoryId);
+  const { mutate } = usePostListApi.useGetPostList(categoryId);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const router = useRouter();
   const params = useParams<{ id: string }>();

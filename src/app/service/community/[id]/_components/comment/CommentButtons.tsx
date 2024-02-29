@@ -6,7 +6,7 @@ import useCommentStore from '@/store/community/commentStore';
 import deleteComment from '@/app/service/community/[id]/api/deleteComment';
 import postCommentLike from '@/app/service/community/[id]/api/postCommentLike';
 import deleteCommentLike from '@/app/service/community/[id]/api/deleteCommentLike';
-import useCommentListInfinite from '@/hooks/community/get/infinite/useCommentListInfinite';
+import useCommentListApi from '@/hooks/community/useCommentList';
 
 import { useState } from 'react';
 import { Heart, MessageCircle, MoreVertical } from 'lucide-react';
@@ -19,7 +19,7 @@ function CommentButtons({ ...props }: CommentBtnProps) {
   const { toast } = useToast();
   const { commentId, isLike, setLikes, setIsLike, postId, parentId, isMine } =
     props;
-  const { mutate } = useCommentListInfinite(postId);
+  const { mutate } = useCommentListApi.useGetCommentList(postId);
 
   const [isClicked, setIsClicked] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
