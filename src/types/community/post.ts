@@ -27,6 +27,7 @@ export interface PostDetailProps {
   created_at: string;
   updated_at: string;
   is_mine: boolean;
+  user_id: number;
   user_nickname: string;
   user_profile_image: string;
   is_like: boolean;

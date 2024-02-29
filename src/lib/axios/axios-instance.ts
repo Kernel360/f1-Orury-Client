@@ -4,7 +4,7 @@ import { checkAndSetToken, handleError } from './interceptor';
 
 export const axiosInstance = axios.create({
   baseURL: BACK_URL,
-  timeout: 3000,
+  timeout: 10 * 1000,
   withCredentials: true,
   useAuth: true,
 });

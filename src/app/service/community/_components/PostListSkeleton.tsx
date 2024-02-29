@@ -1,11 +1,24 @@
-'use client';
-
 import { Skeleton } from '@/app/_components/ui/skeleton';
 import { v4 } from 'uuid';
+import { useEffect, useState } from 'react';
 
 function PostListSkeleton() {
-  const innerHeight = typeof window !== 'undefined' ? window.innerHeight : 0;
-  const skeletonHeight = Math.floor(innerHeight / 120);
+  const [skeletonHeight, setSkeletonHeight] = useState(0);
+
+  useEffect(() => {
+    const calculateSkeletonHeight = () => {
+      const innerHeight =
+        typeof window !== 'undefined' ? window.innerHeight : 0;
+      const height = Math.floor(innerHeight / 120);
+      setSkeletonHeight(height);
+    };
+
+    calculateSkeletonHeight();
+    window.addEventListener('resize', calculateSkeletonHeight);
+    return () => {
+      window.removeEventListener('resize', calculateSkeletonHeight);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col  h-full gap-8 pt-8">

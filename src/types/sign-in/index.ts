@@ -3,9 +3,11 @@ export interface UserStateProps {
   id: number;
   email: string;
   profile_image: string;
+  category: string | null;
   setSignUpType: (value: number) => void;
   setId: (value: number) => void;
   setEmail: (value: string) => void;
+  setCategory: (value: string | null) => void;
 }
 
 export interface GetUserInfoProps {

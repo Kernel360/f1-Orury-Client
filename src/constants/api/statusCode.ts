@@ -10,4 +10,6 @@ export const ERROR_CODE = {
   invalidEmail: 900,
   noAccount: 910,
   haveAnotherAccount: 920,
+  invalidAccessToken: 990,
+  invalidRefreshToken: 999,
 } as const;

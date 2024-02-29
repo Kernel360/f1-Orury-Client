@@ -8,7 +8,10 @@ export const formSchema = z.object({
       const minDate = new Date('1900-01-01');
       const maxDate = new Date();
 
-      return dateValue >= minDate && dateValue <= maxDate;
+      const regex = /^\d{4}-\d{2}-\d{2}$/;
+      const isValidFormat = regex.test(value);
+
+      return isValidFormat && dateValue > minDate && dateValue <= maxDate;
     },
     { message: INVALID_MESSAGE.birth },
   ),
