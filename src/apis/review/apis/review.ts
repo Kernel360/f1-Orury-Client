@@ -3,8 +3,7 @@ import { axiosInstance } from '@/lib/axios/axios-instance';
 
 const reviewApi = {
   postReaction: (review_id: number, reaction_type: number) =>
-    axiosInstance.post(END_POINT.reviewsController.reaction(), {
-      review_id,
+    axiosInstance.post(END_POINT.reviewsController.reaction(review_id), {
       reaction_type,
     }),
   postReview: (formData: FormData) =>
