@@ -2,7 +2,7 @@
 
 import useCommentStore from '@/store/community/commentStore';
 import editComment from '@/app/service/community/[id]/api/editComment';
-import useCommentListInfinite from '@/hooks/community/useCommentListInfinite';
+import useCommentListApi from '@/hooks/community/useCommentList';
 
 import { Check, X } from 'lucide-react';
 import { useToast } from '@/app/_components/ui/use-toast';
@@ -18,7 +18,7 @@ function ModifyContent({ ...props }: ModifyContentProps) {
   const [isToggled, setIsToggled] = useState(false);
   const beforeValue = content;
 
-  const { mutate } = useCommentListInfinite(post_id);
+  const { mutate } = useCommentListApi.useGetCommentList(post_id);
 
   const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = '2em';
@@ -54,6 +54,7 @@ function ModifyContent({ ...props }: ModifyContentProps) {
       title: '댓글 수정',
       description: '댓글 수정이 완료되었습니다!',
       variant: 'success',
+      duration: 2000,
     });
   };
 
@@ -90,7 +91,11 @@ function ModifyContent({ ...props }: ModifyContentProps) {
         </div>
       )}
 
-      {!isToggled && <span className="flex items-center">{contentValue}</span>}
+      {!isToggled && (
+        <span className="flex items-center whitespace-pre-wrap">
+          {contentValue}
+        </span>
+      )}
     </div>
   );
 }

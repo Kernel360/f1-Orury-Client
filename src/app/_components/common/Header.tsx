@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Modal from '@/app/_components/common/Modal';
 import HeaderProps from '@/types/ui/common/header';
 import deletePost from '@/app/service/community/[id]/api/deletePost';
-import usePostListInfinite from '@/hooks/community/usePostListInfinite';
+import usePostListApi from '@/hooks/community/usePostList';
 import * as M from '@/app/_components/ui/menubars';
 
 import { useState } from 'react';
@@ -12,13 +12,14 @@ import { useRouter, useParams } from 'next/navigation';
 import { ChevronLeft, MoreVertical, X } from 'lucide-react';
 import { usePostsState } from '@/store/community/postsStore';
 import { MODAL } from '@/constants/ui/common/modal';
+import { useDebouncedCallback } from 'use-debounce';
 import { useToast } from '@/app/_components/ui/use-toast';
 
 function Header({ ...props }: Partial<HeaderProps>) {
   const { title, isBack, isExit, isEllipsis, editHandler, exitHandler } = props;
   const { toast } = useToast();
   const { categoryId } = usePostsState();
-  const { mutate } = usePostListInfinite(categoryId);
+  const { mutate } = usePostListApi.useGetPostList(categoryId);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const router = useRouter();
   const params = useParams<{ id: string }>();
@@ -31,14 +32,14 @@ function Header({ ...props }: Partial<HeaderProps>) {
     setOpenDeleteModal(openDeleteModal => !openDeleteModal);
   };
 
-  const okHandler = async () => {
+  const okHandler = useDebouncedCallback(async () => {
     const message = await deletePost({ postId: Number(params.id) });
     await mutate();
     setOpenDeleteModal(openDeleteModal => !openDeleteModal);
 
     router.back();
-    toast({ variant: 'success', description: message });
-  };
+    toast({ variant: 'success', description: message, duration: 2000 });
+  }, 300);
 
   const buttonClassName = (isBack?: boolean) => {
     return clsx('absolute', {

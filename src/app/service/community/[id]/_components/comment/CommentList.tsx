@@ -7,21 +7,26 @@ import { CommentProps } from '@/types/community/comment';
 import useIntersect from '@/hooks/common/useIntersection';
 import OneComment from '@/app/service/community/[id]/_components/comment/OneComment';
 import CommentInput from '@/app/service/community/[id]/_components/comment/CommentInput';
-import useCommentListInfinite from '@/hooks/community/useCommentListInfinite';
+import useCommentListApi from '@/hooks/community/useCommentList';
 
 function CommentList({ postId }: { postId: number }) {
   const [commentList, setCommentList] = useState<CommentProps[] | undefined>(
     [],
   );
 
-  const { data, size, setSize, isValidating } = useCommentListInfinite(postId);
+  const { data, size, setSize, isValidating } =
+    useCommentListApi.useGetCommentList(postId);
 
   useMemo(() => {
-    setCommentList(data?.flatMap(page => page.data.comments));
+    setCommentList(data?.flatMap(page => page.data.data.comments));
   }, [data, setCommentList]);
 
   const bottomRef = useIntersect(() => {
-    if (!isValidating && data && data[data.length - 1].data.cursor !== -1) {
+    if (
+      !isValidating &&
+      data &&
+      data[data.length - 1].data.data.cursor !== -1
+    ) {
       setSize(size + 1);
     }
   });

@@ -18,3 +18,7 @@ export interface SetTokensInCookiesProps {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface TosProps {
+  handleOpenModal: () => void;
+}

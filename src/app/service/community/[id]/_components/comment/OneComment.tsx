@@ -27,6 +27,7 @@ function OneComment({ ...props }: OneCommentType) {
     content,
     post_id,
     is_mine,
+    user_id,
   } = props;
 
   const liClassName = clsx('flex border-b', {
@@ -66,6 +67,7 @@ function OneComment({ ...props }: OneCommentType) {
               parent_id={parent_id}
               post_id={post_id}
               is_mine={is_mine}
+              user_id={user_id}
               hasButton
             />
             <ModifyContent

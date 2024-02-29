@@ -2,7 +2,7 @@
 
 import postPostLike from '@/app/service/community/[id]/api/postPostLike';
 import deletePostLike from '@/app/service/community/[id]/api/deletePostLike';
-import usePostListInfinite from '@/hooks/community/usePostListInfinite';
+import usePostListApi from '@/hooks/community/usePostList';
 
 import { useState } from 'react';
 import { CountItemProps } from '@/types/community/counts';
@@ -11,7 +11,7 @@ import { COLOR } from '@/styles/color';
 
 function CountItem({ ...props }: CountItemProps) {
   const { postId, count, color, icon, isLike, category } = props;
-  const { mutate } = usePostListInfinite(category);
+  const { mutate } = usePostListApi.useGetPostList(category);
   const [isLiked, setIsLiked] = useState(isLike);
   const [likes, setLikes] = useState(count);
   const { red, white, primary, grey400 } = COLOR;
