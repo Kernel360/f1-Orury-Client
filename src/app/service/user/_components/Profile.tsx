@@ -55,7 +55,7 @@ function Profile({ ...props }: ProfileProps) {
 
       clearCache();
 
-      toast({ variant: 'success', description: message });
+      toast({ variant: 'success', description: message, duration: 2000 });
     }
   };
 

@@ -8,17 +8,17 @@
 
 ### [🗂️ Team Notion](https://www.notion.so/Orury-92fd575d1a09482f8b60777f5182d450?pvs=4)
 
-### [🔵 Front-End Notion](https://www.notion.so/Orury-92fd575d1a09482f8b60777f5182d450?pvs=4)
+### [🔵 Front-End Notion](https://www.notion.so/Front-End-eb11bb7ea19c42038010792167a461d1)
 
 <br />
 
 ## 👤 개발 팀원 소개
 
-| **[유희태](https://github.com/1017yu)** | **[이지형](https://github.com/Jihyeong00)** |
-| :-: | :-: |
-| <a href="https://github.com/1017yu"><img src="https://avatars.githubusercontent.com/u/83483378?v=4" width=200px alt="유희태" /> | <a href="https://github.com/Jihyeong00"><img src="https://avatars.githubusercontent.com/u/115636461?v=4" width=200px alt="이지형" /> |
-| Front-End | Front-End |
-| 메인<br />인증/인가<br />(소셜 로그인/토큰 관리)<br />모바일 App 배포<br />커뮤니티 페이지<br />마이 페이지<br /> | 지도 페이지<br />리뷰 페이지<br /> |
+| **[유희태](https://github.com/1017yu)** | **[이지형](https://github.com/Jihyeong00)** | **[심정아](https://github.com/joanShim)** |
+| :-: | :-: | :-: |
+| <a href="https://github.com/1017yu"><img src="https://avatars.githubusercontent.com/u/83483378?v=4" width=200px alt="유희태" /> | <a href="https://github.com/Jihyeong00"><img src="https://avatars.githubusercontent.com/u/115636461?v=4" width=200px alt="이지형" /> | <a href="https://github.com/joanShim"><img src="https://avatars.githubusercontent.com/u/35457850?v=4" width=200px alt="이지형" /> |
+| Front-End | Front-End | Front-End |
+| 메인<br />인증/인가<br />(소셜 로그인/토큰 관리)<br />모바일 App 배포<br />커뮤니티 페이지<br />마이 페이지<br /> | 지도 페이지<br />리뷰 페이지<br /> | 인증/인가<br />(소셜 로그인)<br />크루 페이지<br /> |
 
 <br />
 

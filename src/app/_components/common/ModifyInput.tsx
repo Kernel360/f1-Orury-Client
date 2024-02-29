@@ -41,7 +41,11 @@ function ModifyInput({ ...props }: ModifyInputProps) {
     clearCache();
     setIsToggled(isToggled => !isToggled);
 
-    toast({ variant: 'success', description: '닉네임이 변경되었습니다.' });
+    toast({
+      variant: 'success',
+      description: '닉네임이 변경되었습니다.',
+      duration: 2000,
+    });
   };
 
   const clearHandler = () => {

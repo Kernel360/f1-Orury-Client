@@ -8,13 +8,13 @@ import Lottie from 'react-lottie';
 import lottieOption from '@/utils/lottieOption';
 
 import { useEffect } from 'react';
-import { setCookie } from '@/lib/cookie';
 import { encrypt } from '@/utils/crypto';
 import { useRouter } from 'next/navigation';
 import { getEmail } from '@/utils/getEmail';
 import { useToast } from '@/app/_components/ui/use-toast';
 import { setTokensInCookies } from '@/utils/setTokensInCookies';
 import { ERROR_CODE, STATUS_CODE } from '@/constants/api/statusCode';
+import { SIGN_UP_ERROR_MESSAGES } from '@/constants/sign-in';
 
 // 카카오 소셜 로그인 REDIRECT URI PAGE
 function Page() {
@@ -27,6 +27,8 @@ function Page() {
   useEffect(() => {
     const signIn = async () => {
       let email;
+      let authToken;
+
       const code = new URL(window.location.href).searchParams.get('code');
       const response = await getUserInfo({ code, signUpType });
 
@@ -48,13 +50,15 @@ function Page() {
           break;
 
         case noAccount:
+          authToken = encrypt(response.data.access_token);
           email = getEmail(response?.data.access_token);
 
-          setCookie({
-            name: 'access_token',
-            value: encrypt(response.data.access_token),
-            options: { path: '/' },
-          });
+          if (authToken) {
+            sessionStorage.setItem('auth_token', authToken);
+            response.message = SIGN_UP_ERROR_MESSAGES.noAuthToken;
+          } else {
+            router.push(home);
+          }
 
           if (email) setEmail(email as string);
 
@@ -70,7 +74,11 @@ function Page() {
           break;
       }
 
-      toast({ variant: 'default', description: response?.message });
+      toast({
+        variant: 'default',
+        description: response?.message || SIGN_UP_ERROR_MESSAGES.default,
+        duration: 2000,
+      });
     };
 
     signIn();

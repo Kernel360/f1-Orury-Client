@@ -7,16 +7,21 @@ import useIntersect from '@/hooks/common/useIntersection';
 import PostListSkeleton from '@/app/service/community/_components/PostListSkeleton';
 import NotSearched from '@/app/service/community/_components/NotSearched';
 import OnePost from '@/app/service/community/_components/OnePost';
-import usePostListInfinite from '@/hooks/community/usePostListInfinite';
+import usePostListApi from '@/hooks/community/usePostList';
 
 function PostList() {
   const { categoryId } = usePostsState();
   const { data, size, setSize, isLoading, isValidating } =
-    usePostListInfinite(categoryId);
+    usePostListApi.useGetPostList(categoryId);
 
-  const posts = data?.flatMap(page => page?.data.posts);
+  const posts = data ? data.flatMap(page => page.data.data.posts) : [];
+
   const bottomRef = useIntersect(() => {
-    if (!isValidating && data && data[data.length - 1]?.data.cursor !== -1) {
+    if (
+      !isValidating &&
+      data &&
+      data[data.length - 1]?.data.data.cursor !== -1
+    ) {
       setSize(size + 1);
     }
   });
@@ -32,8 +37,8 @@ function PostList() {
         {posts && !posts?.length ? (
           <NotSearched content="게시글이 존재하지 않습니다." />
         ) : null}
-        <div ref={bottomRef} />
       </ul>
+      <div ref={bottomRef} />
     </div>
   );
 }
