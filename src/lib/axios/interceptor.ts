@@ -56,13 +56,13 @@ export const handleError = async (error: AxiosError<ErrorResponseData>) => {
       refreshToken: data.refresh_token,
     });
 
-    return axiosInstance(originalRequest);
+    axiosInstance(originalRequest);
   }
 
   if (status === ERROR_CODE.invalidRefreshToken) {
     removeCookie({ name: 'refresh_token', options: { path: '/' } });
     removeCookie({ name: 'access_token', options: { path: '/' } });
 
-    return window.location.replace('/');
+    window.location.replace('/');
   }
 };
