@@ -14,6 +14,7 @@ import { getEmail } from '@/utils/getEmail';
 import { useToast } from '@/app/_components/ui/use-toast';
 import { setTokensInCookies } from '@/utils/setTokensInCookies';
 import { ERROR_CODE, STATUS_CODE } from '@/constants/api/statusCode';
+import { SIGN_UP_ERROR_MESSAGES } from '@/constants/sign-in';
 
 // 카카오 소셜 로그인 REDIRECT URI PAGE
 function Page() {
@@ -54,6 +55,7 @@ function Page() {
 
           if (authToken) {
             sessionStorage.setItem('auth_token', authToken);
+            response.message = SIGN_UP_ERROR_MESSAGES.noAuthToken;
           } else {
             router.push(home);
           }
@@ -74,9 +76,7 @@ function Page() {
 
       toast({
         variant: 'default',
-        description:
-          response?.message ||
-          '로그인 과정에서 문제가 생겼습니다. 같은 문제가 반복된다면 앱 삭제 후 다시 설치해주세요.',
+        description: response?.message || SIGN_UP_ERROR_MESSAGES.default,
         duration: 2000,
       });
     };
