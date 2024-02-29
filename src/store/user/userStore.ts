@@ -13,7 +13,7 @@ const useUserStore = create<UserStateProps>(set => ({
 
   profile_image: 'default-user-profile',
 
-  category: '',
+  category: null,
 
   setSignUpType: (value: number) => set({ signUpType: value }),
   setId: (value: number) => set({ id: value }),
