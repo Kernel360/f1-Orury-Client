@@ -26,6 +26,8 @@ function Page() {
   useEffect(() => {
     const signIn = async () => {
       let email;
+      let authToken;
+
       const code = new URL(window.location.href).searchParams.get('code');
       const response = await getUserInfo({ code, signUpType });
 
@@ -47,12 +49,14 @@ function Page() {
           break;
 
         case noAccount:
+          authToken = encrypt(response.data.access_token);
           email = getEmail(response?.data.access_token);
 
-          sessionStorage.setItem(
-            'auth_token',
-            encrypt(response.data.access_token) as string,
-          );
+          if (authToken) {
+            sessionStorage.setItem('auth_token', authToken);
+          } else {
+            router.push(home);
+          }
 
           if (email) setEmail(email as string);
 
