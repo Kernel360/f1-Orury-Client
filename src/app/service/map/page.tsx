@@ -104,11 +104,13 @@ function Page() {
         onSearchingBlur={() => setIsSearching(false)}
         handleMovePosition={handleMovePosition}
       />
-      <BottomSheetContainer
-        selectId={selectId}
-        isSheetOpen={isSheetOpen}
-        onDisMiss={() => setIsSheetOpen(false)}
-      />
+      {selectId && (
+        <BottomSheetContainer
+          selectId={selectId}
+          isSheetOpen={isSheetOpen}
+          onDisMiss={() => setIsSheetOpen(false)}
+        />
+      )}
     </div>
   );
 }
