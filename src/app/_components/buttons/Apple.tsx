@@ -35,7 +35,10 @@ function AppleSignIn() {
       const { code } = res.authorization;
       router.push(`/sign-in/apple?code=${code}`);
     } catch (error) {
-      console.log(error);
+      // 기존 console.log 임시 주석
+
+      throw new Error('애플 로그인 중 오류가 발생했습니다.');
+      // console.log(error);
     }
   };
 
