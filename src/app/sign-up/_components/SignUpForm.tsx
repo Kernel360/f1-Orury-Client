@@ -24,6 +24,7 @@ import { useState } from 'react';
 function SignUpForm({ handleOpenModal }: TosProps) {
   const [dateValue, setDateValue] = useState<DateValueType>({
     startDate: '',
+    endDate: '',
   });
 
   const router = useRouter();
@@ -46,8 +47,8 @@ function SignUpForm({ handleOpenModal }: TosProps) {
   };
 
   const handleValueChange = (value: DateValueType) => {
+    if (value?.startDate) setValue('birthday', value.startDate.toString());
     setDateValue(value);
-    setValue('birthday', value.startDate);
     trigger('birthday');
   };
 

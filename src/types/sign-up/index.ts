@@ -24,7 +24,8 @@ export interface TosProps {
 }
 
 export interface DateRangeType {
-  startDate: string;
+  startDate: string | null | Date;
+  endDate: string | null | Date;
 }
 
-export type DateValueType = DateRangeType;
+export type DateValueType = DateRangeType | null;
