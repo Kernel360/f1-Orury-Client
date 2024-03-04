@@ -9,7 +9,7 @@ const useUserStore = create<UserStateProps>(set => ({
   id: 0,
 
   // 유저 고유 EMAIL
-  email: '',
+  email: null,
 
   profile_image: 'default-user-profile',
 
@@ -17,7 +17,7 @@ const useUserStore = create<UserStateProps>(set => ({
 
   setSignUpType: (value: number) => set({ signUpType: value }),
   setId: (value: number) => set({ id: value }),
-  setEmail: (value: string) => set({ email: value }),
+  setEmail: (value: string | null) => set({ email: value }),
   setCategory: (value: string | null) => set({ category: value }),
 }));
 

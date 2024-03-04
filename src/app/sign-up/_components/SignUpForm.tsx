@@ -5,6 +5,7 @@ import useUserStore from '@/store/user/userStore';
 import postSignUp from '@/app/sign-up/api/postSignUp';
 import CALLBACK_URL from '@/constants/url';
 import TosSummary from '@/app/sign-up/_components/TosSummary';
+import Datepicker from 'react-tailwindcss-datepicker';
 
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -16,12 +17,15 @@ import {
   BIRTHDAY_INPUT,
   GENDER_INPUT,
   NICKNAME_INPUT,
-  rBirthform,
 } from '@/constants/sign-up';
-
-import type { TosProps } from '@/types/sign-up';
+import type { DateValueType, TosProps } from '@/types/sign-up';
+import { useState } from 'react';
 
 function SignUpForm({ handleOpenModal }: TosProps) {
+  const [dateValue, setDateValue] = useState<DateValueType>({
+    startDate: '',
+  });
+
   const router = useRouter();
   const { toast } = useToast();
   const { signUpType, email, profile_image } = useUserStore();
@@ -36,16 +40,15 @@ function SignUpForm({ handleOpenModal }: TosProps) {
     resolver: zodResolver(formSchema),
   });
 
-  const formatBirthValue = (value: string) => {
-    const formattedValue = value.replace(rBirthform, '$1-$2-$3');
-    setValue('birthday', formattedValue);
-
-    return formattedValue;
-  };
-
   const handleButtonClick = (gender: number) => {
     setValue('gender', gender);
     trigger('gender');
+  };
+
+  const handleValueChange = (value: DateValueType) => {
+    setDateValue(value);
+    setValue('birthday', value.startDate);
+    trigger('birthday');
   };
 
   const onSubmit: SubmitHandler<FormSchemaType> = async formData => {
@@ -118,19 +121,20 @@ function SignUpForm({ handleOpenModal }: TosProps) {
               </p>
             )}
           </div>
-          <input
+          <Datepicker
             {...register('birthday')}
-            className={`outline-none border-b-2 focus:border-b-primary ${
+            i18n="ko"
+            placeholder={BIRTHDAY_INPUT.placeholder}
+            useRange={false}
+            asSingle
+            primaryColor="violet"
+            value={dateValue}
+            onChange={handleValueChange}
+            maxDate={new Date()}
+            readOnly
+            inputClassName={`relative p-0 ${
               errors.birthday && 'border-b-warning focus:border-b-warning'
             }`}
-            type={BIRTHDAY_INPUT.type}
-            placeholder={BIRTHDAY_INPUT.placeholder}
-            onChange={e => {
-              const formattedValue = formatBirthValue(e.target.value);
-              setValue('birthday', formattedValue);
-            }}
-            onBlur={() => trigger('birthday')}
-            maxLength={8}
           />
         </div>
 

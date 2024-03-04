@@ -7,7 +7,7 @@ export interface SignUpState {
 
 export interface PostSignUpProps {
   sign_up_type: number;
-  email: string;
+  email: string | null;
   nickname: string;
   gender: number;
   birthday: string;
@@ -22,3 +22,9 @@ export interface SetTokensInCookiesProps {
 export interface TosProps {
   handleOpenModal: () => void;
 }
+
+export interface DateRangeType {
+  startDate: string;
+}
+
+export type DateValueType = DateRangeType;
