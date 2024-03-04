@@ -6,7 +6,10 @@ import Content from '@/app/_components/home/Content';
 import Button from '@/app/_components/buttons/Button';
 import GuideModal from '@/app/_components/home/GuideModal';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getCookie } from '@/lib/cookie';
+import { useRouter } from 'next/navigation';
+import AppleSignIn from './_components/buttons/Apple';
 
 function Page() {
   const [isClicked, setIsClicked] = useState(false);
@@ -32,8 +35,9 @@ function Page() {
           />
         </div>
       </div>
-      <div className="flex justify-center pb-[8rem] mx-4">
+      <div className="flex flex-col items-center justify-center pb-[8rem] gap-y-2">
         <Kakao />
+        <AppleSignIn />
       </div>
       {isClicked && <GuideModal cancelHandler={handleCloseModalClick} />}
     </div>

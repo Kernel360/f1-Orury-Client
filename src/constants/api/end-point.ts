@@ -9,7 +9,7 @@ export const END_POINT = {
     refresh: '/auth/refresh',
 
     // KAKAO
-    kakao: '/auth/login',
+    oauth: '/auth/login',
 
     signUp: '/auth/sign-up',
   },
