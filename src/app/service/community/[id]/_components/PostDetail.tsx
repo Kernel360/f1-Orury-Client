@@ -20,6 +20,7 @@ function PostDetail({ ...props }: PostDetailProps) {
     id,
     images,
     category,
+    user_id,
   } = props;
 
   const handleCarouselOpen = useImagesStore(state => state.setModalOpen);
@@ -29,17 +30,18 @@ function PostDetail({ ...props }: PostDetailProps) {
   };
 
   return (
-    <div className="flex flex-col gap-4 border-b-4 border-b-grey-200 p-4">
+    <div className="flex flex-col gap-4 border-b-4 border-b-grey-200 p-4 bg-white">
       <User
         user_profile_image={user_profile_image}
         user_nickname={user_nickname}
         created_at={created_at}
         is_like={is_like}
         post_id={id}
+        user_id={user_id}
       />
       <div className="flex flex-col gap-4">
         <span className="font-bold text-xl">{title}</span>
-        <span>{content}</span>
+        <span className="whitespace-pre-wrap">{content}</span>
       </div>
 
       {images.length ? (

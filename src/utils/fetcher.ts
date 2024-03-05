@@ -6,9 +6,7 @@ import { decrypt } from '@/utils/crypto';
 let accessToken = decrypt(getCookie({ name: 'access_token' }));
 const refreshToken = decrypt(getCookie({ name: 'refresh_token' }));
 
-// TOFIXED: headers key name 변경 예정
-// TOFIXED: headers key name 변경 예정
-export const fetcher = (url: string): Promise<any> => {
+export const getFetcher = (url: string): Promise<any> => {
   return new Promise((resolve, reject) => {
     axios
       .get(url, {
@@ -18,8 +16,6 @@ export const fetcher = (url: string): Promise<any> => {
         },
       })
       .then(res => {
-        // TOFIXED: status code 재논의 필요
-        // TOFIXED: status code 재논의 필요
         if (res.status === 900) {
           axios
             .post(END_POINT.auth.refresh, {
@@ -29,6 +25,39 @@ export const fetcher = (url: string): Promise<any> => {
               accessToken = refreshRes.data.access_token;
               axios
                 .get(url, {
+                  headers: { Authorization: `Bearer ${accessToken}` },
+                })
+                .then(retryRes => resolve(retryRes.data))
+                .catch(err => reject(err));
+            })
+            .catch(err => reject(err));
+        } else {
+          resolve(res.data);
+        }
+      })
+      .catch(err => reject(err));
+  });
+};
+
+export const postFetcher = (url: string): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(url, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          withCredentials: true,
+        },
+      })
+      .then(res => {
+        if (res.status === 900) {
+          axios
+            .post(END_POINT.auth.refresh, {
+              Authorization: `Bearer ${refreshToken}`,
+            })
+            .then((refreshRes: AxiosResponse) => {
+              accessToken = refreshRes.data.access_token;
+              axios
+                .post(url, {
                   headers: { Authorization: `Bearer ${accessToken}` },
                 })
                 .then(retryRes => resolve(retryRes.data))

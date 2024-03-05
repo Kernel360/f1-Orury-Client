@@ -9,7 +9,7 @@ export const END_POINT = {
     refresh: '/auth/refresh',
 
     // KAKAO
-    kakao: '/auth/login',
+    oauth: '/auth/login',
 
     signUp: '/auth/sign-up',
   },
@@ -120,7 +120,8 @@ export const END_POINT = {
   reviewsController: {
     // DEFAULT
     default: '/reviews',
-    reaction: () => `${END_POINT.reviewsController.default}/reaction`,
+    reaction: (review_id: number) =>
+      `${END_POINT.reviewsController.default}/${review_id}/reaction`,
     // GET
     getReviews: (reviewId: number, cursor: number) => {
       const url = new URLSearchParams();

@@ -7,12 +7,14 @@ export const FormSchema = z.object({
   category: z.number({
     required_error: category,
   }),
-  title: z.string({
-    required_error: title,
-  }),
-  content: z.string({
-    required_error: content,
-  }),
+  title: z
+    .string({ required_error: title.min })
+    .min(1, { message: title.min })
+    .max(30, { message: title.max }),
+  content: z
+    .string({ required_error: content.min })
+    .min(1, { message: content.min })
+    .max(300, { message: content.max }),
 });
 
 export type FormSchemaType = z.infer<typeof FormSchema>;

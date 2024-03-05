@@ -1,24 +1,34 @@
 'use client';
 
+import Button from '@/app/_components/buttons/Button';
+import useUserStore from '@/store/user/userStore';
+import postSignUp from '@/app/sign-up/api/postSignUp';
+import CALLBACK_URL from '@/constants/url';
+import TosSummary from '@/app/sign-up/_components/TosSummary';
+import Datepicker from 'react-tailwindcss-datepicker';
+
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { setTokensInCookies } from '@/utils/setTokensInCookies';
 import { FormSchemaType, formSchema } from '@/app/sign-up/schema';
+import { useToast } from '@/app/_components/ui/use-toast';
 import {
   BIRTHDAY_INPUT,
   GENDER_INPUT,
   NICKNAME_INPUT,
-  rBirthform,
 } from '@/constants/sign-up';
+import type { DateValueType, TosProps } from '@/types/sign-up';
+import { useState } from 'react';
 
-import Button from '@/app/_components/buttons/Button';
-import useUserStore from '@/store/user/userStore';
-import postSignUp from '@/app/sign-up/api/postSignUp';
-import CALLBACK_URL from '@/constants/url';
+function SignUpForm({ handleOpenModal }: TosProps) {
+  const [dateValue, setDateValue] = useState<DateValueType>({
+    startDate: '',
+    endDate: '',
+  });
 
-function SignUpForm() {
   const router = useRouter();
+  const { toast } = useToast();
   const { signUpType, email, profile_image } = useUserStore();
   const {
     handleSubmit,
@@ -31,16 +41,15 @@ function SignUpForm() {
     resolver: zodResolver(formSchema),
   });
 
-  const formatBirthValue = (value: string) => {
-    const formattedValue = value.replace(rBirthform, '$1-$2-$3');
-    setValue('birthday', formattedValue);
-
-    return formattedValue;
-  };
-
   const handleButtonClick = (gender: number) => {
     setValue('gender', gender);
     trigger('gender');
+  };
+
+  const handleValueChange = (value: DateValueType) => {
+    if (value?.startDate) setValue('birthday', value.startDate.toString());
+    setDateValue(value);
+    trigger('birthday');
   };
 
   const onSubmit: SubmitHandler<FormSchemaType> = async formData => {
@@ -51,10 +60,22 @@ function SignUpForm() {
       profile_image,
     });
 
+    // 회원가입에 성공했을 때
     if (response && response.data) {
+      // 응답으로 온 토큰 저장
       setTokensInCookies({
         accessToken: response.data.access_token,
         refreshToken: response.data.refresh_token,
+      });
+
+      // 세션 스토리지 내 auth token 삭제
+      sessionStorage.clear();
+
+      // 회원가입 성공 토스트 출력
+      toast({
+        variant: 'success',
+        description: response?.message,
+        duration: 2000,
       });
     }
 
@@ -80,7 +101,7 @@ function SignUpForm() {
           <input
             {...register('nickname')}
             className={`outline-none border-b-2 focus:border-b-primary ${
-              errors.birthday && 'border-b-warning focus:border-b-warning'
+              errors.nickname && 'border-b-warning focus:border-b-warning'
             }`}
             type={NICKNAME_INPUT.type}
             placeholder={NICKNAME_INPUT.placeholder}
@@ -101,18 +122,20 @@ function SignUpForm() {
               </p>
             )}
           </div>
-          <input
+          <Datepicker
             {...register('birthday')}
-            className={`outline-none border-b-2 focus:border-b-primary ${
+            i18n="ko"
+            placeholder={BIRTHDAY_INPUT.placeholder}
+            useRange={false}
+            asSingle
+            primaryColor="violet"
+            value={dateValue}
+            onChange={handleValueChange}
+            maxDate={new Date()}
+            readOnly
+            inputClassName={`relative p-0 ${
               errors.birthday && 'border-b-warning focus:border-b-warning'
             }`}
-            type={BIRTHDAY_INPUT.type}
-            placeholder={BIRTHDAY_INPUT.placeholder}
-            onChange={e => {
-              const formattedValue = formatBirthValue(e.target.value);
-              setValue('birthday', formattedValue);
-            }}
-            onBlur={() => trigger('birthday')}
           />
         </div>
 
@@ -148,8 +171,10 @@ function SignUpForm() {
           </div>
         </div>
       </div>
-
-      <Button onClick={() => {}} content="회원 가입" color="primary" submit />
+      <div className="flex flex-col gap-4">
+        <TosSummary handleOpenModal={handleOpenModal} />
+        <Button content="회원 가입" color="primary" submit />
+      </div>
     </form>
   );
 }

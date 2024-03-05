@@ -63,6 +63,12 @@ function ReviewModal({ openPosition }: ReviewProps) {
     return <ReviewModalSkeleton openPosition={openPosition} />;
   }
 
+  // 데이터를 가공해주는 변수
+  const reviewData = reviews.map(v => v.data.data.reviews).flat();
+
+  // 데이터를 작성한 적 있는지 판단하는 변수
+  const hasWrittenReview = reviewData.findIndex(val => val.is_mine) === -1;
+
   return (
     <>
       <ReviewRegisterModal
@@ -70,31 +76,30 @@ function ReviewModal({ openPosition }: ReviewProps) {
         gym_name={reviews[0].data.data.gym_name}
       />
       <div className={ModalClassName}>
-        <div className="w-full max-w-[768px] z-[101] h-[3.5rem] fixed shadow flex items-center justify-center">
+        <div className="w-full bg-white max-w-[768px] z-[101] h-[3.5rem] fixed shadow flex items-center justify-center">
           <button type="button" className={PositionClassName} onClick={reset}>
             {openPosition === 'center' ? <ChevronDown /> : <ChevronLeft />}
           </button>
           {reviews[0].data.data.gym_name}
         </div>
         <div className="relative mt-[3.5rem]">
-          {reviews
-            .map(v => v.data.data.reviews)
-            .flat()
-            .map(data => (
-              <OneReview mutate={mutate} key={v4()} list={data} />
-            ))}
+          {reviewData.map(data => (
+            <OneReview mutate={mutate} key={v4()} list={data} />
+          ))}
           <div ref={bottomRef} />
-          <IconButton
-            onClick={setCreateMode}
-            size="large"
-            className="fixed bottom-6 right-6 z-[50] rounded-3xl bg-primary w-[3rem] h-[3rem] shadow-main"
-          >
-            <PenSquare
-              fill="#ffffff"
-              stroke={COLOR.primary}
-              strokeWidth={1.5}
-            />
-          </IconButton>
+          {hasWrittenReview && (
+            <IconButton
+              onClick={setCreateMode}
+              size="large"
+              className="fixed bottom-6 right-6 z-[50] rounded-3xl bg-primary w-[3rem] h-[3rem] shadow-main"
+            >
+              <PenSquare
+                fill="#ffffff"
+                stroke={COLOR.primary}
+                strokeWidth={1.5}
+              />
+            </IconButton>
+          )}
         </div>
       </div>
     </>
