@@ -5,11 +5,9 @@ import Title from '@/app/_components/common/Title';
 import Content from '@/app/_components/home/Content';
 import Button from '@/app/_components/buttons/Button';
 import GuideModal from '@/app/_components/home/GuideModal';
+import AppleSignIn from '@/app/_components/buttons/Apple';
 
-import { useEffect, useState } from 'react';
-import { getCookie } from '@/lib/cookie';
-import { useRouter } from 'next/navigation';
-import AppleSignIn from './_components/buttons/Apple';
+import { useState } from 'react';
 
 function Page() {
   const [isClicked, setIsClicked] = useState(false);

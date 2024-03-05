@@ -1,12 +1,12 @@
 export interface UserStateProps {
   signUpType: number;
   id: number;
-  email: string;
+  email: string | null;
   profile_image: string;
   category: string | null;
   setSignUpType: (value: number) => void;
   setId: (value: number) => void;
-  setEmail: (value: string) => void;
+  setEmail: (value: string | null) => void;
   setCategory: (value: string | null) => void;
 }
 
