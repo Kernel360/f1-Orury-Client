@@ -6,7 +6,10 @@ export const encrypt = (payload: string) => {
   if (!secretKey) return null;
 
   //  AES 알고리즘을 사용하여 payload 암호화
-  const encrypted = CryptoJS.AES.encrypt(payload, secretKey).toString();
+  const encrypted = CryptoJS.AES.encrypt(
+    payload,
+    JSON.stringify({ secretKey }),
+  ).toString();
 
   return encrypted;
 };
