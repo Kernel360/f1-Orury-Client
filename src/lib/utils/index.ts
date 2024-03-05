@@ -5,7 +5,7 @@ export function cn(...classes: ClassValue[]) {
   return twMerge(clsx(classes));
 }
 
-export function generateRandomString(length: number) {
+export function getRandomString(length: number) {
   let text = '';
   const possible =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
