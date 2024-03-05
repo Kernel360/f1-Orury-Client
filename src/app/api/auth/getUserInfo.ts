@@ -10,7 +10,7 @@ const getUserInfo = async ({ code, signUpType }: GetUserInfoProps) => {
     const { data: response } = await axiosInstance.post<
       TResponse<UserInfoProps>
     >(
-      END_POINT.auth.oauth,
+      END_POINT.auth.kakao,
       {
         code,
         sign_up_type: signUpType,
