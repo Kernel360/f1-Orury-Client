@@ -39,12 +39,12 @@ function Page() {
 
       switch (response?.status) {
         case STATUS_CODE.ok:
-          // router.push(service);
+          router.push(service);
           setId(response.data.id);
           break;
 
         case invalidEmail:
-          // router.push(home);
+          router.push(home);
           break;
 
         case noAccount:
@@ -58,15 +58,15 @@ function Page() {
 
           if (email) setEmail(email as string);
 
-          // router.push(signUp);
+          router.push(signUp);
           break;
 
         case haveAnotherAccount:
-          // router.push(home);
+          router.push(home);
           break;
 
         default:
-          // router.push(home);
+          router.push(home);
           break;
       }
 

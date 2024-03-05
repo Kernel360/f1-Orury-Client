@@ -6,7 +6,7 @@ import ICON from '@/constants/ui/icon';
 import Image from 'next/image';
 import useUserStore from '@/store/user/userStore';
 import { SIGN_UP_TYPE } from '@/constants/sign-in';
-import { generateRandomString } from '@/lib/utils';
+import { getRandomString } from '@/lib/utils';
 import useAppleAuth from '@/hooks/auth/useAppleAuth';
 import { useRouter } from 'next/navigation';
 
@@ -23,8 +23,8 @@ function AppleSignIn() {
         clientId: process.env.NEXT_PUBLIC_APPLE_CLIENT_ID,
         scope: 'name email',
         redirectURI: process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI,
-        state: generateRandomString(16),
-        nonce: generateRandomString(16),
+        state: getRandomString(16),
+        nonce: getRandomString(16),
         usePopup: true,
       });
     }
@@ -35,10 +35,7 @@ function AppleSignIn() {
       const { code } = res.authorization;
       router.push(`/sign-in/apple?code=${code}`);
     } catch (error) {
-      // 기존 console.log 임시 주석
-
       throw new Error('애플 로그인 중 오류가 발생했습니다.');
-      // console.log(error);
     }
   };
 
