@@ -40,7 +40,6 @@ export interface ReviewStateType {
 
 export interface ReviewRegisterType {
   newContent: string;
-  newImages: File[];
   newScore: number;
   fixId: number;
 }
