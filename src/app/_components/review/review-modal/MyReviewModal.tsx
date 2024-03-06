@@ -71,7 +71,7 @@ function MyReviewModal({ openPosition }: ReviewProps) {
         <div className="relative mt-[3.5rem]">
           {reviews[0].data.data.cursor !== -2 ? (
             reviews
-              .map(v => v.data.data.reviews)
+              .map(v => v.data.data.list)
               .flat()
               .map(data => <OneReview mutate={mutate} key={v4()} list={data} />)
           ) : (
