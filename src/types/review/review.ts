@@ -26,6 +26,11 @@ export interface ReviewResponseType {
   cursor: number;
 }
 
+export interface MyReviewResponseType {
+  list: ReviewDataType[];
+  cursor: number;
+}
+
 export interface ReviewStateType {
   prevImages: File[] | null;
   prevScore: number | null;

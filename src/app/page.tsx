@@ -7,10 +7,20 @@ import Button from '@/app/_components/buttons/Button';
 import GuideModal from '@/app/_components/home/GuideModal';
 import AppleSignIn from '@/app/_components/buttons/Apple';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { getCookie } from '@/lib/cookie';
+import CALLBACK_URL from '@/constants/url';
 
 function Page() {
+  const router = useRouter();
   const [isClicked, setIsClicked] = useState(false);
+
+  useEffect(() => {
+    if (getCookie({ name: 'access_token' })) {
+      router.push(CALLBACK_URL.service);
+    }
+  }, []);
 
   const handleButtonClick = () => {
     setIsClicked(true);
