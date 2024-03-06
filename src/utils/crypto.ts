@@ -32,6 +32,5 @@ export const decrypt = (ciphertext?: string) => {
     return decrypted;
   } catch (error) {
     throw new Error('Error decrypting data');
-    return null;
   }
 };
