@@ -17,7 +17,7 @@ import ReviewModalContainer from '../../_components/review/review-modal/ReviewMo
 
 function Page() {
   const router = useRouter();
-  const closeModal = useReviewStore(state => state.closeMode);
+  const { reset } = useReviewStore(state => state);
   const keyword = useSearchParams().get('keyword') ?? '';
   const selectId = useSearchParams().get('selectId') ?? '';
 
@@ -77,7 +77,7 @@ function Page() {
     return () => {
       handleImageClosed();
       handleCarouselClosed();
-      closeModal();
+      reset();
     };
   }, []);
 
