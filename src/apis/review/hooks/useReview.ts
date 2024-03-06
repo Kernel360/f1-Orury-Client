@@ -1,5 +1,8 @@
 import useSWRInfinite from 'swr/infinite';
-import {MyReviewResponseType, ReviewResponseType} from '@/types/review/review';
+import {
+  MyReviewResponseType,
+  ReviewResponseType,
+} from '@/types/review/review';
 import { getMyReviewKey, getReviewKey } from '@/apis/review/getKeys';
 import { axiosInstance } from '@/lib/axios/axios-instance';
 import { AxiosResponse } from 'axios';
