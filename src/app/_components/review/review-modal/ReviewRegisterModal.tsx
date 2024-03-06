@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { SetStateAction, useEffect, useMemo, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/app/_components/ui/button';
@@ -17,23 +17,34 @@ import { getFormData } from '@/utils/getFormData';
 import reviewApi from '@/apis/review/apis/review';
 import { cn } from '@/lib/utils';
 import { ReviewRegisterProps } from '@/types/review/ReviewProps';
+import type {
+  ReviewRegisterType,
+  SubmitReviewType,
+} from '@/types/review/review';
 
 function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
-  const { closeMode, reviewState, state, reviewId } = useReviewStore(
-    state => state,
-  );
+  const { closeMode, reviewState, state, reviewId } = useReviewStore();
+  const initialValue = {
+    newContent: '',
+    newImages: [],
+    newScore: 5,
+    fixId: -1,
+  };
+  const [registerValue, setRegisterValue] =
+    useState<ReviewRegisterType>(initialValue);
 
-  let newContent: string = '';
-  let newImages: File[] = [];
-  let newScore: number = 5;
-  let fixId: number = -1;
+  const { newImages, newContent, newScore, fixId } = registerValue;
 
   if (state === 'fix') {
     const { prevContent, prevImages, prevScore, prevId } = reviewState;
-    newContent = prevContent as string;
-    newImages = prevImages as File[];
-    newScore = prevScore as number;
-    fixId = prevId as number;
+    const prevState = {
+      newContent: prevContent || '',
+      newImages: prevImages || [],
+      newScore: prevScore || 5,
+      fixId: prevId || -1,
+    };
+
+    setRegisterValue(prevState);
   }
 
   const isOpen = state === 'create' || state === 'fix';
@@ -44,36 +55,41 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
     { 'opacity-1 z-[1000]': isOpen },
   );
 
-  const [ratingValue, setRatingValue] = useState<number>(newScore);
-  const [images, setImages] = useState<File[]>(newImages);
-
   const form = useForm<ReviewSchemaType>({
     resolver: zodResolver(ReviewSchema),
   });
 
+  useEffect(() => {
+    if (state === 'review') {
+      setRegisterValue(initialValue);
+    }
+  }, [state]);
+
   const onSubmit = async (d: ReviewSchemaType) => {
     if (reviewId === null) return;
-
-    let data: { score: number; content: string; gym_id?: number } = {
-      score: ratingValue,
-      content: d.content ? d.content : '',
+    let data: SubmitReviewType = {
+      score: newScore,
+      content: d.content || '',
     };
 
     switch (state) {
       case 'fix': {
         const formData = getFormData({
           jsonData: JSON.stringify(data),
-          images,
+          images: newImages,
         });
         await reviewApi.patchReview(fixId, formData);
         mutate();
         break;
       }
       case 'create': {
-        data = { ...data, gym_id: reviewId };
+        data = {
+          ...data,
+          gym_id: reviewId,
+        };
         const formData = getFormData({
           jsonData: JSON.stringify(data),
-          images,
+          images: newImages,
         });
         await reviewApi.postReview(formData);
         mutate();
@@ -85,22 +101,50 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
     closeMode();
   };
 
-  let header = null;
-  let submit = null;
-  if (state === 'create') {
-    header = '리뷰 작성';
-    submit = '작성 완료';
-  } else if (state === 'fix') {
-    header = '리뷰 수정';
-    submit = '수정 완료';
-  }
+  // @ts-ignore
+  const setImages: React.Dispatch<SetStateAction<File[]>> = (
+    newImages: File[],
+  ) => {
+    setRegisterValue(prev => ({
+      ...prev,
+      newImages,
+    }));
+  };
+
+  const RegisterContent = useMemo(() => {
+    switch (state) {
+      case 'create': {
+        const header = '리뷰 작성';
+        const submit = '작성 완료';
+        return {
+          header,
+          submit,
+        };
+      }
+      case 'fix': {
+        const header = '리뷰 작성';
+        const submit = '작성 완료';
+        return {
+          header,
+          submit,
+        };
+      }
+      default: {
+        return {
+          header: null,
+          submit: null,
+        };
+      }
+    }
+  }, [state]);
+
   return (
     <div className={ModalClassName}>
       <div className=" h-[3.5rem] shadow flex items-center justify-center">
         <button type="button" className="absolute right-3" onClick={closeMode}>
           <X />
         </button>
-        {header}
+        {RegisterContent.header}
       </div>
       <div
         className={`mx-4 pt-4 text-[20px] border-b border-primary ${aBeeZee.className}`}
@@ -120,12 +164,18 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
             <Rating
               name="rating"
               size="large"
-              defaultValue={ratingValue}
+              defaultValue={registerValue.newScore}
               onChange={(_, newValue) => {
                 if (typeof newValue === 'number') {
-                  setRatingValue(newValue);
+                  setRegisterValue(prev => ({
+                    ...prev,
+                    newScore: newValue,
+                  }));
                 } else {
-                  setRatingValue(1);
+                  setRegisterValue(prev => ({
+                    ...prev,
+                    newScore: 1,
+                  }));
                 }
               }}
             />
@@ -151,9 +201,9 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
           </div>
 
           <div className="flex flex-col items-end w-full gap-2 pb-4 z-50 bg-white">
-            <PhotoBooth images={images} setImages={setImages} />
+            <PhotoBooth images={newImages} setImages={setImages} />
             <Button type="submit" color="white" className="w-full">
-              {submit}
+              {RegisterContent.submit}
             </Button>
           </div>
         </form>
