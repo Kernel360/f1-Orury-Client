@@ -31,6 +31,6 @@ export const decrypt = (ciphertext?: string) => {
     const decrypted = decrypted_bytes.toString(CryptoJS.enc.Utf8);
     return decrypted;
   } catch (error) {
-    throw new Error('Error decrypting data');
+    throw new Error(`Error decrypting data : ${error}`);
   }
 };
