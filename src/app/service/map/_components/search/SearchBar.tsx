@@ -43,19 +43,17 @@ function SearchBar({ isSearching, onSearchingFocus }: SearchKeyWordProps) {
   return (
     <div className={containerClassName}>
       <form onSubmit={handleSearchSubmit} className={formClassName}>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="searchKeyword">
           <input
             defaultValue={keyword}
             name="searchKeyword"
             id="searchKeyword"
             ref={searchRef}
-            placeholder="오늘은 어디를 가볼까?"
+            placeholder="암장 이름으로 검색하세요."
             onFocus={handleSearchFocus}
             className="w-full outline-0"
           />
         </label>
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <button
           type="submit"
           className="absolute right-2 top-1/2 translate-y-[-50%]"
