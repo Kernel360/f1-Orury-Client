@@ -9,7 +9,7 @@ function UserPostsModal({ ...props }: UserModalProps) {
   const { user_profile_image, user_nickname, user_id } = props;
   const { data, size, setSize, isValidating } = useUserPostListInfinite('post');
 
-  const posts = data?.flatMap(page => page.data.list);
+  const posts = data ? data.flat().flatMap(page => page.data.data.list) : [];
   const bottomRef = useIntersect(() => {
     if (!isValidating) setSize(size + 1);
   });

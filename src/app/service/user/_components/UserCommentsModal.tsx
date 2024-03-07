@@ -11,7 +11,7 @@ function UserCommentModal({ ...props }: UserModalProps) {
   const { data, size, setSize, isValidating } =
     useUserPostListInfinite('comment');
 
-  const posts = data?.flatMap(page => page.data.list);
+  const posts = data ? data.flat().flatMap(page => page.data.data.list) : [];
   const bottomRef = useIntersect(() => {
     if (!isValidating) setSize(size + 1);
   });
