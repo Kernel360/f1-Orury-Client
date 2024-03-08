@@ -1,7 +1,6 @@
 'use client';
 
 import autoResize from '@/utils/autoResize';
-import TextInput from '@/app/_components/common/TextInput';
 import post from '@/app/service/community/api/post';
 import PhotoBooth from '@/app/service/community/_components/PhotoBooth';
 import editPost from '@/app/service/community/api/editPost';
@@ -123,11 +122,11 @@ function Form({ ...props }: FormType) {
                 <F.FormMessage className="text-warning text-xs" />
 
                 <F.FormControl>
-                  <TextInput
+                  <Textarea
                     placeholder="제목"
-                    width="w-full"
                     defaultValue={title}
-                    isFocus
+                    className="resize-none"
+                    maxLength={30}
                     {...field}
                   />
                 </F.FormControl>
