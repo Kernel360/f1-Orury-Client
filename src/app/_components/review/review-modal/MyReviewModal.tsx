@@ -9,13 +9,14 @@ import { useEffect } from 'react';
 import NotSearched from '@/app/service/community/_components/NotSearched';
 import ReviewModalSkeleton from './ReviwModalSkeleton';
 import OneReview from './OneReview';
+import ReviewRegisterModal from './ReviewRegisterModal';
 
 /**
  * @description 지도 위에 띄위기 위해서 Modal로 구현을 합니다.
  * @param position 어느 방향에서 모달이 열릴지 결정합니다.
  */
 function MyReviewModal({ openPosition }: ReviewProps) {
-  const { isOpen, reset, state } = useReviewStore(state => state);
+  const { isOpen, reset } = useReviewStore(state => state);
 
   const { data, mutate, size, setSize, isLoading, isValidating } =
     useReviewApi.useGetMyReviews();
@@ -60,14 +61,15 @@ function MyReviewModal({ openPosition }: ReviewProps) {
   }
 
   return (
-    <div className={ModalClassName}>
-      <div className="w-full max-w-[768px] z-[101] px-1 h-[3.5rem] fixed shadow flex items-center justify-center">
-        <button type="button" className={PositionClassName} onClick={reset}>
-          {openPosition === 'center' ? <ChevronDown /> : <ChevronLeft />}
-        </button>
-        내가 작성한 리뷰
-      </div>
-      {state === 'mypage' && (
+    <>
+      <ReviewRegisterModal mutate={mutate} />
+      <div className={ModalClassName}>
+        <div className="w-full max-w-[768px] z-[101] px-1 h-[3.5rem] fixed shadow flex items-center justify-center">
+          <button type="button" className={PositionClassName} onClick={reset}>
+            {openPosition === 'center' ? <ChevronDown /> : <ChevronLeft />}
+          </button>
+          내가 작성한 리뷰
+        </div>
         <div className="relative mt-[3.5rem]">
           {reviews[0].data.data.cursor !== -2 ? (
             reviews
@@ -79,8 +81,8 @@ function MyReviewModal({ openPosition }: ReviewProps) {
           )}
           <div ref={bottomRef} />
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }
 

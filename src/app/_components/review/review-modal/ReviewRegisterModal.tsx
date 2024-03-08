@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/app/_components/ui/button';
@@ -12,7 +12,7 @@ import * as F from '@/app/_components/ui/form';
 import { X } from 'lucide-react';
 import useReviewStore from '@/store/review/reviewStore';
 import { aBeeZee } from '@/styles/fonts';
-import { Rating, Skeleton } from '@mui/material';
+import { Rating } from '@mui/material';
 import { getFormData } from '@/utils/getFormData';
 import reviewApi from '@/apis/review/apis/review';
 import { cn } from '@/lib/utils';
@@ -31,9 +31,8 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
     fixId: -1,
   };
   const [images, setImages] = useState<File[]>([]);
-  const [registerValue, setRegisterValue] = useState<ReviewRegisterType>(
-    () => initialValue,
-  );
+  const [registerValue, setRegisterValue] =
+    useState<ReviewRegisterType>(initialValue);
 
   const { newContent, newScore, fixId } = registerValue;
 
@@ -68,11 +67,14 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
     }
   }, [state]);
 
-  const onSubmit = async (d: ReviewSchemaType) => {
-    if (reviewId === null) return;
+  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setRegisterValue(prev => ({ ...prev, newContent: e.target.value }));
+  };
+
+  const onSubmit = async () => {
     let data: SubmitReviewType = {
       score: newScore,
-      content: d.content || '',
+      content: newContent,
     };
 
     switch (state) {
@@ -86,16 +88,22 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
         break;
       }
       case 'create': {
+        if (!reviewId) return;
+
         data = {
           ...data,
           gym_id: reviewId,
         };
+
         const formData = getFormData({
           jsonData: JSON.stringify(data),
           images,
         });
+
         await reviewApi.postReview(formData);
+
         mutate();
+
         break;
       }
       default:
@@ -104,23 +112,26 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
     closeMode();
   };
 
-  const RegisterContent = useMemo(() => {
+  const registerContent = useMemo(() => {
     switch (state) {
       case 'create': {
         return {
           header: '리뷰 작성',
+          title: gym_name ?? '',
           submit: '작성 완료',
         };
       }
       case 'fix': {
         return {
-          header: '리뷰 작성',
+          header: '리뷰 수정',
+          title: gym_name ?? '나의 리뷰 수정',
           submit: '작성 완료',
         };
       }
       default: {
         return {
           header: null,
+          title: null,
           submit: null,
         };
       }
@@ -133,16 +144,12 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
         <button type="button" className="absolute right-3" onClick={closeMode}>
           <X />
         </button>
-        {RegisterContent.header}
+        {registerContent.header}
       </div>
       <div
         className={`mx-4 pt-4 text-[20px] border-b border-primary ${aBeeZee.className}`}
       >
-        {typeof gym_name !== 'undefined' ? (
-          `${gym_name}`
-        ) : (
-          <Skeleton className="w-[140px] h-[54px] bg-gray-200" />
-        )}
+        {registerContent.title}
       </div>
       <F.Form {...form}>
         <form
@@ -179,7 +186,7 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
                         maxLength={520}
                         placeholder="리뷰 내용"
                         content={newContent}
-                        {...field}
+                        {...{ ...field, value: newContent, onChange }}
                       />
                     </F.FormControl>
                     <F.FormMessage className="text-warning pl-2 text-xs" />
@@ -192,7 +199,7 @@ function ReviewRegisterModal({ gym_name, mutate }: ReviewRegisterProps) {
           <div className="flex flex-col items-end w-full gap-2 pb-4 z-50 bg-white">
             <PhotoBooth images={images} setImages={setImages} />
             <Button type="submit" color="white" className="w-full">
-              {RegisterContent.submit}
+              {registerContent.submit}
             </Button>
           </div>
         </form>
