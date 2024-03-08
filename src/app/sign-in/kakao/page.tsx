@@ -51,16 +51,17 @@ function Page() {
 
         case noAccount:
           authToken = encrypt(response.data.access_token);
-          email = getEmail(response?.data.access_token);
+          email = getEmail(authToken);
 
           if (authToken) {
             sessionStorage.setItem('auth_token', authToken);
-            response.message = SIGN_UP_ERROR_MESSAGES.noAuthToken;
           } else {
+            response.message = SIGN_UP_ERROR_MESSAGES.noAuthToken;
+
             router.push(home);
           }
 
-          if (email) setEmail(email as string);
+          if (typeof email === 'string') setEmail(email);
 
           router.push(signUp);
           break;

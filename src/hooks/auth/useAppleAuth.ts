@@ -11,8 +11,9 @@ const useAppleAuth = () => {
       script.id = 'apple-login-script';
       script.src =
         'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js';
-      script.onerror = () =>
-        console.error('Apple login script를 가져오는데 실패했습니다.');
+      script.onerror = () => {
+        throw new Error('Apple login script를 가져오는데 실패했습니다.');
+      };
       document.body.appendChild(script);
     };
 

@@ -16,6 +16,12 @@ function Page() {
   const router = useRouter();
   const [isClicked, setIsClicked] = useState(false);
 
+  useEffect(() => {
+    if (getCookie({ name: 'access_token' })) {
+      router.push(CALLBACK_URL.service);
+    }
+  }, []);
+
   const handleButtonClick = () => {
     setIsClicked(true);
   };
