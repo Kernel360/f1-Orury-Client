@@ -1,10 +1,14 @@
-import { getPostListKey, getSearchPostListKey } from '@/utils/getKeys';
-
 import useSWRInfinite from 'swr/infinite';
+
 import { axiosInstance } from '@/lib/axios/axios-instance';
-import { PostListData } from '@/types/community/post';
 import { AxiosResponse } from 'axios';
 import { TResponse } from '@/types/common/response';
+import {
+  getPostListKey,
+  getSearchPostListKey,
+  getUserPostListKey,
+} from '@/utils/getKeys';
+import type { PostListData, MyPostListData } from '@/types/community/post';
 
 const usePostListApi = {
   useGetPostList: (categoryId: number) =>
@@ -18,6 +22,14 @@ const usePostListApi = {
     useSWRInfinite<AxiosResponse<TResponse<PostListData>>>(
       (pageIndex, previousPageData) =>
         getSearchPostListKey(searchText, pageIndex, previousPageData),
+      axiosInstance.get,
+      { revalidateFirstPage: false },
+    ),
+
+  useGetMyPostList: (state: 'post' | 'comment') =>
+    useSWRInfinite<AxiosResponse<TResponse<MyPostListData>>>(
+      (pageIndex, previousPageData) =>
+        getUserPostListKey(pageIndex, state, previousPageData),
       axiosInstance.get,
       { revalidateFirstPage: false },
     ),

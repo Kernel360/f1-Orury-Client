@@ -55,6 +55,9 @@ function Profile({ ...props }: ProfileProps) {
 
       clearCache();
 
+      // 더미 값 설정
+      event.target.value = '';
+
       toast({ variant: 'success', description: message, duration: 2000 });
     }
   };
