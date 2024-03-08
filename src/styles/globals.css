@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --rsbs-backdrop-bg: rgba(0, 0, 0, 40%);
+  --rsbs-bg: #fff;
+  --rsbs-handle-bg: hsla(0, 0%, 0%, 0.14);
+  --rsbs-max-w: 768px;
+  --rsbs-ml: auto;
+  --rsbs-mr: auto;
+  --rsbs-overlay-rounded: 16px;
+}
+
+[data-rsbs-root] {
+  position: relative;
+  z-index: 50;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer utilities {
+  .safe-padding-comment {
+    padding-bottom: calc(48px + env(safe-area-inset-bottom));
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .shadow-custom-line {
+    --rsbs-content-opacity: 1;
+    box-shadow: 0 1px 0
+      rgba(46, 59, 66, calc(var(--rsbs-content-opacity) * 0.125));
+  }
+}
+
+@layer components {
+  .ellipsis {
+    @apply text-ellipsis whitespace-nowrap overflow-hidden;
+  }
+}
+
+* {
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}

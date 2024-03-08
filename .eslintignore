@@ -1,0 +1,10 @@
+next.config.js
+/next.config.js
+public
+node_modules/
+postcss.config.js
+tailwind.config.js
+tsconfig.json
+prettier.config.js
+public/index.js
+src/app/_components/ui

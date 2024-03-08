@@ -1,0 +1,51 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["./tsconfig.json"]
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "react-hooks/exhaustive-deps": "off",
+    "react/jsx-props-no-spreading": "off",
+    "linebreak-style": 0,
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": ["off", { "target": "single" }],
+    "object-curly-newline": "off",
+    "arrow-parens": "off",
+    "arrow-body-style": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "operator-linebreak": "off",
+    "react/require-default-props": "off",
+    "implicit-arrow-linebreak": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "consistent-return": "off",
+    "@typescript-eslint/indent": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "react/jsx-wrap-multilines": "off",
+    "react/jsx-indent": "off",
+    "react/no-invalid-html-attribute": "off",
+    "eslint-plugin-import/no-cycle": "off",
+    "import/no-cycle":"off",
+    "no-param-reassign":"off",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelAttributes": ["htmlFor"]
+      }
+    ]
+  },
+  "globals": {
+    "React": "writable"
+  }
+}
