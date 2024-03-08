@@ -27,9 +27,7 @@ function PhotoBooth({ ...props }: PhotoBoothProps) {
       const newImages = Array.from(files);
 
       // 첨부되는 사진이 5MB 이하일때만 허용
-      if (newImages.every(newImage => newImage.size <= 5 * 1024 * 1024)) {
-        setImages(prevImages => [...prevImages, ...newImages]);
-      } else {
+      if (newImages.every(newImage => newImage.size > 5 * 1024 * 1024)) {
         toast({
           title: '이미지 용량 초과',
           description: '최대 5MB까지의 이미지만 업로드할 수 있습니다.',
@@ -37,6 +35,7 @@ function PhotoBooth({ ...props }: PhotoBoothProps) {
           duration: 2000,
         });
       }
+      setImages(prevImages => [...prevImages, ...newImages]);
     }
   };
 
