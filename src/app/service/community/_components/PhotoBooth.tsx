@@ -40,6 +40,7 @@ function PhotoBooth({ ...props }: PhotoBoothProps) {
   };
 
   useMemo(() => {
+    console.log(images);
     if (images.length > 5) {
       setImages(prevImages => prevImages.splice(0, 5));
       toast({

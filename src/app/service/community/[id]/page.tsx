@@ -19,7 +19,7 @@ function Page({ params }: { params: { id: string } }) {
   const [postDetail, setPostDetail] = useState<PostDetailProps>();
   const [isEditButtonClicked, setIsEditButtonClicked] = useState(false);
 
-  const editHandler = () => {
+  const handleEditMode = () => {
     setIsEditButtonClicked(isEditButtonClicked => !isEditButtonClicked);
   };
 
@@ -41,8 +41,8 @@ function Page({ params }: { params: { id: string } }) {
         isEllipsis={postDetail?.is_mine && !isEditButtonClicked}
         isBack={!isEditButtonClicked}
         isExit={isEditButtonClicked}
-        exitHandler={editHandler}
-        editHandler={editHandler}
+        exitHandler={handleEditMode}
+        editHandler={handleEditMode}
       />
       <ImageSliderModal />
       <div className="flex flex-col  relative h-full-size-omit-nav">
@@ -55,7 +55,7 @@ function Page({ params }: { params: { id: string } }) {
             title={postDetail?.title}
             content={postDetail?.content}
             images={postDetail?.images}
-            editHandler={editHandler}
+            editHandler={handleEditMode}
             isPostDetail
           />
         )}

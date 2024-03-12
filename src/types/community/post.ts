@@ -59,8 +59,10 @@ export interface UsePostsStateProps {
 export interface UseOnePostState {
   title: string;
   content: string;
+  images: string[];
   setTitle: (value: string) => void;
   setContent: (value: string) => void;
+  setImages: (value: string[] | undefined) => void;
 }
 
 export interface PostCountState {

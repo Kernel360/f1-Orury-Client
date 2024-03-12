@@ -13,8 +13,10 @@ export const usePostsState = create<UsePostsStateProps>(set => ({
 export const useOnePostState = create<UseOnePostState>(set => ({
   title: '',
   content: '',
+  images: [],
   setTitle: value => set({ title: value }),
   setContent: value => set({ content: value }),
+  setImages: value => set(state => ({ ...state, images: value })),
 }));
 
 export const postCountState = create<PostCountState>(set => ({
