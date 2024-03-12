@@ -79,7 +79,6 @@ function Profile({ ...props }: ProfileProps) {
           <Image
             src={profileImage}
             alt="프로필 이미지"
-            quality={100}
             fill
             priority
             className="rounded-full"
@@ -87,7 +86,7 @@ function Profile({ ...props }: ProfileProps) {
         </div>
 
         <label
-          htmlFor="photo"
+          htmlFor="userProfileImage"
           className="flex justify-center items-center w-8 h-8 absolute right-0 bottom-0 bg-purple-200 rounded-full cursor-pointer"
         >
           <D.DropdownMenu>
@@ -117,7 +116,7 @@ function Profile({ ...props }: ProfileProps) {
 
       <input
         type="file"
-        id="photo"
+        id="userProfileImage"
         accept="image/*"
         onChange={handleProfileImageChange}
         className="hidden"

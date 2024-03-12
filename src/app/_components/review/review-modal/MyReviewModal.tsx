@@ -64,7 +64,7 @@ function MyReviewModal({ openPosition }: ReviewProps) {
     <>
       <ReviewRegisterModal mutate={mutate} />
       <div className={ModalClassName}>
-        <div className="w-full max-w-[768px] z-[101] px-1 h-[3.5rem] fixed shadow flex items-center justify-center">
+        <div className="w-full bg-white max-w-[768px] z-[101] px-1 h-[3.5rem] fixed shadow flex items-center justify-center">
           <button type="button" className={PositionClassName} onClick={reset}>
             {openPosition === 'center' ? <ChevronDown /> : <ChevronLeft />}
           </button>

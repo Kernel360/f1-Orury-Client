@@ -8,7 +8,7 @@ import * as R from '@/app/_components/ui/radio-group';
 import * as F from '@/app/_components/ui/form';
 import usePostListApi from '@/hooks/community/usePostList';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getFormData } from '@/utils/getFormData';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -18,6 +18,7 @@ import { FormSchema, FormSchemaType } from '@/app/schema';
 import { useToast } from '@/app/_components/ui/use-toast';
 import { useDebouncedCallback } from 'use-debounce';
 import { Textarea } from '@/app/_components/ui/textarea';
+import { convertURLtoFile } from '@/utils/convertURLtoFile';
 import type { FormType } from '@/types/common/form';
 
 function Form({ ...props }: FormType) {
@@ -30,12 +31,27 @@ function Form({ ...props }: FormType) {
     setIsSheetOpen,
     editHandler,
     category,
+    images,
   } = props;
   const { toast } = useToast();
   const { categoryId, setCategoryId } = usePostsState();
   const { setTitle, setContent } = useOnePostState();
   const { mutate } = usePostListApi.useGetPostList(categoryId);
-  const [images, setImages] = useState<File[]>([]);
+  const [newImages, setNewImages] = useState<File[]>([]);
+
+  useEffect(() => {
+    const convertImagesType = async () => {
+      if (images) {
+        const convertedImages = await Promise.all(
+          images.map(image => convertURLtoFile(image)),
+        );
+
+        setNewImages(convertedImages);
+      }
+    };
+
+    convertImagesType();
+  }, []);
 
   const form = useForm<FormSchemaType>({
     defaultValues: {
@@ -48,7 +64,10 @@ function Form({ ...props }: FormType) {
 
   const onSubmit = useDebouncedCallback(async (data: FormSchemaType) => {
     if (isPost && setIsSheetOpen) {
-      const formData = getFormData({ jsonData: JSON.stringify(data), images });
+      const formData = getFormData({
+        jsonData: JSON.stringify(data),
+        images: newImages,
+      });
       const message = await post(formData);
 
       await mutate();
@@ -60,7 +79,7 @@ function Form({ ...props }: FormType) {
     if (isPostDetail && postId && editHandler) {
       const formData = getFormData({
         jsonData: JSON.stringify({ ...data, id: postId }),
-        images,
+        images: newImages,
       });
 
       const message = await editPost(formData);
@@ -158,7 +177,7 @@ function Form({ ...props }: FormType) {
         </div>
 
         <div className="flex flex-col items-end w-full gap-2 pb-4 z-50 bg-white">
-          <PhotoBooth images={images} setImages={setImages} />
+          <PhotoBooth images={newImages} setImages={setNewImages} />
 
           <Button type="submit" color="white" className="w-full">
             작성 완료

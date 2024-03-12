@@ -8,11 +8,13 @@ function ReviewModalContainer({
   isMyPage,
   openPosition,
 }: ReviewModalContainerProps) {
-  const { reviewId } = useReviewStore(state => state);
+  const { reviewId, isOpen } = useReviewStore(state => state);
 
   if (!isMyPage && reviewId === null) {
     return <ReviewModalSkeleton openPosition={openPosition} />;
   }
+
+  if (!isOpen) return null;
 
   if (isMyPage) {
     return <MyReviewModal openPosition={openPosition} />;

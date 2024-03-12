@@ -58,7 +58,7 @@ function Page() {
 
   return (
     <div className="relative">
-      {category && (
+      {category && category !== 'review' && (
         <Header
           title={getHeaderTitle(category)}
           isExit
