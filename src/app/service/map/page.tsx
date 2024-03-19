@@ -64,12 +64,14 @@ function Page() {
   };
 
   useEffect(() => {
-    if (selectId !== '') {
+    console.log('selectId', typeof selectId, selectId);
+    if (selectId && selectId !== 'undefined') {
       const selectItem = data?.data.data.filter(
         v => v.id === Number(selectId),
       )[0];
 
       if (selectItem) {
+        // 목록을 선택했을때 위도 경도
         handleMovePosition(selectItem);
       }
     }
