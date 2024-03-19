@@ -7,20 +7,20 @@ export default function Location() {
     { latitude: number; longitude: number } | string
   >('');
 
-  function success(position: GeolocationPosition) {
+  const success = (position: GeolocationPosition) => {
     setLocation({
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
     });
-  }
+  };
 
-  function handleError() {
+  const handleError = () => {
     setLocation({
       latitude: 37.483034,
       longitude: 126.902435,
     });
     console.log('Failed to retrieve location');
-  }
+  };
 
   useEffect(() => {
     if (navigator.geolocation) {
