@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable lines-around-directive */
 'use client';
 
 import React from 'react';
@@ -9,6 +11,7 @@ import {
 } from 'react-kakao-maps-sdk';
 import type { KakaoBackGroundMapProps } from '@/types/map/BottomSheetProps';
 import type { OneSearchKeywordType } from '@/types/map/map';
+import Locations from './Locations';
 
 /**
  * @description 맵으로서 해당 도메인에서는 뒷배경에 위치하고 있습니다.
@@ -29,10 +32,20 @@ function KakaoBackGroundMap({
   const onMovePosition = (item: OneSearchKeywordType) => {
     handleMovePosition(item);
   };
+  // 처음 현재 내위치 latitude, longitude
+  const location: any = Locations();
 
+  const currentLatLng = {
+    // 현재 위치 좌표
+    lat: location.latitude,
+    lng: location.longitude,
+  };
+
+  console.log('mapInfo', mapInfo, mapInfo.center);
   return (
     <div className="h-full-size-omit-nav relative z-10">
-      <Map
+      <Map // 지도를 표시할 Container
+        id="map"
         draggable
         center={mapInfo.center}
         isPanto={mapInfo.isPanto}
@@ -40,12 +53,16 @@ function KakaoBackGroundMap({
           width: '100%',
           height: '100%',
         }}
-        level={3}
+        level={3} // 지도의 확대 레벨
       >
+        <MapMarker
+          position={currentLatLng} // 현재 위치 표시
+        />
+
         <MarkerClusterer averageCenter minLevel={10}>
           <>
             {positionList.map(marker => (
-              <MapMarker
+              <MapMarker // 암장 위치 표시
                 onClick={() => onMovePosition(marker)}
                 key={`${marker.position.latitude}-${marker.position.longitude}`}
                 position={{
