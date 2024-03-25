@@ -2,7 +2,6 @@ import { COLOR } from '@/styles/color';
 import { Info } from 'lucide-react';
 import guide_ios_1 from '$/images/guide/guide-ios-1.png';
 import guide_web_1 from '$/images/guide/guide-web-1.png';
-import guide_and_1 from '$/images/guide/guide-and-1.png';
 
 import * as A from '@/app/_components/ui/accordion';
 import Image from 'next/image';
@@ -87,33 +86,6 @@ function GuideModal({ cancelHandler }: { cancelHandler: () => void }) {
                           3.
                           <b>홈 화면에 추가 (Add to Home Screen) </b>
                           버튼을 클릭하여 추가합니다.
-                        </A.AccordionContent>
-                      </A.AccordionItem>
-                      <A.AccordionItem value="item-3">
-                        <A.AccordionTrigger>안드로이드</A.AccordionTrigger>
-                        <A.AccordionContent>
-                          <span>1. 크롬 앱에서 </span>
-                          <Link
-                            href="https://orury.com"
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            className="text-blue-800 underline-offset-3 underline"
-                          >
-                            오루리 사이트
-                          </Link>
-                          <span>에 접속합니다.</span>
-                          <br />
-                          <span>2. 상단의 메뉴 버튼을 클릭합니다.</span>
-                          <Image
-                            src={guide_and_1}
-                            alt="guide_and_1"
-                            width={400}
-                          />
-                          3. 메뉴 항목 중 앱 설치 메뉴를 클릭합니다.
-                          <br />
-                          4.
-                          <b>앱 설치 </b>
-                          버튼을 클릭하여 설치합니다.
                         </A.AccordionContent>
                       </A.AccordionItem>
                     </A.Accordion>
