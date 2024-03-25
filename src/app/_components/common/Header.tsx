@@ -48,6 +48,12 @@ function Header({ ...props }: Partial<HeaderProps>) {
     });
   };
 
+  const ellipsisClassName = (isEllipsis?: boolean) => {
+    return clsx('absolute', {
+      'right-4 h-6': isEllipsis,
+    });
+  };
+
   return (
     <header className="sticky top-0 flex items-center justify-center h-12 bg-white z-10">
       <button
@@ -58,7 +64,7 @@ function Header({ ...props }: Partial<HeaderProps>) {
         {isBack && <ChevronLeft />}
       </button>
       <span className="font-medium">{title}</span>
-      <div className="absolute right-4 h-6">
+      <div className={ellipsisClassName(isEllipsis)}>
         {isEllipsis && (
           <M.Menubar className="border-none">
             <M.MenubarMenu>
