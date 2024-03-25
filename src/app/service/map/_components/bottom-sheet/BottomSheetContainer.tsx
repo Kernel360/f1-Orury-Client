@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import { useRef } from 'react';
 import useCss from '@/hooks/common/useCss';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
@@ -40,13 +41,36 @@ function BottomSheetContainer({
         return [200, maxHeight];
       }}
       header={
-        <h1 className="flex items-center text-xl justify-center font-bold text-gray-800">
+        <>
           {isDataNull ? (
             <Skeleton className="w-[100px] h-[28px] bg-gray-200" />
           ) : (
-            data.data.data.name
+            <div
+              style={{
+                borderRadius: '50%',
+                width: '70px',
+                height: '70px',
+                backgroundColor: '#855AFF',
+                color: 'white',
+                fontSize: '36px',
+                lineHeight: '70px',
+                fontWeight: 600,
+                textAlign: 'center',
+              }}
+            >
+              {data.data.data.name.substring(0, 1)}
+            </div>
           )}
-        </h1>
+          <h1 className="flex items-center text-xl justify-center font-bold text-gray-800">
+            {isDataNull ? (
+              <Skeleton className="w-[100px] h-[28px] bg-gray-200" />
+            ) : (
+              data.data.data.name
+            )}
+          </h1>
+          <div>인스타</div>
+          <div>북마크</div>
+        </>
       }
       onDismiss={onDisMiss}
       expandOnContentDrag={isSheetOpen}

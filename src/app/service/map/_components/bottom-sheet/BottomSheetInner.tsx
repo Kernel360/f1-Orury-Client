@@ -47,16 +47,17 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
 
   return (
     <>
+      <Image
+        src={images[0]}
+        alt={`${name} 로고이미지`}
+        width={0}
+        height={0}
+        sizes="100vw"
+        style={{ width: '100vw', height: '250px' }} // optional
+      />
+
       <div className="p-[0.75rem]">
         <div className="flex gap-[0.75rem]">
-          <div>
-            <Image
-              src={images[0]}
-              alt={`${name} 로고이미지`}
-              width="110"
-              height="110"
-            />
-          </div>
           <div className={aBeeZee.className}>
             {state !== -1 ? (
               <div className={stateClassName}>
