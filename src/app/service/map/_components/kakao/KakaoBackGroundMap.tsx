@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable lines-around-directive */
 'use client';
 
@@ -40,12 +41,13 @@ function KakaoBackGroundMap({
     lng: location.longitude,
   };
 
+  console.log('mapInfo', mapInfo, mapInfo.center);
   return (
     <div className="h-full-size-omit-nav relative z-10">
       <Map // 지도를 표시할 Container
         id="map"
         draggable
-        center={currentLatLng}
+        center={mapInfo.center}
         isPanto={mapInfo.isPanto}
         style={{
           width: '100%',
@@ -56,6 +58,7 @@ function KakaoBackGroundMap({
         <MapMarker
           position={currentLatLng} // 현재 위치 표시
         />
+
         <MarkerClusterer averageCenter minLevel={10}>
           <>
             {positionList.map(marker => (

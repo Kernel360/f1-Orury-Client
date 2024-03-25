@@ -1,3 +1,7 @@
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable lines-around-directive */
+/* eslint-disable react/button-has-type */
 'use client';
 
 import SearchBar from '@/app/service/map/_components/search/SearchBar';
@@ -14,27 +18,25 @@ import useReviewStore from '@/store/review/reviewStore';
 import { useImageStore, useImagesStore } from '@/store/modal/imageModalStore';
 import useMap from '@/apis/map/hooks/useMap';
 import ReviewModalContainer from '../../_components/review/review-modal/ReviewModalContainer';
+import Locations from './_components/kakao/Locations';
 
 function Page() {
   const router = useRouter();
   const { reset } = useReviewStore(state => state);
   const keyword = useSearchParams().get('keyword') ?? '';
   const selectId = useSearchParams().get('selectId') ?? '';
-
-  // 현재 지도의 좌표와 이동시 부드럽게 움직이는지 여부를 나타냅니다.
+  const location: any = Locations(); // 처음 현재 내위치 latitude, longitude
+  // 맵상에서 선택된 지도가 있는지 판단하는 state
+  const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
+  // 검색중인지 판단하는 state
+  const [isSearching, setIsSearching] = useState<boolean>(false);
   const [mapInfo, setMapInfo] = useState<MapMoveControlType>({
-    center: { lat: DEFAULT_POSITION.latitude, lng: DEFAULT_POSITION.longitude },
-    isPanto: false,
+    center: { lat: 0, lng: 0 }, // Default center
+    isPanto: false, // 현재 지도의 좌표와 이동시 부드럽게 움직이는지 여부를 나타냅니다.
   });
 
   // // 첫 화면으로 검색창에 default 값으로 들어간다.
   const { isLoading, data } = useMap.useGetSearchList(mapInfo.center, keyword);
-
-  // 맵상에서 선택된 지도가 있는지 판단하는 state
-  const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
-
-  // 검색중인지 판단하는 state
-  const [isSearching, setIsSearching] = useState<boolean>(false);
 
   const handleImageClosed = useImageStore(state => state.setModalClose);
   const handleCarouselClosed = useImagesStore(state => state.setModalClose);
@@ -83,6 +85,17 @@ function Page() {
     };
   }, []);
 
+  useEffect(() => {
+    console.log('===============', mapInfo, mapInfo.center);
+    if (typeof location === 'object' && location !== null) {
+      // location이 object 이고 null이 아닌지 확인
+      setMapInfo({
+        center: { lat: location.latitude, lng: location.longitude },
+        isPanto: false,
+      });
+    }
+  }, [location]);
+
   const isEmptyData = !data || isLoading;
 
   return (
@@ -90,6 +103,17 @@ function Page() {
       <ReviewModalContainer isMyPage={false} openPosition="right" />
       <ImageModal />
       <ImageSliderModal />
+      <button
+        className="z-0"
+        onClick={() =>
+          setMapInfo({
+            center: { lat: location.latitude, lng: location.longitude },
+            isPanto: false,
+          })
+        }
+      >
+        중심으로 이동
+      </button>
       <KakaoBackGroundMap
         mapInfo={mapInfo}
         positionList={isEmptyData ? [] : data.data.data}
