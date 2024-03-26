@@ -30,6 +30,8 @@ function BottomSheetHeader({
     console.log('====북마크 클릭');
   };
 
+  const addressSplit = address.split(' ');
+
   return (
     <>
       <div>
@@ -53,8 +55,7 @@ function BottomSheetHeader({
             <span> · </span>
           </div>
         )}
-
-        {address.slice(0, 6)}
+        {addressSplit[0] + addressSplit[1]}
       </div>
 
       <div className="flex text-sm leading-5 font-semibold text-black">
