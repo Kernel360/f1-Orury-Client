@@ -4,7 +4,7 @@ export interface PositionType {
 }
 
 export interface URLType {
-  label: 'homepage' | 'instagram' | 'kakaomap';
+  label: 'homepage' | 'instagram' | 'kakaomap' | 'phone';
   url: string;
 }
 
@@ -83,9 +83,10 @@ export interface DetailPlaceType extends BusinessHoursType {
   homepage_link: string;
   setting_day: string;
   doing_business: boolean;
-  isLike: boolean;
+  is_like: boolean;
   bar_chart_data: PointChartDataType[];
   line_chart_data: AvgChartDataType[];
+  gym_type?: string;
 }
 
 export interface CenterType {
