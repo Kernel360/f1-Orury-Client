@@ -5,7 +5,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import OneSiteUrl from './OneSiteUrl';
 import { Phone, Star, StarHalf, ChevronRight } from 'lucide-react';
-import SquarePen from './square-pen.svg';
+import SquarePen from 'public/square-pen.svg';
 
 interface BottomSheetHeaderProps {
   name: string;
