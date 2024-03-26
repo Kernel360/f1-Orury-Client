@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { useRef } from 'react';
 import useCss from '@/hooks/common/useCss';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
@@ -7,7 +6,7 @@ import type { BottomSheetProps } from '@/types/map/BottomSheetProps';
 import { Skeleton } from '@mui/material';
 import useMap from '@/apis/map/hooks/useMap';
 import BottomSheetInnerSkeleton from '../skeleton/BottomSheetInnerSkeleton';
-
+import BottomSheetHeader from './BottomSheetHeader';
 /**
  * @description 바텀시트의 외부 컴포넌트입니다.
  * @param isSheetOpen 바텀 시트가 열려있는지 판단합니다. 해당 값으로 애니메이션을 적용합니다.
@@ -22,11 +21,10 @@ function BottomSheetContainer({
   useCss('https://unpkg.com/react-spring-bottom-sheet/dist/style.css');
 
   const { data, isLoading } = useMap.useGetDetail(selectId);
-
   const focusRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<BottomSheetRef>(null);
-
   const isDataNull = typeof data === 'undefined' || isLoading;
+  console.log('====', data?.data.data, typeof data?.data.data);
 
   return (
     <BottomSheet
@@ -38,39 +36,23 @@ function BottomSheetContainer({
       initialFocusRef={focusRef}
       defaultSnap={200}
       snapPoints={({ maxHeight }) => {
-        return [200, maxHeight];
+        return [250, maxHeight];
       }}
       header={
-        <>
-          {isDataNull ? (
-            <Skeleton className="w-[100px] h-[28px] bg-gray-200" />
+        <header className="h-[220px]">
+          {data?.data.data ? (
+            <BottomSheetHeader
+              name={data.data.data.name}
+              address={data.data.data.address}
+              instagram_link={data.data.data.instagram_link}
+              is_like={data.data.data.is_like}
+              gym_type={data.data.data.gym_type}
+              phone_number={data.data.data.phone_number}
+            />
           ) : (
-            <div
-              style={{
-                borderRadius: '50%',
-                width: '70px',
-                height: '70px',
-                backgroundColor: '#855AFF',
-                color: 'white',
-                fontSize: '36px',
-                lineHeight: '70px',
-                fontWeight: 600,
-                textAlign: 'center',
-              }}
-            >
-              {data.data.data.name.substring(0, 1)}
-            </div>
+            <Skeleton className="w-[100px] h-[28px] bg-gray-200" />
           )}
-          <h1 className="flex items-center text-xl justify-center font-bold text-gray-800">
-            {isDataNull ? (
-              <Skeleton className="w-[100px] h-[28px] bg-gray-200" />
-            ) : (
-              data.data.data.name
-            )}
-          </h1>
-          <div>인스타</div>
-          <div>북마크</div>
-        </>
+        </header>
       }
       onDismiss={onDisMiss}
       expandOnContentDrag={isSheetOpen}
