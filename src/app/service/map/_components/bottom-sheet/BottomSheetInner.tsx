@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Image from 'next/image';
 import OneSiteUrl from '@/app/service/map/_components/bottom-sheet/OneSiteUrl';
 import BarRatingChart from '@/app/service/map/_components/chart/BarRatingChart';
@@ -36,11 +37,6 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
 
   const state = getGymState({ business_hours });
 
-  const stateClassName = cn('text-[0.75rem] leading-[1.063rem]', {
-    'text-green': state === 0,
-    'text-end-time': state === 1,
-  });
-
   const onModalOpen = () => {
     onReview(id);
   };
@@ -53,17 +49,16 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
         width={0}
         height={0}
         sizes="100vw"
-        style={{ width: '100vw', height: '250px' }} // optional
+        className="w-screen h-64"
       />
-
+      <div className="flex justify-end p-[0.75rem]">
+        <button type="button" onClick={onModalOpen}>
+          리뷰탭 만들어야하지롱 컴포넌트 분리해야하밍
+        </button>
+      </div>
       <div className="p-[0.75rem]">
         <div className="flex gap-[0.75rem]">
           <div className={aBeeZee.className}>
-            {state !== -1 ? (
-              <div className={stateClassName}>
-                {state === 0 ? '영업중' : '영업 종료'}
-              </div>
-            ) : null}
             {Object.values(
               business_hours[
                 new Date().getDay() - 1 === -1 ? 6 : new Date().getDay() - 1
@@ -78,28 +73,19 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
                 )[0]
               }`}
             </div>
+
             {setting_day && (
               <>
-                <div className="text-[0.875rem]">세팅요일</div>
+                <div className="text-[0.875rem]">[Setting Day]</div>
                 <div className="text-[0.688rem]">{setting_day}</div>
               </>
             )}
-            <div className="text-[0.688rem]">
-              지번 주소:
-              {address}
-            </div>
-            <div className="text-[0.688rem]">
-              도로명 주소:
-              {road_address}
-            </div>
           </div>
         </div>
       </div>
       <div className="shadow-custom-line h-[1px] py-1" />
       <div className="p-[0.75rem] text-m text-purple-500">
-        <OneSiteUrl label="homepage" url={homepage_link} />
-        <OneSiteUrl label="instagram" url={instagram_link} />
-        <OneSiteUrl label="kakaomap" url={kakao_map_link} />
+        센터 정보
         {phone_number ? (
           <div className="flex gap-2">
             <Smartphone stroke={COLOR.primary} size={20} strokeWidth={1.25} />
@@ -110,34 +96,11 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
         ) : null}
       </div>
       <div className="shadow-custom-line h-[1px] py-1" />
-      <div className="flex justify-between p-[0.75rem]">
-        <span>사진</span>
-        <span>{`${images.length}개`}</span>
-      </div>
+      위치 카카오맵 지도 두둥
+      <div>{road_address}</div>
+      <div className="shadow-custom-line h-[1px] py-1" />
       <MapCarousel images={images} />
       <div className="shadow-custom-line h-[1px] py-3" />
-      <div className="flex justify-end p-[0.75rem]">
-        <button type="button" onClick={onModalOpen}>
-          리뷰 더보기
-        </button>
-      </div>
-      {bar_chart_data.length > 0 && (
-        <div className="flex p-[0.75rem] h-[11rem]">
-          <div className="w-[8rem] flex flex-col items-center justify-center justify-items-center">
-            <span className="text-[1.5rem]">평균</span>
-            <span className="text-[3rem]">{score_average}</span>
-          </div>
-          <BarRatingChart data={bar_chart_data} />
-        </div>
-      )}
-      {line_chart_data.length > 0 && (
-        <>
-          <div className="shadow-custom-line h-[1px] py-1" />
-          <div className="flex p-[0.75rem] h-[11rem]">
-            <LineRatingChart data={line_chart_data} />
-          </div>
-        </>
-      )}
       <div className="shadow-border h-[1px]" />
     </>
   );
