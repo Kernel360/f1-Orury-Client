@@ -4,7 +4,7 @@ import OneSiteUrl from '@/app/service/map/_components/bottom-sheet/OneSiteUrl';
 import BarRatingChart from '@/app/service/map/_components/chart/BarRatingChart';
 import LineRatingChart from '@/app/service/map/_components/chart/LineRatingChart';
 import { BottomSheetInnerProps } from '@/types/map/BottomSheetProps';
-import { Smartphone, Copy } from 'lucide-react';
+import { Smartphone, Copy, ChevronDown } from 'lucide-react';
 import { COLOR } from '@/styles/color';
 import { aBeeZee } from '@/styles/fonts';
 import MapCarousel from '@/app/_components/review/review-component/MapCarousel';
@@ -22,7 +22,6 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
   const {
     address,
     business_hours,
-    homepage_link,
     id,
     instagram_link,
     kakao_map_link,
@@ -31,18 +30,22 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
     setting_day,
     bar_chart_data,
     line_chart_data,
+    doing_business,
     images,
     name,
     phone_number,
     position,
   } = data;
 
-  const state = getGymState({ business_hours });
+  // 현재 요일 조회 (암장 영업일을 현재기준으로 상단에 렌더링하기때문)
+  const week = ['일', '월', '화', '수', '목', '금', '토', '일'];
+  const curDay = week[new Date().getDay()];
 
   const onModalOpen = () => {
     onReview(id);
   };
 
+  // 주소 복사
   const copyAdd = () => {
     window.navigator.clipboard.writeText(road_address).then(() => {
       // 복사가 완료되면 호출된다.
@@ -67,34 +70,44 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
       </div>
 
       <main className="p-[1rem] " style={{ border: '2px solid red' }}>
-        <section className="flex gap-[0.75rem]">
-          <div className={aBeeZee.className}>
-            {Object.values(
-              business_hours[
-                new Date().getDay() - 1 === -1 ? 6 : new Date().getDay() - 1
-              ],
-            )[0] && (
-              <h2 className="text-gray-900 font-semibold text-base">
-                운영시간
-              </h2>
-            )}
-            <div className="text-[0.688rem]">
-              {`${
-                Object.values(
-                  business_hours[
-                    new Date().getDay() - 1 === -1 ? 6 : new Date().getDay() - 1
-                  ],
-                )[0]
-              }`}
-            </div>
-
-            {setting_day && (
-              <>
-                <div className="text-[0.875rem]">[Setting Day]</div>
-                <div className="text-[0.688rem]">{setting_day}</div>
-              </>
-            )}
+        <section className=" gap-[0.75rem]">
+          <div className="flex">
+            {doing_business ? '영업중' : '영업 종료'}
+            <h2 className="text-gray-900 font-semibold text-base">운영시간</h2>
           </div>
+
+          <ul>
+            <div>{`[월] ${business_hours[0].MONDAY}`}</div>
+            <details className="cursor-pointer">
+              <summary className="list-none">
+                <ChevronDown size={14} />
+              </summary>
+              <div>{`[화] ${business_hours[1].TUESDAY}`}</div>
+              <div>{`[수] ${business_hours[2].WEDNESDAY}`}</div>
+              <div>{`[목] ${business_hours[3].THURSDAY}`}</div>
+              <div>{`[금] ${business_hours[4].FRIDAY}`}</div>
+              <div>{`[토] ${business_hours[5].SATURDAY}`}</div>
+              <div>{`[일] ${business_hours[6].SUNDAY}`}</div>
+            </details>
+          </ul>
+          <ul>
+            <details className="cursor-pointer">
+              <summary className="list-none">
+                <ChevronDown size={14} />
+              </summary>
+              {business_hours.map((hours, index) =>
+                Object.entries(hours).map(([day, time]) => (
+                  <div key={day}>{`[${day}] ${time}`}</div>
+                )),
+              )}
+            </details>
+          </ul>
+          {setting_day && (
+            <>
+              <div className="text-[0.875rem]">[Setting Day]</div>
+              <div className="text-[0.688rem]">{setting_day}</div>
+            </>
+          )}
         </section>
         <div className="shadow-custom-line h-[1px] py-1" />
         <section>
