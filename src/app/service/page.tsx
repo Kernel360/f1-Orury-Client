@@ -13,7 +13,7 @@ function Page() {
     <main className="flex flex-col justify-between pb-16 bg-white">
       <section className="flex justify-between items-center px-4">
         <Title primary />
-        <Link href={CALLBACK_URL.alert}>
+        <Link href={CALLBACK_URL.notification}>
           <Bell strokeWidth={2.5} />
         </Link>
       </section>
