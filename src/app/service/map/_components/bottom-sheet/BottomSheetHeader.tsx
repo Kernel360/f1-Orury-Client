@@ -34,31 +34,33 @@ function BottomSheetHeader({
 
   return (
     <>
-      <div>
-        <div className="flex justify-end">
-          {instagram_link && (
-            <OneSiteUrl label="instagram" url={instagram_link} />
-          )}
-          <button type="button" className="ml-2" onClick={onClickBookmark}>
-            {is_like ? <BookmarkIcon /> : <BookmarkBorderIcon />}
-          </button>
-        </div>
-
+      {/* 인스타 및 북마크 */}
+      <section className="flex justify-end">
+        {instagram_link && (
+          <OneSiteUrl label="instagram" url={instagram_link} />
+        )}
+        <button type="button" className="ml-2" onClick={onClickBookmark}>
+          {is_like ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+        </button>
+      </section>
+      {/* 클라이밍 이름 */}
+      <section>
         <h1 className="flex items-left text-xl justify-left font-bold text-gray-800">
           {name}
         </h1>
-      </div>
-      <div className="text-gray-500 font-normal text-sm leading-5 text-left ">
+      </section>
+      {/* 간략주소 */}
+      <section className="text-gray-500 font-normal text-sm leading-5 text-left ">
         {gym_type && (
           <div>
             <span>{gym_type}</span>
             <span> · </span>
           </div>
         )}
-        {addressSplit[0] + addressSplit[1]}
-      </div>
-
-      <div className="flex text-sm leading-5 font-semibold text-black">
+        {`${addressSplit[0]} ${addressSplit[1]}`}
+      </section>
+      {/* 5개 빈 별공간 */}
+      <section className="flex text-sm leading-5 font-semibold text-black">
         <div className="relative">
           <div className="flex gap-4px">
             {Array.from({ length: 5 }, () => (
@@ -73,10 +75,12 @@ function BottomSheetHeader({
         </div>
         별점 점수
         <ChevronRight size={24} strokeWidth={1} />
-      </div>
-      <div
-        className="flex justify-around mt-10"
-        style={{ display: 'flex', height: '36px', border: '1px solid red' }}
+      </section>
+
+      {/* 버튼 */}
+      <section
+        className="flex justify-around h-[36px] mt-10"
+        style={{ border: '1px solid red' }}
       >
         <a
           className="flex justify-center align-center w-[155px] h-[36px] px-6px pt-16px pb-12px gap-4px rounded-lg border border-solid border-[#E5E7EB]"
@@ -85,11 +89,14 @@ function BottomSheetHeader({
           <Phone size={24} strokeWidth={1} fill="black" />
           전화
         </a>
-        <div className="flex justify-center align-center w-[155px] h-[36px] px-6px pt-16px pb-12px gap-4px rounded-lg border border-solid border-[#E5E7EB]">
+        <button
+          type="button"
+          className="flex justify-center align-center w-[155px] h-[36px] px-6px pt-16px pb-12px gap-4px rounded-lg border border-solid border-[#E5E7EB]"
+        >
           <Image src={SquarePen} width="24" height="24" alt="글쓰기" />
           글쓰기
-        </div>
-      </div>
+        </button>
+      </section>
     </>
   );
 }

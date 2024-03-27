@@ -4,13 +4,14 @@ import OneSiteUrl from '@/app/service/map/_components/bottom-sheet/OneSiteUrl';
 import BarRatingChart from '@/app/service/map/_components/chart/BarRatingChart';
 import LineRatingChart from '@/app/service/map/_components/chart/LineRatingChart';
 import { BottomSheetInnerProps } from '@/types/map/BottomSheetProps';
-import { Smartphone } from 'lucide-react';
+import { Smartphone, Copy } from 'lucide-react';
 import { COLOR } from '@/styles/color';
 import { aBeeZee } from '@/styles/fonts';
 import MapCarousel from '@/app/_components/review/review-component/MapCarousel';
 import useReviewStore from '@/store/review/reviewStore';
 import { cn } from '@/lib/utils';
 import getGymState from '@/utils/getGymState';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 /**
  * @description 바텀시트의 내부 콘테이너로서 내용물을 보여주는데 초점을 두고 있습니다.
@@ -33,12 +34,20 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
     images,
     name,
     phone_number,
+    position,
   } = data;
 
   const state = getGymState({ business_hours });
 
   const onModalOpen = () => {
     onReview(id);
+  };
+
+  const copyAdd = () => {
+    window.navigator.clipboard.writeText(road_address).then(() => {
+      // 복사가 완료되면 호출된다.
+      alert('복사완료');
+    });
   };
 
   return (
@@ -56,14 +65,19 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
           리뷰탭 만들어야하지롱 컴포넌트 분리해야하밍
         </button>
       </div>
-      <div className="p-[0.75rem]">
-        <div className="flex gap-[0.75rem]">
+
+      <main className="p-[1rem] " style={{ border: '2px solid red' }}>
+        <section className="flex gap-[0.75rem]">
           <div className={aBeeZee.className}>
             {Object.values(
               business_hours[
                 new Date().getDay() - 1 === -1 ? 6 : new Date().getDay() - 1
               ],
-            )[0] && <div className="text-[0.875rem]">운영시간</div>}
+            )[0] && (
+              <h2 className="text-gray-900 font-semibold text-base">
+                운영시간
+              </h2>
+            )}
             <div className="text-[0.688rem]">
               {`${
                 Object.values(
@@ -81,27 +95,38 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
               </>
             )}
           </div>
-        </div>
-      </div>
-      <div className="shadow-custom-line h-[1px] py-1" />
-      <div className="p-[0.75rem] text-m text-purple-500">
-        센터 정보
-        {phone_number ? (
-          <div className="flex gap-2">
-            <Smartphone stroke={COLOR.primary} size={20} strokeWidth={1.25} />
-            <a className="cursor-pointer" href={`tel:${phone_number}`}>
-              {phone_number}
-            </a>
-          </div>
-        ) : null}
-      </div>
-      <div className="shadow-custom-line h-[1px] py-1" />
-      위치 카카오맵 지도 두둥
-      <div>{road_address}</div>
-      <div className="shadow-custom-line h-[1px] py-1" />
-      <MapCarousel images={images} />
-      <div className="shadow-custom-line h-[1px] py-3" />
-      <div className="shadow-border h-[1px]" />
+        </section>
+        <div className="shadow-custom-line h-[1px] py-1" />
+        <section>
+          <h2 className="text-gray-900 font-semibold text-base">센터 정보</h2>
+        </section>
+        <div className="shadow-custom-line h-[1px] py-1" />
+        <section>
+          <h2 className="text-gray-900 font-semibold text-base">위치</h2>
+          <Map
+            center={{ lat: position.latitude, lng: position.longitude }}
+            style={{
+              width: '90%',
+              height: '120px',
+              borderRadius: '8px',
+              margin: 'auto',
+            }}
+          >
+            <MapMarker
+              position={{ lat: position.latitude, lng: position.longitude }}
+            />
+          </Map>
+          <div>{road_address}</div>
+          <button
+            type="button"
+            onClick={copyAdd}
+            className="flex justify-center align-center w-[100px] h-[37px] px-6px pt-16px pb-12px gap-4px rounded-lg border border-solid border-[#E5E7EB]"
+          >
+            <Copy size={14} />
+            주소복사
+          </button>
+        </section>
+      </main>
     </>
   );
 }
