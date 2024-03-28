@@ -1,3 +1,4 @@
+import { useToast } from '@/app/_components/ui/use-toast';
 import { BottomSheetInnerProps } from '@/types/map/BottomSheetProps';
 import { ChevronDown, Copy } from 'lucide-react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
@@ -29,10 +30,15 @@ export default function BottomSheetInfoTab({ data }: BottomSheetInnerProps) {
     return Object.keys(business_hour).includes(curDay);
   });
   // 주소 복사
+  const { toast } = useToast();
   const copyAdd = () => {
     window.navigator.clipboard.writeText(road_address).then(() => {
       // 복사가 완료되면 호출된다.
-      toast('복사완료');
+      toast({
+        variant: 'success',
+        description: '주소가 복사되었습니다.',
+        duration: 2000,
+      });
     });
   };
 
