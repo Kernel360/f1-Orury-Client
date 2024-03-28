@@ -74,7 +74,7 @@ function User({ ...props }: UserProps) {
             alt="image"
             width={36}
             height={36}
-            className="rounded-full"
+            className="rounded-full h-9"
           />
         )}
 
