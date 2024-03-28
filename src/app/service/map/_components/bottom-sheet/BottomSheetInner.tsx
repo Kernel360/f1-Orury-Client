@@ -40,13 +40,6 @@ function CustomTabPanel(props: TabPanelProps) {
   );
 }
 
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
 /**
  * @description 바텀시트의 내부 콘테이너로서 내용물을 보여주는데 초점을 두고 있습니다.
  * @param data 상세정보들을 가져와서 보여주기 위해 상세값들을 가져옵니다.
@@ -106,8 +99,8 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
             onChange={handleChange}
             aria-label="basic tabs example"
           >
-            <Tab label="정보" {...a11yProps(0)} />
-            <Tab label="리뷰" {...a11yProps(1)} />
+            <Tab label="정보" />
+            <Tab label="리뷰" />
           </Tabs>
         </Box>
         {/* CustomTabPanel안에 기본적으로 padding이 사방들어감 */}
