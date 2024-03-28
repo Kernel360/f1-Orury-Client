@@ -24,7 +24,6 @@ function BottomSheetContainer({
   const focusRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<BottomSheetRef>(null);
   const isDataNull = typeof data === 'undefined' || isLoading;
-  console.log('====', data?.data.data, typeof data?.data.data);
 
   return (
     <BottomSheet
