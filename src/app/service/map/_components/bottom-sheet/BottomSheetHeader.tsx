@@ -27,7 +27,7 @@ function BottomSheetHeader({
   useCss('https://unpkg.com/react-spring-bottom-sheet/dist/style.css');
 
   const onClickBookmark = () => {
-    console.log('====북마크 클릭');
+    console.log('====북마크 클릭, 클릭에따라 api보내야함');
   };
 
   const addressSplit = address.split(' ');
@@ -49,24 +49,19 @@ function BottomSheetHeader({
           {name}
         </h1>
       </section>
-      {/* 간략주소 */}
+      {/* gym_type & 간략주소 */}
       <section className="text-gray-500 font-normal text-sm leading-5 text-left ">
-        {gym_type && (
-          <div>
-            <span>{gym_type}</span>
-            <span> · </span>
-          </div>
-        )}
-        {`${addressSplit[0]} ${addressSplit[1]}`}
+        <div>{`${gym_type} · ${addressSplit[0]} ${addressSplit[1]}`}</div>
       </section>
       {/* 5개 빈 별공간 */}
       <section className="flex text-sm leading-5 font-semibold text-black">
         <div className="relative">
           <div className="flex gap-4px">
-            {Array.from({ length: 5 }, () => (
-              <Star fill="gray" strokeWidth={0} />
+            {Array.from({ length: 5 }, (_, index) => (
+              <Star key={index} fill="#C3C6CC" strokeWidth={0} />
             ))}
           </div>
+          {/* 별 점수에 따라 넣어야함 (로직 아직안함), 별점 점수도 바꿔야함 */}
           <div className="flex gap-4px absolute top-0">
             <Star fill="#FFCB29" strokeWidth={0} />
             <Star fill="#FFCB29" strokeWidth={0} />
