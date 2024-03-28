@@ -32,7 +32,7 @@ export default function BottomSheetInfoTab({ data }: BottomSheetInnerProps) {
   const copyAdd = () => {
     window.navigator.clipboard.writeText(road_address).then(() => {
       // 복사가 완료되면 호출된다.
-      alert('복사완료');
+      toast('복사완료');
     });
   };
 
@@ -44,7 +44,9 @@ export default function BottomSheetInfoTab({ data }: BottomSheetInnerProps) {
             <span className="rounded px-1 gap-8px bg-[#B79DFF] text-[#ffff] mr-1">
               {doing_business ? '영업중' : '영업 종료'}
             </span>
-            <h2 className="text-gray-900 font-semibold text-base">운영 시간</h2>
+            <div className="text-gray-900 font-semibold text-base">
+              운영 시간
+            </div>
           </div>
 
           <div className="my-2">
@@ -70,11 +72,11 @@ export default function BottomSheetInfoTab({ data }: BottomSheetInnerProps) {
         </section>
         <div className="shadow-custom-line h-[1px] py-1" />
         <section className="my-5">
-          <h2 className="text-gray-900 font-semibold text-base">센터 정보</h2>
+          <div className="text-gray-900 font-semibold text-base">센터 정보</div>
         </section>
         <div className="shadow-custom-line h-[1px] py-1" />
         <section className="my-5">
-          <h2 className="text-gray-900 font-semibold text-base">위치</h2>
+          <div className="text-gray-900 font-semibold text-base">위치</div>
           <Map
             center={{ lat: position.latitude, lng: position.longitude }}
             style={{
