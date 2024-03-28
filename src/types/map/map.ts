@@ -57,13 +57,13 @@ export interface SearchIdDetailMapType {
 
 export interface BusinessHoursType {
   business_hours: [
-    { MONDAY: string },
-    { TUESDAY: string },
-    { WEDNESDAY: string },
-    { THURSDAY: string },
-    { FRIDAY: string },
-    { SATURDAY: string },
-    { SUNDAY: string },
+    { 월: string },
+    { 화: string },
+    { 수: string },
+    { 목: string },
+    { 금: string },
+    { 토: string },
+    { 일: string },
   ];
 }
 
