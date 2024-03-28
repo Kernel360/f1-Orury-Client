@@ -4,7 +4,7 @@ export interface PositionType {
 }
 
 export interface URLType {
-  label: 'homepage' | 'instagram' | 'kakaomap';
+  label: 'homepage' | 'instagram' | 'kakaomap' | 'phone';
   url: string;
 }
 
@@ -57,13 +57,13 @@ export interface SearchIdDetailMapType {
 
 export interface BusinessHoursType {
   business_hours: [
-    { MONDAY: string },
-    { TUESDAY: string },
-    { WEDNESDAY: string },
-    { THURSDAY: string },
-    { FRIDAY: string },
-    { SATURDAY: string },
-    { SUNDAY: string },
+    { 월: string },
+    { 화: string },
+    { 수: string },
+    { 목: string },
+    { 금: string },
+    { 토: string },
+    { 일: string },
   ];
 }
 
@@ -83,9 +83,10 @@ export interface DetailPlaceType extends BusinessHoursType {
   homepage_link: string;
   setting_day: string;
   doing_business: boolean;
-  isLike: boolean;
+  is_like: boolean;
   bar_chart_data: PointChartDataType[];
   line_chart_data: AvgChartDataType[];
+  gym_type?: string;
 }
 
 export interface CenterType {

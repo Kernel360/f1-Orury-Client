@@ -6,7 +6,7 @@ import type { BottomSheetProps } from '@/types/map/BottomSheetProps';
 import { Skeleton } from '@mui/material';
 import useMap from '@/apis/map/hooks/useMap';
 import BottomSheetInnerSkeleton from '../skeleton/BottomSheetInnerSkeleton';
-
+import BottomSheetHeader from './BottomSheetHeader';
 /**
  * @description 바텀시트의 외부 컴포넌트입니다.
  * @param isSheetOpen 바텀 시트가 열려있는지 판단합니다. 해당 값으로 애니메이션을 적용합니다.
@@ -21,10 +21,8 @@ function BottomSheetContainer({
   useCss('https://unpkg.com/react-spring-bottom-sheet/dist/style.css');
 
   const { data, isLoading } = useMap.useGetDetail(selectId);
-
   const focusRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<BottomSheetRef>(null);
-
   const isDataNull = typeof data === 'undefined' || isLoading;
 
   return (
@@ -37,16 +35,16 @@ function BottomSheetContainer({
       initialFocusRef={focusRef}
       defaultSnap={200}
       snapPoints={({ maxHeight }) => {
-        return [200, maxHeight];
+        return [250, maxHeight];
       }}
       header={
-        <h1 className="flex items-center text-xl justify-center font-bold text-gray-800">
-          {isDataNull ? (
-            <Skeleton className="w-[100px] h-[28px] bg-gray-200" />
+        <header className="h-[220px]">
+          {data?.data.data ? (
+            <BottomSheetHeader data={data.data.data} />
           ) : (
-            data.data.data.name
+            <Skeleton className="w-[100px] h-[28px] bg-gray-200" />
           )}
-        </h1>
+        </header>
       }
       onDismiss={onDisMiss}
       expandOnContentDrag={isSheetOpen}

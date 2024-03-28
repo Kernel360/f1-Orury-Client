@@ -11,7 +11,7 @@ function OneSiteUrl({ url, label }: URLType) {
   const getSvg = () => {
     switch (label) {
       case 'instagram':
-        return <Instagram size={20} strokeWidth={1.25} />;
+        return <Instagram size={24} strokeWidth={2} />;
       case 'kakaomap':
         return <Map size={20} strokeWidth={1.25} />;
       default:
@@ -25,9 +25,8 @@ function OneSiteUrl({ url, label }: URLType) {
 
   return (
     <div className="flex gap-2 items-center">
-      <div>{getSvg()}</div>
       <button onClick={handleDeepLink} type="button" rel="noreferrer">
-        {label}
+        {getSvg()}
       </button>
     </div>
   );
