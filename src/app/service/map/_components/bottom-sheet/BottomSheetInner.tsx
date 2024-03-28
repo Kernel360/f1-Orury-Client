@@ -41,6 +41,11 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
   const week = ['일', '월', '화', '수', '목', '금', '토', '일'];
   const curDay = week[new Date().getDay()];
 
+  // business_hours에 현재 요일과 일치한것 filter 후 return
+  const filteredBusinessHours = business_hours.filter(dayList => {
+    return Object.keys(dayList).includes(curDay);
+  });
+
   const onModalOpen = () => {
     onReview(id);
   };
@@ -70,51 +75,41 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
       </div>
 
       <main className="p-[1rem] " style={{ border: '2px solid red' }}>
-        <section className=" gap-[0.75rem]">
+        <section className=" gap-[0.75rem] my-5">
           <div className="flex">
-            {doing_business ? '영업중' : '영업 종료'}
-            <h2 className="text-gray-900 font-semibold text-base">운영시간</h2>
+            <span className="rounded px-1 gap-8px bg-[#B79DFF] text-[#ffff] mr-1">
+              {doing_business ? '영업중' : '영업 종료'}
+            </span>
+            <h2 className="text-gray-900 font-semibold text-base">운영 시간</h2>
           </div>
 
-          <ul>
-            <div>{`[월] ${business_hours[0].MONDAY}`}</div>
-            <details className="cursor-pointer">
-              <summary className="list-none">
-                <ChevronDown size={14} />
-              </summary>
-              <div>{`[화] ${business_hours[1].TUESDAY}`}</div>
-              <div>{`[수] ${business_hours[2].WEDNESDAY}`}</div>
-              <div>{`[목] ${business_hours[3].THURSDAY}`}</div>
-              <div>{`[금] ${business_hours[4].FRIDAY}`}</div>
-              <div>{`[토] ${business_hours[5].SATURDAY}`}</div>
-              <div>{`[일] ${business_hours[6].SUNDAY}`}</div>
-            </details>
-          </ul>
-          <ul>
-            <details className="cursor-pointer">
-              <summary className="list-none">
-                <ChevronDown size={14} />
-              </summary>
-              {business_hours.map((hours, index) =>
-                Object.entries(hours).map(([day, time]) => (
-                  <div key={day}>{`[${day}] ${time}`}</div>
-                )),
-              )}
-            </details>
-          </ul>
-          {setting_day && (
-            <>
-              <div className="text-[0.875rem]">[Setting Day]</div>
-              <div className="text-[0.688rem]">{setting_day}</div>
-            </>
-          )}
+          <div className="my-2">
+            <div>{`[${Object.keys(filteredBusinessHours[0])}] ${Object.values(filteredBusinessHours[0])}`}</div>
+            <ul>
+              <details className="cursor-pointer">
+                <summary className="list-none">
+                  <ChevronDown size={14} />
+                </summary>
+                {business_hours.map((hours, index) =>
+                  Object.entries(hours).map(([day, time]) => (
+                    <div key={day}>{`[${day}] ${time}`}</div>
+                  )),
+                )}
+                {setting_day && (
+                  <div className="text-[0.875rem]">
+                    {`[Setting Day] ${setting_day}`}
+                  </div>
+                )}
+              </details>
+            </ul>
+          </div>
         </section>
         <div className="shadow-custom-line h-[1px] py-1" />
-        <section>
+        <section className="my-5">
           <h2 className="text-gray-900 font-semibold text-base">센터 정보</h2>
         </section>
         <div className="shadow-custom-line h-[1px] py-1" />
-        <section>
+        <section className="my-5">
           <h2 className="text-gray-900 font-semibold text-base">위치</h2>
           <Map
             center={{ lat: position.latitude, lng: position.longitude }}
