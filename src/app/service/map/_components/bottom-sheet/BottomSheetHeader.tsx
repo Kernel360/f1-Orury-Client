@@ -6,24 +6,28 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import OneSiteUrl from './OneSiteUrl';
 import { Phone, Star, StarHalf, ChevronRight } from 'lucide-react';
 import SquarePen from 'public/square-pen.svg';
+import { BottomSheetInnerProps } from '@/types/map/BottomSheetProps';
 
-interface BottomSheetHeaderProps {
-  name: string;
-  address: string;
-  instagram_link?: string;
-  is_like?: boolean;
-  gym_type?: string;
-  phone_number: string;
-}
-
-function BottomSheetHeader({
-  name,
-  address,
-  instagram_link,
-  is_like,
-  gym_type,
-  phone_number,
-}: BottomSheetHeaderProps) {
+function BottomSheetHeader({ data }: BottomSheetInnerProps) {
+  const {
+    address,
+    business_hours,
+    id,
+    instagram_link,
+    kakao_map_link,
+    road_address,
+    score_average,
+    setting_day,
+    bar_chart_data,
+    line_chart_data,
+    doing_business,
+    images,
+    name,
+    phone_number,
+    position,
+    is_like,
+    gym_type,
+  } = data;
   useCss('https://unpkg.com/react-spring-bottom-sheet/dist/style.css');
 
   const onClickBookmark = () => {

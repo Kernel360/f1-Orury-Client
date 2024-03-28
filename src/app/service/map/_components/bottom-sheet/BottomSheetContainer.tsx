@@ -40,14 +40,7 @@ function BottomSheetContainer({
       header={
         <header className="h-[220px]">
           {data?.data.data ? (
-            <BottomSheetHeader
-              name={data.data.data.name}
-              address={data.data.data.address}
-              instagram_link={data.data.data.instagram_link}
-              is_like={data.data.data.is_like}
-              gym_type={data.data.data.gym_type}
-              phone_number={data.data.data.phone_number}
-            />
+            <BottomSheetHeader data={data.data.data} />
           ) : (
             <Skeleton className="w-[100px] h-[28px] bg-gray-200" />
           )}
