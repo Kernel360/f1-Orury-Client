@@ -42,8 +42,8 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
   const curDay = week[new Date().getDay()];
 
   // business_hours에 현재 요일과 일치한것 filter 후 return
-  const filteredBusinessHours = business_hours.filter(dayList => {
-    return Object.keys(dayList).includes(curDay);
+  const filteredBusinessHours = business_hours.filter(business_hour => {
+    return Object.keys(business_hour).includes(curDay);
   });
 
   const onModalOpen = () => {
@@ -74,7 +74,7 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
         </button>
       </div>
 
-      <main className="p-[1rem] " style={{ border: '2px solid red' }}>
+      <main className="p-[1rem] h-fit" style={{ border: '2px solid red' }}>
         <section className=" gap-[0.75rem] my-5">
           <div className="flex">
             <span className="rounded px-1 gap-8px bg-[#B79DFF] text-[#ffff] mr-1">
@@ -90,8 +90,8 @@ function BottomSheetInner({ data }: BottomSheetInnerProps) {
                 <summary className="list-none">
                   <ChevronDown size={14} />
                 </summary>
-                {business_hours.map((hours, index) =>
-                  Object.entries(hours).map(([day, time]) => (
+                {business_hours.map(business_hour =>
+                  Object.entries(business_hour).map(([day, time]) => (
                     <div key={day}>{`[${day}] ${time}`}</div>
                   )),
                 )}
