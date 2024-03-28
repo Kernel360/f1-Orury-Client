@@ -3,6 +3,7 @@ import TABS from '@/constants/community/tabs';
 import { TResponse } from '@/types/common/response';
 import { CommentListData } from '@/types/community/comment';
 import { PostListData } from '@/types/community/post';
+import { NotificationData } from '@/types/notification';
 import { AxiosResponse } from 'axios';
 
 export const getUserPostListKey = (
@@ -98,5 +99,30 @@ export const getPostListKey = (
   return END_POINT.postController.getPostList(
     categoryId,
     previousPageData?.data.data.cursor as number,
+  );
+};
+
+export const getNotificationListKey = (
+  pageIndex: number,
+  previousPageData?: AxiosResponse<TResponse<NotificationData>>,
+) => {
+  const currentPage = previousPageData?.data.data.number;
+
+  // 첫 페이지가 아닌 마지막 페이지인 경우 null을 반환한다.
+  if (
+    previousPageData &&
+    !previousPageData.data.data.first &&
+    previousPageData.data.data.last
+  ) {
+    return null;
+  }
+
+  // 첫 페이지인 경우
+  if (!previousPageData && pageIndex === 0) {
+    return END_POINT.notificationController.getNotification(0);
+  }
+
+  return END_POINT.notificationController.getNotification(
+    (currentPage as number) + 1,
   );
 };

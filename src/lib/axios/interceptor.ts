@@ -3,8 +3,8 @@ import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { ERROR_CODE } from '@/constants/api/statusCode';
 import { getNewToken } from '@/apis/auth/getNewToken';
 import { setTokensInCookies } from '@/utils/setTokensInCookies';
+import axios from 'axios';
 import { getCookie, removeCookie } from '../cookie';
-import { axiosInstance } from './axios-instance';
 
 export interface ErrorResponseData {
   statusCode: number;
@@ -47,16 +47,20 @@ export const handleError = async (error: AxiosError<ErrorResponseData>) => {
   }
 
   if (status === ERROR_CODE.invalidAccessToken) {
-    const data = await getNewToken();
+    try {
+      const data = await getNewToken();
 
-    originalRequest.headers.Authorization = `Bearer ${data.access_token}`;
+      originalRequest.headers.Authorization = `Bearer ${data.access_token}`;
 
-    setTokensInCookies({
-      accessToken: data.access_token,
-      refreshToken: data.refresh_token,
-    });
+      setTokensInCookies({
+        accessToken: data.access_token,
+        refreshToken: data.refresh_token,
+      });
 
-    axiosInstance(originalRequest);
+      return await axios(originalRequest);
+    } catch (error) {
+      throw new Error('토큰을 갱신하는 동안 에러가 발생했습니다.');
+    }
   }
 
   if (status === ERROR_CODE.invalidRefreshToken) {

@@ -158,4 +158,17 @@ export const END_POINT = {
     detail: (detailId: string) =>
       `${END_POINT.gymController.default}/${detailId}`,
   },
+
+  notificationController: {
+    // DEFAULT
+    default: '/notification',
+
+    getNotification: (page: number) => {
+      const url = new URLSearchParams();
+
+      url.append('page', String(page));
+
+      return `${END_POINT.notificationController.default}?${url.toString()}`;
+    },
+  },
 };
